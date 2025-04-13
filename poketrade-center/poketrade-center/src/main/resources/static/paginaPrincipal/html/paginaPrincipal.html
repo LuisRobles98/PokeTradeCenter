@@ -4,8 +4,9 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeTradeCenter</title>
-    <link rel="stylesheet" href="/css/paginaPrincipal.css">
+    <link rel="stylesheet" href="/paginaPrincipal/css/paginaPrincipal.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/paginaPrincipal/js/paginaPrincipal.js" defer></script>
 </head>
 <body>
  	<!-- Popup Principal-->
@@ -16,29 +17,29 @@
 	        <button id="btnRegistrarse">Registrarse</button>
 	    </div>
 	</div>
-	<!--
 
-	<div id="popupIniciarSesion" class="popup">
+	<div id="popupIniciarSesion" class="popup" style="display: none;">
 	    <div class="popup-content">
 	        <h2>PokeTradeCenter</h2>
 		 	<input required id="inputCorreo" type="text" placeholder="Correo electronico">
 		 	<input required id="inputPassword" type="text" placeholder="Contraseña">
-			<button id="btnAcceder">Iniciar sesión</button>
-			<button id="btnVolver">Volver</button>
+			<button id="btnAcceder">Acceder</button>
+			<button id="btnVolverInicioSesion">Volver</button>
 	    </div>
 	</div>
 	
 
-	<div id="popupRegistrarse" class="popup">
+	<div id="popupRegistrarse" class="popup" style="display: none;">
 	    <div class="popup-content">
 	        <h2>PokeTradeCenter</h2>
 	        <input required id="inputUsuario" type="text" placeholder="Usuario">
 	        <input required id="inputCorreo" type="text" placeholder="Correo electronico">
 	        <input required id="inputPassword" type="text" placeholder="Contraseña">
-	        <button id="btnRegistrarse">Iniciar sesión</button>
-	        <button id="btnVolver">Volver</button>
+	        <input required id="inputPassword2" type="text" placeholder="Vuelva a introducir la contraseña">
+	        <button id="btnRegistrarse">Registrarse</button>
+	        <button id="btnVolverRegistrarse">Volver</button>
 	    </div>
 	</div>
-	-->
+
 </body>
 </html>

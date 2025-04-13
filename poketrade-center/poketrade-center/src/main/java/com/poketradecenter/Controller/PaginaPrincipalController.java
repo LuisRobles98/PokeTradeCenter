@@ -7,6 +7,6 @@ public class PaginaPrincipalController {
 
     @GetMapping("/")
     public String PaginaPrincipal() {
-        return "redirect:/paginaPrincipal.html";
+        return "redirect:/paginaPrincipal/html/paginaPrincipal.html";
     }
 }
