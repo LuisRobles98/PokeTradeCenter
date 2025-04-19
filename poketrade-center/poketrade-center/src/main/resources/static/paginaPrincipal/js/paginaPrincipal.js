@@ -40,7 +40,7 @@ $(document).ready(function() {
 	const guardarRegistro = function() {
 		let errores = validarRegistro();
 		
-		if(errores == "") {
+		if(errores != "") {
 			//enviar mensaje de error
 		} else {
 			guardar();
@@ -50,30 +50,30 @@ $(document).ready(function() {
 	
 	const guardar = function() {
 		let usuario = {};
-		usuario.nombre = $("#inputUsuario").val();
-		usuario.email = $("#inputCorreo").val();
-		usuario.password = $("#inputPassword").val();
-		llamadasAjax.guardarUsuario(usuario);
+		usuario.nombre = $("#inputUsuarioRegistro").val();
+		usuario.email = $("#inputCorreoRegistro").val();
+		usuario.password = $("#inputPasswordRegistro").val();
+		guardarUsuario(usuario);
 	};
 	
 	const validarRegistro = function() {
 		let errores = "";
-		if($("#inputUsuario").val() == "") {
+		if($("#inputUsuarioRegistro").val() == "") {
 			errores += "- Debes introducir un nombre" + "<br>";
 		}
-		if($("#inputCorreo").val() == "") {
+		if($("#inputCorreoRegistro").val() == "") {
 			errores += "- Debes introducir un email" + "<br>";
 		}
 		if(validarCorreo()) {
 			errores += "- Debes introducir un email valido" + "<br>";
 		}
-		if($("#inputPassword").val() == "") {
+		if($("#inputPasswordRegistro").val() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		}
-		if($("#inputPassword2").val() == "") {
+		if($("#inputPassword2Registro").val() == "") {
 			errores += "- Debes volver a introducir la contraseña para verificarla" + "<br>";
 		}
-		if($("#inputPassword").val() != $("#inputPassword2").val()) {
+		if($("#inputPasswordRegistro").val() != $("#inputPassword2Registro").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
 		}
 		return errores;

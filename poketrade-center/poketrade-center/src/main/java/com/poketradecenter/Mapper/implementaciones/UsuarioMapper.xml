@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poketradecenter.mapper.UsuarioMapper">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IUsuarioMapper">
 
     <!-- SQL para insertar un usuario -->
-    <insert id="guardar" parameterType="Usuario">
+    <insert id="guardar" parameterType="com.poketradecenter.Clase.Usuario">
         INSERT INTO usuario
         (nombre, email, password)
         VALUES (#{nombre}, #{email}, #{password})
