@@ -1,8 +1,11 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
@@ -19,6 +22,15 @@ public class UsuarioService implements IUsuarioService {
 			usuarioMapper.guardar(usuario);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error guardando los datos del usuario", e);
+		}
+	}
+	
+	@Override
+	public List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
+		try {
+			return usuarioMapper.recuperarPorCriterios(criterios);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al recuperar los datos del usuario", e);
 		}
 	}
 }

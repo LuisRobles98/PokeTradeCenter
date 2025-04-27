@@ -9,3 +9,8 @@ const guardarUsuario = function(usuario) {
     };
     fetch('http://localhost:8080/usuario', parameters);
 };
+
+const recuperarUsuariosPorEmail = function(correo) {
+	return fetch('http://localhost:8080/usuario/' + encodeURIComponent(correo))
+	.then(response => response.json());
+};

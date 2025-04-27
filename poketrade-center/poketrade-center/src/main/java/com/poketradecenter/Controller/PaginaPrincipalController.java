@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PaginaPrincipalController {
-
+	
     @GetMapping("/")
     public String PaginaPrincipal() {
-        return "redirect:/paginaPrincipal/html/paginaPrincipal";
+        return "redirect:/paginaPrincipal/html/paginaPrincipal.html";
     }
 }

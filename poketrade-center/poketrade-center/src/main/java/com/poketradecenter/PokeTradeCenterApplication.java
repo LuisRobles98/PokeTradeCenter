@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.poketradecenter.Mapper")
+@MapperScan("com.poketradecenter.Mapper") 
 public class PokeTradeCenterApplication {
 
 	public static void main(String[] args) {

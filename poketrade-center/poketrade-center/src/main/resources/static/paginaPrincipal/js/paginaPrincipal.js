@@ -37,13 +37,14 @@ $(document).ready(function() {
 		guardarRegistro();
 	});
 	
-	const guardarRegistro = function() {
-		let errores = validarRegistro();
+	const guardarRegistro = async function() {
+		let errores = await validarRegistro();
 		
 		if(errores != "") {
 			//enviar mensaje de error
 		} else {
 			guardar();
+			$("#btnVolverRegistrarse").click();
 			$("#btnIniciarSesion").click();
 		}
 	};
@@ -56,7 +57,7 @@ $(document).ready(function() {
 		guardarUsuario(usuario);
 	};
 	
-	const validarRegistro = function() {
+	const validarRegistro = async function() {
 		let errores = "";
 		if($("#inputUsuarioRegistro").val() == "") {
 			errores += "- Debes introducir un nombre" + "<br>";
@@ -64,9 +65,16 @@ $(document).ready(function() {
 		if($("#inputCorreoRegistro").val() == "") {
 			errores += "- Debes introducir un email" + "<br>";
 		}
-		if(validarCorreo()) {
+		if($("#inputCorreoRegistro").val().indexOf('@') === -1 || $("#inputCorreoRegistro").val().indexOf('.') === -1) {
 			errores += "- Debes introducir un email valido" + "<br>";
 		}
+		
+		//comprobar que el correo no exista en bbdd
+ 		const correoExiste = await comprobarCorreoExiste();
+	    if (correoExiste) {
+	        errores += "- El correo ya existe en el sistema" + "<br>";
+	    }
+		
 		if($("#inputPasswordRegistro").val() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		}
@@ -79,8 +87,9 @@ $(document).ready(function() {
 		return errores;
 	};
 	
-	const validarCorreo = function() {
-		
-	};
+	const comprobarCorreoExiste = async function() {
+    	const usuarios = await recuperarUsuariosPorEmail($("#inputCorreoRegistro").val());
+		return usuarios.length > 0;
+	}
 	
 });

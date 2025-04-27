@@ -8,5 +8,31 @@
         (nombre, email, password)
         VALUES (#{nombre}, #{email}, #{password})
     </insert>
+    
+    <!-- SQL para recuperar usuarios por criterios-->
+    <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosUsuario"  resultType="com.poketradecenter.Clase.Usuario">
+    	SELECT * 
+    	FROM Usuario
+    	<where>
+	        <if test="id != null">
+	            AND id = #{id}
+	        </if>
+	        <if test="nombre != null and nombre != ''">
+	            AND nombre = #{nombre}
+	        </if>
+	        <if test="email != null and email != ''">
+	            AND email = #{email}
+	        </if>
+	        <if test="password != null and password != ''">
+	            AND password = #{password}
+	        </if>
+	        <if test="icono != null">
+	            AND icono = #{icono}
+	        </if>
+	        <if test="idJuego != null">
+	            AND idJuego = #{idJuego}
+	        </if>
+    	</where>
+    </select>
 
 </mapper>
