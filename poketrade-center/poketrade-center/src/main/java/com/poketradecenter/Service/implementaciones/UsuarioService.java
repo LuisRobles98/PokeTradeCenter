@@ -28,9 +28,17 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	public List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
 		try {
-			return usuarioMapper.recuperarPorCriterios(criterios);
+			List<Usuario> usuarios = usuarioMapper.recuperarPorCriterios(criterios);
+			eliminarPassword(usuarios);
+			return usuarios;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar los datos del usuario", e);
+		}
+	}
+	
+	private void eliminarPassword(List<Usuario> usuarios) {
+		for(Usuario usuario : usuarios) {
+			usuario.setPassword(null);
 		}
 	}
 }

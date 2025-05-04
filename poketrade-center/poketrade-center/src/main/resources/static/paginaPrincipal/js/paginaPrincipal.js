@@ -6,12 +6,14 @@ $(document).ready(function() {
 
     // logica acceder popup inicio de sesion
     $("#btnIniciarSesion").click(function() {
+		limpiarIniciarSesion();
         $("#popupPrincipal").hide();
         $("#popupIniciarSesion").show();
     });
 
     // logica acceder a popup registrarse
     $("#btnRegistrarse").click(function() {
+		limpiarRegistrarse();
         $("#popupPrincipal").hide();
         $("#popupRegistrarse").show();
     });
@@ -30,7 +32,7 @@ $(document).ready(function() {
 
     // logica acceder tras rellenar datos del registro
     $("#btnAcceder").click(function() {
-        alert("Iniciando sesión...");
+        acceder();
     });
 
     $("#btnConfirmarRegistrarse").click(function(){
@@ -41,9 +43,10 @@ $(document).ready(function() {
 		let errores = await validarRegistro();
 		
 		if(errores != "") {
-			//enviar mensaje de error
+			mostrarPopupConfirmacionOErrores("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			guardar();
+			mostrarPopupConfirmacionOErrores("success", "¡Registro completado!");
 			$("#btnVolverRegistrarse").click();
 			$("#btnIniciarSesion").click();
 		}
@@ -64,8 +67,7 @@ $(document).ready(function() {
 		}
 		if($("#inputCorreoRegistro").val() == "") {
 			errores += "- Debes introducir un email" + "<br>";
-		}
-		if($("#inputCorreoRegistro").val().indexOf('@') === -1 || $("#inputCorreoRegistro").val().indexOf('.') === -1) {
+		} else if($("#inputCorreoRegistro").val().indexOf('@') === -1 || $("#inputCorreoRegistro").val().indexOf('.') === -1) {
 			errores += "- Debes introducir un email valido" + "<br>";
 		}
 		
@@ -77,6 +79,8 @@ $(document).ready(function() {
 		
 		if($("#inputPasswordRegistro").val() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
+		} else if($("#inputPasswordRegistro").val().length < 8) {
+			errores += "- La contraseña tiene que tener 8 caracteres como mínimo" + "<br>";
 		}
 		if($("#inputPassword2Registro").val() == "") {
 			errores += "- Debes volver a introducir la contraseña para verificarla" + "<br>";
@@ -91,5 +95,61 @@ $(document).ready(function() {
     	const usuarios = await recuperarUsuariosPorEmail($("#inputCorreoRegistro").val());
 		return usuarios.length > 0;
 	}
+	
+	const mostrarPopupConfirmacionOErrores = function(icono, titulo, errores) {
+		Swal.fire({
+		  icon: icono,
+		  title: titulo,
+		  html: errores ? `<ul style="text-align: left; margin-left: 20px;">${errores}</ul>` : ""
+		});
+	}
+	
+	const acceder = async function() {
+		let errores = await validarAcceso();
+		if(errores != "") {
+			mostrarPopupConfirmacionOErrores("error", "No se ha podido acceder", errores);
+		} else {
+			alert("de momento va bien");
+			entrarMenuUsuario();
+		}
+	}
+	
+	const validarAcceso = async function() {
+		let errores = "";
+		if($("#inputCorreoInicioSesion").val() == "") {
+			errores += "- Debes introducir un email" + "<br>";
+		} else if($("#inputCorreoInicioSesion").val().indexOf('@') === -1 || $("#inputCorreoInicioSesion").val().indexOf('.') === -1) {
+			errores += "- Debes introducir un email valido" + "<br>";
+		}
+		if($("#inputPasswordInicioSesion").val() == "") {
+			errores += "- Debes introducir una contraseña" + "<br>";
+		}
+		
+		if(errores == "") {
+			const usuarioExiste = await comprobarUsuarioExiste();
+			if(!usuarioExiste) {
+				errores += "- El email o la contraseña no coinciden" + "<br>";
+			}
+		}
+		return errores;
+	}
+	
+	const comprobarUsuarioExiste = async function() {
+		const usuarios = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
+		return usuarios.length > 0;
+	}
+	
+	const limpiarIniciarSesion = function() {
+		$("#inputCorreoInicioSesion").val("");
+		$("#inputPasswordInicioSesion").val("");
+	}
+	
+	const limpiarRegistrarse = function() {
+		$("#inputUsuarioRegistro").val("");
+		$("#inputCorreoRegistro").val("");
+		$("#inputPasswordRegistro").val("");
+		$("#inputPassword2Registro").val("");
+	}
+	
 	
 });

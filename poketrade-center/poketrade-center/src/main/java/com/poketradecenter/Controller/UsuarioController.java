@@ -32,4 +32,13 @@ public class UsuarioController {
     	List<Usuario> usuarios = usuarioService.recuperarUsuarioPorCriterios(criterios);
     	return usuarios;
     }
+    
+    @GetMapping("/usuario" + "/{correo}" + "/{password}")
+    public List<Usuario> recuperarUsuarioPorEmailYPassword(@PathVariable String correo, @PathVariable String password) {
+    	CriteriosUsuario criterios = new CriteriosUsuario();
+    	criterios.setEmail(correo);
+    	criterios.setPassword(password);
+    	List<Usuario> usuarios = usuarioService.recuperarUsuarioPorCriterios(criterios);
+    	return usuarios;
+    }
 }
