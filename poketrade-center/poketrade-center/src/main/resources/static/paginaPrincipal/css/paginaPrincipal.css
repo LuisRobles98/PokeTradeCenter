@@ -90,6 +90,11 @@ body::before {
     background-color: #007bb5;
 }
 
+.popup-content .botones {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre botones */
+}
 
 .hide {
     display: none;

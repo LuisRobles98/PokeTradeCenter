@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokeTradeCenter</title>
+    <title>PoketDex</title>
     <link rel="stylesheet" href="/paginaPrincipal/css/paginaPrincipal.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/paginaPrincipal/js/llamadasAjax.js" defer></script>
@@ -14,32 +14,38 @@
  	<!-- Popup Principal-->
 	<div id="popupPrincipal" class="popup">
 	    <div class="popup-content">
-	        <h2>PokeTradeCenter</h2>
-	        <button id="btnIniciarSesion">Iniciar sesión</button>
-	        <button id="btnRegistrarse">Registrarse</button>
+	        <img src="/paginaPrincipal/images/poketDex.png" alt="PoketDex" style="width: 120px;">
+	        <div class="botones">
+				<button id="btnIniciarSesion">Iniciar sesión</button>
+	        	<button id="btnRegistrarse">Registrarse</button>
+			</div>
 	    </div>
 	</div>
 
 	<div id="popupIniciarSesion" class="popup" style="display: none;">
 	    <div class="popup-content">
-	        <h2>PokeTradeCenter</h2>
+	        <img src="/paginaPrincipal/images/poketDex.png" alt="PoketDex" style="width: 120px;">
 		 	<input required id="inputCorreoInicioSesion" type="email" placeholder="Correo electronico">
 		 	<input required id="inputPasswordInicioSesion" type="password" placeholder="Contraseña">
-			<button id="btnAcceder">Acceder</button>
-			<button id="btnVolverInicioSesion">Volver</button>
+		 	<div class="botones">
+				<button id="btnAcceder">Acceder</button>
+				<button id="btnVolverInicioSesion">Volver</button>
+			</div>
 	    </div>
 	</div>
 	
 
 	<div id="popupRegistrarse" class="popup" style="display: none;">
 	    <div class="popup-content">
-	        <h2>PokeTradeCenter</h2>
+	        <img src="/paginaPrincipal/images/poketDex.png" alt="PoketDex" style="width: 120px;">
 	        <input required id="inputUsuarioRegistro" type="text" placeholder="Usuario">
 	        <input required id="inputCorreoRegistro" type="email" placeholder="Correo electronico">
 	        <input required id="inputPasswordRegistro" type="password" placeholder="Contraseña">
 	        <input required id="inputPassword2Registro" type="password" placeholder="Vuelva a introducir la contraseña">
-	        <button id="btnConfirmarRegistrarse">Registrarse</button>
-	        <button id="btnVolverRegistrarse">Volver</button>
+	        <div class="botones">
+	        	<button id="btnConfirmarRegistrarse">Registrarse</button>
+	        	<button id="btnVolverRegistrarse">Volver</button>
+	        </div>
 	    </div>
 	</div>
 
