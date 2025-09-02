@@ -100,7 +100,9 @@ $(document).ready(function() {
 		Swal.fire({
 		  icon: icono,
 		  title: titulo,
-		  html: errores ? `<ul style="text-align: left; margin-left: 20px;">${errores}</ul>` : ""
+		  html: errores ? `<ul style="text-align: left; margin-left: 20px;">${errores}</ul>` : "",
+		  confirmButtonText: "Aceptar",
+		  confirmButtonColor: "#3085d6"
 		});
 	}
 	
@@ -109,7 +111,6 @@ $(document).ready(function() {
 		if(errores != "") {
 			mostrarPopupConfirmacionOErrores("error", "No se ha podido acceder", errores);
 		} else {
-			alert("de momento va bien");
 			entrarMenuUsuario();
 		}
 	}
@@ -134,6 +135,10 @@ $(document).ready(function() {
 		return errores;
 	}
 	
+	const entrarMenuUsuario = async function() {
+		window.location.href = "/menuPrincipal";
+	}
+	
 	const comprobarUsuarioExiste = async function() {
 		const usuarios = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
 		return usuarios.length > 0;
@@ -143,13 +148,11 @@ $(document).ready(function() {
 		$("#inputCorreoInicioSesion").val("");
 		$("#inputPasswordInicioSesion").val("");
 	}
-	
+
 	const limpiarRegistrarse = function() {
 		$("#inputUsuarioRegistro").val("");
 		$("#inputCorreoRegistro").val("");
 		$("#inputPasswordRegistro").val("");
 		$("#inputPassword2Registro").val("");
 	}
-	
-	
 });
