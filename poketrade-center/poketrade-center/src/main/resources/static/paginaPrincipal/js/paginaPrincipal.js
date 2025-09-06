@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	//constantes
+
+	
     //Mostrar popup principal al iniciar la aplicacion
     $("#popupPrincipal").show();
     $("#popupIniciarSesion").hide();
@@ -111,6 +114,8 @@ $(document).ready(function() {
 		if(errores != "") {
 			mostrarPopupConfirmacionOErrores("error", "No se ha podido acceder", errores);
 		} else {
+			const usuario = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
+			localStorage.setItem("usuario", JSON.stringify(usuario[0]));
 			entrarMenuUsuario();
 		}
 	}
@@ -140,8 +145,8 @@ $(document).ready(function() {
 	}
 	
 	const comprobarUsuarioExiste = async function() {
-		const usuarios = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
-		return usuarios.length > 0;
+		const usuario = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
+		return usuario.length == 1;
 	}
 	
 	const limpiarIniciarSesion = function() {
