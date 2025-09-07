@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/generico/images/poketDexNoText.ico" type="image/x-icon">
+    <link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
     <title>PoketDex</title>
     <link rel="stylesheet" href="/generico/css/generico.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,17 +13,51 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+	
+	<!-- Barra superior -->
+	<div class="barraSuperior"></div>
+	
+	<!-- Barra de menú -->
+	<div class="barraMenu">
+	    <div class="usuarioIzquierda">
+	        <img id="iconoJuegoBarra" alt="Icono Usuario" class="iconoUsuario"/>
+	        <div class="usuarioInfo">
+	            <span class="nombreUsuario" id="nombreUsuarioBarra"></span><br>
+	            <span class="idUsuario" id="idUsuarioBarra"></span>
+	        </div>
+	    </div>
+	    <div id="btnLogout">
+    		<img src="/generico/imagenes/cerrarSesion.png" alt="Logout" class="iconoLogout">
+		</div>
+	</div>
+
+	<!-- Barra inferior -->
+	<div class="barraInferior"></div>
+		
+	</div>
+	
 	<!-- Popup Insertar id del juego del usuario-->
 	<div id="popupInsertarIdJuego" class="popup" style="display: none;">
 	    <div class="popup-content">
 			<label for="inputIdJuego">¡Bienvenido a PoketDex!<br>
 			Como es la primera vez que accedes a la aplicación, necesitas añadir tu Id del juego.<br>
 			Para obtenerlo, abre el juego y busca el siguiente icono en la pantalla de inicio:</label>
-	        <img src="/menuPrincipal/images/iconoMenuPrincipalIdJuego.png" alt="IconoIdJuego" style="width: 30px;">
+	        <img src="/menuPrincipal/imagenes/iconoMenuPrincipalIdJuego.png" alt="IconoIdJuego" style="width: 30px;">
 	        <label for="inputIdJuego"><br>Presiona ese icono y encontrarás tu Id del juego al final de la pantalla.</label>
 	        <input required id="inputIdJuego" type="text" placeholder="Id del juego">
 	        <div class="botones">
 	        	<button id="btnAceptarIdJuego">Añadir id del juego</button>
+			</div>
+	    </div>
+	</div>
+	
+	 	<!-- Popup Principal-->
+	<div id="popupCerrarSesion" class="popup" style="display: none;">
+	    <div class="popup-content">
+			<label for="lblCerrarSesion">¿Estás seguro que quieres cerrar la sesión?</label>
+	        <div class="botones">
+				<button id="btnCancelar">Cancelar</button>
+	        	<button id="btnCerrarSesion">Cerrar Sesión</button>
 			</div>
 	    </div>
 	</div>

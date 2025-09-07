@@ -1,10 +1,7 @@
 /* Fondo general con imagen y capa semitransparente */
 body {
-    background-image: url('/paginaPrincipal/images/pokePortada.jpg');
+    background-image: url('/paginaPrincipal/imagenes/pokePortada.jpg');
     height: 100vh;
     overflow: hidden;
     position: relative;
 }
-
-
-

@@ -1,12 +1,19 @@
-$(document).ready(function() {
-	let _usuario = JSON.parse(localStorage.getItem("usuario"));
+$(document).ready(async function() {
+	//constantes
+	let ICONO = "/iconos/";
+	let PNG = ".png";
+	let NOMBRE_USUARIO = "Nombre de usuario: ";
+	let ID_JUEGO = "Id juego: ";
+	let usuario = JSON.parse(localStorage.getItem("usuario"));
     //Mostrar popup de incluir el id del juego del usuario cuando es la primera vez que inicia sesion en la aplicación
-    if(_usuario.idJuego == null) {
+    if(usuario.idJuego == null) {
 		limpiarPopupAniadirIdJuego();
 		$("#popupInsertarIdJuego").show();	
 	} else {
 		limpiarPopupAniadirIdJuego();
 		$("#popupInsertarIdJuego").hide();
+		usuario = await recuperarUsuarioPorId(usuario.id);
+		cargarBarraSuperior(usuario);
 	}
 	
     // logica añadir el id del juego
@@ -15,9 +22,11 @@ $(document).ready(function() {
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			//guardarUsuario();
+			actualizarIdJuego();
 			popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
 			cerrarPopupInsertarIdJuego();
+			usuario = recuperarUsuarioPorId(usuario.id);
+			cargarBarraSuperior(usuario);
 		}
     });
     
@@ -37,5 +46,37 @@ $(document).ready(function() {
 	function limpiarPopupAniadirIdJuego() {
 		$("#inputIdJuego").val("");
 	}
+	
+	async function actualizarIdJuego() {
+		let usuarioActualizar = {};
+		usuarioActualizar.id = usuario.id;
+		usuarioActualizar.idJuego = $("#inputIdJuego").val();
+		await actualizarUsuario(usuarioActualizar);
+	}
+	
+	async function recuperarUsuarioPorId(id) {
+		let usuarioBuscar = {}
+		usuarioBuscar.id = id;
+		let usuarios = await recuperarUsuario(usuarioBuscar);
+		return usuarios[0];
+	}
+	
+	function cargarBarraSuperior(usuario) {
+		$("#iconoJuegoBarra").attr("src", ICONO + usuario.icono + PNG);
+		$("#nombreUsuarioBarra").text(NOMBRE_USUARIO + usuario.nombre);
+		$("#idUsuarioBarra").text(ID_JUEGO + usuario.idJuego);
+	}
+	
+    $("#btnLogout").click(function() {
+        $("#popupCerrarSesion").show();
+    });
+    
+    $("#btnCancelar").click(function() {
+    	$("#popupCerrarSesion").hide();
+    });
+    
+	$("#btnCerrarSesion").click(function() {
+    	window.location.href = "/paginaPrincipal/html/paginaPrincipal.html";
+    });
  
 });

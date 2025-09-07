@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	//constantes
-
 	
     //Mostrar popup principal al iniciar la aplicacion
     $("#popupPrincipal").show();
@@ -60,6 +59,7 @@ $(document).ready(function() {
 		usuario.nombre = $("#inputUsuarioRegistro").val();
 		usuario.email = $("#inputCorreoRegistro").val();
 		usuario.password = $("#inputPasswordRegistro").val();
+		usuario.icono = "Pikachu";
 		guardarUsuario(usuario);
 	};
 	
@@ -95,7 +95,9 @@ $(document).ready(function() {
 	};
 	
 	async function comprobarCorreoExiste() {
-    	let usuarios = await recuperarUsuariosPorEmail($("#inputCorreoRegistro").val());
+		let usuarioBuscar = {};
+		usuarioBuscar.email = $("#inputCorreoRegistro").val();
+    	let usuarios = await recuperarUsuario(usuarioBuscar);
 		return usuarios.length == 1;
 	}
 	
@@ -104,7 +106,10 @@ $(document).ready(function() {
 		if(errores != "") {
 			popupErroresOConfirmacion.mostrar("error", "No se ha podido acceder", errores);
 		} else {
-			let usuario = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
+			let usuarioBuscar = {};
+			usuarioBuscar.email = $("#inputCorreoInicioSesion").val();
+			usuarioBuscar.password = $("#inputPasswordInicioSesion").val();
+			let usuario = await recuperarUsuario(usuarioBuscar);
 			localStorage.setItem("usuario", JSON.stringify(usuario[0]));
 			entrarMenuUsuario();
 		}
@@ -135,8 +140,11 @@ $(document).ready(function() {
 	}
 	
 	async function comprobarUsuarioExiste() {
-		const usuario = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
-		return usuario.length == 1;
+		let usuarioBuscar = {};
+		usuarioBuscar.email = $("#inputCorreoInicioSesion").val();
+		usuarioBuscar.password = $("#inputPasswordInicioSesion").val();
+		let usuarios = await recuperarUsuario(usuarioBuscar);
+		return usuarios.length == 1;
 	}
 	
 	function limpiarIniciarSesion() {

@@ -47,9 +47,18 @@ body {
     margin: 10px auto;
     display: block;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #008CBA;
     font-size: 1em;
     box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Cuando seleccionas el input */
+.popup-content input:focus,
+.popup-content select:focus {
+    border-color: #007bb5;
+    box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
 }
 
 /* Botones */
@@ -72,4 +81,68 @@ body {
 label {
     font-family: Verdana, Arial, sans-serif;
     font-size: 1em;
+}
+
+/* Barras superior e inferior */
+.barraSuperior,
+.barraInferior {
+    width: 100%;
+    height: 4px;
+    background-color: #008CBA;
+    position: fixed;
+    left: 0;
+    z-index: 10;
+}
+.barraSuperior { top: 0; }
+.barraInferior { top: 70px; }
+
+/* Barra del menú (entre las barras) */
+.barraMenu {
+    display: flex;
+    justify-content: space-between; /* empuja usuario a la izquierda y logout a la derecha */
+    align-items: center;
+    padding: 0 10px; /* ajusta este valor si quieres más o menos espacio lateral */
+    height: 66px;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 4px; /* debajo de la primera barra azul */
+    left: 0;
+    box-sizing: border-box;
+    z-index: 11;
+}
+
+/* Contenedor del icono + texto */
+.usuarioIzquierda {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espacio entre icono y texto */
+}
+
+/* Ajustes del icono */
+.iconoUsuario {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Texto usuario */
+.usuarioInfo {
+    display: flex;
+    flex-direction: column; /* nombre arriba, id abajo */
+}
+
+.usuarioInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+
+.iconoLogout {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
