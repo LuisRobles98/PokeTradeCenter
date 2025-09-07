@@ -1,6 +1,14 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
 /* Estilo del popup centrado */
 .popup {
-	display: flex;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -9,11 +17,13 @@
     z-index: 10;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
 }
+
 
 .popup-content {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco con un pelín de transparencia */
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -59,7 +69,7 @@
     background-color: #007bb5;
 }
 
-.hide {
-    display: none;
+label {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 1em;
 }
-
