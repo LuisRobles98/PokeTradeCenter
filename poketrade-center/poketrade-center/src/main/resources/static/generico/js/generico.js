@@ -6,9 +6,12 @@ const popupErroresOConfirmacion = {
         Swal.fire({
             icon: icono,
             title: titulo,
-            html: errores ? `<ul style="text-align: left; margin-left: 20px;">${errores}</ul>` : "",
+            html: errores ? `<ul style="text-align: left; margin-left: 20px; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
             confirmButtonText: "Aceptar",
-            confirmButtonColor: "#3085d6"
+            confirmButtonColor: "#3085d6",
+            customClass: {
+                confirmButton: 'swal-confirm-bold'
+            }
         });
     }
 };
