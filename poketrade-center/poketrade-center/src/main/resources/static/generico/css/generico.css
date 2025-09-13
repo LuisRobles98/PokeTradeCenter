@@ -143,16 +143,19 @@ label {
     margin-left: 10px;
 }
 
+/*Estilos de iconos de font Awesome*/
+.iconoFontAwesome {
+  font-size: 32px;
+  color: #008CBA;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
 
-.iconoLogout {
-    width: 24px;
-    height: 24px;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
+.iconoFontAwesome:hover {
+  color: #007bb5;
 }
 
 .swal-confirm-bold {
     font-family: Arial, sans-serif;
-    font-weight: bold; /* o 600 para semi-bold */
+    font-weight: bold;
 }

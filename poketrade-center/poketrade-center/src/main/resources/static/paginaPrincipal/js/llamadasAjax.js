@@ -20,13 +20,3 @@ async function recuperarUsuario(usuario) {
     })
     .then(response => response.json());
 };
-
-function recuperarUsuariosPorEmail(correo) {
-	return fetch('http://localhost:8080/usuario/' + encodeURIComponent(correo))
-	.then(response => response.json());
-};
-
-function recuperarUsuariosPorEmailYPassword(correo, password) {
-	return fetch('http://localhost:8080/usuario/' + encodeURIComponent(correo) + "/" + encodeURIComponent(password))
-	.then(response => response.json());
-};

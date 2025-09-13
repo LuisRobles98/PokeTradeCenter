@@ -2,9 +2,9 @@ $(document).ready(async function() {
 	//constantes
 	let ICONO = "/iconos/";
 	let PNG = ".png";
-	let NOMBRE_USUARIO = "Nombre de usuario: ";
 	let ID_JUEGO = "Id juego: ";
-	let usuario = JSON.parse(localStorage.getItem("usuario"));
+	let usuario = usuarioLogado.recuperar();
+	
     //Mostrar popup de incluir el id del juego del usuario cuando es la primera vez que inicia sesion en la aplicación
     if(usuario.idJuego == null) {
 		limpiarPopupAniadirIdJuego();
@@ -63,7 +63,7 @@ $(document).ready(async function() {
 	
 	function cargarBarraSuperior(usuario) {
 		$("#iconoJuegoBarra").attr("src", ICONO + usuario.icono + PNG);
-		$("#nombreUsuarioBarra").text(NOMBRE_USUARIO + usuario.nombre);
+		$("#nombreUsuarioBarra").text(usuario.nombre);
 		$("#idUsuarioBarra").text(ID_JUEGO + usuario.idJuego);
 	}
 	

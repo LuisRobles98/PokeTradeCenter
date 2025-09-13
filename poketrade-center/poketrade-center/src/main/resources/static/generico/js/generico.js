@@ -26,3 +26,9 @@ const QueryURL = {
         	.join('&');
 	}
 }
+
+const usuarioLogado = {
+	recuperar: function() {
+		return JSON.parse(localStorage.getItem("usuario"));	
+	}
+}

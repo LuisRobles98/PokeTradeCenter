@@ -1,11 +1,9 @@
 package com.poketradecenter.Controller;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,17 +31,8 @@ public class UsuarioController {
     }
     
     @GetMapping("/usuario")
-    public List<Usuario> recuperarUsuarioPorCriterios(@RequestParam(required = false) String email, @RequestParam(required = false) String password,
-    		@RequestParam(required = false) String nombre, @RequestParam(required = false) String icono, @RequestParam(required = false) String idJuego,
-    		@RequestParam(required = false) Integer id) {
-    	
-    	CriteriosUsuario criterios = new CriteriosUsuario();
-        criterios.setEmail(email);
-        criterios.setPassword(password);
-        criterios.setNombre(nombre);
-        criterios.setIcono(icono);
-        criterios.setIdJuego(idJuego);
-        criterios.setId(id);
+    public List<Usuario> recuperarUsuarioPorCriterios(@RequestParam Map<String, String> params) {
+        CriteriosUsuario criterios = usuarioService.crearCriteriosUsuarioParams(params);
         List<Usuario> usuarios = usuarioService.recuperarUsuarioPorCriterios(criterios);
         return usuarios;
     }

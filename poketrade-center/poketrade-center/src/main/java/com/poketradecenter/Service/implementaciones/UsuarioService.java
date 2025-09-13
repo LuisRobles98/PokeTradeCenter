@@ -1,6 +1,7 @@
 package com.poketradecenter.Service.implementaciones;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,35 @@ public class UsuarioService implements IUsuarioService {
 		for(Usuario usuario : usuarios) {
 			usuario.setPassword(null);
 		}
+	}
+	
+	@Override
+	public CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params) {
+    	CriteriosUsuario criterios = new CriteriosUsuario();
+    	   params.forEach((key, value) -> {
+    	        switch(key) {
+    	            case "email":
+    	                criterios.setEmail(value);
+    	                break;
+    	            case "password":
+    	                criterios.setPassword(value);
+    	                break;
+    	            case "nombre":
+    	                criterios.setNombre(value);
+    	                break;
+    	            case "icono":
+    	                criterios.setIcono(value);
+    	                break;
+    	            case "idJuego":
+    	                criterios.setIdJuego(value);
+    	                break;
+    	            case "id":
+    	                criterios.setId(Integer.parseInt(value));
+    	                break;
+    	            default:
+    	                break;
+    	        }
+    	    });
+        return criterios;
 	}
 }
