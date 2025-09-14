@@ -1,0 +1,64 @@
+/* Primera fila de apps (los 4)*/
+.iconosAplicaciones1 {
+    display: grid;
+    grid-template-columns: repeat(4, 160px);
+    justify-content: center;
+    row-gap: 100px;
+    column-gap: 120px;
+    margin-top: 300px;
+}
+
+.iconosAplicaciones2 {
+    display: grid;
+    grid-template-columns: repeat(3, 160px);
+    justify-content: center;
+    row-gap: 120px;
+    column-gap: 120px;
+    margin-top: 100px;
+}
+
+
+
+.iconoApp {
+    font-size: 66px;
+    color: #008CBA;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.iconoApp:hover {
+	transform: scale(1.2);
+    color: #007bb5;
+}
+
+.iconosAplicaciones {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin-top: 50px;
+}
+
+.iconoContenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.iconoApp {
+    font-size: 48px;
+    color: #008CBA;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.iconoApp:hover {
+    color: #007bb5;
+}
+
+.iconoLabel {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+}

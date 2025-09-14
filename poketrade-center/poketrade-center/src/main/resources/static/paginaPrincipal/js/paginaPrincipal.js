@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	//constantes
+	
     //Mostrar popup principal al iniciar la aplicacion
     $("#popupPrincipal").show();
     $("#popupIniciarSesion").hide();
@@ -39,28 +41,29 @@ $(document).ready(function() {
 		guardarRegistro();
 	});
 	
-	const guardarRegistro = async function() {
+	async function guardarRegistro() {
 		let errores = await validarRegistro();
 		
 		if(errores != "") {
-			mostrarPopupConfirmacionOErrores("error", "Se han producido los siguientes errores:",errores);
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			guardar();
-			mostrarPopupConfirmacionOErrores("success", "¡Registro completado!");
+			popupErroresOConfirmacion.mostrar("success", "¡Registro completado!");
 			$("#btnVolverRegistrarse").click();
 			$("#btnIniciarSesion").click();
 		}
 	};
 	
-	const guardar = function() {
+	function guardar() {
 		let usuario = {};
 		usuario.nombre = $("#inputUsuarioRegistro").val();
 		usuario.email = $("#inputCorreoRegistro").val();
 		usuario.password = $("#inputPasswordRegistro").val();
+		usuario.icono = "Pikachu";
 		guardarUsuario(usuario);
 	};
 	
-	const validarRegistro = async function() {
+	async function validarRegistro() {
 		let errores = "";
 		if($("#inputUsuarioRegistro").val() == "") {
 			errores += "- Debes introducir un nombre" + "<br>";
@@ -72,7 +75,7 @@ $(document).ready(function() {
 		}
 		
 		//comprobar que el correo no exista en bbdd
- 		const correoExiste = await comprobarCorreoExiste();
+ 		let correoExiste = await comprobarCorreoExiste();
 	    if (correoExiste) {
 	        errores += "- El correo ya existe en el sistema" + "<br>";
 	    }
@@ -91,30 +94,28 @@ $(document).ready(function() {
 		return errores;
 	};
 	
-	const comprobarCorreoExiste = async function() {
-    	const usuarios = await recuperarUsuariosPorEmail($("#inputCorreoRegistro").val());
-		return usuarios.length > 0;
+	async function comprobarCorreoExiste() {
+		let usuarioBuscar = {};
+		usuarioBuscar.email = $("#inputCorreoRegistro").val();
+    	let usuarios = await recuperarUsuario(usuarioBuscar);
+		return usuarios.length == 1;
 	}
 	
-	const mostrarPopupConfirmacionOErrores = function(icono, titulo, errores) {
-		Swal.fire({
-		  icon: icono,
-		  title: titulo,
-		  html: errores ? `<ul style="text-align: left; margin-left: 20px;">${errores}</ul>` : ""
-		});
-	}
-	
-	const acceder = async function() {
+	async function acceder() {
 		let errores = await validarAcceso();
 		if(errores != "") {
-			mostrarPopupConfirmacionOErrores("error", "No se ha podido acceder", errores);
+			popupErroresOConfirmacion.mostrar("error", "No se ha podido acceder", errores);
 		} else {
-			alert("de momento va bien");
-			entrarMenuUsuario();
+			let usuarioBuscar = {};
+			usuarioBuscar.email = $("#inputCorreoInicioSesion").val();
+			usuarioBuscar.password = $("#inputPasswordInicioSesion").val();
+			let usuario = await recuperarUsuario(usuarioBuscar);
+			localStorage.setItem("usuario", JSON.stringify(usuario[0]));
+			cambiarAplicacion.menuPrincipal();
 		}
 	}
 	
-	const validarAcceso = async function() {
+	async function validarAcceso() {
 		let errores = "";
 		if($("#inputCorreoInicioSesion").val() == "") {
 			errores += "- Debes introducir un email" + "<br>";
@@ -126,7 +127,7 @@ $(document).ready(function() {
 		}
 		
 		if(errores == "") {
-			const usuarioExiste = await comprobarUsuarioExiste();
+			let usuarioExiste = await comprobarUsuarioExiste();
 			if(!usuarioExiste) {
 				errores += "- El email o la contraseña no coinciden" + "<br>";
 			}
@@ -134,22 +135,23 @@ $(document).ready(function() {
 		return errores;
 	}
 	
-	const comprobarUsuarioExiste = async function() {
-		const usuarios = await recuperarUsuariosPorEmailYPassword($("#inputCorreoInicioSesion").val(), $("#inputPasswordInicioSesion").val());
-		return usuarios.length > 0;
+	async function comprobarUsuarioExiste() {
+		let usuarioBuscar = {};
+		usuarioBuscar.email = $("#inputCorreoInicioSesion").val();
+		usuarioBuscar.password = $("#inputPasswordInicioSesion").val();
+		let usuarios = await recuperarUsuario(usuarioBuscar);
+		return usuarios.length == 1;
 	}
 	
-	const limpiarIniciarSesion = function() {
+	function limpiarIniciarSesion() {
 		$("#inputCorreoInicioSesion").val("");
 		$("#inputPasswordInicioSesion").val("");
 	}
-	
-	const limpiarRegistrarse = function() {
+
+	function limpiarRegistrarse() {
 		$("#inputUsuarioRegistro").val("");
 		$("#inputCorreoRegistro").val("");
 		$("#inputPasswordRegistro").val("");
 		$("#inputPassword2Registro").val("");
 	}
-	
-	
 });

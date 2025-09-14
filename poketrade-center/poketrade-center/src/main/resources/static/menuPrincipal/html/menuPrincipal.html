@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+    <title>PoketDex</title>
+    <link rel="stylesheet" href="/generico/css/generico.css">
+    <link rel="stylesheet" href="/menuPrincipal/css/menuPrincipal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/generico/js/generico.js" defer></script>
+    <script>$(document).ready(function() {barraSuperior.cargar();});</script>
+    <script src="/menuPrincipal/js/llamadasAjax.js" defer></script>
+    <script src="/menuPrincipal/js/menuPrincipal.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="fondo">
+	
+	<!-- cargar Barra superior -->
+	<div id="barraContainer"></div>
+
+	<!-- Popup Insertar id del juego del usuario-->
+	<div id="popupInsertarIdJuego" class="popup" style="display: none;">
+	    <div class="popup-content">
+			<label for="inputIdJuego">¡Bienvenido a PoketDex!<br>
+			Como es la primera vez que accedes a la aplicación, necesitas añadir tu Id del juego.<br>
+			Para obtenerlo, abre el juego y busca el siguiente icono en la pantalla de inicio:</label>
+	        <img src="/menuPrincipal/imagenes/iconoMenuPrincipalIdJuego.png" alt="IconoIdJuego" style="width: 30px;">
+	        <label for="inputIdJuego"><br>Presiona ese icono y encontrarás tu Id del juego al final de la pantalla.</label>
+	        <input required id="inputIdJuego" type="text" placeholder="Id del juego">
+	        <div class="botones">
+	        	<button id="btnAceptarIdJuego">Añadir id del juego</button>
+			</div>
+	    </div>
+	</div>
+		
+	<!-- Primera fila -->
+	<div id="iconosAplicaciones1" class="iconosAplicaciones1">
+	    <div class="iconoContenedor">
+	        <i id="buscarIntercambiosApp" class="fa-solid fa-magnifying-glass iconoApp"></i>
+	        <span class="iconoLabel">Buscar Intercambios</span>
+	    </div>
+	    <div class="iconoContenedor">
+	        <i id="publicarIntercambiosApp" class="fa-solid fa-arrow-up-from-bracket iconoApp"></i>
+	        <span class="iconoLabel">Publicar Intercambios</span>
+	    </div>
+	    <div class="iconoContenedor">
+	        <i id="misIntercambiosApp" class="fa-solid fa-arrows-rotate iconoApp"></i>
+	        <span class="iconoLabel">Mis Intercambios</span>
+	    </div>
+	    <div class="iconoContenedor">
+	        <i id="coleccionCartasApp" class="fa-solid fa-book-open iconoApp"></i>
+	        <span class="iconoLabel">Colección de Cartas</span>
+	    </div>
+	</div>
+	
+	<!-- Segunda fila -->
+	<div id="iconosAplicaciones2" class="iconosAplicaciones2">
+	    <div class="iconoContenedor">
+	        <i id="misBarajasApp" class="fa-solid fa-layer-group iconoApp"></i>
+	        <span class="iconoLabel">Mis barajas</span>
+	    </div>
+	    <div class="iconoContenedor">
+	        <i id="amigosApp" class="fa-solid fa-users iconoApp"></i>
+	        <span class="iconoLabel">Amigos</span>
+	    </div>
+	    <div class="iconoContenedor">
+	        <i id="perfilApp" class="fa-solid fa-user iconoApp"></i>
+	        <span class="iconoLabel">Perfil</span>
+	    </div>
+	</div>
+		
+		
+</body>
+</html>

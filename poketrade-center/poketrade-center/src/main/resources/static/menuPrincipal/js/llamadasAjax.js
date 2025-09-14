@@ -1,7 +1,6 @@
-
-function guardarUsuario(usuario) {
+async function actualizarUsuario(usuario) {
     let parameters = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },

@@ -10,4 +10,5 @@ import com.poketradecenter.Clase.Usuario;
 public interface IUsuarioMapper {
 	void guardar(Usuario usuario);
 	List<Usuario> recuperarPorCriterios(CriteriosUsuario criterios);
+	void actualizar(Usuario usuario);
 }
