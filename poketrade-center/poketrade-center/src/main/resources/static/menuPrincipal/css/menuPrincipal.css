@@ -1,12 +1,3 @@
-body {
-    background-image: url('/generico/imagenes/fondoApp.png');
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-}
-
-
-
 /* Primera fila de apps (los 4)*/
 .iconosAplicaciones1 {
     display: grid;
@@ -36,6 +27,7 @@ body {
 }
 
 .iconoApp:hover {
+	transform: scale(1.2);
     color: #007bb5;
 }
 
@@ -57,7 +49,7 @@ body {
     font-size: 48px;
     color: #008CBA;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: transform 0.2s;
 }
 
 .iconoApp:hover {

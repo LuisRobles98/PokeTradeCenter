@@ -1,0 +1,27 @@
+.expansionesContainer {
+    display: flex;
+    overflow-x: auto;
+    gap: 85px;
+    padding-top: calc(var(--separacion-barras) + 10px);
+    white-space: nowrap;
+     height: 100px;
+}
+
+.expansion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.expansionLogo:hover {
+    transform: scale(1.3);
+}
+
+.expansionLogo {
+    width: 140px;
+    height: auto;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}

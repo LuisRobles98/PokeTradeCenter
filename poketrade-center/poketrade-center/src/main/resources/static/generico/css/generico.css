@@ -1,3 +1,11 @@
+/* Variables globales */
+:root {
+    --altura-barra-superior: 4px;
+    --altura-barra-menu: 66px;
+    --separacion-barras: calc(var(--altura-barra-superior) + var(--altura-barra-menu));
+}
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -5,6 +13,20 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
+
+body.paginaPrincipalFondo {
+    background-image: url('/paginaPrincipal/imagenes/pokePortada.jpg');
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+body.fondo {
+    background-image: url('/generico/imagenes/fondoApp.png');
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
 /* Estilo del popup centrado */
@@ -24,7 +46,7 @@ body {
 
 .popup-content {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #fff;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -98,20 +120,26 @@ label {
     left: 0;
     z-index: 10;
 }
-.barraSuperior { top: 0; }
-.barraInferior { top: 70px; }
+.barraSuperior {
+	height: var(--altura-barra-superior);
+	top: 0; 
+}
+.barraInferior {
+	height: 4px;
+	top: var(--separacion-barras);
+}
 
 /* Barra del menú (entre las barras) */
 .barraMenu {
+	height: var(--altura-barra-menu);
+    top: var(--altura-barra-superior);
     display: flex;
-    justify-content: space-between; /* empuja usuario a la izquierda y logout a la derecha */
+    justify-content: space-between;
     align-items: center;
-    padding: 0 10px; /* ajusta este valor si quieres más o menos espacio lateral */
-    height: 66px;
+    padding: 0 10px;
     width: 100%;
     background-color: #fff;
     position: fixed;
-    top: 4px; /* debajo de la primera barra azul */
     left: 0;
     box-sizing: border-box;
     z-index: 11;
@@ -134,7 +162,7 @@ label {
 /* Texto usuario */
 .usuarioInfo {
     display: flex;
-    flex-direction: column; /* nombre arriba, id abajo */
+    flex-direction: column;
 }
 
 .usuarioInfo {
@@ -158,4 +186,38 @@ label {
 .swal-confirm-bold {
     font-family: Arial, sans-serif;
     font-weight: bold;
+}
+
+/* Scroll horizontal genérico para cualquier contenedor con scroll */
+.scrollHorizontal {
+    overflow-x: auto;
+    scroll-behavior: smooth; /* opcional, para que el scroll sea suave */
+}
+
+/* WebKit */
+.scrollHorizontal::-webkit-scrollbar {
+    height: 10px;
+}
+
+.scrollHorizontal::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
+}
+
+.scrollHorizontal::-webkit-scrollbar-thumb {
+    background-color: #008CBA;
+    border-radius: 6px;
+    border: 3px solid #f0f0f0;
+}
+
+.scrollHorizontal::-webkit-scrollbar-thumb:hover {
+    background-color: #007bb5;
+}
+
+
+.deshabilitar {
+    filter: grayscale(100%);
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
 }

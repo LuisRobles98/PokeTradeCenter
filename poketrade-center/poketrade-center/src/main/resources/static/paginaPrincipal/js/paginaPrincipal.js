@@ -111,7 +111,7 @@ $(document).ready(function() {
 			usuarioBuscar.password = $("#inputPasswordInicioSesion").val();
 			let usuario = await recuperarUsuario(usuarioBuscar);
 			localStorage.setItem("usuario", JSON.stringify(usuario[0]));
-			entrarMenuUsuario();
+			cambiarAplicacion.menuPrincipal();
 		}
 	}
 	
@@ -133,10 +133,6 @@ $(document).ready(function() {
 			}
 		}
 		return errores;
-	}
-	
-	async function entrarMenuUsuario() {
-		window.location.href = "/menuPrincipal";
 	}
 	
 	async function comprobarUsuarioExiste() {
