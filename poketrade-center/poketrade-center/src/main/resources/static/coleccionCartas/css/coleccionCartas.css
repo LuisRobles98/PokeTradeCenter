@@ -100,6 +100,15 @@
     justify-content: flex-start;
 }
 
+.labelBuscadorCartasRareza {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    font-weight: bold;
+    margin: 5px;
+    font-size: 1em;
+    color: #008CBA;
+}
+
 .rarezaRombos {
     display: flex;          /* organiza los hijos en fila */
     flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
