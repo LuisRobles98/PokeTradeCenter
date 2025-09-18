@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/generico/js/generico.js" defer></script>
+    <script src="/coleccionCartas/js/coleccionCartas.js" defer></script>
     <script>$(document).ready(function() {barraSuperior.cargar();});</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -21,38 +23,104 @@
 	
 	<div class="expansionesContainer scrollHorizontal">
 		<div class="expansion">
-        	<img id="expansionGenesFormidables" src="/expansiones/expansionGenesFormidables.png" class="expansionLogo deshabilitar">
+        	<img id="expansionGenesFormidables" src="/imagenes/expansiones/expansionGenesFormidables.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionLaIslaSingular" src="/expansiones/expansionLaIslaSingular.png" class="expansionLogo deshabilitar">
+        	<img id="expansionLaIslaSingular" src="/imagenes/expansiones/expansionLaIslaSingular.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionPugnaEspaciotemporal" src="/expansiones/expansionPugnaEspaciotemporal.png" class="expansionLogo deshabilitar">
+        	<img id="expansionPugnaEspaciotemporal" src="/imagenes/expansiones/expansionPugnaEspaciotemporal.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionLuzTriunfal" src="/expansiones/expansionLuzTriunfal.png" class="expansionLogo deshabilitar">
+        	<img id="expansionLuzTriunfal" src="/imagenes/expansiones/expansionLuzTriunfal.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionFestivalBrillante" src="/expansiones/expansionFestivalBrillante.png" class="expansionLogo deshabilitar">
+        	<img id="expansionFestivalBrillante" src="/imagenes/expansiones/expansionFestivalBrillante.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionGuardianesCelestiales" src="/expansiones/expansionGuardianesCelestiales.png" class="expansionLogo deshabilitar">
+        	<img id="expansionGuardianesCelestiales" src="/imagenes/expansiones/expansionGuardianesCelestiales.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionCrisisDimensional" src="/expansiones/expansionCrisisDimensional.png" class="expansionLogo deshabilitar">
+        	<img id="expansionCrisisDimensional" src="/imagenes/expansiones/expansionCrisisDimensional.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionArboledaDeEevee" src="/expansiones/expansionArboledaDeEevee.png" class="expansionLogo">
+        	<img id="expansionArboledaDeEevee" src="/imagenes/expansiones/expansionArboledaDeEevee.png" class="expansionLogo">
     	</div>
 		<div class="expansion">
-        	<img id="expansionSaberMarinoYCeleste" src="/expansiones/expansionSaberMarinoYCeleste.png" class="expansionLogo deshabilitar">
+        	<img id="expansionSaberMarinoYCeleste" src="/imagenes/expansiones/expansionSaberMarinoYCeleste.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionManantialOculto" src="/expansiones/expansionManantialOculto.png" class="expansionLogo deshabilitar">
+        	<img id="expansionManantialOculto" src="/imagenes/expansiones/expansionManantialOculto.png" class="expansionLogo deshabilitar">
     	</div>
 		<div class="expansion">
-        	<img id="expansionPromoA" src="/expansiones/expansionPromoA.png" class="expansionLogo deshabilitar">
+        	<img id="expansionPromoA" src="/imagenes/expansiones/expansionPromoA.png" class="expansionLogo deshabilitar">
     	</div>
+	</div>
+	
+	<!-- Columna izquierda: buscador -->
+	<div id="buscadorCartas" style="display: none;">
+		<div class="buscadorCartas">
+	        <img id="imagenPopupBuscador" class="imagenBuscadorCartas">
+		 	<input id="inputNombreCarta" class="inputBuscadorCartas" placeholder="Nombre de carta">
+		 	<div id="selectRarezaCarta" class="selectRarezasCarta">
+				<div class="rarezaRombos">
+			 		<div id="romboX1RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 		</div>
+			 		<div id="romboX2RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 		</div>
+			 		<div id="romboX3RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 		</div>
+			 		<div id="romboX4RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/rombo.png">
+			 		</div>
+		 		</div>
+		 		<div class="rarezaEstrellas">
+			 		<div id="estrellaX1RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 		</div>
+			 		<div id="estrellaX2RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 		</div>
+			 		<div id="estrellaX3RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrella.png">
+			 		</div>
+		 		</div>
+		 		<div class="rarezaEstrellaSCorona">
+			 		<div id="estrellaSX1RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrellaS.png">
+			 		</div>
+			 		<div id="estrellaSX2RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrellaS.png">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/estrellaS.png">
+			 		</div>
+			 		<div id="coronaX1RarezaCarta" class="rarezaCarta">
+			 			<img class="imagenSelect" src="/imagenes/rarezas/corona.png">
+			 		</div>
+		 		</div>
+		 	</div>
+		 	<select id="comboRareza" class="combo"></select>
+		 	<select id="comboEnergia" class="combo"></select>
+		 	<select id="comboTipo" class="combo"></select>
+		 	<div class="botones">
+				<button id="btnBuscar">Buscar</button>
+			</div>
+		</div>
+	</div>
+	
+  	<!-- Columna derecha: cartas -->
+	<div class="cartas" id="cartas" style="display: none;">
 	</div>
 	
 </body>

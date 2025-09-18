@@ -25,3 +25,111 @@
     cursor: pointer;
     transition: transform 0.2s;
 }
+
+
+.cartas {
+  flex: 1;
+  padding: 20px;
+  background: rgba(100, 100, 255, 0.1);
+  box-sizing: border-box;
+}
+
+
+/*INICIO COMBO RAREZAS*/
+.combo {
+  border: 2px solid #008CBA;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.combo option {
+  background: #fff;
+  color: #000;
+}
+
+.combo option:checked {
+  background: #008CBA;
+  color: #fff;
+}
+/*FIN COMBO RAREZAS*/
+
+
+
+/*REWORK*/
+.buscadorCartas {
+	display: flex;
+	width: fit-content;
+  	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+    margin-top: 50px;
+    margin-left: 50px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+   	box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+   	
+   	/*transiciones*/
+   	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imagenBuscadorCartas {
+	width: 320px;
+}
+
+.inputBuscadorCartas {
+	width: 90%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px solid #008CBA;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+.inputBuscadorCartas:focus {
+	outline: none; /* eliminar lo que pone por defecto el navegador */
+    border-color: #007bb5;
+    box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
+}
+
+.selectRarezasCarta {
+    justify-content: flex-start;
+}
+
+.rarezaRombos {
+    display: flex;          /* organiza los hijos en fila */
+    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+    gap: 10px;
+    margin: 5px;
+}
+
+.rarezaEstrellas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 5px;
+}
+
+.rarezaEstrellaSCorona {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 5px;
+}
+
+.rarezaCarta {
+    display: flex;
+    padding: 5px;
+    border: 2px solid #008CBA;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.rarezaCarta.rarezaSeleccionada {
+    background-color: #B0B0B0;
+}

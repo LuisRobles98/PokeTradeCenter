@@ -5,7 +5,7 @@
     justify-content: center;
     row-gap: 100px;
     column-gap: 120px;
-    margin-top: 300px;
+    margin-top: 250px;
 }
 
 .iconosAplicaciones2 {
@@ -56,9 +56,47 @@
     color: #007bb5;
 }
 
-.iconoLabel {
+
+/* AQUI EMPIEZA EL REWORK DEL MENU PRINCIPAL */
+
+.appMenu {
+	display: flex;
+	width: fit-content;
+  	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+   	box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+   	
+   	/*transiciones*/
+   	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imagenApp {
+	width: 80px;
+	/*transiciones*/
+   	transition: transform 0.3s ease;
+}
+
+.labelApp {
     font-family: Arial, sans-serif;
+    padding: 10px;
     font-weight: bold;
     font-size: 1.25em;
     text-align: center;
+    
+    /*transiciones*/
+    transition: color 0.3s ease;
+}
+
+.appMenu:hover {
+    transform: scale(1.05); /* aumenta un 5% todo el contenedor */
+    box-shadow: 0 1px 40px #007bb5;
+}
+
+.appMenu:hover .labelApp {
+    color: #007bb5; /* cambia el color del texto al azul */
 }

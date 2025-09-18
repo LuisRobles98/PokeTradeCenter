@@ -59,7 +59,7 @@ const barraSuperior = {
     },
 
     mostrarDatos: function(usuario) {
-        $("#iconoJuegoBarra").attr("src", "/iconos/" + usuario.icono + ".png");
+        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.icono + ".png");
         $("#nombreUsuarioBarra").text(usuario.nombre);
         $("#idUsuarioBarra").text("ID: " + usuario.idJuego);
     }
@@ -74,6 +74,87 @@ const cambiarAplicacion = {
 	},
 	coleccionCartas: function() {
 		window.location.href = "/coleccionCartas/html/coleccionCartas.html";
-	}
-	
-}
+	}	
+};
+
+const combo = {
+    cargarRareza: function(comboElement) {
+        if (!comboElement) return;
+
+        const rarezas = [
+			{ id: 0, simbolo: "Todas las rarezas" },
+            { id: 1, simbolo: "♦" },
+            { id: 2, simbolo: "♦♦" },
+            { id: 3, simbolo: "♦♦♦" },
+            { id: 4, simbolo: "♦♦♦♦" },
+            { id: 5, simbolo: "★" },
+            { id: 6, simbolo: "★★" },
+            { id: 7, simbolo: "★★★" },
+            { id: 8, simbolo: "✵" },
+            { id: 9, simbolo: "✵✵" },
+            { id: 10, simbolo: "♕" }
+        ];
+
+        comboElement.innerHTML = "";
+
+        // Agregar opciones
+        rarezas.forEach((r, i) => {
+    		const option = document.createElement("option");
+    		option.value = r.id;
+    		option.text = r.simbolo;
+    		comboElement.add(option);
+		});
+    },
+    
+    cargarEnergia: function(comboElement) {
+        if (!comboElement) return;
+
+        const energias = [
+			{ id: 0, simbolo: "Todas las energías" },
+            { id: 1, simbolo: "Incoloro" },
+            { id: 2, simbolo: "Oscuro" },
+            { id: 3, simbolo: "Dragón" },
+            { id: 4, simbolo: "Lucha" },
+            { id: 5, simbolo: "Fuego" },
+            { id: 6, simbolo: "Planta" },
+            { id: 7, simbolo: "Eléctrico" },
+            { id: 8, simbolo: "Metal" },
+            { id: 9, simbolo: "Psíquico" },
+            { id: 10, simbolo: "Agua" }
+        ];
+
+        comboElement.innerHTML = "";
+
+        // Agregar opciones
+        energias.forEach((r, i) => {
+    		const option = document.createElement("option");
+    		option.value = r.id;
+    		option.text = r.simbolo;
+    		comboElement.add(option);
+		});
+    },
+    
+    cargarTipo: function(comboElement) {
+        if (!comboElement) return;
+
+        const tipos = [
+			{ id: 0, simbolo: "Todos los tipos" },
+            { id: 1, simbolo: "Pokemon" },
+            { id: 2, simbolo: "Objeto" },
+            { id: 3, simbolo: "Partidario" },
+            { id: 4, simbolo: "Herramienta" }
+        ];
+
+        comboElement.innerHTML = "";
+
+        // Agregar opciones
+        tipos.forEach((r, i) => {
+    		const option = document.createElement("option");
+    		option.value = r.id;
+    		option.text = r.simbolo;
+    		comboElement.add(option);
+		});
+    }
+};
+
+
