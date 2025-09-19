@@ -15,6 +15,7 @@ $(document).ready(function() {
  
     //logica boton volver de registro
 	$("#btnVolverRegistrarse").click(function() {
+		limpiarIniciarSesion();
         $("#popupRegistrarse").hide(); 
         $("#popupIniciarSesion").show();
     });
