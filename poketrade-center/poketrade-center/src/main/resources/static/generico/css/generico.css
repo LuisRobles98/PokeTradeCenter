@@ -190,36 +190,3 @@ label {
     font-family: Arial, sans-serif;
     font-weight: normal;
 }
-
-/* Scroll horizontal genérico para cualquier contenedor con scroll */
-.scrollHorizontal {
-    overflow-x: auto;
-    scroll-behavior: smooth; /* opcional, para que el scroll sea suave */
-}
-
-/* WebKit */
-.scrollHorizontal::-webkit-scrollbar {
-    height: 10px;
-}
-
-.scrollHorizontal::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 6px;
-}
-
-.scrollHorizontal::-webkit-scrollbar-thumb {
-    background-color: #008CBA;
-    border-radius: 6px;
-    border: 3px solid #f0f0f0;
-}
-
-.scrollHorizontal::-webkit-scrollbar-thumb:hover {
-    background-color: #007bb5;
-}
-
-.deshabilitar {
-    filter: grayscale(100%);
-    opacity: 0.5;
-    pointer-events: none;
-    user-select: none;
-}

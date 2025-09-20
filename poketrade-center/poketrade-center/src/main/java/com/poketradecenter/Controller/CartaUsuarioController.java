@@ -1,0 +1,27 @@
+package com.poketradecenter.Controller;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.poketradecenter.Clase.CartaUsuario;
+import com.poketradecenter.Clase.CriteriosCartaUsuario;
+import com.poketradecenter.Service.interfaces.ICartaUsuarioService;
+
+@RestController
+public class CartaUsuarioController {
+	
+	@Autowired
+	private ICartaUsuarioService cartaUsuarioService;
+	
+
+    @GetMapping("/cartasUsuario")
+    public List<CartaUsuario> recuperarCartasUsuarioPorCriterios(@RequestParam Map<String, String> params) {
+        CriteriosCartaUsuario criterios = cartaUsuarioService.crearCriteriosCartaUsuarioParams(params);
+        List<CartaUsuario> cartas = cartaUsuarioService.recuperarCartaUsuarioPorCriterios(criterios);
+        return cartas;
+    }
+}
