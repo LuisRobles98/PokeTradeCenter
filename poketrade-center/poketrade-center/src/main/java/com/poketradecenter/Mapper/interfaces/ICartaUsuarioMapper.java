@@ -9,4 +9,5 @@ import com.poketradecenter.Clase.CartaUsuario;
 @Mapper
 public interface ICartaUsuarioMapper {
 	List<CartaUsuario> recuperarPorCriterios(CriteriosCartaUsuario criterios);
+	void actualizar(CartaUsuario cartaUsuario);
 }

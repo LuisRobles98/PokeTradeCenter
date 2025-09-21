@@ -70,11 +70,16 @@
     border: 2px solid #008CBA;
     font-weight: normal;
     font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.inputBuscadorCartas:hover {
+    border-color: #007bb5;
+}
+
 .inputBuscadorCartas:focus {
 	outline: none; /* eliminar lo que pone por defecto el navegador */
-    border-color: #007bb5;
-    box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
+    border-color: #005f87;
 }
 
 /* ---------------------------RAREZAS BUSCADOR CARTAS------------------------------------------- */
@@ -117,11 +122,17 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.rarezaCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #007bb5;
+}
+
 .rarezaCarta.rarezaSeleccionada {
     background-color: #B0B0B0;
-    border-color: #007bb5;
-    box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
+    border-color: #005f87;
 }
 
 
@@ -158,10 +169,17 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.energiaCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #007bb5;
+}
+
 .energiaCarta.energiaSeleccionada {
     background-color: #B0B0B0;
-    border-color: #007bb5;
+    border-color: #005f87;
     box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
 }
 
@@ -198,10 +216,17 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.tipoCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #007bb5;
+}
+
 .tipoCarta.tipoSeleccionada {
     background-color: #B0B0B0;
-    border-color: #007bb5;
+    border-color: #005f87;
     box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
 }
 
@@ -232,10 +257,17 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.obtenidaCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #007bb5;
+}
+
 .obtenidaCarta.obtenidaSeleccionada {
     background-color: #B0B0B0;
-    border-color: #007bb5;
+    border-color: #005f87;
     box-shadow: 0 0 5px rgba(0, 123, 181, 0.5);
 }
 
@@ -269,6 +301,7 @@
     justify-content: center;
     align-items: center;
     margin-top: -5px;
+    user-select: none;
 }
 
 /* ---------------- CONTADOR ------------------------- */
@@ -278,6 +311,11 @@
     border: 2px solid #008CBA;
     border-radius: 10px;
     transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.contadorResultado:hover {
+    border: 2px solid #007bb5;
 }
 
 /* ---------------- CONTENEDOR CARTAS ------------------------- */
@@ -294,10 +332,11 @@
 
 /* ---------------- CARTA ------------------------- */
 .carta {
-  width: 225px;
+  width: 220px;
   cursor: pointer;
-  border-radius: 4px;
   transition: transform 0.2s;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 .carta:hover {
 	transform: scale(1.03);
@@ -305,5 +344,82 @@
 
 .deshabilitarParcial {
     filter: grayscale(100%);
-    opacity: 0.5;
+}
+
+
+/* ------------------------------------------------- POPUP AMPLIAR CARTA --------------------------------------------- */
+.cartaSeleccionada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.75); /* fondo semi-transparente */
+    z-index: 1000;
+}
+
+/*------------------------------------CONTENEDOR IMAGEN Y BOTONES -----------------------------------------*/
+.contenidoCartaSeleccionada {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    border-radius: 30px;
+}
+
+/*--------------------------------IMAGEN CARTA AMPLIADA -----------------------*/
+.cartaSeleccionadaAmpliada {
+  width: 425px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+  transition: transform 0.2s;
+  
+  
+  transform-style: preserve-3d; /* permite efecto 3D */
+  transition: transform 0.2s ease;
+  transform-origin: center center;
+}
+
+
+/* ------------------------------ BOTONES CARTA AMPLIADA --------------------- */
+
+.contenedorBotoneraCarta {
+	background-color: white;
+	border-radius: 15px;
+	margin-top: 30px;
+    width: 425px;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+}
+
+.botoneraCarta {
+	display: flex;
+	justify-content: center;
+}
+
+.botonesCartaAmpliada {
+	padding: 10px 20px;
+    margin: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 10px;
+    background-color: #008CBA;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.botonesCartaAmpliada:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #007bb5; 
 }

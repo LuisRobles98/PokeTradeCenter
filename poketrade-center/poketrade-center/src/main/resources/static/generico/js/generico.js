@@ -14,6 +14,16 @@ const popupErroresOConfirmacion = {
             },
             didOpen: (popup) => {
                 popup.style.borderRadius = "30px";          // esquinas redondeadas
+            },
+            didRender: () => {
+                // ⚡ Evitar que SweetAlert2 mueva el body
+                document.body.style.position = 'initial';
+                document.body.style.top = '';
+                document.body.style.left = '';
+            },
+            willClose: () => {
+                // ⚡ restaurar padding si quieres
+                document.body.style.paddingRight = '';
             }
         });
     }

@@ -1,203 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
-    <title>PoketDex</title>
-    <link rel="stylesheet" href="/generico/css/generico.css">
-    <link rel="stylesheet" href="/coleccionCartas/css/coleccionCartas.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/generico/js/generico.js" defer></script>
-    <script src="/coleccionCartas/js/llamadasAjax.js" defer></script>
-    <script src="/coleccionCartas/js/coleccionCartas.js" defer></script>
-    <script>$(document).ready(function() {barraSuperior.cargar();});</script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+	<title>PoketDex</title>
+	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/coleccionCartas/css/coleccionCartas.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/generico/js/generico.js" defer></script>
+	<script src="/coleccionCartas/js/llamadasAjax.js" defer></script>
+	<script src="/coleccionCartas/js/coleccionCartas.js" defer></script>
+	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="fondo">
-	
+
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
-	
+
 	<div class="expansionesContainer scrollHorizontal">
 		<div class="expansion">
-        	<img id="expansionGenesFormidables" src="/imagenes/expansiones/expansionGenesFormidables.png" class="expansionLogo deshabilitarCompleto" data-id="1">
-    	</div>
+			<img id="expansionGenesFormidables" src="/imagenes/expansiones/expansionGenesFormidables.png"
+				class="expansionLogo deshabilitarCompleto" data-id="1">
+		</div>
 		<div class="expansion">
-        	<img id="expansionLaIslaSingular" src="/imagenes/expansiones/expansionLaIslaSingular.png" class="expansionLogo deshabilitarCompleto" data-id="2">
-    	</div>
+			<img id="expansionLaIslaSingular" src="/imagenes/expansiones/expansionLaIslaSingular.png"
+				class="expansionLogo deshabilitarCompleto" data-id="2">
+		</div>
 		<div class="expansion">
-        	<img id="expansionPugnaEspaciotemporal" src="/imagenes/expansiones/expansionPugnaEspaciotemporal.png" class="expansionLogo deshabilitarCompleto" data-id="3">
-    	</div>
+			<img id="expansionPugnaEspaciotemporal" src="/imagenes/expansiones/expansionPugnaEspaciotemporal.png"
+				class="expansionLogo deshabilitarCompleto" data-id="3">
+		</div>
 		<div class="expansion">
-        	<img id="expansionLuzTriunfal" src="/imagenes/expansiones/expansionLuzTriunfal.png" class="expansionLogo deshabilitarCompleto" data-id="4">
-    	</div>
+			<img id="expansionLuzTriunfal" src="/imagenes/expansiones/expansionLuzTriunfal.png"
+				class="expansionLogo deshabilitarCompleto" data-id="4">
+		</div>
 		<div class="expansion">
-        	<img id="expansionFestivalBrillante" src="/imagenes/expansiones/expansionFestivalBrillante.png" class="expansionLogo" data-id="5">
-    	</div>
+			<img id="expansionFestivalBrillante" src="/imagenes/expansiones/expansionFestivalBrillante.png"
+				class="expansionLogo" data-id="5">
+		</div>
 		<div class="expansion">
-        	<img id="expansionGuardianesCelestiales" src="/imagenes/expansiones/expansionGuardianesCelestiales.png" class="expansionLogo deshabilitarCompleto" data-id="6">
-    	</div>
+			<img id="expansionGuardianesCelestiales" src="/imagenes/expansiones/expansionGuardianesCelestiales.png"
+				class="expansionLogo deshabilitarCompleto" data-id="6">
+		</div>
 		<div class="expansion">
-        	<img id="expansionCrisisDimensional" src="/imagenes/expansiones/expansionCrisisDimensional.png" class="expansionLogo deshabilitarCompleto" data-id="7">
-    	</div>
+			<img id="expansionCrisisDimensional" src="/imagenes/expansiones/expansionCrisisDimensional.png"
+				class="expansionLogo deshabilitarCompleto" data-id="7">
+		</div>
 		<div class="expansion">
-        	<img id="expansionArboledaDeEevee" src="/imagenes/expansiones/expansionArboledaDeEevee.png" class="expansionLogo" data-id="8">
-    	</div>
+			<img id="expansionArboledaDeEevee" src="/imagenes/expansiones/expansionArboledaDeEevee.png"
+				class="expansionLogo" data-id="8">
+		</div>
 		<div class="expansion">
-        	<img id="expansionSaberMarinoYCeleste" src="/imagenes/expansiones/expansionSaberMarinoYCeleste.png" class="expansionLogo deshabilitarCompleto" data-id="9">
-    	</div>
+			<img id="expansionSaberMarinoYCeleste" src="/imagenes/expansiones/expansionSaberMarinoYCeleste.png"
+				class="expansionLogo deshabilitarCompleto" data-id="9">
+		</div>
 		<div class="expansion">
-        	<img id="expansionManantialOculto" src="/imagenes/expansiones/expansionManantialOculto.png" class="expansionLogo deshabilitarCompleto" data-id="10">
-    	</div>
+			<img id="expansionManantialOculto" src="/imagenes/expansiones/expansionManantialOculto.png"
+				class="expansionLogo deshabilitarCompleto" data-id="10">
+		</div>
 		<div class="expansion">
-        	<img id="expansionPromoA" src="/imagenes/expansiones/expansionPromoA.png" class="expansionLogo" data-id="-1">
-    	</div>
+			<img id="expansionPromoA" src="/imagenes/expansiones/expansionPromoA.png" class="expansionLogo"
+				data-id="-1">
+		</div>
 	</div>
-	
+
 	<!-- Buscador -->
 	<div id="buscadorCartas" style="display: none;">
 		<div class="buscadorCartas">
-	        <img id="imagenPopupBuscador" class="imagenBuscadorCartas">
-		 	<input id="inputNombreCarta" class="inputBuscadorCartas" placeholder="Nombre de carta">
-		 	<div id="selectRarezaCarta" class="selectRarezasCarta">
-			 	<span class="labelBuscadorCartasRareza">Rarezas</span>
+			<img id="imagenPopupBuscador" class="imagenBuscadorCartas">
+			<input id="inputNombreCarta" class="inputBuscadorCartas" placeholder="Nombre de carta">
+			<div id="selectRarezaCarta" class="selectRarezasCarta">
+				<span class="labelBuscadorCartasRareza">Rarezas</span>
 				<div class="rarezaRombos">
-			 		<div id="romboX1RarezaCarta" class="rarezaCarta" data-id="1">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 		</div>
-			 		<div id="romboX2RarezaCarta" class="rarezaCarta" data-id="2">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 		</div>
-			 		<div id="romboX3RarezaCarta" class="rarezaCarta" data-id="3">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 		</div>
-			 		<div id="romboX4RarezaCarta" class="rarezaCarta" data-id="4">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 			<img src="/imagenes/rarezas/rombo.png">
-			 		</div>
-		 		</div>
-		 		<div class="rarezaEstrellas">
-			 		<div id="estrellaX1RarezaCarta" class="rarezaCarta" data-id="5">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 		</div>
-			 		<div id="estrellaX2RarezaCarta" class="rarezaCarta" data-id="6">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 		</div>
-			 		<div id="estrellaX3RarezaCarta" class="rarezaCarta" data-id="7">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 			<img src="/imagenes/rarezas/estrella.png">
-			 		</div>
-		 		</div>
-		 		<div class="rarezaEstrellaSCorona">
-			 		<div id="estrellaSX1RarezaCarta" class="rarezaCarta" data-id="8">
-			 			<img src="/imagenes/rarezas/estrellaS.png">
-			 		</div>
-			 		<div id="estrellaSX2RarezaCarta" class="rarezaCarta" data-id="9">
-			 			<img src="/imagenes/rarezas/estrellaS.png">
-			 			<img src="/imagenes/rarezas/estrellaS.png">
-			 		</div>
-			 		<div id="coronaX1RarezaCarta" class="rarezaCarta" data-id="10">
-			 			<img src="/imagenes/rarezas/corona.png">
-			 		</div>
-		 		</div>
-		 	</div>
-		 	<div id="selectEnergiaCarta" class="selectEnergiasCarta">
- 				<span class="labelBuscadorCartasEnergia">Energías</span>
+					<div id="romboX1RarezaCarta" class="rarezaCarta" data-id="1">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX2RarezaCarta" class="rarezaCarta" data-id="2">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX3RarezaCarta" class="rarezaCarta" data-id="3">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX4RarezaCarta" class="rarezaCarta" data-id="4">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+				</div>
+				<div class="rarezaEstrellas">
+					<div id="estrellaX1RarezaCarta" class="rarezaCarta" data-id="5">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+					<div id="estrellaX2RarezaCarta" class="rarezaCarta" data-id="6">
+						<img src="/imagenes/rarezas/estrella.png">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+					<div id="estrellaX3RarezaCarta" class="rarezaCarta" data-id="7">
+						<img src="/imagenes/rarezas/estrella.png">
+						<img src="/imagenes/rarezas/estrella.png">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+				</div>
+				<div class="rarezaEstrellaSCorona">
+					<div id="estrellaSX1RarezaCarta" class="rarezaCarta" data-id="8">
+						<img src="/imagenes/rarezas/estrellaS.png">
+					</div>
+					<div id="estrellaSX2RarezaCarta" class="rarezaCarta" data-id="9">
+						<img src="/imagenes/rarezas/estrellaS.png">
+						<img src="/imagenes/rarezas/estrellaS.png">
+					</div>
+					<div id="coronaX1RarezaCarta" class="rarezaCarta" data-id="10">
+						<img src="/imagenes/rarezas/corona.png">
+					</div>
+				</div>
+			</div>
+			<div id="selectEnergiaCarta" class="selectEnergiasCarta">
+				<span class="labelBuscadorCartasEnergia">Energías</span>
 				<div class="energiasCartasF1">
 					<div id="plantaEnergiaCarta" class="energiaCarta" data-id="1">
-		 				<img src="/imagenes/energias/energiaPlanta.png">
-			 		</div>
-				 	<div id="fuegoEnergiaCarta" class="energiaCarta" data-id="2">
-		 				<img src="/imagenes/energias/energiaFuego.png">
-			 		</div>
- 					<div id="aguaEnergiaCarta" class="energiaCarta" data-id="3">
-		 				<img src="/imagenes/energias/energiaAgua.png">
-		 			</div>
- 					<div id="rayoEnergiaCarta" class="energiaCarta" data-id="4">
-			 			<img src="/imagenes/energias/energiaRayo.png">
-			 		</div>
- 					<div id="psiquicaEnergiaCarta" class="energiaCarta" data-id="5">
-			 			<img src="/imagenes/energias/energiaPsiquica.png">
-			 		</div>
+						<img src="/imagenes/energias/energiaPlanta.png">
+					</div>
+					<div id="fuegoEnergiaCarta" class="energiaCarta" data-id="2">
+						<img src="/imagenes/energias/energiaFuego.png">
+					</div>
+					<div id="aguaEnergiaCarta" class="energiaCarta" data-id="3">
+						<img src="/imagenes/energias/energiaAgua.png">
+					</div>
+					<div id="rayoEnergiaCarta" class="energiaCarta" data-id="4">
+						<img src="/imagenes/energias/energiaRayo.png">
+					</div>
+					<div id="psiquicaEnergiaCarta" class="energiaCarta" data-id="5">
+						<img src="/imagenes/energias/energiaPsiquica.png">
+					</div>
 					<div id="luchaEnergiaCarta" class="energiaCarta" data-id="6">
- 						<img src="/imagenes/energias/energiaLucha.png">
-			 		</div>
+						<img src="/imagenes/energias/energiaLucha.png">
+					</div>
 				</div>
- 				<div class="energiasCartasF2">
-				 	<div id="oscuraEnergiaCarta" class="energiaCarta" data-id="7">
-		 				<img src="/imagenes/energias/energiaOscura.png">
-			 		</div>
- 					<div id="metalicaEnergiaCarta" class="energiaCarta" data-id="8">
-		 				<img src="/imagenes/energias/energiaMetalica.png">
-		 			</div>
- 					<div id="dragonEnergiaCarta" class="energiaCarta" data-id="9">
-			 			<img src="/imagenes/energias/energiaDragon.png">
-			 		</div>
- 					<div id="incoloraEnergiaCarta" class="energiaCarta" data-id="10">
-			 			<img src="/imagenes/energias/energiaIncolora.png">
-			 		</div>
-				 </div>
-			 </div>
-			 <div id="selectTipoCarta" class="selectTiposCarta">
-				 <span class="labelBuscadorCartasTipo">Tipos</span>
-				 <div class="tiposCartasF1">
- 					<div id="pokemonTipoCarta" class="tipoCarta" data-id="1">
-		 				<span>Pokemon</span>
-			 		</div>
- 					<div id="itemTipoCarta" class="tipoCarta" data-id="2">
-		 				<span>Objeto</span>
-			 		</div>
-				 </div>
-				 <div class="tiposCartasF2">
- 					<div id="partidarioTipoCarta" class="tipoCarta" data-id="3">
-		 				<span>Partidario</span>
-			 		</div>
- 					<div id="herramientaTipoCarta" class="tipoCarta" data-id="4">
-		 				<span>Herramienta</span>
-			 		</div>
-				 </div>
-			 </div>
-			 <div id="selectObtenidaCarta" class="selectObtenidasCarta">
-				 <span class="labelBuscadorCartasObtenida">Obtenidas</span>
-				 <div class="obtenidasCartasF1">
-				 	<div id="obtenidaCarta" class="obtenidaCarta" data-id="true">
+				<div class="energiasCartasF2">
+					<div id="oscuraEnergiaCarta" class="energiaCarta" data-id="7">
+						<img src="/imagenes/energias/energiaOscura.png">
+					</div>
+					<div id="metalicaEnergiaCarta" class="energiaCarta" data-id="8">
+						<img src="/imagenes/energias/energiaMetalica.png">
+					</div>
+					<div id="dragonEnergiaCarta" class="energiaCarta" data-id="9">
+						<img src="/imagenes/energias/energiaDragon.png">
+					</div>
+					<div id="incoloraEnergiaCarta" class="energiaCarta" data-id="10">
+						<img src="/imagenes/energias/energiaIncolora.png">
+					</div>
+				</div>
+			</div>
+			<div id="selectTipoCarta" class="selectTiposCarta">
+				<span class="labelBuscadorCartasTipo">Tipos</span>
+				<div class="tiposCartasF1">
+					<div id="pokemonTipoCarta" class="tipoCarta" data-id="1">
+						<span>Pokemon</span>
+					</div>
+					<div id="itemTipoCarta" class="tipoCarta" data-id="2">
+						<span>Objeto</span>
+					</div>
+				</div>
+				<div class="tiposCartasF2">
+					<div id="partidarioTipoCarta" class="tipoCarta" data-id="3">
+						<span>Partidario</span>
+					</div>
+					<div id="herramientaTipoCarta" class="tipoCarta" data-id="4">
+						<span>Herramienta</span>
+					</div>
+				</div>
+			</div>
+			<div id="selectObtenidaCarta" class="selectObtenidasCarta">
+				<span class="labelBuscadorCartasObtenida">Obtenidas</span>
+				<div class="obtenidasCartasF1">
+					<div id="obtenidaCarta" class="obtenidaCarta" data-id="true">
 						<span>Obtenidas</span>
-				 	</div>
-				 	<div id="noObtenidaCarta" class="obtenidaCarta" data-id="false">
+					</div>
+					<div id="noObtenidaCarta" class="obtenidaCarta" data-id="false">
 						<span>No obtenidas</span>
 					</div>
-				 </div>
-			 </div>
+				</div>
+			</div>
 		</div>
 	</div>
-	
-  	<!-- Resultado -->
+
+	<!-- Resultado -->
 	<div id="resultadosCartas" style="display: none;">
 		<div class="resultadosCartas">
 			<div id="contadoresCartas" class="contadoresCartas">
 				<div class="contadoresF1">
 					<div id="contadorResultadoRombo" class="contadorResultado">
-						<img src="/imagenes/rarezas/rombo.png"></div>
- 					<div id="contadorResultadoEstrella" class="contadorResultado">
-						 <img src="/imagenes/rarezas/estrella.png"></div>
-			 		<div id="contadorResultadoEstrellaS" class="contadorResultado">
-						 <img src="/imagenes/rarezas/estrellaS.png"></div>
- 					<div id="contadorResultadoCorona" class="contadorResultado"></div>
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="contadorResultadoEstrella" class="contadorResultado">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+					<div id="contadorResultadoEstrellaS" class="contadorResultado">
+						<img src="/imagenes/rarezas/estrellaS.png">
+					</div>
+					<div id="contadorResultadoCorona" class="contadorResultado"></div>
 				</div>
 			</div>
 			<div id="mostrarCartas" class="mostrarCartas"></div>
 		</div>
 	</div>
-	
+
+	<div id="cartaSeleccionada" class="cartaSeleccionada" style="display: none;">
+    	<div class="contenidoCartaSeleccionada">
+        	<img id="cartaSeleccionadaAmpliada" class="cartaSeleccionadaAmpliada">
+        	<div id="contenedorBotoneraCarta" class="contenedorBotoneraCarta">
+				<div id="botoneraCarta" class="botoneraCarta">
+            		<button id="btnSalir" class="botonesCartaAmpliada">Salir</button>
+            		<button id="btnQuitar" class="botonesCartaAmpliada">Quitar</button>
+            		<button id="btnObtener" class="botonesCartaAmpliada">Obtener</button>
+        		</div>
+			</div>
+    	</div>
+	</div>
+
 </body>

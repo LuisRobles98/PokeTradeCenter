@@ -48,5 +48,17 @@
     	</where>
     	ORDER BY carta_juego_id ASC;
     </select>
+    
+    
+    <!-- SQL para actualizar los datos de la carta -->
+	<update id="actualizar" parameterType="com.poketradecenter.Clase.CartaUsuario">
+	   UPDATE coleccion_cartas_usuario
+	   <set>
+	       <if test="obtenida != null">
+	           obtenida = #{obtenida}
+	       </if>
+	   </set>
+	   WHERE id = #{id}
+	</update>
 
 </mapper>
