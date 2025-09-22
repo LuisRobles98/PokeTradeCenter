@@ -57,8 +57,17 @@ const barraSuperior = {
                     barraSuperior.mostrarDatos(usuario);
                 }
 
+				if(window.location.pathname.includes("menuPrincipal.html")) {
+					$("#botonVolverAtrasBarra").hide();
+				} else {
+					$("#botonVolverAtrasBarra").show();
+				}
+
                 // Configuración de botones
-                $("#btnLogout").click(function() {
+                $("#botonVolverAtrasBarra").click(function() {
+                    cambiarAplicacion.menuPrincipal();
+                });
+                $("#botonCerrarSesionBarra").click(function() {
                     $("#popupCerrarSesion").show();
                 });
                 $("#btnCancelar").click(function() {
