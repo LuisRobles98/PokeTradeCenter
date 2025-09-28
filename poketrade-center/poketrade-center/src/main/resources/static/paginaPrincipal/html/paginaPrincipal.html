@@ -6,6 +6,7 @@
     <link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
     <title>PoketDex</title>
     <link rel="stylesheet" href="/generico/css/generico.css">
+    <link rel="stylesheet" href="/paginaPrincipal/css/paginaPrincipal.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/generico/js/generico.js" defer></script>
     <script src="/paginaPrincipal/js/llamadasAjax.js" defer></script>
@@ -13,40 +14,36 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="paginaPrincipalFondo">	
- 	<!-- Popup Principal-->
-	<div id="popupPrincipal" class="popup">
-	    <div class="popup-content">
-	        <img src="/paginaPrincipal/imagenes/poketDex.png" alt="PoketDex" style="width: 120px;">
-	        <div class="botones">
-				<button id="btnIniciarSesion">Iniciar sesión</button>
-	        	<button id="btnRegistrarse">Registrarse</button>
-			</div>
-	    </div>
-	</div>
 
-	<div id="popupIniciarSesion" class="popup" style="display: none;">
-	    <div class="popup-content">
-	        <img src="/paginaPrincipal/imagenes/poketDex.png" alt="PoketDex" style="width: 120px;">
-		 	<input required id="inputCorreoInicioSesion" type="email" placeholder="Correo electrónico">
-		 	<input required id="inputPasswordInicioSesion" type="password" placeholder="Contraseña">
-		 	<div class="botones">
-				 <button id="btnVolverInicioSesion">Volver</button>
-				<button id="btnAcceder">Acceder</button>
+
+
+	<div id="popupIniciarSesion" class="iniciarSesion">
+	    <div class="contenidoIniciarSesion">
+	        <img src="/paginaPrincipal/imagenes/poketDex.png" class="imagenIniciarSesion">
+	        <div class="inputsIniciarSesion">
+		 		<input required id="inputCorreoInicioSesion" class="inputIniciarSesion" type="email" placeholder="Correo electrónico">
+		 		<input required id="inputPasswordInicioSesion" class="inputIniciarSesion" type="password" placeholder="Contraseña">
+		 	</div>
+		 	<div class="botoneraIniciarSesion">
+				<button id="btnRegistrarse" class="botonIniciarSesion">Registrarse</button>
+				<button id="btnAcceder" class="botonIniciarSesion">Acceder</button>
 			</div>
 	    </div>
 	</div>
 	
 
-	<div id="popupRegistrarse" class="popup" style="display: none;">
-	    <div class="popup-content">
-	        <img src="/paginaPrincipal/imagenes/poketDex.png" alt="PoketDex" style="width: 120px;">
-	        <input required id="inputUsuarioRegistro" type="text" placeholder="Usuario">
-	        <input required id="inputCorreoRegistro" type="email" placeholder="Correo electrónico">
-	        <input required id="inputPasswordRegistro" type="password" placeholder="Contraseña">
-	        <input required id="inputPassword2Registro" type="password" placeholder="Vuelva a introducir la contraseña">
-	        <div class="botones">
-				<button id="btnVolverRegistrarse">Volver</button>
-	        	<button id="btnConfirmarRegistrarse">Registrarse</button>
+	<div id="popupRegistrarse" class="registrarse" style="display: none;">
+	    <div class="contenidoRegistrarse">
+	        <img src="/paginaPrincipal/imagenes/poketDex.png" class="imagenRegistrarse">
+	        <div class="inputsRegistrarse">
+		        <input required id="inputUsuarioRegistro" class="inputRegistrarse" type="text" placeholder="Usuario">
+	        	<input required id="inputCorreoRegistro" class="inputRegistrarse" type="email" placeholder="Correo electrónico">
+	        	<input required id="inputPasswordRegistro" class="inputRegistrarse" type="password" placeholder="Contraseña">
+	        	<input required id="inputPassword2Registro" class="inputRegistrarse" type="password" placeholder="Vuelva a introducir la contraseña">
+			</div>
+	        <div class="botoneraRegistrarse">
+				<button id="btnVolverRegistrarse" class="botonRegistrarse">Volver</button>
+	        	<button id="btnConfirmarRegistrarse" class="botonRegistrarse">Registrarse</button>
 	        </div>
 	    </div>
 	</div>

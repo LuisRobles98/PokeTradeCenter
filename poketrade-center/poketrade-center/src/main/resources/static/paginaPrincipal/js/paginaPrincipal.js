@@ -2,34 +2,22 @@ $(document).ready(function() {
 	//constantes
 	
     //Mostrar popup principal al iniciar la aplicacion
-    $("#popupPrincipal").show();
-    $("#popupIniciarSesion").hide();
+    limpiarIniciarSesion();
+    $("#popupIniciarSesion").show();
     $("#popupRegistrarse").hide();
-
-    // logica acceder popup inicio de sesion
-    $("#btnIniciarSesion").click(function() {
-		limpiarIniciarSesion();
-        $("#popupPrincipal").hide();
-        $("#popupIniciarSesion").show();
-    });
 
     // logica acceder a popup registrarse
     $("#btnRegistrarse").click(function() {
 		limpiarRegistrarse();
-        $("#popupPrincipal").hide();
+        $("#popupIniciarSesion").hide();
         $("#popupRegistrarse").show();
     });
-
-	//logica boton volver de inicio sesion
-    $("#btnVolverInicioSesion").click(function() {
-        $("#popupIniciarSesion").hide();
-        $("#popupPrincipal").show();
-    });
-    
+ 
     //logica boton volver de registro
 	$("#btnVolverRegistrarse").click(function() {
+		limpiarIniciarSesion();
         $("#popupRegistrarse").hide(); 
-        $("#popupPrincipal").show();
+        $("#popupIniciarSesion").show();
     });
 
     // logica acceder tras rellenar datos del registro
@@ -50,7 +38,6 @@ $(document).ready(function() {
 			guardar();
 			popupErroresOConfirmacion.mostrar("success", "¡Registro completado!");
 			$("#btnVolverRegistrarse").click();
-			$("#btnIniciarSesion").click();
 		}
 	};
 	

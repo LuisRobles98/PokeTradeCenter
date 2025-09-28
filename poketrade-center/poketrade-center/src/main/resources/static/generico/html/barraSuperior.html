@@ -10,8 +10,9 @@
 	            <span class="idUsuario" id="idUsuarioBarra"></span>
 	        </div>
 	    </div>
-	    <div id="btnLogout">
-    		 <i class="fa-sharp fa-regular fa-circle-xmark iconoFontAwesome" title="Cerrar sesión"></i>
+	    <div id="botoneraBarra" class="botoneraBarra">
+			 <i id="botonVolverAtrasBarra" class="fa-solid fa-circle-arrow-left iconoFontAwesome" title="Volver atrás"></i>
+			 <i id="botonCerrarSesionBarra" class="fa-solid fa-circle-xmark iconoFontAwesome" title="Cerrar sesión"></i>
 		</div>
 	</div>
 
@@ -20,12 +21,12 @@
 	
 	
 	 <!-- Popup Cerrar Sesion-->
-	<div id="popupCerrarSesion" class="popup" style="display: none;">
-	    <div class="popup-content">
-			<label for="lblCerrarSesion">¿Estás seguro que quieres cerrar la sesión?</label>
-	        <div class="botones">
-				<button id="btnCancelar">Cancelar</button>
-	        	<button id="btnCerrarSesion">Cerrar Sesión</button>
+	<div id="popupCerrarSesion" class="cerrarSesion" style="display: none;">
+	    <div class="contenidoCerrarSesion">
+			<label for="lblCerrarSesion" class="labelCerrarSesion">¿Estás seguro que quieres cerrar la sesión?</label>
+	        <div class="botoneraCerrarSesion">
+				<button id="btnCancelar" class="botonCerrarSesion">Cancelar</button>
+	        	<button id="btnCerrarSesion" class="botonCerrarSesion">Cerrar Sesión</button>
 			</div>
 	    </div>
 	</div>

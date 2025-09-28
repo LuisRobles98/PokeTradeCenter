@@ -11,6 +11,19 @@ const popupErroresOConfirmacion = {
             confirmButtonColor: "#3085d6",
             customClass: {
                 confirmButton: 'swal-confirm-bold'
+            },
+            didOpen: (popup) => {
+                popup.style.borderRadius = "30px";          // esquinas redondeadas
+            },
+            didRender: () => {
+                // ⚡ Evitar que SweetAlert2 mueva el body
+                document.body.style.position = 'initial';
+                document.body.style.top = '';
+                document.body.style.left = '';
+            },
+            willClose: () => {
+                // ⚡ restaurar padding si quieres
+                document.body.style.paddingRight = '';
             }
         });
     }
@@ -44,8 +57,17 @@ const barraSuperior = {
                     barraSuperior.mostrarDatos(usuario);
                 }
 
+				if(window.location.pathname.includes("menuPrincipal.html")) {
+					$("#botonVolverAtrasBarra").hide();
+				} else {
+					$("#botonVolverAtrasBarra").show();
+				}
+
                 // Configuración de botones
-                $("#btnLogout").click(function() {
+                $("#botonVolverAtrasBarra").click(function() {
+                    cambiarAplicacion.menuPrincipal();
+                });
+                $("#botonCerrarSesionBarra").click(function() {
                     $("#popupCerrarSesion").show();
                 });
                 $("#btnCancelar").click(function() {
@@ -59,7 +81,7 @@ const barraSuperior = {
     },
 
     mostrarDatos: function(usuario) {
-        $("#iconoJuegoBarra").attr("src", "/iconos/" + usuario.icono + ".png");
+        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.icono + ".png");
         $("#nombreUsuarioBarra").text(usuario.nombre);
         $("#idUsuarioBarra").text("ID: " + usuario.idJuego);
     }
@@ -74,6 +96,5 @@ const cambiarAplicacion = {
 	},
 	coleccionCartas: function() {
 		window.location.href = "/coleccionCartas/html/coleccionCartas.html";
-	}
-	
-}
+	}	
+};

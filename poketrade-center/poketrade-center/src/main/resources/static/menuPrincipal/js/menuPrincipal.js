@@ -13,15 +13,16 @@ $(document).ready(async function() {
 	}
 	
     // logica añadir el id del juego
-    $("#btnAceptarIdJuego").click(function() {
+    $("#btnAceptarIdJuego").click(async function() {
 		let errores = validarIdJuego();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			actualizarIdJuego();
+			await actualizarIdJuego();
 			popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
 			cerrarPopupInsertarIdJuego();
-			usuario = recuperarUsuarioPorId(usuario.id);
+			usuario = await recuperarUsuarioPorId(usuario.id);
+			barraSuperior.mostrarDatos(usuario);
 		}
     });
     
