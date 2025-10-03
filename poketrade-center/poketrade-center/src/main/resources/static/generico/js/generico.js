@@ -81,9 +81,14 @@ const barraSuperior = {
     },
 
     mostrarDatos: function(usuario) {
-        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.icono + ".png");
+        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.iconoId + ".png");
+        
         $("#nombreUsuarioBarra").text(usuario.nombre);
-        $("#idUsuarioBarra").text("ID: " + usuario.idJuego);
+        $("#juegoIdUsuarioBarra").text(usuario.juegoId);
+        
+        $("#emblema1Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema1Id + ".png");
+        $("#emblema2Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema2Id + ".png");
+        $("#emblema3Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png");
     }
 };
 

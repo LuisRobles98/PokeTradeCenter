@@ -46,7 +46,6 @@ $(document).ready(function() {
 		usuario.nombre = $("#inputUsuarioRegistro").val();
 		usuario.email = $("#inputCorreoRegistro").val();
 		usuario.password = $("#inputPasswordRegistro").val();
-		usuario.icono = "Pikachu";
 		guardarUsuario(usuario);
 	};
 	

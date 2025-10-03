@@ -132,40 +132,92 @@ body.fondo {
 .usuarioIzquierda {
     display: flex;
     align-items: center;
-    gap: 10px; /* espacio entre icono y texto */
+    gap: 15px; /* espacio entre icono y texto */
 }
 
 /* Ajustes del icono */
 .iconoUsuario {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 48px;
+    margin-left: 25px;
+    border: 3px solid #008CBA;
+    border-radius: 35px;
+    transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Texto usuario */
-.usuarioInfo {
-    display: flex;
-    flex-direction: column;
+.iconoUsuario:hover {
+	color: #007bb5;
+  	transform: scale(1.03);
 }
 
-.usuarioInfo {
+/* Datos nombre usuario y id ptgcp */
+.usuarioInfoNombre {
+    margin-left: 20px;
+    font-weight: 400;
+    margin-top: -2px
+}
+
+.labelBarra {
+	display: block;
+	text-align: center;
+}
+
+.usuarioInfoJuegoId {
+    margin-left: 20px;
+    font-weight: 400;
+    margin-top: -2px
+}
+
+.usuarioInfoBarra {
     display: flex;
-    flex-direction: column;
-    margin-left: 10px;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid #008CBA;
+    border-radius: 10px;
+    transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 2px;
+}
+
+.usuarioInfoBarra:hover {
+    border: 2px solid #007bb5;
+}
+
+/*Emblemas barra*/
+.emblemaUsuario {
+    width: 48px;
+    margin-left: 25px;
+    margin-top: 3px;
+    border: 3px solid #008CBA;
+    border-radius: 35px;
+    transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.emblemaUsuario:hover {
+	color: #007bb5;
+  	transform: scale(1.03);
+}
+
+.botoneraBarra {
+	margin-right: 20px;	
 }
 
 /*Estilos de iconos de font Awesome*/
 .iconoFontAwesome {
-  font-size: 32px;
-  color: #008CBA;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  margin-left: 15px;
+  	font-size: 34px;
+  	color: #008CBA;
+  	cursor: pointer;
+  	transition: color 0.3s ease;
+  	margin-left: 15px;
+    border-radius: 35px;
+    transition: border-color 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .iconoFontAwesome:hover {
-  color: #007bb5;
-  transform: scale(1.03);
+  	color: #007bb5;
+  	transform: scale(1.03);
 }
 
 .swal-confirm-bold {

@@ -21,8 +21,8 @@ public class UsuarioController {
 	private IUsuarioService usuarioService;
 	
     @PostMapping("/usuario")
-    public void guardarUsuario(@RequestBody Usuario usuario) {
-        usuarioService.guardarUsuario(usuario);
+    public void crearUsuario(@RequestBody Usuario usuario) {
+        usuarioService.crearUsuario(usuario);
     }
     
     @PutMapping("/usuario")

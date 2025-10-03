@@ -3,10 +3,10 @@
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IUsuarioMapper">
 
     <!-- SQL para insertar un usuario cuando se registra-->
-    <insert id="guardar" parameterType="com.poketradecenter.Clase.Usuario">
+    <insert id="crear" parameterType="com.poketradecenter.Clase.Usuario">
         INSERT INTO usuario
-        (nombre, email, password, icono)
-        VALUES (#{nombre}, #{email}, #{password}, #{icono})
+        (nombre, email, password, icono_id, emblema_1_id, emblema_2_id, emblema_3_id)
+        VALUES (#{nombre}, #{email}, #{password}, 25,0,0,0)
     </insert>
     
     <!-- SQL para actualizar los datos del usuario -->
@@ -22,11 +22,20 @@
 	       <if test="password != null and password != ''">
 	           password = #{password},
 	       </if>
-	       <if test="icono != null and icono != ''">
-	           icono = #{icono},
+	       <if test="juegoId != null and juegoId != ''">
+	           juego_id = #{juegoId},
 	       </if>
-	       <if test="idJuego != null and idJuego != ''">
-	           id_juego = #{idJuego}
+  	       <if test="iconoId != null">
+	           icono_id = #{iconoId},
+	       </if>
+     	   <if test="emblema1Id != null">
+	           emblema_1_id = #{emblema1Id},
+	       </if>
+           <if test="emblema2Id != null">
+	           emblema_2_id = #{emblema2Id},
+	       </if>
+	       <if test="emblema3Id != null">
+	           emblema_3_id = #{emblema3Id}
 	       </if>
 	   </set>
 	   WHERE id = #{id}
@@ -34,7 +43,7 @@
     
     <!-- SQL para recuperar usuarios por criterios-->
     <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosUsuario"  resultType="com.poketradecenter.Clase.Usuario">
-    	SELECT id, nombre, email, password, icono, id_juego AS idJuego
+    	SELECT id, nombre, email, password, juego_id AS juegoId, icono_id AS iconoId, emblema_1_id AS emblema1Id, emblema_2_id AS emblema2Id, emblema_3_id AS emblema3Id
     	FROM Usuario
     	<where>
 	        <if test="id != null">
@@ -49,11 +58,20 @@
 	        <if test="password != null and password != ''">
 	            AND password = #{password}
 	        </if>
-	        <if test="icono != null">
-	            AND icono = #{icono}
+	        <if test="juegoId != null and juegoId != ''">
+	            AND juego_id = #{juegoId}
 	        </if>
-	        <if test="idJuego != null">
-	            AND id_juego = #{idJuego}
+	        <if test="iconoId != null">
+	            AND icono_id = #{iconoId}
+	        </if>
+      	    <if test="emblema1Id != null">
+	            AND emblema_1_id = #{emblema1Id}
+	        </if>
+            <if test="emblema2Id != null">
+	            AND emblema_2_id = #{emblema2Id}
+	        </if>
+	        <if test="emblema3Id != null">
+	            AND emblema_3_id = #{emblema3Id}
 	        </if>
     	</where>
     </select>

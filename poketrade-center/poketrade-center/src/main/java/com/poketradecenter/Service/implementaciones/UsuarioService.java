@@ -18,9 +18,9 @@ public class UsuarioService implements IUsuarioService {
 	private IUsuarioMapper usuarioMapper;
 	
 	@Override
-	public void guardarUsuario(Usuario usuario) {
+	public void crearUsuario(Usuario usuario) {
 		try {
-			usuarioMapper.guardar(usuario);
+			usuarioMapper.crear(usuario);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error guardando los datos del usuario", e);
 		}
@@ -66,11 +66,20 @@ public class UsuarioService implements IUsuarioService {
     	            case "nombre":
     	                criterios.setNombre(value);
     	                break;
-    	            case "icono":
-    	                criterios.setIcono(value);
+    	            case "juegoId":
+    	                criterios.setJuegoId(value);
     	                break;
-    	            case "idJuego":
-    	                criterios.setIdJuego(value);
+      	            case "iconoId":
+    	                criterios.setIconoId(Integer.parseInt(value));
+    	                break;
+      	            case "emblema1Id":
+    	                criterios.setIconoId(Integer.parseInt(value));
+    	                break;
+      	            case "emblema2Id":
+    	                criterios.setIconoId(Integer.parseInt(value));
+    	                break;
+      	            case "emblema3Id":
+    	                criterios.setIconoId(Integer.parseInt(value));
     	                break;
     	            case "id":
     	                criterios.setId(Integer.parseInt(value));

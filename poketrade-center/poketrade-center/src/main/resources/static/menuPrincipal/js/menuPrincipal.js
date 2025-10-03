@@ -3,7 +3,7 @@ $(document).ready(async function() {
 	let usuario = usuarioLogado.recuperar();
 	
     //Mostrar popup de incluir el id del juego del usuario cuando es la primera vez que inicia sesion en la aplicación
-    if(usuario.idJuego == null) {
+    if(usuario.juegoId == null) {
 		limpiarPopupAniadirIdJuego();
 		$("#popupInsertarIdJuego").show();
 	} else {
@@ -47,7 +47,7 @@ $(document).ready(async function() {
 	async function actualizarIdJuego() {
 		let usuarioActualizar = {};
 		usuarioActualizar.id = usuario.id;
-		usuarioActualizar.idJuego = $("#inputIdJuego").val();
+		usuarioActualizar.juegoId = $("#inputIdJuego").val();
 		await actualizarUsuario(usuarioActualizar);
 	}
 	
