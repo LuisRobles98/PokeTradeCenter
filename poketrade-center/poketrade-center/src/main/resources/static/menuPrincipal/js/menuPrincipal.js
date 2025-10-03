@@ -5,7 +5,7 @@ $(document).ready(async function() {
     //Mostrar popup de incluir el id del juego del usuario cuando es la primera vez que inicia sesion en la aplicación
     if(usuario.idJuego == null) {
 		limpiarPopupAniadirIdJuego();
-		$("#popupInsertarIdJuego").show();	
+		$("#popupInsertarIdJuego").show();
 	} else {
 		limpiarPopupAniadirIdJuego();
 		$("#popupInsertarIdJuego").hide();
@@ -22,6 +22,7 @@ $(document).ready(async function() {
 			popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
 			cerrarPopupInsertarIdJuego();
 			usuario = await recuperarUsuarioPorId(usuario.id);
+			localStorage.setItem("usuario", JSON.stringify(usuario));
 			barraSuperior.mostrarDatos(usuario);
 		}
     });
