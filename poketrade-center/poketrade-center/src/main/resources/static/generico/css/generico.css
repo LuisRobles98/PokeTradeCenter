@@ -8,24 +8,27 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     font-weight: 600;
+    min-width: 100vw;   /* ancho mínimo de la ventana */
+    height: auto;
+    min-height: 100vh;  /* altura mínima de la ventana */
+
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+
+    overflow: auto;     /* scroll solo si hace falta */
 }
 
 body.paginaPrincipalFondo {
     background-image: url('/paginaPrincipal/imagenes/pokePortada.jpg');
-    height: 100vh;
-    overflow: hidden;
     position: relative;
 }
 
 body.fondo {
     background-image: url('/generico/imagenes/fondoApps.png');
-    height: 100vh;
-    overflow: hidden;
     position: relative;
 }
 
@@ -136,7 +139,7 @@ body.fondo {
 }
 
 /* Ajustes del icono */
-.iconoUsuario {
+.iconoBarra {
     width: 48px;
     margin-left: 25px;
     border: 3px solid #008CBA;
@@ -145,7 +148,7 @@ body.fondo {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.iconoUsuario:hover {
+.iconoBarra:hover {
 	color: #007bb5;
   	transform: scale(1.03);
 }
@@ -160,6 +163,9 @@ body.fondo {
 .labelBarra {
 	display: block;
 	text-align: center;
+	font-weight: bold;
+    font-size: 1em;
+    color: #008CBA;
 }
 
 .usuarioInfoJuegoId {
@@ -184,7 +190,7 @@ body.fondo {
 }
 
 /*Emblemas barra*/
-.emblemaUsuario {
+.emblemaBarra {
     width: 48px;
     margin-left: 25px;
     margin-top: 3px;
@@ -194,7 +200,7 @@ body.fondo {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.emblemaUsuario:hover {
+.emblemaBarra:hover {
 	color: #007bb5;
   	transform: scale(1.03);
 }

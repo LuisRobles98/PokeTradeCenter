@@ -101,5 +101,8 @@ const cambiarAplicacion = {
 	},
 	coleccionCartas: function() {
 		window.location.href = "/coleccionCartas/html/coleccionCartas.html";
-	}	
+	},
+	perfil: function() {
+		window.location.href = "/perfil/html/perfil.html";
+	}
 };
