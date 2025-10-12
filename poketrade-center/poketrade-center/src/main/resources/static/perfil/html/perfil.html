@@ -35,6 +35,7 @@
 					<input id="inputJuegoIdUsuario" class="inputUsuario">
 					<span class="labelDatoUsuario">Correo electronico</span>
 					<input id="inputCorreoUsuario" class="inputUsuario" disabled>
+					<span id="cambioPassword" class="labelDatoUsuario cambioPassword">Cambiar Contraseña</span>
 				</div>
 			</div>
 			<div id="personalizacionUsuario" class="personalizacionUsuario">
@@ -54,7 +55,7 @@
 			</div>
 		</div>
 		<div id="botonera" class="botonera">
-			<button id="btnModificarDatosUsuario" class="botonDatosUsuario">Modificar</button>
+			<button id="btnModificarDatosUsuario" class="botonDatosUsuario">Guardar</button>
 		</div>
 	</div>
 	
@@ -70,4 +71,16 @@
 		</div>
 	</div>
 
+	<div id="password" class="password" style="display: none;">
+		<div id="contenidoPassword" class="contenidoPassword">
+			<input id="inputPasswordUsuario" class="inputCambioPassword" type="password" placeholder="Introduzca la nueva contraseña">
+			<input id="inputPasswordUsuarioConfirmacion" class="inputCambioPassword" type="password" placeholder="vuelva a introducir la contraseña">
+			<label for="lblCambioPassword" class="lblCambioPassword">Los cambios se aplicarán al guardar</label>
+			<div id="botonera" class="botoneraCambioPassword">
+				<button id="btnCancelarPassword" class="botonCancelar">Cancelar</button>
+				<button id="btnModificarPassword" class="botonCambioPassword">Modificar</button>
+			</div>
+		</div>
+	</div>
+	
 </body>

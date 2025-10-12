@@ -89,6 +89,7 @@ $(document).ready(function() {
 			localStorage.setItem("usuario", JSON.stringify(usuario));
 			barraSuperior.mostrarDatos(usuario);
 			cargarPerfilUsuario(usuario);
+			limpiarPopupPassword();
 		}
     });
     
@@ -112,6 +113,7 @@ $(document).ready(function() {
 		usuarioActualizar.emblema1Id = usuario.emblema1Id;
 		usuarioActualizar.emblema2Id = usuario.emblema2Id;
 		usuarioActualizar.emblema3Id = usuario.emblema3Id;
+		usuarioActualizar.password = $("#inputPasswordUsuario").val();
 		await actualizarUsuario(usuarioActualizar);
 	}
 	
@@ -122,5 +124,54 @@ $(document).ready(function() {
 		return usuarios[0];
 	}
 
+	$("#cambioPassword").click(function() {
+		$("#password").show();
+		let contenedor = document.getElementById("mostrarIconos");
+		contenedor.innerHTML = "";
+		for(let i = 1; i <= 54; i++) {
+        	let img = document.createElement("img");
+        	img.classList.add("iconoSeleccionado"); // clase para aplicar CSS
+        	img.src = "/imagenes/iconos/" + i + ".png";
+        	img.dataset.id = i;
+        	contenedor.appendChild(img);
+		}
+	});
+	
+	$("#btnCancelarPassword").click(function() {
+		$("#password").hide();
+		limpiarPopupPassword();
+	});
+	
+	function limpiarPopupPassword() {
+		$("#inputPasswordUsuario").val("");
+		$("#inputPasswordUsuarioConfirmacion").val("");
+	}
+	
+	$("#btnModificarPassword").click(function() {
+		let errores = validarModificarPassword();
+		if(errores != "") {
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			$("#password").hide();
+		}
+	});
+	
+	function validarModificarPassword() {
+		let errores = "";
+		
+		if($("#inputPasswordUsuario").val() == "") {
+			errores += "- Debes introducir una contraseña valida" + "<br>";
+		} else if($("#inputPasswordUsuario").val().length < 8) {
+			errores += "- La contraseña tiene que tener 8 caracteres como mínimo" + "<br>";
+		}
+		if($("#inputPasswordUsuarioConfirmacion").val() == "") {
+			errores += "- Debes volver a introducir la contraseña para verificarla" + "<br>";
+		}
+		if($("#inputPasswordUsuario").val() != $("#inputPasswordUsuarioConfirmacion").val()) {
+			errores += "- Las contraseñas no coinciden" + "<br>";
+		}
+		
+		return errores;
+	}
 
 });
