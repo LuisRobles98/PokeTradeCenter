@@ -66,7 +66,7 @@
 /*---------BOTON POPUP INICIAR SESION-------*/
 .botonIniciarSesion {
     padding: 10px 20px;
-    margin: 0px 15px;
+    margin: 0px 10px;
     border: 2px solid #007bb5;
     border-radius: 30px;
     background-color: cornflowerblue;
@@ -76,6 +76,7 @@
     cursor: pointer;
     transition: background-color 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 140px;
 }
 
 .botonIniciarSesion:hover {
@@ -155,7 +156,7 @@
 /*---------BOTON POPUP REGISTRARSE-------*/
 .botonRegistrarse {
     padding: 10px 20px;
-    margin: 0px 15px;
+    margin: 0px 10px;
     border: 2px solid #007bb5;
     border-radius: 30px;
     background-color: cornflowerblue;
@@ -165,6 +166,7 @@
     cursor: pointer;
     transition: background-color 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 130px;
 }
 
 .botonRegistrarse:hover {
@@ -176,7 +178,7 @@
 /*----------BOTON VOLVER--------------*/
 .botonVolver {
     padding: 10px 20px;
-    margin: 0px 15px;
+    margin: 0px 10px;
     border: 2px solid #B85C5C;
     border-radius: 30px;
     background-color: #E07A7A;
@@ -186,13 +188,13 @@
     cursor: pointer;
     transition: background-color 0.5s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    width: 130px;
 }
 
 .botonVolver:hover {
     transform: scale(1.03);
     border: 2px solid #9C4A4A;
     background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 

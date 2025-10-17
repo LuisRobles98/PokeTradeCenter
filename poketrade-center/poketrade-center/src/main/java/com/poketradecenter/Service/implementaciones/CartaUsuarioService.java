@@ -44,6 +44,15 @@ public class CartaUsuarioService implements ICartaUsuarioService {
 	}
 	
 	@Override
+	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
+		try {
+			return cartaUsuarioMapper.recuperarTotalCartasPorExpansion(expansionId);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al recuperar el total de cartas de la expansión", e);
+		}
+	}
+	
+	@Override
 	public CriteriosCartaUsuario crearCriteriosCartaUsuarioParams(Map<String, String> params) {
     	CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
     	   params.forEach((key, value) -> {
@@ -54,8 +63,13 @@ public class CartaUsuarioService implements ICartaUsuarioService {
     	            case "usuarioId":
     	                criterios.setUsuarioId(Integer.parseInt(value));
     	                break;
-    	            case "expansionId":
-    	                criterios.setExpansionId(Integer.parseInt(value));
+    	            case "expansiones":
+    	            	List<Integer> expansiones = Arrays.stream(value.split(","))
+            				.map(String::trim)
+            				.filter(s -> !s.isEmpty())
+            				.map(Integer::parseInt)
+            				.collect(Collectors.toList());
+    	                criterios.setExpansiones(expansiones);
     	                break;
     	            case "cartaJuegoId":
     	                criterios.setCartaJuegoId(Integer.parseInt(value));

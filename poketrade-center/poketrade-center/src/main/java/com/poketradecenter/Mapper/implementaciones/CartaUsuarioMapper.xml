@@ -15,9 +15,6 @@
 	        <if test="usuarioId != null">
 	            AND usuario_id = #{usuarioId}
 	        </if>
-	        <if test="expansionId != null">
-	            AND expansion_id = #{expansionId}
-	        </if>
 	        <if test="cartaJuegoId != null">
 	            AND carta_juego_id = #{cartaJuegoId}
 	        </if>
@@ -28,6 +25,12 @@
 	            AND rareza_id IN
 	            <foreach collection="rarezas" item="rarezaId" open="(" separator="," close=")">
             			#{rarezaId}
+        		</foreach>
+	        </if>
+	        <if test="expansiones != null and expansiones.size() > 0">
+	            AND expansion_id IN
+	            <foreach collection="expansiones" item="expansionId" open="(" separator="," close=")">
+            			#{expansionId}
         		</foreach>
 	        </if>
     	    <if test="energias != null and energias.size() > 0">
@@ -60,5 +63,11 @@
 	   </set>
 	   WHERE id = #{id}
 	</update>
-
+	
+	 <!-- SQL para recuperar el total de cartas de una expansion-->
+    <select id="recuperarTotalCartasPorExpansion" parameterType="Integer"  resultType="Integer">
+    	SELECT COUNT(*)
+    	FROM coleccion_cartas_usuario
+    	WHERE expansion_id = #{expansionId}
+	</select>
 </mapper>

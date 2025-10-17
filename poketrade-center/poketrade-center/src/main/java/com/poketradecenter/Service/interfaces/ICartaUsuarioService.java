@@ -9,4 +9,5 @@ public interface ICartaUsuarioService {
 	List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criteriosCartaUsuario);
 	CriteriosCartaUsuario crearCriteriosCartaUsuarioParams(Map<String, String> params);
 	void actualizarCarta(CartaUsuario cartaUsuario);
+	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
 }

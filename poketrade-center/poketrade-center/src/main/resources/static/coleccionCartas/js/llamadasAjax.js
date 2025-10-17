@@ -20,3 +20,13 @@ async function actualizarCarta(carta) {
     };
     return await fetch('http://localhost:8080/cartasUsuario', parameters);
 };
+
+async function recuperarTotalCartasExpansion(expansionId) {
+    return fetch(`http://localhost:8080/cartasUsuario/${expansionId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json());
+};
