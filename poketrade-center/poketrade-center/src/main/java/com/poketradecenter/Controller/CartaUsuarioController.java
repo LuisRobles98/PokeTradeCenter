@@ -33,7 +33,6 @@ public class CartaUsuarioController {
         cartaUsuarioService.actualizarCarta(cartaUsuario);
     }
     
-    //MIGRAR A NUEVA TABLA PARA CARTAS
     @GetMapping("/cartasUsuario/{expansionId}")
     public Integer recuperarTotalCartasPorExpansion(@PathVariable Integer expansionId) {
     	Integer totalCartas = cartaUsuarioService.recuperarTotalCartasPorExpansion(expansionId);

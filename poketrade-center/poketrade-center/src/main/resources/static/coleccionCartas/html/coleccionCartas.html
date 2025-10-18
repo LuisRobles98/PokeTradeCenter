@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/generico/css/generico.css">
 	<link rel="stylesheet" href="/coleccionCartas/css/coleccionCartas.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/coleccionCartas/js/llamadasAjax.js" defer></script>
@@ -122,7 +123,7 @@
 						<img src="/imagenes/rarezas/corona.png">
 					</div>
 					<div id="promoRarezaCarta" class="rarezaCarta" data-id="11">
-						<span>Promo</span>
+						<span class="fuenteNormal">Promo</span>
 					</div>
 				</div>
 			</div>
@@ -167,16 +168,16 @@
 				<span class="label">Tipos</span>
 				<div class="tipo">
 					<div id="pokemonTipoCarta" class="tipoCarta" data-id="1">
-						<span>Pokemon</span>
+						<span class="fuenteNormal">Pokemon</span>
 					</div>
 					<div id="itemTipoCarta" class="tipoCarta" data-id="2">
-						<span>Objeto</span>
+						<span class="fuenteNormal">Objeto</span>
 					</div>
 					<div id="partidarioTipoCarta" class="tipoCarta" data-id="3">
-						<span>Partidario</span>
+						<span class="fuenteNormal">Partidario</span>
 					</div>
 					<div id="herramientaTipoCarta" class="tipoCarta" data-id="4">
-						<span>Herramienta</span>
+						<span class="fuenteNormal">Herramienta</span>
 					</div>
 				</div>
 			</div>
@@ -184,10 +185,10 @@
 				<span class="label">Obtenidas</span>
 				<div class="obtenidasCartasF1">
 					<div id="obtenidaCarta" class="obtenidaCarta" data-id="true">
-						<span>Obtenidas</span>
+						<span class="fuenteNormal">Obtenidas</span>
 					</div>
 					<div id="noObtenidaCarta" class="obtenidaCarta" data-id="false">
-						<span>No obtenidas</span>
+						<span class="fuenteNormal">No obtenidas</span>
 					</div>
 				</div>
 			</div>
@@ -222,7 +223,8 @@
 					<img id="infoExpansion" class="infoExpansion"></img>
 				</div>
 				<div id="infoCartaNumero" class="infoCartaNumero">
-					<span id="infoNumero" class="infoNumero"></span>
+					<span class="label">Número de carta</span>
+					<span id="infoNumero" class="infoNumero fuenteNormal"></span>
 				</div>
     		</div>
     		<img id="cartaSeleccionadaAmpliada" class="cartaSeleccionadaAmpliada">

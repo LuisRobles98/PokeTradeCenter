@@ -4,53 +4,64 @@
 
 
     <!-- SQL para recuperar cartas de usuario por criterios-->
-    <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosCartaUsuario"  resultType="com.poketradecenter.Clase.CartaUsuario">
-    	SELECT id, usuario_id AS usuarioId, expansion_id AS expansionId, carta_juego_id AS cartaJuegoId, nombre, 
-    	rareza_id AS rarezaId, energia_id AS energiaId, tipo_id AS tipoId, obtenida
-    	FROM coleccion_cartas_usuario
-    	<where>
-	        <if test="id != null">
-	            AND id = #{id}
-	        </if>
-	        <if test="usuarioId != null">
-	            AND usuario_id = #{usuarioId}
-	        </if>
-	        <if test="cartaJuegoId != null">
-	            AND carta_juego_id = #{cartaJuegoId}
-	        </if>
-	        <if test="nombre != null and nombre != ''">
-	            AND nombre LIKE CONCAT('%', #{nombre}, '%')
-	        </if>
-	        <if test="rarezas != null and rarezas.size() > 0">
-	            AND rareza_id IN
-	            <foreach collection="rarezas" item="rarezaId" open="(" separator="," close=")">
-            			#{rarezaId}
-        		</foreach>
-	        </if>
-	        <if test="expansiones != null and expansiones.size() > 0">
-	            AND expansion_id IN
-	            <foreach collection="expansiones" item="expansionId" open="(" separator="," close=")">
-            			#{expansionId}
-        		</foreach>
-	        </if>
-    	    <if test="energias != null and energias.size() > 0">
-	            AND energia_id IN
-	            <foreach collection="energias" item="energiaId" open="(" separator="," close=")">
-            			#{energiaId}
-        		</foreach>
-	        </if>
-      	    <if test="tipos != null and tipos.size() > 0">
-	            AND tipo_id IN
-	            <foreach collection="tipos" item="tipoId" open="(" separator="," close=")">
-            			#{tipoId}
-        		</foreach>
-	        </if>
-        	<if test="obtenida != null">
-	            AND obtenida = #{obtenida}
-	        </if>
-    	</where>
-    	ORDER BY carta_juego_id ASC;
-    </select>
+ <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosCartaUsuario"  
+        resultType="com.poketradecenter.Clase.CartaUsuario">
+    SELECT ccu.id,
+           ccu.usuario_id AS usuarioId,
+           ccu.expansion_id AS expansionId,
+           ccu.carta_juego_id AS cartaJuegoId,
+           c.nombre,
+           c.rareza_id AS rarezaId,
+           c.energia_id AS energiaId,
+           c.tipo_id AS tipoId,
+           ccu.obtenida
+    FROM coleccion_cartas_usuario ccu
+    JOIN cartas c
+      ON ccu.expansion_id = c.expansion_id
+     AND ccu.carta_juego_id = c.carta_juego_id
+    <where>
+        <if test="id != null">
+            AND ccu.id = #{id}
+        </if>
+        <if test="usuarioId != null">
+            AND ccu.usuario_id = #{usuarioId}
+        </if>
+        <if test="cartaJuegoId != null">
+            AND ccu.carta_juego_id = #{cartaJuegoId}
+        </if>
+        <if test="nombre != null and nombre != ''">
+            AND c.nombre LIKE CONCAT('%', #{nombre}, '%')
+        </if>
+        <if test="rarezas != null and rarezas.size() > 0">
+            AND c.rareza_id IN
+            <foreach collection="rarezas" item="rarezaId" open="(" separator="," close=")">
+                #{rarezaId}
+            </foreach>
+        </if>
+        <if test="expansiones != null and expansiones.size() > 0">
+            AND c.expansion_id IN
+            <foreach collection="expansiones" item="expansionId" open="(" separator="," close=")">
+                #{expansionId}
+            </foreach>
+        </if>
+        <if test="energias != null and energias.size() > 0">
+            AND c.energia_id IN
+            <foreach collection="energias" item="energiaId" open="(" separator="," close=")">
+                #{energiaId}
+            </foreach>
+        </if>
+        <if test="tipos != null and tipos.size() > 0">
+            AND c.tipo_id IN
+            <foreach collection="tipos" item="tipoId" open="(" separator="," close=")">
+                #{tipoId}
+            </foreach>
+        </if>
+        <if test="obtenida != null">
+            AND ccu.obtenida = #{obtenida}
+        </if>
+    </where>
+    ORDER BY ccu.expansion_id ASC, ccu.carta_juego_id ASC;
+</select>
     
     
     <!-- SQL para actualizar los datos de la carta -->
@@ -64,10 +75,4 @@
 	   WHERE id = #{id}
 	</update>
 	
-	 <!-- SQL para recuperar el total de cartas de una expansion-->
-    <select id="recuperarTotalCartasPorExpansion" parameterType="Integer"  resultType="Integer">
-    	SELECT COUNT(*)
-    	FROM coleccion_cartas_usuario
-    	WHERE expansion_id = #{expansionId}
-	</select>
 </mapper>

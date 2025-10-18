@@ -1,0 +1,11 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.ICartaMapper">
+
+	 <!-- SQL para recuperar el total de cartas de una expansion-->
+    <select id="recuperarTotalCartasPorExpansion" parameterType="Integer"  resultType="Integer">
+    	SELECT COUNT(*)
+    	FROM cartas
+    	WHERE expansion_id = #{expansionId}
+	</select>
+	
+</mapper>

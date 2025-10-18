@@ -213,10 +213,10 @@ async function abrirAmpliarCarta(carta) {
     $("#cartaSeleccionada").show();
     
     // Actualizamos la expansion de la carta
-     $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png").addClass("expansionLogo");
+     $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
      
      //Actualizamos el numero de carta con respecto al total de cartas de la expansion
-     $("#infoNumero").text("Carta número " + carta.cartaJuegoId + "/" + await recuperarTotalCartasExpansionId(carta.expansionId));
+     $("#infoNumero").text(carta.cartaJuegoId + "/" + await recuperarTotalCartasExpansionId(carta.expansionId));
 
     // Actualizamos la imagen del popup
     $("#cartaSeleccionadaAmpliada").attr("src", carta.src);
@@ -297,7 +297,7 @@ async function abrirAmpliarCarta(carta) {
 
 	async function obtenerCarta(carta) {
 		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "Ya tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "- tYa tienes esta carta");
 		} else {
 			carta.obtenida = true;
 			await actualizarObtenida(carta);
@@ -309,7 +309,7 @@ async function abrirAmpliarCarta(carta) {
 	
 	async function quitarCarta(carta) {
 		if(!carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido quitar esta carta de la colección", "No tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No se ha podido quitar esta carta de la colección", "- No tienes esta carta");
 		} else {
 			carta.obtenida = false;
 			await actualizarObtenida(carta);

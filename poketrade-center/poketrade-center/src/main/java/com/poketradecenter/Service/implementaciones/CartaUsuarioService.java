@@ -10,18 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CartaUsuario;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
-import com.poketradecenter.Clase.CriteriosUsuario;
-import com.poketradecenter.Clase.Usuario;
+import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICartaUsuarioService;
-import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper;
-import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
 
 @Service
 public class CartaUsuarioService implements ICartaUsuarioService {
 	
 	@Autowired
 	private ICartaUsuarioMapper cartaUsuarioMapper;
+	@Autowired
+	private ICartaService cartaService;
 	
 
 	@Override
@@ -46,7 +45,7 @@ public class CartaUsuarioService implements ICartaUsuarioService {
 	@Override
 	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
 		try {
-			return cartaUsuarioMapper.recuperarTotalCartasPorExpansion(expansionId);
+			return cartaService.recuperarTotalCartasPorExpansion(expansionId);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar el total de cartas de la expansión", e);
 		}
