@@ -62,6 +62,9 @@ $(document).ready(async function() {
 	$("#coleccionCartasApp").click(function() {
     	cambiarAplicacion.coleccionCartas();
     });
+	$("#crearBarajasApp").click(function() {
+    	cambiarAplicacion.crearBarajas();
+    });
 	$("#perfilApp").click(function() {
     	cambiarAplicacion.perfil();
     });

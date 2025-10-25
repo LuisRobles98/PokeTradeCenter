@@ -6,7 +6,7 @@
     <!-- SQL para recuperar cartas de usuario por criterios-->
  <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosCartaUsuario"  
         resultType="com.poketradecenter.Clase.CartaUsuario">
-    SELECT ccu.id,
+    SELECT
            ccu.usuario_id AS usuarioId,
            ccu.expansion_id AS expansionId,
            ccu.carta_juego_id AS cartaJuegoId,
@@ -20,9 +20,6 @@
       ON ccu.expansion_id = c.expansion_id
      AND ccu.carta_juego_id = c.carta_juego_id
     <where>
-        <if test="id != null">
-            AND ccu.id = #{id}
-        </if>
         <if test="usuarioId != null">
             AND ccu.usuario_id = #{usuarioId}
         </if>
@@ -72,7 +69,7 @@
 	           obtenida = #{obtenida}
 	       </if>
 	   </set>
-	   WHERE id = #{id}
+	   WHERE usuario_id = #{usuarioId} AND expansion_id = #{expansionId} AND carta_juego_id = #{cartaJuegoId}
 	</update>
 	
 </mapper>

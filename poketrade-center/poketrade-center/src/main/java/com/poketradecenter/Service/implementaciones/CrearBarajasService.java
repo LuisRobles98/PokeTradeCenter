@@ -8,60 +8,29 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.poketradecenter.Clase.CartaUsuario;
-import com.poketradecenter.Clase.CriteriosCartaUsuario;
+import com.poketradecenter.Clase.Carta;
+import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Service.interfaces.ICartaService;
-import com.poketradecenter.Service.interfaces.ICartaUsuarioService;
-import com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper;
+import com.poketradecenter.Service.interfaces.ICrearBarajasService;
 
 @Service
-public class CartaUsuarioService implements ICartaUsuarioService {
+public class CrearBarajasService implements ICrearBarajasService {
 	
-	@Autowired
-	private ICartaUsuarioMapper cartaUsuarioMapper;
 	@Autowired
 	private ICartaService cartaService;
 	
 
 	@Override
-	public List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criterios) {
-		try {
-			List<CartaUsuario> cartas = cartaUsuarioMapper.recuperarPorCriterios(criterios);
-			return cartas;
-		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al recuperar los datos de las cartas del usuario", e);
-		}
+	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 	}
 	
+
 	@Override
-	public void actualizarCarta(CartaUsuario cartaUsuario) {
-		try {
-			cartaUsuarioMapper.actualizar(cartaUsuario);
-		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al actualizar los datos de la carta", e);
-		}
-	}
-	
-	@Override
-	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
-		try {
-			return cartaService.recuperarTotalCartasPorExpansion(expansionId);
-		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al recuperar el total de cartas de la expansión", e);
-		}
-	}
-	
-	@Override
-	public CriteriosCartaUsuario crearCriteriosCartaUsuarioParams(Map<String, String> params) {
-    	CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
+	public CriteriosCarta crearCriteriosCartaParams(Map<String, String> params) {
+    	CriteriosCarta criterios = new CriteriosCarta();
     	   params.forEach((key, value) -> {
     	        switch(key) {
-    	        	case "id":
-    	        		criterios.setId(Integer.parseInt(value));
-    	        		break;
-    	            case "usuarioId":
-    	                criterios.setUsuarioId(Integer.parseInt(value));
-    	                break;
     	            case "expansiones":
     	            	List<Integer> expansiones = Arrays.stream(value.split(","))
             				.map(String::trim)
@@ -100,12 +69,6 @@ public class CartaUsuarioService implements ICartaUsuarioService {
 	                        .collect(Collectors.toList());
     	            	criterios.setTipos(tipos);
     	                break;
-       	            case "obtenida":
-       	            	if(value == "null") {
-       	            		criterios.setObtenida(null);
-       	            	} else {
-       	            		criterios.setObtenida(Boolean.parseBoolean(value));
-       	            	}
     	            default:
     	                break;
     	        }

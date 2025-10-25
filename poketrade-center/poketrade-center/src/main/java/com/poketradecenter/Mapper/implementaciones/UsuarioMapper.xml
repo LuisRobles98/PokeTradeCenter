@@ -6,7 +6,7 @@
     <insert id="crear" parameterType="com.poketradecenter.Clase.Usuario">
         INSERT INTO usuario
         (nombre, email, password, icono_id, emblema_1_id, emblema_2_id, emblema_3_id)
-        VALUES (#{nombre}, #{email}, #{password}, 25,0,0,0)
+        VALUES (#{nombre}, #{email}, #{password}, 1,0,0,0)
     </insert>
     
     <!-- SQL para actualizar los datos del usuario -->

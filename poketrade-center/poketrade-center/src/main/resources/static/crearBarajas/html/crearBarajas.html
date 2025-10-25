@@ -7,13 +7,13 @@
 	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
 	<title>PoketDex</title>
 	<link rel="stylesheet" href="/generico/css/generico.css">
-	<link rel="stylesheet" href="/coleccionCartas/css/coleccionCartas.css">
+	<link rel="stylesheet" href="/crearBarajas/css/crearBarajas.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/generico/js/generico.js" defer></script>
-	<script src="/coleccionCartas/js/llamadasAjax.js" defer></script>
-	<script src="/coleccionCartas/js/coleccionCartas.js" defer></script>
+	<script src="/crearBarajas/js/llamadasAjax.js" defer></script>
+	<script src="/crearBarajas/js/crearBarajas.js" defer></script>
 	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -67,9 +67,6 @@
 					<div id="expansion10carta" class="expansionCarta" data-id="10">
 						<img id="expansionManantialOculto" src="/imagenes/expansiones/10.png" class="expansionLogo">
 					</div>
-					<div id="expansion11carta" class="expansionCarta" data-id="11">
-						<img id="expansionSobreDeluxeEx" src="/imagenes/expansiones/11.png" class="expansionLogo">
-					</div>
 					<div id="expansion12carta" class="expansionCarta" data-id="12">
 						<img id="expansionPromoA" src="/imagenes/expansiones/12.png" class="expansionLogo">
 					</div>
@@ -98,30 +95,6 @@
 					</div>
 				</div>
 				<div class="rareza">
-					<div id="estrellaX1RarezaCarta" class="rarezaCarta" data-id="5">
-						<img src="/imagenes/rarezas/estrella.png">
-					</div>
-					<div id="estrellaX2RarezaCarta" class="rarezaCarta" data-id="6">
-						<img src="/imagenes/rarezas/estrella.png">
-						<img src="/imagenes/rarezas/estrella.png">
-					</div>
-					<div id="estrellaX3RarezaCarta" class="rarezaCarta" data-id="7">
-						<img src="/imagenes/rarezas/estrella.png">
-						<img src="/imagenes/rarezas/estrella.png">
-						<img src="/imagenes/rarezas/estrella.png">
-					</div>
-					<div id="estrellaSX1RarezaCarta" class="rarezaCarta" data-id="8">
-						<img src="/imagenes/rarezas/estrellaS.png">
-					</div>
-				</div>
-				<div class="rareza">
-					<div id="estrellaSX2RarezaCarta" class="rarezaCarta" data-id="9">
-						<img src="/imagenes/rarezas/estrellaS.png">
-						<img src="/imagenes/rarezas/estrellaS.png">
-					</div>
-					<div id="coronaX1RarezaCarta" class="rarezaCarta" data-id="10">
-						<img src="/imagenes/rarezas/corona.png">
-					</div>
 					<div id="promoRarezaCarta" class="rarezaCarta" data-id="11">
 						<span class="fuenteNormal">Promo</span>
 					</div>
@@ -181,55 +154,14 @@
 					</div>
 				</div>
 			</div>
-			<div id="selectObtenidaCarta" class="selectObtenidasCarta">
-				<span class="label">Obtenidas</span>
-				<div class="obtenidasCartasF1">
-					<div id="obtenidaCarta" class="obtenidaCarta" data-id="true">
-						<span class="fuenteNormal">Obtenidas</span>
-					</div>
-					<div id="noObtenidaCarta" class="obtenidaCarta" data-id="false">
-						<span class="fuenteNormal">No obtenidas</span>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 
 	<!-- Resultado -->
 	<div id="resultadosCartas">
 		<div class="resultadosCartas">
-			<div id="contadoresCartas" class="contadoresCartas">
-				<div class="contadoresF1">
-					<div id="contadorResultadoRombo" class="contadorResultado"></div>
-					<div id="contadorResultadoEstrella" class="contadorResultado"></div>
-					<div id="contadorResultadoEstrellaS" class="contadorResultado"></div>
-					<div id="contadorResultadoCorona" class="contadorResultado"></div>
-				</div>
-			</div>
 			<div id="mostrarCartas" class="mostrarCartas"></div>
 		</div>
-	</div>
-
-	<div id="cartaSeleccionada" class="cartaSeleccionada" style="display: none;">
-    	<div class="contenidoCartaSeleccionada">
-        	<div id="infoCarta" class="infoCarta">
-				<div id="infoCartaExpansion" class="infoCartaExpansion">
-					<img id="infoExpansion" class="infoExpansion"></img>
-				</div>
-				<div id="infoCartaNumero" class="infoCartaNumero">
-					<span class="label">Número de carta</span>
-					<span id="infoNumero" class="infoNumero fuenteNormal"></span>
-				</div>
-    		</div>
-    		<img id="cartaSeleccionadaAmpliada" class="cartaSeleccionadaAmpliada">
-        	<div id="contenedorBotoneraCarta" class="contenedorBotoneraCarta">
-				<div id="botoneraCarta" class="botoneraCarta">
-            		<button id="btnSalir" class="botonesCartaAmpliadaSalir">Salir</button>
-            		<button id="btnQuitar" class="botonesCartaAmpliadaAceptar">Quitar</button>
-            		<button id="btnObtener" class="botonesCartaAmpliadaAceptar">Obtener</button>
-        		</div>
-			</div>
-    	</div>
 	</div>
 
 </body>

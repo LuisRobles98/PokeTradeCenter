@@ -150,6 +150,9 @@ $(document).ready(function() {
             	img.classList.add("deshabilitarParcial");
         	}
         	contenedor.appendChild(img);
+        	
+        	 // hacer que el scroll vuelva al principio de forma suave
+    		contenedor.scrollTo({ top: 0, behavior: "smooth" });
     	});
 	}
 	
@@ -192,7 +195,6 @@ $(document).ready(function() {
 	//funcion seleccionar carta
 	$("#mostrarCartas").on("click", ".carta", function() {
 		let carta = {};
-		carta.id = $(this).data("id");
 		carta.expansionId = $(this).data("expansionId");
 		carta.cartaJuegoId = $(this).data("cartaJuegoId");
     	carta.obtenida = $(this).data("obtenida");
@@ -203,7 +205,6 @@ $(document).ready(function() {
 
 async function abrirAmpliarCarta(carta) {
     // Guardamos los campos importantes
-    $("#cartaSeleccionada").data("id", carta.id);
     $("#cartaSeleccionada").data("expansion", carta.expansionId);
     $("#cartaSeleccionada").data("cartaJuegoId", carta.cartaJuegoId);
     $("#cartaSeleccionada").data("obtenida", carta.obtenida);
@@ -297,7 +298,7 @@ async function abrirAmpliarCarta(carta) {
 
 	async function obtenerCarta(carta) {
 		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "- tYa tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "- Ya tienes esta carta");
 		} else {
 			carta.obtenida = true;
 			await actualizarObtenida(carta);
@@ -321,7 +322,9 @@ async function abrirAmpliarCarta(carta) {
 	
 	async function actualizarObtenida(carta) {
 		let cartaActualizar = {};
-		cartaActualizar.id = carta.id;
+		cartaActualizar.usuarioId = usuario.id;
+		cartaActualizar.expansionId = carta.expansionId;
+		cartaActualizar.cartaJuegoId = carta.cartaJuegoId;
 		cartaActualizar.obtenida = carta.obtenida;
 		await actualizarCarta(cartaActualizar);
 	}
