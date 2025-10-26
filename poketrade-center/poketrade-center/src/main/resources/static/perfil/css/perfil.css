@@ -196,8 +196,8 @@
 
 .botonDatosUsuario:hover {
 	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #007bb5; 
+border: 2px solid #005f87;
+	background-color: #2F65C8;
 }
 
 
@@ -380,7 +380,7 @@
 .botonCambioPassword:hover {
 	transform: scale(1.03);
 	border: 2px solid #005f87;
-	background-color: #007bb5; 
+	background-color: #2F65C8;
 }
 
 

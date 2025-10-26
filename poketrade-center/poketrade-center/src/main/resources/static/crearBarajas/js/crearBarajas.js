@@ -5,9 +5,10 @@ $(document).ready(function() {
 	let listaRarezas = [];
 	let listaEnergias = [];
 	let listaTipos = [];
-	let obtenida = null;
+	let cartasBaraja = [];
 	
 	limpiarBuscador();
+	vaciarListadoBaraja();
 	cargarCartas();
 	
 	function limpiarBuscador() {
@@ -29,8 +30,29 @@ $(document).ready(function() {
 		//vaciamos lista tipos y eliminamos campos seleccionados
 		listaTipos = [];
 		$(".tipoCarta").removeClass("tipoSeleccionada");
+	}
+	
+	function vaciarListadoBaraja() {
+	
+		let contenedor = document.getElementById("cartasBaraja");
+		contenedor.innerHTML = "";
 		
-		obtenida = null;
+		// Inicializar el array con 20 cartas vacías
+    	cartasBaraja = Array.from({ length: 20 }, () => ({
+        	src: "/crearBarajas/imagenes/cartaVacia.png",
+        	expansionId: 0,
+        	cartaJuegoId: 0,
+        	nombre: ""
+    	}));
+    	
+		cartasBaraja.forEach(carta => {
+        	let img = document.createElement("img");
+        	img.classList.add("cartaBaraja"); // clase para aplicar CSS
+        	img.src = carta.src;
+        	img.dataset.expansionId = carta.expansionId;
+        	img.dataset.cartaJuegoId = carta.cartaJuegoId;
+        	contenedor.appendChild(img);
+    	});
 	}
 	
 	$("#inputNombreCarta").on("input", function() {

@@ -141,7 +141,6 @@ $(document).ready(function() {
         	let img = document.createElement("img");
         	img.classList.add("carta"); // clase para aplicar CSS
         	img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
-        	img.dataset.id = carta.id;
         	img.dataset.expansionId = carta.expansionId;
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
         	img.dataset.obtenida = carta.obtenida;
