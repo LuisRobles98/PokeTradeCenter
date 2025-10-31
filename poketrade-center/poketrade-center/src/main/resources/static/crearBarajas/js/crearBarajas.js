@@ -33,26 +33,28 @@ $(document).ready(function() {
 	}
 	
 	function vaciarListadoBaraja() {
-	
-		let contenedor = document.getElementById("cartasBaraja");
-		contenedor.innerHTML = "";
-		
 		// Inicializar el array con 20 cartas vacías
-    	cartasBaraja = Array.from({ length: 20 }, () => ({
-        	src: "/crearBarajas/imagenes/cartaVacia.png",
+    	cartasBaraja = Array.from({ length: 20 }, (_, index) => ({
+        	src: index < 2 ? "/crearBarajas/imagenes/cartaVacia2.png"
+        		: "/crearBarajas/imagenes/cartaVacia.png",
         	expansionId: 0,
-        	cartaJuegoId: 0,
-        	nombre: ""
+        	cartaJuegoId: 0
     	}));
     	
+    	recargarBaraja();
+	}
+	
+	function recargarBaraja() {
+		let contenedor = document.getElementById("cartasBaraja");
+		contenedor.innerHTML = "";
 		cartasBaraja.forEach(carta => {
-        	let img = document.createElement("img");
-        	img.classList.add("cartaBaraja"); // clase para aplicar CSS
-        	img.src = carta.src;
-        	img.dataset.expansionId = carta.expansionId;
-        	img.dataset.cartaJuegoId = carta.cartaJuegoId;
-        	contenedor.appendChild(img);
-    	});
+    		let img = document.createElement("img");
+    		img.classList.add("cartaBaraja");
+    		img.src = carta.src;
+    		img.dataset.expansionId = carta.expansionId;
+    		img.dataset.cartaJuegoId = carta.cartaJuegoId;
+    		contenedor.appendChild(img);
+		});
 	}
 	
 	$("#inputNombreCarta").on("input", function() {
@@ -156,7 +158,20 @@ $(document).ready(function() {
 		carta.expansionId = $(this).data("expansionId");
 		carta.cartaJuegoId = $(this).data("cartaJuegoId");
     	carta.src = $(this).attr("src");
-    	//abrirAmpliarCarta(carta);
+    	aniadirCartaABaraja(carta);
 	});
+	
+	function aniadirCartaABaraja(nuevaCarta) {
+		let insertada = false;
+		cartasBaraja.forEach(carta => {
+			if(carta.expansionId == 0 && carta.cartaJuegoId == 0 && !insertada) {
+				carta.src = "/imagenes/cartas/" + nuevaCarta.expansionId + "/" + nuevaCarta.cartaJuegoId + ".png";
+				carta.expansionId = nuevaCarta.expansionId;
+        		carta.cartaJuegoId = nuevaCarta.cartaJuegoId;
+        		insertada = true;
+			}
+		});
+		recargarBaraja();
+	}
 		
 });
