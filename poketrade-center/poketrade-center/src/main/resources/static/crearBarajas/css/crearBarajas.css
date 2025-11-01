@@ -30,6 +30,16 @@
     border-radius: 8px;
 }
 
+.cartaBarajaAniadida {
+	cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cartaBarajaAniadida:hover {
+	transform: scale(1.03);
+}
+
 .botoneraBaraja {
 	margin-left: -5px;
    	margin-top: 10px;
@@ -291,7 +301,7 @@
 .carta {
   width: 225px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.3s;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }

@@ -7,9 +7,13 @@ $(document).ready(function() {
 	let listaTipos = [];
 	let cartasBaraja = [];
 	
-	limpiarBuscador();
-	vaciarListadoBaraja();
-	cargarCartas();
+	limpiar();
+	
+	function limpiar() {
+		limpiarBuscador();
+		vaciarListadoBaraja();
+		cargarCartas();	
+	}
 	
 	function limpiarBuscador() {
 		//limpiamos input nombre carta
@@ -34,25 +38,35 @@ $(document).ready(function() {
 	
 	function vaciarListadoBaraja() {
 		// Inicializar el array con 20 cartas vacías
-    	cartasBaraja = Array.from({ length: 20 }, (_, index) => ({
-        	src: index < 2 ? "/crearBarajas/imagenes/cartaVacia2.png"
-        		: "/crearBarajas/imagenes/cartaVacia.png",
-        	expansionId: 0,
-        	cartaJuegoId: 0
-    	}));
-    	
+    	cartasBaraja = Array.from({ length: 20 }, () => ({
+			expansionId: 0,
+			cartaJuegoId: 0,
+			nombre: null,
+			basico: null
+		}));
     	recargarBaraja();
 	}
 	
 	function recargarBaraja() {
 		let contenedor = document.getElementById("cartasBaraja");
 		contenedor.innerHTML = "";
-		cartasBaraja.forEach(carta => {
+		cartasBaraja.forEach((carta, index) => {
     		let img = document.createElement("img");
     		img.classList.add("cartaBaraja");
-    		img.src = carta.src;
-    		img.dataset.expansionId = carta.expansionId;
-    		img.dataset.cartaJuegoId = carta.cartaJuegoId;
+    		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				img.classList.add("cartaBarajaAniadida");
+				img.src = carta.src;
+				img.dataset.nombre = carta.nombre;
+				img.dataset.posicion = carta.posicion;
+				img.dataset.basico = carta.basico;
+			} else {
+				img.src = index < 2 ? "/crearBarajas/imagenes/cartaVacia2.png"
+        			: "/crearBarajas/imagenes/cartaVacia.png";
+				img.dataset.expansionId = 0;
+    			img.dataset.cartaJuegoId = 0;
+    			img.dataset.nombre = null;
+    			img.dataset.basico = null;
+			}
     		contenedor.appendChild(img);
 		});
 	}
@@ -148,8 +162,11 @@ $(document).ready(function() {
         	img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
         	img.dataset.expansionId = carta.expansionId;
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
+        	img.dataset.nombre = carta.nombre;
+        	img.dataset.basico = carta.basico;
         	contenedor.appendChild(img);
     	});
+		contenedor.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
 	//funcion añadir carta a la baraja
@@ -158,20 +175,127 @@ $(document).ready(function() {
 		carta.expansionId = $(this).data("expansionId");
 		carta.cartaJuegoId = $(this).data("cartaJuegoId");
     	carta.src = $(this).attr("src");
-    	aniadirCartaABaraja(carta);
+    	carta.nombre = $(this).data("nombre");
+    	carta.basico = $(this).data("basico");
+    	aniadirCartaBaraja(carta);
 	});
 	
-	function aniadirCartaABaraja(nuevaCarta) {
+	function aniadirCartaBaraja(nuevaCarta) {
 		let insertada = false;
-		cartasBaraja.forEach(carta => {
+		cartasBaraja.forEach((carta, index) => {
 			if(carta.expansionId == 0 && carta.cartaJuegoId == 0 && !insertada) {
 				carta.src = "/imagenes/cartas/" + nuevaCarta.expansionId + "/" + nuevaCarta.cartaJuegoId + ".png";
 				carta.expansionId = nuevaCarta.expansionId;
         		carta.cartaJuegoId = nuevaCarta.cartaJuegoId;
+        		carta.nombre = nuevaCarta.nombre;
+        		carta.basico = nuevaCarta.basico;
+        		carta.posicion = index;
         		insertada = true;
 			}
 		});
 		recargarBaraja();
 	}
+	
+	//funcion eliminar carta de la baraja
+	$("#cartasBaraja").on("click", ".cartaBarajaAniadida", function() {
+		let posicionEliminar = $(this).data("posicion");
+    	eliminarCartaBaraja($(this).data("posicion"));
+	});
+	
+	function eliminarCartaBaraja(posicionEliminar) {
+		const index = cartasBaraja.findIndex(carta => carta.posicion === posicionEliminar);
+		if (index !== -1) {
+    		cartasBaraja.splice(index, 1);
+    		cartasBaraja.push({
+    			expansionId: 0,
+    			cartaJuegoId: 0,
+    			nombre: null,
+    			basico: null
+  			});
+  		}
+		recargarBaraja();
+	}
+	
+	$("#btnGuardar").off("click").on("click", () => {
+		guardarBaraja();
+    });
+    
+	$("#btnGuardarYPublicar").off("click").on("click", () => {
+		guardarYPublicarBaraja();
+    });
+    
+    function guardarBaraja() {
+		let errores = validarDatos();
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			//guardar(cartasBaraja);
+			popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'");
+			limpiar()
+		}
+	}
+	
+    function guardarYPublicarBaraja() {
+		let errores = validarDatos();
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			//guardarYPublicar(cartasBaraja);
+			popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'");
+			limpiar()
+		}
+	}
+	
+	function validarDatos() {
+		let errores = "";
+		//validar que hay 20 cartas
+		let contadorCartas = 0;
+		cartasBaraja.forEach(carta => {
+			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				contadorCartas++;
+			}
+		});
+		if(contadorCartas != 20) {
+			errores += "- La baraja tiene que tener 20 cartas" + "<br>";
+		}
 		
+		//validar que no hay una misma carta mas de dos veces
+		let masDeDosCartas = new Set();
+		cartasBaraja.forEach(carta1 => {
+			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
+				let contadorCartas = 0;
+				let nombreCarta = carta1.nombre;
+				cartasBaraja.forEach(carta2 => {
+					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
+						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
+							contadorCartas++;
+						}
+					}
+				});
+				if(contadorCartas > 2) {
+					masDeDosCartas.add(nombreCarta);
+				}
+			}
+		});
+		
+		masDeDosCartas.forEach(nombreCarta => {
+			errores += "- La carta " + nombreCarta + " no puede estar más de dos veces" + "<br>";
+		});
+		
+		//validar que hay al menos una carta básica
+		let hayCartaBasica = false;
+		cartasBaraja.forEach(carta => {
+			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				if(carta.basico) {
+					hayCartaBasica = true;
+				}
+			}
+		});
+		
+		if(!hayCartaBasica) {
+			errores += "- La baraja tiene que tener al menos una carta básica" + "<br>";
+		}
+		
+		return errores;
+	}
 });

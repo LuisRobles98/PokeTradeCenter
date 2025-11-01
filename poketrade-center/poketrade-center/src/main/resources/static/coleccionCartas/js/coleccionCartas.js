@@ -149,10 +149,8 @@ $(document).ready(function() {
             	img.classList.add("deshabilitarParcial");
         	}
         	contenedor.appendChild(img);
-        	
-        	 // hacer que el scroll vuelva al principio de forma suave
-    		contenedor.scrollTo({ top: 0, behavior: "smooth" });
     	});
+    	contenedor.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
 	function calcularContadores(cartas) {
