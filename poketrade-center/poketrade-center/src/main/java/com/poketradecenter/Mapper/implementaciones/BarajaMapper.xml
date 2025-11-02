@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaMapper">
+
+    <!-- SQL para guardar una baraja creada-->
+    <insert id="guardarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
+        INSERT INTO barajas_usuario
+        (usuario_id, creador_id, baraja_nombre, cartas, fecha_creacion)
+        VALUES (#{usuarioId}, #{creadorId}, #{barajaNombre}, #{cartas},#{fechaCreacion})
+    </insert>
+    
+        <!-- SQL para publicar una baraja creada-->
+    <insert id="publicarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
+        INSERT INTO barajas_publicas
+        (creador_id, baraja_nombre, cartas, fecha_creacion, me_gusta)
+        VALUES (#{creadorId}, #{barajaNombre}, #{cartas},#{fechaCreacion}, 0)
+    </insert>
+
+</mapper>

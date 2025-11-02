@@ -4,9 +4,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
@@ -22,6 +25,16 @@ public class CrearBarajasController {
         CriteriosCarta criterios = crearBarajasService.crearCriteriosCartaParams(params);
         List<Carta> cartas = crearBarajasService.recuperarCartasPorCriterios(criterios);
         return cartas;
+    }
+    
+    @PostMapping("/cartasBarajas/guardar")
+    public void guardarBaraja(@RequestBody Baraja baraja) {
+    	crearBarajasService.guardarBaraja(baraja);
+    }
+    
+    @PostMapping("/cartasBarajas/guardarPublicar")
+    public void guardarPublicarBaraja(@RequestBody Baraja baraja) {
+    	crearBarajasService.guardarPublicarBaraja(baraja);
     }
 
 }
