@@ -17,7 +17,11 @@ async function guardar(baraja) {
         },
         body: JSON.stringify(baraja),
     };
-    await fetch('http://localhost:8080/cartasBarajas/guardar', parameters);
+    let response = await fetch('http://localhost:8080/cartasBarajas/guardar', parameters);
+    if (!response.ok) {
+        let msg = await response.text();
+        throw new Error(msg || 'Error desconocido del servidor');
+    }
 };
 
 async function guardarPublicar(baraja) {
@@ -28,5 +32,9 @@ async function guardarPublicar(baraja) {
         },
         body: JSON.stringify(baraja),
     };
-    await fetch('http://localhost:8080/cartasBarajas/guardarPublicar', parameters);
+    let response = await fetch('http://localhost:8080/cartasBarajas/guardarPublicar', parameters);
+    if (!response.ok) {
+        let msg = await response.text();
+        throw new Error(msg || 'Error desconocido del servidor');
+    }
 };

@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,7 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	@Override
 	public List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criterios) {
 		try {
-			List<CartaUsuario> cartas = cartaUsuarioMapper.recuperarPorCriterios(criterios);
-			return cartas;
+			return cartaUsuarioMapper.recuperarPorCriterios(criterios);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar los datos de las cartas del usuario", e);
 		}
@@ -35,6 +35,27 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	
 	@Override
 	public void actualizarCarta(CartaUsuario cartaUsuario) {
+		validarActualizarCarta(cartaUsuario);
+		actualizar(cartaUsuario);
+	}
+	
+	private void validarActualizarCarta(CartaUsuario cartaUsuario) {
+		CartaUsuario cartaUsuarioBBDD = recuperarCartaUsuario(cartaUsuario);
+		if(cartaUsuarioBBDD != null && (cartaUsuario.isObtenida() == cartaUsuarioBBDD.isObtenida())) {
+			throw new RuntimeException("El estado de la carta es el mismo que el almacenado en el sistema");
+		}
+	}
+	
+	private CartaUsuario recuperarCartaUsuario(CartaUsuario cartaUsuario) {
+		CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
+		List<Integer> expansiones = new ArrayList<>();
+		expansiones.add(cartaUsuario.getExpansionId());
+		criterios.setExpansiones(expansiones);
+		criterios.setCartaJuegoId(cartaUsuario.getCartaJuegoId());
+		return recuperarCartaUsuarioPorCriterios(criterios).get(0);
+	}
+	
+	private void actualizar(CartaUsuario cartaUsuario) {
 		try {
 			cartaUsuarioMapper.actualizar(cartaUsuario);
 		} catch(RuntimeException e) {

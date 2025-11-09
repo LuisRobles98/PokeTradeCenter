@@ -51,13 +51,13 @@ $(document).ready(function() {
 	
 	async function validarRegistro() {
 		let errores = "";
-		if($("#inputUsuarioRegistro").val() == "") {
-			errores += "- Debes introducir un nombre" + "<br>";
+		if($("#inputUsuarioRegistro").val().trim() == "") {
+			errores += "- Debe introducir un nombre" + "<br>";
 		}
-		if($("#inputCorreoRegistro").val() == "") {
-			errores += "- Debes introducir un email" + "<br>";
+		if($("#inputCorreoRegistro").val().trim() == "") {
+			errores += "- Debe introducir un email" + "<br>";
 		} else if($("#inputCorreoRegistro").val().indexOf('@') === -1 || $("#inputCorreoRegistro").val().indexOf('.') === -1) {
-			errores += "- Debes introducir un email valido" + "<br>";
+			errores += "- Debe introducir un email valido" + "<br>";
 		}
 		
 		//comprobar que el correo no exista en bbdd
@@ -66,13 +66,13 @@ $(document).ready(function() {
 	        errores += "- El correo ya existe en el sistema" + "<br>";
 	    }
 		
-		if($("#inputPasswordRegistro").val() == "") {
-			errores += "- Debes introducir una contraseña valida" + "<br>";
+		if($("#inputPasswordRegistro").val().trim() == "") {
+			errores += "- Debe introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordRegistro").val().length < 8) {
 			errores += "- La contraseña tiene que tener 8 caracteres como mínimo" + "<br>";
 		}
-		if($("#inputPassword2Registro").val() == "") {
-			errores += "- Debes volver a introducir la contraseña para verificarla" + "<br>";
+		if($("#inputPassword2Registro").val().trim() == "") {
+			errores += "- Debe volver a introducir la contraseña para verificarla" + "<br>";
 		}
 		if($("#inputPasswordRegistro").val() != $("#inputPassword2Registro").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
@@ -103,7 +103,7 @@ $(document).ready(function() {
 	
 	async function validarAcceso() {
 		let errores = "";
-		if($("#inputCorreoInicioSesion").val() == "") {
+		if($("#inputCorreoInicioSesion").val().trim() == "") {
 			errores += "- Debes introducir un email" + "<br>";
 		} else if($("#inputCorreoInicioSesion").val().indexOf('@') === -1 || $("#inputCorreoInicioSesion").val().indexOf('.') === -1) {
 			errores += "- Debes introducir un email valido" + "<br>";

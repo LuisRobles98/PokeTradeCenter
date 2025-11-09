@@ -26,6 +26,7 @@ $(document).ready(function() {
         	img.dataset.id = i;
         	contenedor.appendChild(img);
 		}
+		contenedor.scrollTo({ top: 0 });
 	});
 	
 	//funcion seleccionar icono
@@ -59,6 +60,7 @@ $(document).ready(function() {
         	img.dataset.emblema = emblema;
         	contenedor.appendChild(img);
 		}
+		contenedor.scrollTo({ top: 0 });
 	}
 	
 	//funcion seleccionar emblemas
@@ -83,23 +85,31 @@ $(document).ready(function() {
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			await actualizarDatosUsuario();
-			popupErroresOConfirmacion.mostrar("success", "" , "¡Se han actualizado correctamente los datos!");
-			usuario = await recuperarUsuarioPorId(usuario.id);
-			localStorage.setItem("usuario", JSON.stringify(usuario));
-			barraSuperior.mostrarDatos(usuario);
-			cargarPerfilUsuario(usuario);
-			limpiarPopupPassword();
+			try {
+				await actualizarDatosUsuario();	
+				popupErroresOConfirmacion.mostrar("success", "Se han actualizado correctamente los datos" , "");
+				usuario = await recuperarUsuarioPorId(usuario.id);
+				localStorage.setItem("usuario", JSON.stringify(usuario));
+				barraSuperior.mostrarDatos(usuario);
+				cargarPerfilUsuario(usuario);
+				limpiarPopupPassword();
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error","Ha ocurrido el siguiente error en el sistema:",error.message);
+			}
 		}
     });
     
     function validarDatos() {
 		let errores = "";
-		if($("#inputNombreUsuario").val() == "") {
+		if($("#inputNombreUsuario").val().trim() == "") {
 			errores += "- Debes introducir un nombre de usuario" + "<br>";
+		} else if($("#inputNombreUsuario").val().length > 45) {
+			errores += "- El nombre de usuario no puede tener más de 45 caracteres" + "<br>";
 		}
-		if($("#inputJuegoIdUsuario").val() == "") {
+		if($("#inputJuegoIdUsuario").val().trim() == "") {
 			errores += "- Debes introducir un id de Pokemon TCG Pocket" + "<br>";
+		} else if($("#inputJuegoIdUsuario").val().length > 45) {
+			errores += "- El id de Pokémon TCG Pocket no puede tener más de 45 caracteres" + "<br>";
 		}
 		return errores;
 	}
@@ -159,13 +169,15 @@ $(document).ready(function() {
 	function validarModificarPassword() {
 		let errores = "";
 		
-		if($("#inputPasswordUsuario").val() == "") {
+		if($("#inputPasswordUsuario").val().trim() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordUsuario").val().length < 8) {
-			errores += "- La contraseña tiene que tener 8 caracteres como mínimo" + "<br>";
+			errores += "- La contraseña debe tener 8 caracteres como mínimo" + "<br>";
+		} else if($("#inputPasswordUsuario").val().length > 45) {
+			errores += "- La contraseña no puede tener más de 45 caracteres" + "<br>";
 		}
-		if($("#inputPasswordUsuarioConfirmacion").val() == "") {
-			errores += "- Debes volver a introducir la contraseña para verificarla" + "<br>";
+		if($("#inputPasswordUsuarioConfirmacion").val().trim() == "") {
+			errores += "- Debe volver a introducir la contraseña para verificarla" + "<br>";
 		}
 		if($("#inputPasswordUsuario").val() != $("#inputPasswordUsuarioConfirmacion").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
@@ -173,5 +185,13 @@ $(document).ready(function() {
 		
 		return errores;
 	}
+	
+	$("#btnCancelarIcono").click(function() {
+		$("#iconos").hide();
+	});
+	
+	$("#btnCancelarEmblema").click(function() {
+		$("#emblemas").hide();
+	});
 
 });

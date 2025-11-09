@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,14 +27,19 @@ public class UsuarioController {
     }
     
     @PutMapping("/usuario")
-    public void actualizarUsuario(@RequestBody Usuario usuario) {
-    	usuarioService.actualizarUsuario(usuario);
+    public ResponseEntity<?> actualizarUsuario(@RequestBody Usuario usuario) {
+    	try {
+    		usuarioService.actualizarUsuario(usuario);
+    		return ResponseEntity.ok().build();
+    	}catch(RuntimeException e) {
+    		return ResponseEntity.badRequest().body(e.getMessage());
+    	}
     }
+    
     
     @GetMapping("/usuario")
     public List<Usuario> recuperarUsuarioPorCriterios(@RequestParam Map<String, String> params) {
         CriteriosUsuario criterios = usuarioService.crearCriteriosUsuarioParams(params);
-        List<Usuario> usuarios = usuarioService.recuperarUsuarioPorCriterios(criterios);
-        return usuarios;
+        return usuarioService.recuperarUsuarioPorCriterios(criterios);
     }
 }

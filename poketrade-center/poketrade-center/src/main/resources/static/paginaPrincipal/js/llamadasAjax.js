@@ -1,4 +1,3 @@
-
 function guardarUsuario(usuario) {
     let parameters = {
         method: 'POST',

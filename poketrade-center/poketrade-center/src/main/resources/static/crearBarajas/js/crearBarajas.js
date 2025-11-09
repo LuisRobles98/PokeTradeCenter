@@ -229,10 +229,14 @@ $(document).ready(function() {
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			let baraja = construirBaraja();
-			await guardar(baraja);
-			popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'");
-			limpiar();
+			try {
+				let baraja = construirBaraja();
+				await guardar(baraja);
+				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+				limpiar();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}
 		}
 	}
 	
@@ -241,10 +245,14 @@ $(document).ready(function() {
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			let baraja = construirBaraja();
-			await guardarPublicar(baraja);
-			popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'");
-			limpiar();
+			try {
+				let baraja = construirBaraja();
+				await guardarPublicar(baraja);
+				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+				limpiar();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}
 		}
 	}
 	
@@ -258,7 +266,7 @@ $(document).ready(function() {
 			}
 		});
 		if(contadorCartas != 20) {
-			errores += "- La baraja tiene que tener 20 cartas" + "<br>";
+			errores += "- La baraja debe tener 20 cartas" + "<br>";
 		}
 		
 		//validar que no hay una misma carta mas de dos veces
@@ -295,9 +303,8 @@ $(document).ready(function() {
 		});
 		
 		if(!hayCartaBasica) {
-			errores += "- La baraja tiene que tener al menos una carta básica" + "<br>";
+			errores += "- La baraja debe tener al menos una carta básica" + "<br>";
 		}
-		
 		return errores;
 	}
 	

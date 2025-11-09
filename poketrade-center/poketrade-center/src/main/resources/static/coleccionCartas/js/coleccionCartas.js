@@ -295,25 +295,33 @@ async function abrirAmpliarCarta(carta) {
 
 	async function obtenerCarta(carta) {
 		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "- Ya tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No puedes obtener una carta que ya tienes", "");
 		} else {
-			carta.obtenida = true;
-			await actualizarObtenida(carta);
-			popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección");
-			$("#cartaSeleccionada").hide();
-			buscarCartasUsuarioPorCriterios();
+			try {
+				carta.obtenida = true;
+				await actualizarObtenida(carta);
+				popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección", "");
+				$("#cartaSeleccionada").hide();
+				buscarCartasUsuarioPorCriterios();	
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error.message);
+			}
 		}
 	}
 	
 	async function quitarCarta(carta) {
 		if(!carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido quitar esta carta de la colección", "- No tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No puedes eliminar una carta que no tienes", "");
 		} else {
-			carta.obtenida = false;
-			await actualizarObtenida(carta);
-			popupErroresOConfirmacion.mostrar("success", "La carta ha sido eliminada de la colección");
-			$("#cartaSeleccionada").hide();
-			buscarCartasUsuarioPorCriterios();
+			try {
+				carta.obtenida = false;
+				await actualizarObtenida(carta);
+				popupErroresOConfirmacion.mostrar("success","La carta ha sido eliminada de la colección", "");
+				$("#cartaSeleccionada").hide();
+				buscarCartasUsuarioPorCriterios();	
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error);
+			}
 		}
 	}
 	

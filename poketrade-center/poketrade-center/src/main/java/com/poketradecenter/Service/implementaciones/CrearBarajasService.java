@@ -33,32 +33,22 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	@Override
 	public void guardarBaraja(Baraja baraja) {
-		try {
-			validarCartas(baraja);
-			construirBaraja(baraja);
-			guardar(baraja);
-		} catch(RuntimeException e) {
-			throw new RuntimeException(e);
-		}
+		validarCartas(baraja);
+		construirBaraja(baraja);
+		guardar(baraja);
 	}
 	
 	@Override
 	public void guardarPublicarBaraja(Baraja baraja) {
-		try {
-			validarCartas(baraja);
-			construirBaraja(baraja);
-			guardar(baraja);
-			baraja.setCreadorId(baraja.getUsuarioId());
-			publicar(baraja);
-		} catch(RuntimeException e) {
-			throw new RuntimeException(e);
-		}
+		validarCartas(baraja);
+		construirBaraja(baraja);
+		guardar(baraja);
+		baraja.setCreadorId(baraja.getUsuarioId());
+		publicar(baraja);
 	}
 	
 	private void validarCartas(Baraja baraja) {
-		
 		List<Carta> cartas = new ArrayList<>();
-		
 		String[] cartasBaraja = baraja.getCartas().split(";");
 		
 		for(String carta : cartasBaraja) {
@@ -68,10 +58,12 @@ public class CrearBarajasService implements ICrearBarajasService {
 			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
 			criterios.setExpansiones(expansiones);
 			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			Carta cartaBuscada = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
-			cartas.add(cartaBuscada);
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
+			if(cartasBBDD.isEmpty()) {
+				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
+			}
+			cartas.add(cartasBBDD.get(0));
 		}
-		
 		
 		//validar tamaño baraja
 		Integer contadorCartas = 0;

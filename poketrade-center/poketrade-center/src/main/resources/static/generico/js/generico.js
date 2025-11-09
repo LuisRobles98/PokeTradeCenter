@@ -6,14 +6,14 @@ const popupErroresOConfirmacion = {
         Swal.fire({
             icon: icono,
             title: titulo,
-            html: errores ? `<ul style="text-align: left; margin-left: 20px; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
+            html: errores ? `<ul style="text-align: left; color: #68768A; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
             confirmButtonText: "Aceptar",
-            confirmButtonColor: "#3085d6",
             customClass: {
-                confirmButton: 'swal-confirm-bold'
+				title: 'titlePopupErrorConfirmacion',
+                confirmButton: 'botonAceptar'
             },
             didOpen: (popup) => {
-                popup.style.borderRadius = "30px";          // esquinas redondeadas
+                popup.style.borderRadius = "30px";
             },
             didRender: () => {
                 // ⚡ Evitar que SweetAlert2 mueva el body

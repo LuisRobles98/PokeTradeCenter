@@ -223,7 +223,22 @@ body.fondo {
   	transform: scale(1.03);
 }
 
-.swal-confirm-bold {
+.titlePopupErrorConfirmacion {
+	font-size: 1.125em;
+	color: #68768A;
     font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.botonAceptar {
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
     font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }

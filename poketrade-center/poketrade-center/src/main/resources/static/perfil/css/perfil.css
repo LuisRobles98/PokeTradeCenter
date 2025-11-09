@@ -218,6 +218,7 @@ border: 2px solid #005f87;
 .contenidoIconos {
     background-color: white;
     padding: 30px;
+    height: 450px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -226,7 +227,7 @@ border: 2px solid #005f87;
 .mostrarIconos {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
-    height: 400px;
+    height: 357px;
     width: 900px;
     overflow-y: auto;
     padding: 10px;
@@ -252,6 +253,11 @@ border: 2px solid #005f87;
   	cursor: pointer;
 }
 
+.botonPopup {
+	margin-left: 420px !important;
+    margin-top: 30px !important;
+}
+
 /*------------------------POPUP EMBLEMAS ------------------------*/
 
 .emblemas {
@@ -270,6 +276,7 @@ border: 2px solid #005f87;
 .contenidoEmblemas {
     background-color: white;
     padding: 30px;
+    height: 450px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -278,7 +285,7 @@ border: 2px solid #005f87;
 .mostrarEmblemas {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
-    height: 400px;
+    height: 357px;
     width: 900px;
     overflow-y: auto;
     padding: 10px;
@@ -374,7 +381,6 @@ border: 2px solid #005f87;
     cursor: pointer;
     transition: background-color 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-   
 }
 
 .botonCambioPassword:hover {
