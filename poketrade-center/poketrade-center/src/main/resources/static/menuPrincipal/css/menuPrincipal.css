@@ -1,24 +1,14 @@
 /* Primera fila de apps (los 4)*/
-.iconosAplicaciones1 {
+.iconosAplicaciones {
     display: grid;
     position: absolute;
-    grid-template-columns: repeat(4, 160px);
+    grid-template-columns: repeat(4, 180px);
+    column-gap: 180px;
+    row-gap: 100px;
+    top: 240px;
+    left: 290px;
     justify-content: center;
-    column-gap: 120px;
-    top: 250px;
-    left: 400px;
 }
-
-.iconosAplicaciones2 {
-	display: grid;
-    position: absolute;
-    grid-template-columns: repeat(3, 160px);
-    justify-content: center;
-    column-gap: 120px;
-    top: 500px;
-    left: 540px;
-}
-
 
 
 .iconoApp {
@@ -31,13 +21,6 @@
 .iconoApp:hover {
 	transform: scale(1.2);
     color: #007bb5;
-}
-
-.iconosAplicaciones {
-    display: flex;
-    justify-content: center;
-    gap: 120px;
-    margin-top: 50px;
 }
 
 .iconoContenedor {
@@ -170,24 +153,19 @@
 }
 
 .labelApp {
-    font-family: Arial, sans-serif;
+font-family: Arial, sans-serif;
     padding: 10px;
     font-weight: bold;
     font-size: 1.25em;
     text-align: center;
     user-select: none;
-    width: 100px;
-    height: 30px;
-    
-    /*transiciones*/
+    width: 140px;
+    height: 35px;
     transition: color 0.3s ease;
+    color: #68768A;
 }
 
 .appMenu:hover {
     transform: scale(1.03); /* aumenta un 5% todo el contenedor */
     box-shadow: 0 1px 40px rgba(0, 0, 0, 0.5)
-}
-
-.appMenu:hover .labelApp {
-    color: #007bb5; /* cambia el color del texto al azul */
 }
