@@ -65,8 +65,10 @@ $(document).ready(async function() {
 	$("#crearBarajasApp").click(function() {
     	cambiarAplicacion.crearBarajas();
     });
+	$("#misBarajasApp").click(function() {
+    	cambiarAplicacion.misBarajas();
+    });
 	$("#perfilApp").click(function() {
     	cambiarAplicacion.perfil();
     });
- 
 });

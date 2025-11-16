@@ -105,6 +105,9 @@ const cambiarAplicacion = {
 	crearBarajas: function() {
 		window.location.href = "/crearBarajas/html/crearBarajas.html";
 	},
+	misBarajas: function() {
+		window.location.href = "/misBarajas/html/misBarajas.html";
+	},
 	perfil: function() {
 		window.location.href = "/perfil/html/perfil.html";
 	}

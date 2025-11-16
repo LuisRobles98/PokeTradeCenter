@@ -242,3 +242,33 @@ body.fondo {
     transition: background-color 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+
+/*-------------------------------- TABLAS GENERICAS ---------------------------------------------*/
+.tabulator {
+    overflow: hidden;
+    border: 2px solid white !important;
+    background-color: transparent !important;
+}
+
+.tabulator-row .tabulator-cell {
+    border-right: 1px solid white !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+}
+
+.tabulator-cell {
+    left: 10px;
+    height: 135px !important;
+    width: 640px !important;
+    margin-top: 12px;
+}
+
+.tabulator-row {
+	background-color: transparent !important;
+}
+
+.tabulator-row.tabulator-selectable:hover {
+    background-color: transparent !important;
+}
+

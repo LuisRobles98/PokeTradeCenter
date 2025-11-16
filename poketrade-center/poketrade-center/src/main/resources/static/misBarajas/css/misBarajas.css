@@ -1,0 +1,51 @@
+/* -----------------------------------------POPUP BUSCADOR CARTAS--------------------------------------- */
+.popupTablaBarajas {
+	display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 102px;
+    left: 50px;
+    height: 712px;
+    width: 685px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tablaCell {
+    display: flex;
+    position: absolute !important;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* Imagen de la carta */
+.tablaCell .fondo {
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    width: 48%;
+    height: 145%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.tablaCell .portada {
+    width: 100px;
+    margin-left: 55px;
+    transform: rotate(8deg);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: -10px;
+    z-index: 2;
+}
+
+.tablaCell span {
+	margin-top: -35px;
+    margin-left: 65px;
+    color: #68768A;
+}
