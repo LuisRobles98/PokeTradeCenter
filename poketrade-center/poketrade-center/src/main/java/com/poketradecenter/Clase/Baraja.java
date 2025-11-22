@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Baraja {
 	private Integer id;
-	private String barajaNombre;
+	private String nombre;
 	private String cartas;
 	private Integer usuarioId;
 	private Integer creadorId;
@@ -14,8 +14,8 @@ public class Baraja {
 	public Integer getId() {return id;}
 	public void setId(Integer id) {this.id = id;}
 	
-	public String getBarajaNombre() {return barajaNombre;}
-	public void setBarajaNombre(String barajaNombre) {this.barajaNombre = barajaNombre;}
+	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {this.nombre = nombre;}
 	
 	public String getCartas() {return cartas;}
 	public void setCartas(String cartas) {this.cartas = cartas;}

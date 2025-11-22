@@ -15,7 +15,7 @@
     padding: 10px;
     border-radius: 30px;
     box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cartasBaraja {
@@ -33,7 +33,7 @@
 .cartaBarajaAniadida {
 	cursor: pointer;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cartaBarajaAniadida:hover {
@@ -58,6 +58,7 @@
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   
 }
@@ -89,7 +90,7 @@
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 /*--------------------------- TODOS LOS LABELS ----------------------*/
 .label {
@@ -119,6 +120,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -174,6 +176,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     align-items: center;
     width: 75px;
@@ -212,6 +215,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 42px;
     flex-direction: row;
@@ -250,6 +254,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: border-color 0.2s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
@@ -283,7 +288,7 @@
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ---------------- CONTENEDOR CARTAS ------------------------- */
@@ -301,7 +306,7 @@
 .carta {
   width: 225px;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.2s;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }

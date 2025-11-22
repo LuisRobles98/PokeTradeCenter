@@ -26,12 +26,7 @@ public class CrearBarajasController {
         CriteriosCarta criterios = crearBarajasService.crearCriteriosCartaParams(params);
         return crearBarajasService.recuperarCartasPorCriterios(criterios);
     }
-    /*
-    @PostMapping("/cartasBarajas/guardar")
-    public void guardarBaraja(@RequestBody Baraja baraja) {
-    	crearBarajasService.guardarBaraja(baraja);
-    }
-    */
+    
     @PostMapping("/cartasBarajas/guardar")
     public ResponseEntity<?> guardarBaraja(@RequestBody Baraja baraja) {
     	try {

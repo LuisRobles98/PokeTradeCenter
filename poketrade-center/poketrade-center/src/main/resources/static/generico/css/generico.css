@@ -86,6 +86,7 @@ body.fondo {
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -142,6 +143,7 @@ body.fondo {
     border: 2px solid #8EA0B8;
     border-radius: 35px;
     transition: border-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -194,6 +196,7 @@ body.fondo {
     border: 2px solid #8EA0B8;
     border-radius: 35px;
     transition: border-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -215,6 +218,7 @@ body.fondo {
   	margin-left: 15px;
     border-radius: 35px;
     transition: border-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -240,7 +244,14 @@ body.fondo {
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.5s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.botonAceptar:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8;
 }
 
 
@@ -255,6 +266,11 @@ body.fondo {
     border-right: 1px solid white !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
+    transition: transform 0.2s;
+}
+
+.tabulator-row .tabulator-cell:hover {
+    transform: scale(1.03);
 }
 
 .tabulator-cell {
@@ -269,6 +285,6 @@ body.fondo {
 }
 
 .tabulator-row.tabulator-selectable:hover {
-    background-color: transparent !important;
+   background-color: transparent !important;
 }
 

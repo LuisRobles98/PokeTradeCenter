@@ -26,12 +26,31 @@
 
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
-
-	<div id="popupTablaBarajas">
-		<div class="popupTablaBarajas">
-			<div id="tablaBarajas"></div>
+	
+	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador">
+		<div id="contenidoBuscador" class="contenidoBuscador">
+			<input id="inputNombreBaraja"class="inputNombreBaraja" placeholder="Nombre de baraja">
 		</div>
 	</div>
 
+	<div id="popupTablaBarajas" class="popupTablaBarajas">
+		<div id="tablaBarajas"></div>
+	</div>
+	
+	<div id="popupMostrarBaraja" class="popupMostrarBaraja">
+		<span id="textoCreador" class="textoCreador"></span>
+		<div id="mostrarCartas" class="mostrarCartas"></div>
+		<button id="botonEliminarBaraja" class="botonEliminarBaraja">Eliminar Baraja</button>
+	</div>
+	
+	<div id="confirmar" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres eliminar esta baraja?</span>
+			<div id="botonera" class="botoneraConfirmar">
+				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
+				<button id="btnEliminar" class="botonEliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
 
 </body>

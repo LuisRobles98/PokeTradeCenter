@@ -26,7 +26,7 @@ public class CartaService implements ICartaService {
 	}
 	
 	@Override
-	public List<Carta> recuperarCartasCrearBarajasPorCriterios(CriteriosCarta criterios) {
+	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
 		try {
 			return cartaMapper.recuperarCartasCrearBarajasPorCriterios(criterios);
 		} catch(RuntimeException e) {

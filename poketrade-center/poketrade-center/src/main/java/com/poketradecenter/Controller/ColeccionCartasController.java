@@ -27,12 +27,7 @@ public class ColeccionCartasController {
         CriteriosCartaUsuario criterios = coleccionCartasService.crearCriteriosCartaUsuarioParams(params);
         return coleccionCartasService.recuperarCartaUsuarioPorCriterios(criterios);
     }
-/*
-    @PutMapping("/coleccionCartas")
-    public void actualizarCarta(@RequestBody CartaUsuario cartaUsuario) {
-        coleccionCartasService.actualizarCarta(cartaUsuario);
-    }
-*/
+
     @PutMapping("/coleccionCartas")
     public ResponseEntity<?> actualizarCarta(@RequestBody CartaUsuario cartaUsuario) {
     	try {

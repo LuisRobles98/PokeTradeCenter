@@ -118,6 +118,7 @@
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     margin-top: 20px;
 }
@@ -149,11 +150,11 @@
 .imagenApp {
 	width: 80px;
 	/*transiciones*/
-   	transition: transform 0.3s ease;
+   	transition: transform 0.2s ease;
 }
 
 .labelApp {
-font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
     padding: 10px;
     font-weight: bold;
     font-size: 1.25em;
@@ -162,6 +163,7 @@ font-family: Arial, sans-serif;
     width: 140px;
     height: 35px;
     transition: color 0.3s ease;
+    transition: transform 0.2s;
     color: #68768A;
 }
 
