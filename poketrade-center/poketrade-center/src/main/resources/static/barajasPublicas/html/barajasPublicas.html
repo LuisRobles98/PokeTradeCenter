@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+	<title>PoketDex</title>
+	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/barajasPublicas/css/barajasPublicas.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/generico/js/generico.js" defer></script>
+	<script src="/barajasPublicas/js/llamadasAjax.js" defer></script>
+	<script src="/barajasPublicas/js/barajasPublicas.js" defer></script>
+	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+
+</head>
+
+<body class="fondo">
+
+	<!-- cargar Barra superior -->
+	<div id="barraContainer"></div>
+	
+	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador">
+		<div id="contenidoBuscador" class="contenidoBuscador">
+			<input id="inputNombreBaraja"class="inputNombreBaraja" placeholder="Nombre de baraja">
+			<div id="+likes" class="botonOrden" data-id="me_gusta desc">
+				<span class="fuenteNormal">likes ↑</span>
+			</div>
+			<div id="-likes" class="botonOrden" data-id="me_gusta asc">
+				<span class="fuenteNormal">likes ↓</span>
+			</div>
+			<div id="nuevas" class="botonOrden" data-id="fecha_creacion desc">
+				<span class="fuenteNormal">fecha ↑</span>
+			</div>
+			<div id="antiguas" class="botonOrden" data-id="fecha_creacion asc">
+				<span class="fuenteNormal">fecha ↓</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="popupTablaBarajas" class="popupTablaBarajas">
+		<div id="tablaBarajas"></div>
+	</div>
+	
+	<div id="popupMostrarBaraja" class="popupMostrarBaraja">
+		<span id="textoCreador" class="textoCreador"></span>
+		<div id="mostrarCartas" class="mostrarCartas"></div>
+		<button id="btnMeGusta" class="botonMeGusta">Dar me gusta</button>
+		<button id="btnGuardarBaraja" class="botonGuardarBaraja">Guardar baraja</button>
+	</div>
+	
+	<div id="confirmar" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres guardar esta baraja?</span>
+			<div id="botonera" class="botoneraConfirmar">
+				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
+				<button id="btnGuardar" class="botonGuardar">Guardar</button>
+			</div>
+		</div>
+	</div>
+
+</body>

@@ -108,6 +108,9 @@ const cambiarAplicacion = {
 	misBarajas: function() {
 		window.location.href = "/misBarajas/html/misBarajas.html";
 	},
+	barajasPublicas: function() {
+		window.location.href = "/barajasPublicas/html/barajasPublicas.html";
+	},
 	perfil: function() {
 		window.location.href = "/perfil/html/perfil.html";
 	}

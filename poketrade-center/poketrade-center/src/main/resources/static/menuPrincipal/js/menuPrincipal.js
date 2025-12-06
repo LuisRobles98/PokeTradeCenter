@@ -68,6 +68,9 @@ $(document).ready(async function() {
 	$("#misBarajasApp").click(function() {
     	cambiarAplicacion.misBarajas();
     });
+	$("#barajasPublicasApp").click(function() {
+    	cambiarAplicacion.barajasPublicas();
+    });
 	$("#perfilApp").click(function() {
     	cambiarAplicacion.perfil();
     });

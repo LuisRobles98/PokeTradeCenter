@@ -2,12 +2,14 @@ $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
 	let barajaSeleccionada = null;
+	let ordenSeleccionado = null;
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
 		$("#inputNombreBaraja").val("");
 		barajaSeleccionada = null;
+		ordenSeleccionado = null;
 		initTabla();
 	}
 	
@@ -19,11 +21,15 @@ $(document).ready(function() {
 			let portada = {};
 			let primeraCarta = baraja.cartas.split(";")[0];
 			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
-			let carta = await recuperarCarta(expansionId,cartaJuegoId);
+			//let carta = await recuperarCarta(expansionId,cartaJuegoId);
+			let carta = {};
+			carta.energiaId = 1;
+			
 			portada.barajaId = baraja.id;
 			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
 			portada.imgFondo = `/imagenes/fondos/fondo${carta.energiaId}.png`;
 			portada.nombre = baraja.nombre;
+			portada.meGusta = baraja.meGusta;
 			portadas.push(portada);
 		};
 		
@@ -42,11 +48,12 @@ $(document).ready(function() {
 						 let imgPortada = portada ? portada.imgPortada : "";
                     	 let imgFondo = portada ? portada.imgFondo : "";
                     	 let nombre = portada ? portada.nombre : "";
+                    	 let meGusta = portada ? portada.meGusta : 0;
 						 					
 	 					 return `<div class="tablaCell">
 	 					 			<img class="fondo" src="${imgFondo}">
 	                        		<img class="portada" src="${imgPortada}">
-	                        		<span>${nombre}</span>
+	                        		<span>${nombre}<i class="fa-regular fa-heart" style="color:red; margin-left: 20px;"></i>           ${meGusta}</span>
 	                    		</div>`;
 					}
 				}
@@ -78,7 +85,20 @@ $(document).ready(function() {
 		let criterios = {};
 		criterios.nombre = $("#inputNombreBaraja").val();
 		criterios.usuarioId = usuario.id;
-		let barajas = await recuperarBarajasUsuario(criterios);
+		criterios.orden = ordenSeleccionado != null ? ordenSeleccionado : "";
+		//let barajas = await recuperarBarajasUsuario(criterios);
+		//TODO ELIMINAR DESPUES
+		let barajas = [];
+		let baraja1 = {};
+		let baraja2 = {};
+		let baraja3 = {};
+		baraja1.id = 1; baraja1.creadorId = 14; baraja1.nombre = "Baraja venusaur EX e ivysaur"; baraja1.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja1.meGusta = 0;
+		baraja2.id = 2; baraja2.creadorId = 17; baraja2.nombre = "Baraja venusaur EX e ivysaur"; baraja2.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja2.meGusta = 4;
+		baraja3.id = 3; baraja3.creadorId = 22; baraja3.nombre = "Baraja venusaur EX e ivysaur"; baraja3.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja3.meGusta = 2;
+		barajas.push(baraja1);
+		barajas.push(baraja2);
+		barajas.push(baraja3);
+		
 		return barajas;
 	}
 	
@@ -89,7 +109,11 @@ $(document).ready(function() {
 		} else {
 			let criterios = {};
 			criterios.id = baraja.creadorId;
-			let creador = await recuperarCreador(criterios);
+			//let creador = await recuperarCreador(criterios);
+			let creador = {};
+			creador.nombre = "Prueba";
+			
+			
 			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
 		}
 		let contenedor = document.getElementById("mostrarCartas");
@@ -110,23 +134,22 @@ $(document).ready(function() {
 		$("#confirmar").show();
 	});
 	
-	$("#btnEliminar").click(async function() {
-		await eliminarBaraja();
-		$("#confirmar").hide();
-		limpiarYCargarTabla();
-	});
 	
 	$("#btnCancelar").click(function() {
 		$("#confirmar").hide();
 	});
 	
-	async function eliminarBaraja() {
-		let baraja = {};
-		baraja.id = barajaSeleccionada;
-		baraja.usuarioId = usuario.id
-		await eliminar(baraja);
-		popupErroresOConfirmacion.mostrar("success", "La baraja se ha eliminado correctamente", "");
-		limpiarYCargarTabla();
-	}
+	//funcionalidad botones busqueda
+	$(".botonOrden").click(function() {
+		let valor = $(this).data("id");
+		$(".botonOrden").removeClass("seleccionada");
+		if(ordenSeleccionado === valor) {
+			ordenSeleccionado = null;
+		} else {
+			ordenSeleccionado = valor;
+			$(this).addClass("seleccionada");
+		}
+    	recuperarBarajasPorCriterios();
+	});
 
 });

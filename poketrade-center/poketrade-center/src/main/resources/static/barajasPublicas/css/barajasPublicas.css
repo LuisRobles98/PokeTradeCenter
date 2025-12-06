@@ -15,10 +15,13 @@
     z-index: 3;
 }
 
+.contenidoBuscador {
+	display: flex;
+}
 
 .inputNombreBaraja {
     align-items: center;
-	width: 660px;
+	width: 475px;
     padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
@@ -36,6 +39,37 @@
 .inputNombreBaraja:focus {
 	outline: none;
     border-color: #68768A;
+}
+
+.botonOrden {
+    display: flex;
+    width: 100px;
+    padding: 5px;
+    margin-top: -5px;
+    margin-left: 25px;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.botonOrden:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.botonOrden.seleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+.fuenteNormal {
+	font-weight: 600;
 }
 
 /* -----------------------------------------POPUP TABLA BARAJAS--------------------------------------- */
@@ -129,10 +163,11 @@
 	transform: scale(1.03);
 }
 
-.botonEliminarBaraja {
+.botonMeGusta {
 	position: absolute;
-    left: 436px;
+    left: 350px;
     top: 727px;
+    width: 155px;
     padding: 10px 20px;
     border: 2px solid #007bb5;
     border-radius: 30px;
@@ -146,7 +181,31 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.botonEliminarBaraja:hover {
+.botonMeGusta:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8; 
+}
+
+.botonGuardarBaraja {
+	position: absolute;
+    left: 522px;
+    top: 727px;
+    width: 155px;
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.botonGuardarBaraja:hover {
 	transform: scale(1.03);
 	border: 2px solid #005f87;
 	background-color: #2F65C8; 
@@ -195,7 +254,7 @@
 	color: #68768A;
 }
 
-.botonEliminar {
+.botonGuardar {
     padding: 10px 20px;
     border: 2px solid #007bb5;
     border-radius: 30px;
@@ -209,7 +268,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.botonEliminar:hover {
+.botonGuardar:hover {
 	transform: scale(1.03);
 	border: 2px solid #005f87;
 	background-color: #2F65C8;
@@ -237,4 +296,3 @@
     background-color: #C75C5C;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
-
