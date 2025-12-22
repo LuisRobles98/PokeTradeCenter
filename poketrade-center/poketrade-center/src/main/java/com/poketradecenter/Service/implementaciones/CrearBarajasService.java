@@ -1,6 +1,7 @@
 package com.poketradecenter.Service.implementaciones;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -146,7 +147,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 		}
 		
 		baraja.setNombre(nombreBaraja);
-		baraja.setFechaCreacion(LocalDate.now());
+		baraja.setFechaCreacion(LocalDateTime.now());
 	}
 	
 	private void guardar(Baraja baraja) {

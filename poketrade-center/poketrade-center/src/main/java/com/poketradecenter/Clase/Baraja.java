@@ -1,6 +1,6 @@
 package com.poketradecenter.Clase;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Baraja {
 	private Integer id;
@@ -8,7 +8,7 @@ public class Baraja {
 	private String cartas;
 	private Integer usuarioId;
 	private Integer creadorId;
-	private LocalDate fechaCreacion;
+	private LocalDateTime fechaCreacion;
 	private Integer meGusta;
 	
 	public Integer getId() {return id;}
@@ -26,8 +26,8 @@ public class Baraja {
 	public Integer getCreadorId() {return creadorId;}
 	public void setCreadorId(Integer creadorId) {this.creadorId = creadorId;}
 	
-	public LocalDate getFechaCreacion() {return fechaCreacion;}
-	public void setFechaCreacion(LocalDate fechaCreacion) {this.fechaCreacion = fechaCreacion;}
+	public LocalDateTime getFechaCreacion() {return fechaCreacion;}
+	public void setFechaCreacion(LocalDateTime localDateTime) {this.fechaCreacion = localDateTime;}
 	
 	public Integer getMeGusta() {return meGusta;}
 	public void setMeGusta(Integer meGusta) {this.meGusta = meGusta;}

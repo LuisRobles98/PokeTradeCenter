@@ -2,12 +2,14 @@ $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
 	let barajaSeleccionada = null;
+	let ordenSeleccionado = null;
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
 		$("#inputNombreBaraja").val("");
 		barajaSeleccionada = null;
+		ordenSeleccionado = null;
 		initTabla();
 	}
 	
@@ -58,9 +60,24 @@ $(document).ready(function() {
 	    	mostrarBaraja(row.getData());
 		});
 		
+		//busqueda por nombre de baraja
 		$("#inputNombreBaraja").on("input", async function() {
     		let barajas = await recuperarBarajasPorCriterios();
     		tablaBarajas.replaceData(barajas); // actualiza la tabla
+		});
+		
+		//funcionalidad botones busqueda(ordenación por fechas)
+		$(".botonOrden").click(async function() {
+			let valor = $(this).data("id");
+			$(".botonOrden").removeClass("seleccionada");
+			if(ordenSeleccionado === valor) {
+				ordenSeleccionado = null;
+			} else {
+				ordenSeleccionado = valor;
+				$(this).addClass("seleccionada");
+			}
+	    	let barajas = await recuperarBarajasPorCriterios();
+	    	tablaBarajas.replaceData(barajas); // actualiza la tabla
 		});
 	}
 	
@@ -78,6 +95,7 @@ $(document).ready(function() {
 		let criterios = {};
 		criterios.nombre = $("#inputNombreBaraja").val();
 		criterios.usuarioId = usuario.id;
+		criterios.ordenacion = ordenSeleccionado;
 		let barajas = await recuperarBarajasUsuario(criterios);
 		return barajas;
 	}
@@ -128,5 +146,5 @@ $(document).ready(function() {
 		popupErroresOConfirmacion.mostrar("success", "La baraja se ha eliminado correctamente", "");
 		limpiarYCargarTabla();
 	}
-
+	
 });

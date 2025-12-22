@@ -29,7 +29,14 @@
 	            AND usuario_id = #{usuarioId}
 	        </if>
 	    </where>
-	    ORDER BY fecha_creacion DESC;
+		<choose>
+		    <when test="ordenacion != null">
+		        ORDER BY ${ordenacion}
+		    </when>
+		    <otherwise>
+		        ORDER BY fecha_creacion DESC
+		    </otherwise>
+		</choose>
 	</select>
 	
 	 <delete id="eliminarMiBaraja" parameterType="com.poketradecenter.Clase.Baraja">

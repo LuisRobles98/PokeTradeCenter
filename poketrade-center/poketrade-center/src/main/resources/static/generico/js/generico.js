@@ -16,13 +16,13 @@ const popupErroresOConfirmacion = {
                 popup.style.borderRadius = "30px";
             },
             didRender: () => {
-                // ⚡ Evitar que SweetAlert2 mueva el body
+                //Evitar que SweetAlert2 mueva el body
                 document.body.style.position = 'initial';
                 document.body.style.top = '';
                 document.body.style.left = '';
             },
             willClose: () => {
-                // ⚡ restaurar padding si quieres
+                //restaurar padding si quieres
                 document.body.style.paddingRight = '';
             }
         });

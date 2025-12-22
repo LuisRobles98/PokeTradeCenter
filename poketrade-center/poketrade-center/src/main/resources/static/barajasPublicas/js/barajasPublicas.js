@@ -1,50 +1,37 @@
 $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
+	let barajaSeleccionadaCompleta = null;
 	let barajaSeleccionada = null;
 	let ordenSeleccionado = null;
+	let portadasMostrar = [];
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
 		$("#inputNombreBaraja").val("");
+		barajaSeleccionadaCompleta = null
 		barajaSeleccionada = null;
 		ordenSeleccionado = null;
 		initTabla();
 	}
 	
 	async function initTabla() {
-		let barajasRecuperadas = await recuperarBarajasPorCriterios();
-		let portadas = [];
-		
-		for (const baraja of barajasRecuperadas) {
-			let portada = {};
-			let primeraCarta = baraja.cartas.split(";")[0];
-			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
-			//let carta = await recuperarCarta(expansionId,cartaJuegoId);
-			let carta = {};
-			carta.energiaId = 1;
-			
-			portada.barajaId = baraja.id;
-			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
-			portada.imgFondo = `/imagenes/fondos/fondo${carta.energiaId}.png`;
-			portada.nombre = baraja.nombre;
-			portada.meGusta = baraja.meGusta;
-			portadas.push(portada);
-		};
+		let barajasRecuperadas = await recuperarBarajasPorCriterios()
+		await formarPortadas(barajasRecuperadas);
 		
 		const tablaBarajas = new Tabulator("#tablaBarajas", {
 			data: barajasRecuperadas,
 			layout: "fitDataStretch",
 			rowHeight: 140,
-			height:"710px",
+			height:"715px",
 			headerVisible: false,
 			columns : [
 				{
 	     			field: "id",
 	     			formatter: function(cell) {
 						 let d = cell.getRow().getData();
-						 let portada = portadas.find(p => p.barajaId == d.id);
+						 let portada = portadasMostrar.find(p => p.barajaId == d.id);
 						 let imgPortada = portada ? portada.imgPortada : "";
                     	 let imgFondo = portada ? portada.imgFondo : "";
                     	 let nombre = portada ? portada.nombre : "";
@@ -61,14 +48,61 @@ $(document).ready(function() {
 		});
 		
 		tablaBarajas.on("rowClick", function(e, row){
+			barajaSeleccionadaCompleta = row.getData();
 			barajaSeleccionada = row.getData().id;
 	    	mostrarBaraja(row.getData());
 		});
 		
 		$("#inputNombreBaraja").on("input", async function() {
-    		let barajas = await recuperarBarajasPorCriterios();
+			let barajas = await recuperarBarajasPorCriterios();
+    		await formarPortadas(barajas);
     		tablaBarajas.replaceData(barajas); // actualiza la tabla
+    		mostrarBaraja(barajaSeleccionadaCompleta);
 		});
+		
+		//funcionalidad botones busqueda
+		$(".botonOrden").click(async function() {
+			let valor = $(this).data("id");
+			$(".botonOrden").removeClass("seleccionada");
+			if(ordenSeleccionado === valor) {
+				ordenSeleccionado = null;
+			} else {
+				ordenSeleccionado = valor;
+				$(this).addClass("seleccionada");
+			}
+			let barajas = await recuperarBarajasPorCriterios();
+    		await formarPortadas(barajas);
+	    	tablaBarajas.replaceData(barajas);
+	    	mostrarBaraja(barajaSeleccionadaCompleta);
+		});
+		
+		//boton actualizar
+		$("#botonActualizar").click(async function() {
+			let barajas = await recuperarBarajasPorCriterios();
+    		await formarPortadas(barajas);
+			tablaBarajas.replaceData(barajas);
+			mostrarBaraja(barajaSeleccionadaCompleta);
+		});
+	}
+	
+	async function formarPortadas(barajasRecuperadas) {
+		let portadas = [];
+		
+		for (const baraja of barajasRecuperadas) {
+			let portada = {};
+			let primeraCarta = baraja.cartas.split(";")[0];
+			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
+			let carta = await recuperarCarta(expansionId,cartaJuegoId);
+			
+			portada.barajaId = baraja.id;
+			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
+			portada.imgFondo = `/imagenes/fondos/fondo${carta.energiaId}.png`;
+			portada.nombre = baraja.nombre;
+			portada.meGusta = baraja.meGusta;
+			portadas.push(portada);
+		};
+	
+		portadasMostrar = portadas;
 	}
 	
 	async function recuperarCarta(expansionId, cartaJuegoId) {
@@ -84,38 +118,17 @@ $(document).ready(function() {
 	async function recuperarBarajasPorCriterios() {
 		let criterios = {};
 		criterios.nombre = $("#inputNombreBaraja").val();
-		criterios.usuarioId = usuario.id;
-		criterios.orden = ordenSeleccionado != null ? ordenSeleccionado : "";
-		//let barajas = await recuperarBarajasUsuario(criterios);
-		//TODO ELIMINAR DESPUES
-		let barajas = [];
-		let baraja1 = {};
-		let baraja2 = {};
-		let baraja3 = {};
-		baraja1.id = 1; baraja1.creadorId = 14; baraja1.nombre = "Baraja venusaur EX e ivysaur"; baraja1.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja1.meGusta = 0;
-		baraja2.id = 2; baraja2.creadorId = 17; baraja2.nombre = "Baraja venusaur EX e ivysaur"; baraja2.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja2.meGusta = 4;
-		baraja3.id = 3; baraja3.creadorId = 22; baraja3.nombre = "Baraja venusaur EX e ivysaur"; baraja3.cartas = "1,4;1,2;1,1;1,3;1,5;1,10;1,9;1,8;1,6;1,7;1,17;1,18;1,19;1,20;1,25;1,24;1,23;1,22;1,21;1,26;"; baraja3.meGusta = 2;
-		barajas.push(baraja1);
-		barajas.push(baraja2);
-		barajas.push(baraja3);
-		
+		criterios.ordenacion = ordenSeleccionado;
+		let barajas = await recuperarBarajasPublicas(criterios);
 		return barajas;
 	}
 	
 	async function mostrarBaraja(baraja) {
 		$("#popupMostrarBaraja").show();
-		if(baraja.creadorId == null) {
-			$("#textoCreador").text(baraja.nombre + " creada por " + usuario.nombre);
-		} else {
-			let criterios = {};
-			criterios.id = baraja.creadorId;
-			//let creador = await recuperarCreador(criterios);
-			let creador = {};
-			creador.nombre = "Prueba";
-			
-			
-			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
-		}
+		let criterios = {};
+		criterios.id = baraja.creadorId;
+		let creador = await recuperarCreador(criterios);
+		$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
 		let contenedor = document.getElementById("mostrarCartas");
 		contenedor.innerHTML = "";
 		let cartas = baraja.cartas.split(";");
@@ -129,27 +142,62 @@ $(document).ready(function() {
 		});
     	contenedor.scrollTo({ top: 0, behavior: "smooth" });
 	}
-	
-	$("#botonEliminarBaraja").click(function() {
-		$("#confirmar").show();
+		
+	$("#btnMeGusta").click(function() {
+		$("#confirmarDarMeGusta").show();
 	});
 	
+	$("#btnGuardarBaraja").click(function() {
+		$("#confirmarGuardar").show();
+	});
 	
 	$("#btnCancelar").click(function() {
-		$("#confirmar").hide();
+		$("#confirmarDarMeGusta").hide();
 	});
 	
-	//funcionalidad botones busqueda
-	$(".botonOrden").click(function() {
-		let valor = $(this).data("id");
-		$(".botonOrden").removeClass("seleccionada");
-		if(ordenSeleccionado === valor) {
-			ordenSeleccionado = null;
-		} else {
-			ordenSeleccionado = valor;
-			$(this).addClass("seleccionada");
-		}
-    	recuperarBarajasPorCriterios();
+	$("#btnCancelarGuardar").click(function() {
+		$("#confirmarGuardar").hide();
 	});
-
+	
+	$("#btnLike").click(async function() {
+		if(! await comprobarSiLike()) {
+			await darLike();
+			popupErroresOConfirmacion.mostrar("success", "Se ha dado like a la baraja correctamente", "");
+			$("#botonActualizar").click();
+		} else {
+			popupErroresOConfirmacion.mostrar("error", "Ya has dado like a esta baraja", "");
+			mostrarBaraja(barajaSeleccionadaCompleta);
+		}
+		
+		$("#confirmarDarMeGusta").hide();
+	});
+	
+	$("#btnGuardar").click(async function() {
+		await guardarBaraja();
+		popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+		$("#botonActualizar").click();
+		$("#confirmarGuardar").hide();
+	});
+	
+	async function comprobarSiLike() {
+		let criterios = {};
+		criterios.usuarioId = usuario.id;
+		criterios.barajaId = barajaSeleccionada;
+		return await comprobarSiLikeABaraja(criterios);
+	}
+	
+	async function darLike() {
+		let criterios = {};
+		criterios.usuarioId = usuario.id;
+		criterios.barajaId = barajaSeleccionada;
+		await darLikeABaraja(criterios);
+	}
+	
+	async function guardarBaraja() {
+		let criterios = {};
+		criterios.usuarioId = usuario.id;
+		criterios.barajaId = barajaSeleccionada;
+		await guardarBarajaPublica(criterios);
+	}
+	
 });

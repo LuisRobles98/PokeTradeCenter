@@ -21,7 +21,7 @@
 
 .inputNombreBaraja {
     align-items: center;
-	width: 475px;
+	width: 400px;
     padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
@@ -70,6 +70,12 @@
 
 .fuenteNormal {
 	font-weight: 600;
+}
+
+.actualizar {
+	display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
 }
 
 /* -----------------------------------------POPUP TABLA BARAJAS--------------------------------------- */
@@ -126,13 +132,31 @@
     color: #68768A;
 }
 
+
+#tablaBarajas {
+	margin-top: 15px;
+    height: calc(95% + 0px);
+    max-height: calc(100% + 0px);
+}
+
+.textoActualizar {
+    display: flex;
+    margin-left: 10px;
+	color: #68768A;
+	margin-top: 8px;
+}
+
+#botonActualizar:hover {
+	animation: fa-spin 2s infinite linear;
+}
+
 /* --------------------------- POPUP MOSTRAR BARAJA ----------------------------------------- */
 .popupMostrarBaraja {
 	display: flex;
     flex-direction: column;
     position: absolute;
     top: 95px;
-    left: 839px;
+    left: 847px;
     height: 724px;
     width: 984px;
     background-color: white;
