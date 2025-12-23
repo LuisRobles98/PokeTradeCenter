@@ -46,7 +46,7 @@ $(document).ready(function() {
 				}
 			]
 		});
-		
+			
 		tablaBarajas.on("rowClick", function(e, row){
 			barajaSeleccionadaCompleta = row.getData();
 			barajaSeleccionada = row.getData().id;
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		$("#inputNombreBaraja").on("input", async function() {
 			let barajas = await recuperarBarajasPorCriterios();
     		await formarPortadas(barajas);
-    		tablaBarajas.replaceData(barajas); // actualiza la tabla
+			await renderizarTabla(tablaBarajas, barajas);
     		mostrarBaraja(barajaSeleccionadaCompleta);
 		});
 		
@@ -72,7 +72,7 @@ $(document).ready(function() {
 			}
 			let barajas = await recuperarBarajasPorCriterios();
     		await formarPortadas(barajas);
-	    	tablaBarajas.replaceData(barajas);
+    		await renderizarTabla(tablaBarajas, barajas);
 	    	mostrarBaraja(barajaSeleccionadaCompleta);
 		});
 		
@@ -80,7 +80,7 @@ $(document).ready(function() {
 		$("#botonActualizar").click(async function() {
 			let barajas = await recuperarBarajasPorCriterios();
     		await formarPortadas(barajas);
-			tablaBarajas.replaceData(barajas);
+			await renderizarTabla(tablaBarajas, barajas);
 			mostrarBaraja(barajaSeleccionadaCompleta);
 		});
 	}
@@ -96,7 +96,8 @@ $(document).ready(function() {
 			
 			portada.barajaId = baraja.id;
 			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
-			portada.imgFondo = `/imagenes/fondos/fondo${carta.energiaId}.png`;
+			let cartaEnergia = carta.energiaId ?? "null";
+			portada.imgFondo = `/imagenes/fondos/fondo${cartaEnergia}.png`;
 			portada.nombre = baraja.nombre;
 			portada.meGusta = baraja.meGusta;
 			portadas.push(portada);
@@ -124,23 +125,25 @@ $(document).ready(function() {
 	}
 	
 	async function mostrarBaraja(baraja) {
-		$("#popupMostrarBaraja").show();
-		let criterios = {};
-		criterios.id = baraja.creadorId;
-		let creador = await recuperarCreador(criterios);
-		$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
-		let contenedor = document.getElementById("mostrarCartas");
-		contenedor.innerHTML = "";
-		let cartas = baraja.cartas.split(";");
-		cartas.pop();//para eliminar el ultimo creado por el split ";"
-		cartas.forEach(carta => {
-			let img = document.createElement("img");
-        	img.classList.add("carta");
-        	let [expansionId, cartaJuegoId] = carta.split(",");
-        	img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	contenedor.appendChild(img);
-		});
-    	contenedor.scrollTo({ top: 0, behavior: "smooth" });
+		if(baraja != null) {
+			$("#popupMostrarBaraja").show();
+			let criterios = {};
+			criterios.id = baraja.creadorId;
+			let creador = await recuperarCreador(criterios);
+			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
+			let contenedor = document.getElementById("mostrarCartas");
+			contenedor.innerHTML = "";
+			let cartas = baraja.cartas.split(";");
+			cartas.pop();//para eliminar el ultimo creado por el split ";"
+			cartas.forEach(carta => {
+				let img = document.createElement("img");
+        		img.classList.add("carta");
+        		let [expansionId, cartaJuegoId] = carta.split(",");
+        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        		contenedor.appendChild(img);
+			});
+    		contenedor.scrollTo({ top: 0, behavior: "smooth" });
+		}
 	}
 		
 	$("#btnMeGusta").click(function() {
@@ -200,4 +203,11 @@ $(document).ready(function() {
 		await guardarBarajaPublica(criterios);
 	}
 	
+	async function renderizarTabla(tablaBarajas, barajas) {
+		tablaBarajas.replaceData(barajas);
+		let rows = tablaBarajas.getRows();
+		if (rows.length > 0) {
+   			rows[0].scrollTo({top: 0, behavior: "smooth"});
+		}
+	}
 });

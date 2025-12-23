@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
+	let barajaSeleccionadaCompleta = null;
 	let barajaSeleccionada = null;
 	let ordenSeleccionado = null;
 	limpiarYCargarTabla();
@@ -8,6 +9,7 @@ $(document).ready(function() {
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
 		$("#inputNombreBaraja").val("");
+		barajaSeleccionadaCompleta = null;
 		barajaSeleccionada = null;
 		ordenSeleccionado = null;
 		initTabla();
@@ -24,7 +26,8 @@ $(document).ready(function() {
 			let carta = await recuperarCarta(expansionId,cartaJuegoId);
 			portada.barajaId = baraja.id;
 			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
-			portada.imgFondo = `/imagenes/fondos/fondo${carta.energiaId}.png`;
+			let cartaEnergia = carta.energiaId ?? "null";
+			portada.imgFondo = `/imagenes/fondos/fondo${cartaEnergia}.png`;
 			portada.nombre = baraja.nombre;
 			portadas.push(portada);
 		};
@@ -56,6 +59,7 @@ $(document).ready(function() {
 		});
 		
 		tablaBarajas.on("rowClick", function(e, row){
+			barajaSeleccionadaCompleta = row.getData();
 			barajaSeleccionada = row.getData().id;
 	    	mostrarBaraja(row.getData());
 		});
@@ -63,7 +67,8 @@ $(document).ready(function() {
 		//busqueda por nombre de baraja
 		$("#inputNombreBaraja").on("input", async function() {
     		let barajas = await recuperarBarajasPorCriterios();
-    		tablaBarajas.replaceData(barajas); // actualiza la tabla
+    		renderizarTabla(tablaBarajas, barajas)
+    		mostrarBaraja(barajaSeleccionadaCompleta);
 		});
 		
 		//funcionalidad botones busqueda(ordenación por fechas)
@@ -77,7 +82,8 @@ $(document).ready(function() {
 				$(this).addClass("seleccionada");
 			}
 	    	let barajas = await recuperarBarajasPorCriterios();
-	    	tablaBarajas.replaceData(barajas); // actualiza la tabla
+	    	renderizarTabla(tablaBarajas, barajas)
+	    	mostrarBaraja(barajaSeleccionadaCompleta);
 		});
 	}
 	
@@ -101,27 +107,29 @@ $(document).ready(function() {
 	}
 	
 	async function mostrarBaraja(baraja) {
-		$("#popupMostrarBaraja").show();
-		if(baraja.creadorId == null) {
-			$("#textoCreador").text(baraja.nombre + " creada por " + usuario.nombre);
-		} else {
-			let criterios = {};
-			criterios.id = baraja.creadorId;
-			let creador = await recuperarCreador(criterios);
-			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
+		if(baraja != null) {
+			$("#popupMostrarBaraja").show();
+			if(baraja.creadorId == null) {
+				$("#textoCreador").text(baraja.nombre + " creada por " + usuario.nombre);
+			} else {
+				let criterios = {};
+				criterios.id = baraja.creadorId;
+				let creador = await recuperarCreador(criterios);
+				$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
+			}
+			let contenedor = document.getElementById("mostrarCartas");
+			contenedor.innerHTML = "";
+			let cartas = baraja.cartas.split(";");
+			cartas.pop();//para eliminar el ultimo creado por el split ";"
+			cartas.forEach(carta => {
+				let img = document.createElement("img");
+	        	img.classList.add("carta");
+	        	let [expansionId, cartaJuegoId] = carta.split(",");
+	        	img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+	        	contenedor.appendChild(img);
+			});
+	    	contenedor.scrollTo({ top: 0, behavior: "smooth" });	
 		}
-		let contenedor = document.getElementById("mostrarCartas");
-		contenedor.innerHTML = "";
-		let cartas = baraja.cartas.split(";");
-		cartas.pop();//para eliminar el ultimo creado por el split ";"
-		cartas.forEach(carta => {
-			let img = document.createElement("img");
-        	img.classList.add("carta");
-        	let [expansionId, cartaJuegoId] = carta.split(",");
-        	img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	contenedor.appendChild(img);
-		});
-    	contenedor.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
 	$("#botonEliminarBaraja").click(function() {
@@ -145,6 +153,14 @@ $(document).ready(function() {
 		await eliminar(baraja);
 		popupErroresOConfirmacion.mostrar("success", "La baraja se ha eliminado correctamente", "");
 		limpiarYCargarTabla();
+	}
+	
+	async function renderizarTabla(tablaBarajas, barajas) {
+		tablaBarajas.replaceData(barajas);
+		let rows = tablaBarajas.getRows();
+		if (rows.length > 0) {
+   			rows[0].scrollTo({top: 0, behavior: "smooth"});
+		}
 	}
 	
 });

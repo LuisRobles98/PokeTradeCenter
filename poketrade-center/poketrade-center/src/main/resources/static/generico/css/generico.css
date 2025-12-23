@@ -300,3 +300,7 @@ body.fondo {
    background-color: transparent !important;
 }
 
+.tabulator .tabulator-tableHolder {
+    scroll-behavior: smooth;
+}
+
