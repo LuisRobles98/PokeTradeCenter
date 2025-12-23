@@ -1,0 +1,419 @@
+/* -------------------------------------------------------------POPUP --------------------------------------------------------------*/
+.popupUsuario {
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+    top: 220px;
+    left: 315px;
+    height: 400px;
+    width: 1200px;
+  	justify-content: space-between;
+    gap: 40px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+   	box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+   	
+   	/*transiciones*/
+   	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+/*---------------------PERFIL USUARIO ---------------------*/
+.perfilUsuario {
+	display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* ------------------------COLUMNA IZQUIERDA  ----------------------------*/
+.labelDatosUsuario {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #68768A;
+    margin-left: 115px;
+}
+
+.datosUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    margin-left: 120px;
+}
+
+.inputsUsuario {
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+    gap: 10px;
+}
+
+.labelDatoUsuario {
+	font-weight: bold;
+    font-size: 1.01em;
+    color: #68768A;
+}
+
+.inputUsuario {
+    display: flex;
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.inputUsuario:hover {
+    border-color: #7A8BA3;
+}
+
+.inputUsuario:focus {
+	outline: none; /* eliminar lo que pone por defecto el navegador */
+    border-color: #68768A;
+}
+
+.cambioPassword {
+	margin-top: 15px;
+	text-decoration:underline;
+}
+
+.cambioPassword:hover {
+  	cursor: pointer;
+  	text-decoration:underline;
+}
+
+/*--------------------COLUMNA DERECHA---------------------------*/
+
+.labelPersonalizacionesUsuario {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #68768A;
+    margin-left: 72px;
+}
+
+.personalizacionUsuario {
+	display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    margin-left: 120px;
+}
+
+.labelIconoUsuario {
+	font-weight: bold;
+    font-size: 1.01em;
+    color: #68768A;
+    margin-left: 156px;
+}
+
+.labelEmblemaUsuario {
+	font-weight: bold;
+    font-size: 1.01em;
+    color: #68768A;
+    margin-left:136px;
+    margin-top: 10px;
+}
+
+.personalizacionIconoUsuario {
+	display: flex;
+    flex-direction: column;
+}
+
+.iconoUsuario {
+    width: 80px;
+    margin-top: 15px;
+    margin-left: 136px;
+    border: 2px solid #8EA0B8;
+    border-radius: 55px;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.iconoUsuario:hover {
+	color: #7A8BA3;
+  	transform: scale(1.03);
+  	cursor: pointer;
+}
+
+.personalizacionEmblemaUsuario {
+	display: flex;
+    flex-direction: column;
+    margin-top: -8px;
+}
+
+.emblemasUsuario {
+	display: flex;
+    flex-direction: row;
+}
+
+.emblemaUsuario {
+    width: 80px;
+    margin-left: 25px;
+    margin-top: 15px;
+    border: 2px solid #8EA0B8;
+    border-radius: 50px;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.emblemaUsuario:hover {
+	color: #7A8BA3;
+  	transform: scale(1.03);
+  	cursor: pointer;
+}
+
+
+
+/*--------------------BOTON---------------------------*/
+
+.botonera {
+	display: flex;
+	justify-content: center;
+}
+
+.botonDatosUsuario {
+	margin-top: -35px;
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+   
+}
+
+.botonDatosUsuario:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8;
+}
+
+
+/*------------------------POPUP ICONOS ------------------------*/
+.iconos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.contenidoIconos {
+    background-color: white;
+    padding: 30px;
+    height: 450px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+.mostrarIconos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    height: 357px;
+    width: 900px;
+    overflow-y: auto;
+    padding: 10px;
+    gap: 20px;
+}
+
+
+.iconoSeleccionado {
+	width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    margin-left: 38px;
+    border: 2px solid #8EA0B8;
+    border-radius: 55px;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.iconoSeleccionado:hover {
+	color: #7A8BA3;
+  	transform: scale(1.03);
+  	cursor: pointer;
+}
+
+.botonPopup {
+	margin-left: 420px !important;
+    margin-top: 30px !important;
+}
+
+/*------------------------POPUP EMBLEMAS ------------------------*/
+
+.emblemas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.contenidoEmblemas {
+    background-color: white;
+    padding: 30px;
+    height: 450px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+.mostrarEmblemas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+    height: 357px;
+    width: 900px;
+    overflow-y: auto;
+    padding: 10px;
+    gap: 20px;
+}
+
+.emblemaSeleccionado {
+	width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    margin-left: 38px;
+    border: 2px solid #8EA0B8;
+    border-radius: 55px;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.emblemaSeleccionado:hover {
+	color: #7A8BA3;
+  	transform: scale(1.03);
+  	cursor: pointer;
+}
+
+/*-----------POPUP PASSWORD--------------*/
+.password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.contenidoPassword {
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 350px;
+}
+
+.inputCambioPassword {
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.inputCambioPassword:hover {
+    border-color: #7A8BA3;
+}
+
+.inputCambioPassword:focus {
+	outline: none; /* eliminar lo que pone por defecto el navegador */
+    border-color: #68768A;
+}
+
+
+.lblCambioPassword {
+	display: block;
+	margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    color: red;
+}
+
+.botoneraCambioPassword {
+	display: flex;
+	justify-content: center;
+	margin-left: -20px;
+}
+
+.botonCambioPassword {
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.botonCambioPassword:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8;
+}
+
+
+.botonCancelar {
+    padding: 10px 20px;
+    margin: 0px 15px;
+    border: 2px solid #B85C5C;
+    border-radius: 30px;
+    background-color: #E07A7A;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.botonCancelar:hover {
+    transform: scale(1.03);
+    border: 2px solid #9C4A4A;
+    background-color: #C75C5C;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}

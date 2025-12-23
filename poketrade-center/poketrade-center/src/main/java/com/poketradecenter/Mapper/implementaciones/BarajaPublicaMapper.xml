@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper">
+ 
+	 <!-- SQL para recuperar las barajas públicas por criterios-->
+	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
+	        resultType="com.poketradecenter.Clase.Baraja">
+	    SELECT id, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion, me_gusta AS meGusta
+	    FROM barajas_publicas
+	    <where>
+   	        <if test="nombre != null">
+	            AND nombre LIKE CONCAT('%', #{nombre}, '%')
+	        </if>
+	        <if test="barajaId != null">
+	            AND id = #{barajaId}
+	        </if>
+	    </where>
+		<choose>
+		    <when test="ordenacion != null">
+		        ORDER BY ${ordenacion}
+		    </when>
+		    <otherwise>
+		        ORDER BY fecha_creacion DESC
+		    </otherwise>
+		</choose>
+	</select>
+	
+	<update id="actualizarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
+	    UPDATE barajas_publicas
+	    SET
+	    creador_id = #{creadorId},
+	    cartas = #{cartas},
+	    fecha_creacion = #{fechaCreacion},
+	    me_gusta = #{meGusta}
+	    WHERE id = #{id}
+	</update>
+	
+</mapper>

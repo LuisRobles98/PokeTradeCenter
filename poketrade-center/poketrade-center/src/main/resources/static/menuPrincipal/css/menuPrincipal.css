@@ -1,22 +1,14 @@
 /* Primera fila de apps (los 4)*/
-.iconosAplicaciones1 {
+.iconosAplicaciones {
     display: grid;
-    grid-template-columns: repeat(4, 160px);
-    justify-content: center;
+    position: absolute;
+    grid-template-columns: repeat(4, 180px);
+    column-gap: 180px;
     row-gap: 100px;
-    column-gap: 120px;
-    margin-top: 250px;
-}
-
-.iconosAplicaciones2 {
-    display: grid;
-    grid-template-columns: repeat(3, 160px);
+    top: 240px;
+    left: 305px;
     justify-content: center;
-    row-gap: 120px;
-    column-gap: 120px;
-    margin-top: 100px;
 }
-
 
 
 .iconoApp {
@@ -29,13 +21,6 @@
 .iconoApp:hover {
 	transform: scale(1.2);
     color: #007bb5;
-}
-
-.iconosAplicaciones {
-    display: flex;
-    justify-content: center;
-    gap: 120px;
-    margin-top: 50px;
 }
 
 .iconoContenedor {
@@ -133,6 +118,7 @@
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s;
+    transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     margin-top: 20px;
 }
@@ -164,26 +150,24 @@
 .imagenApp {
 	width: 80px;
 	/*transiciones*/
-   	transition: transform 0.3s ease;
+   	transition: transform 0.2s ease;
 }
 
 .labelApp {
-    font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
     padding: 10px;
     font-weight: bold;
     font-size: 1.25em;
     text-align: center;
     user-select: none;
-    
-    /*transiciones*/
+    width: 140px;
+    height: 35px;
     transition: color 0.3s ease;
+    transition: transform 0.2s;
+    color: #68768A;
 }
 
 .appMenu:hover {
     transform: scale(1.03); /* aumenta un 5% todo el contenedor */
     box-shadow: 0 1px 40px rgba(0, 0, 0, 0.5)
-}
-
-.appMenu:hover .labelApp {
-    color: #007bb5; /* cambia el color del texto al azul */
 }

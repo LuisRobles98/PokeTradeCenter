@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+	<title>PoketDex</title>
+	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/perfil/css/perfil.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/generico/js/generico.js" defer></script>
+	<script src="/perfil/js/llamadasAjax.js" defer></script>
+	<script src="/perfil/js/perfil.js" defer></script>
+	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="fondo">
+
+	<!-- cargar Barra superior -->
+	<div id="barraContainer"></div>
+	
+	<!-- Popup info cuenta -->
+	<div id="popupUsuario" class="popupUsuario">
+		<div id="perfilUsuario" class="perfilUsuario"">
+			<div id="datosUsuario" class="datosUsuario">
+				<span class="labelDatosUsuario">Datos usuario</span>
+				<div id="inputsUsuario" class="inputsUsuario">
+					<span class="labelDatoUsuario">Nombre de usuario</span>
+					<input id="inputNombreUsuario" class="inputUsuario">
+					<span class="labelDatoUsuario">Id Pokémon TCG Pocket</span>
+					<input id="inputJuegoIdUsuario" class="inputUsuario">
+					<span class="labelDatoUsuario">Correo electronico</span>
+					<input id="inputCorreoUsuario" class="inputUsuario" disabled>
+					<span id="cambioPassword" class="labelDatoUsuario cambioPassword">Cambiar Contraseña</span>
+				</div>
+			</div>
+			<div id="personalizacionUsuario" class="personalizacionUsuario">
+				<span class="labelPersonalizacionesUsuario">Personalización usuario</span>
+				<div class="personalizacionIconoUsuario">
+					<span class="labelIconoUsuario">Icono</span>
+					<img id="iconoUsuario" class="iconoUsuario"/>
+				</div>
+				<div class="personalizacionEmblemaUsuario">
+					<span class="labelEmblemaUsuario">Emblemas</span>
+					<div class="emblemasUsuario">
+						<img id="emblema1Usuario" class="emblemaUsuario"/>
+						<img id="emblema2Usuario" class="emblemaUsuario"/>
+						<img id="emblema3Usuario" class="emblemaUsuario"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="botonera" class="botonera">
+			<button id="btnModificarDatosUsuario" class="botonDatosUsuario">Guardar</button>
+		</div>
+	</div>
+	
+	<div id="iconos" class="iconos" style="display: none;">
+		<div id="contenidoIconos" class="contenidoIconos">
+			<div id="mostrarIconos" class="mostrarIconos"></div>
+			<button id="btnCancelarIcono" class="botonCancelar botonPopup">Cancelar</button>
+		</div>
+	</div>
+	
+	<div id="emblemas" class="emblemas" style="display: none;">
+		<div id="contenidoEmblemas" class="contenidoEmblemas">
+			<div id="mostrarEmblemas" class="mostrarEmblemas"></div>
+			<button id="btnCancelarEmblema" class="botonCancelar botonPopup">Cancelar</button>
+		</div>
+	</div>
+
+	<div id="password" class="password" style="display: none;">
+		<div id="contenidoPassword" class="contenidoPassword">
+			<input id="inputPasswordUsuario" class="inputCambioPassword" type="password" placeholder="Introduzca la nueva contraseña">
+			<input id="inputPasswordUsuarioConfirmacion" class="inputCambioPassword" type="password" placeholder="vuelva a introducir la contraseña">
+			<label for="lblCambioPassword" class="lblCambioPassword">Los cambios se aplicarán al guardar</label>
+			<div id="botonera" class="botoneraCambioPassword">
+				<button id="btnCancelarPassword" class="botonCancelar">Cancelar</button>
+				<button id="btnModificarPassword" class="botonCambioPassword">Modificar</button>
+			</div>
+		</div>
+	</div>
+	
+</body>

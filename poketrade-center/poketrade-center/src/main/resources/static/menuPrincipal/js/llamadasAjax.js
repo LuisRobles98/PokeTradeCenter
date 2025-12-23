@@ -6,7 +6,7 @@ async function actualizarUsuario(usuario) {
         },
         body: JSON.stringify(usuario),
     };
-    fetch('http://localhost:8080/usuario', parameters);
+    await fetch('http://localhost:8080/usuario', parameters);
 };
 
 async function recuperarUsuario(usuario) {

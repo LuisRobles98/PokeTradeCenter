@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -10,25 +11,23 @@ import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CartaUsuario;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
-import com.poketradecenter.Clase.CriteriosUsuario;
-import com.poketradecenter.Clase.Usuario;
-import com.poketradecenter.Service.interfaces.ICartaUsuarioService;
-import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Service.interfaces.ICartaService;
+import com.poketradecenter.Service.interfaces.IColeccionCartasService;
 import com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper;
-import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
 
 @Service
-public class CartaUsuarioService implements ICartaUsuarioService {
+public class ColeccionCartasService implements IColeccionCartasService {
 	
 	@Autowired
 	private ICartaUsuarioMapper cartaUsuarioMapper;
+	@Autowired
+	private ICartaService cartaService;
 	
 
 	@Override
 	public List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criterios) {
 		try {
-			List<CartaUsuario> cartas = cartaUsuarioMapper.recuperarPorCriterios(criterios);
-			return cartas;
+			return cartaUsuarioMapper.recuperarPorCriterios(criterios);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar los datos de las cartas del usuario", e);
 		}
@@ -36,6 +35,27 @@ public class CartaUsuarioService implements ICartaUsuarioService {
 	
 	@Override
 	public void actualizarCarta(CartaUsuario cartaUsuario) {
+		validarActualizarCarta(cartaUsuario);
+		actualizar(cartaUsuario);
+	}
+	
+	private void validarActualizarCarta(CartaUsuario cartaUsuario) {
+		CartaUsuario cartaUsuarioBBDD = recuperarCartaUsuario(cartaUsuario);
+		if(cartaUsuarioBBDD != null && (cartaUsuario.isObtenida() == cartaUsuarioBBDD.isObtenida())) {
+			throw new RuntimeException("El estado de la carta es el mismo que el almacenado en el sistema");
+		}
+	}
+	
+	private CartaUsuario recuperarCartaUsuario(CartaUsuario cartaUsuario) {
+		CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
+		List<Integer> expansiones = new ArrayList<>();
+		expansiones.add(cartaUsuario.getExpansionId());
+		criterios.setExpansiones(expansiones);
+		criterios.setCartaJuegoId(cartaUsuario.getCartaJuegoId());
+		return recuperarCartaUsuarioPorCriterios(criterios).get(0);
+	}
+	
+	private void actualizar(CartaUsuario cartaUsuario) {
 		try {
 			cartaUsuarioMapper.actualizar(cartaUsuario);
 		} catch(RuntimeException e) {
@@ -44,18 +64,29 @@ public class CartaUsuarioService implements ICartaUsuarioService {
 	}
 	
 	@Override
+	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
+		try {
+			return cartaService.recuperarTotalCartasPorExpansion(expansionId);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al recuperar el total de cartas de la expansión", e);
+		}
+	}
+	
+	@Override
 	public CriteriosCartaUsuario crearCriteriosCartaUsuarioParams(Map<String, String> params) {
     	CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
     	   params.forEach((key, value) -> {
     	        switch(key) {
-    	        	case "id":
-    	        		criterios.setId(Integer.parseInt(value));
-    	        		break;
     	            case "usuarioId":
     	                criterios.setUsuarioId(Integer.parseInt(value));
     	                break;
-    	            case "expansionId":
-    	                criterios.setExpansionId(Integer.parseInt(value));
+    	            case "expansiones":
+    	            	List<Integer> expansiones = Arrays.stream(value.split(","))
+            				.map(String::trim)
+            				.filter(s -> !s.isEmpty())
+            				.map(Integer::parseInt)
+            				.collect(Collectors.toList());
+    	                criterios.setExpansiones(expansiones);
     	                break;
     	            case "cartaJuegoId":
     	                criterios.setCartaJuegoId(Integer.parseInt(value));

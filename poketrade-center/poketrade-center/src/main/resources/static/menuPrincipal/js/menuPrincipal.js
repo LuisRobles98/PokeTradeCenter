@@ -3,9 +3,9 @@ $(document).ready(async function() {
 	let usuario = usuarioLogado.recuperar();
 	
     //Mostrar popup de incluir el id del juego del usuario cuando es la primera vez que inicia sesion en la aplicación
-    if(usuario.idJuego == null) {
+    if(usuario.juegoId == null) {
 		limpiarPopupAniadirIdJuego();
-		$("#popupInsertarIdJuego").show();	
+		$("#popupInsertarIdJuego").show();
 	} else {
 		limpiarPopupAniadirIdJuego();
 		$("#popupInsertarIdJuego").hide();
@@ -22,6 +22,7 @@ $(document).ready(async function() {
 			popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
 			cerrarPopupInsertarIdJuego();
 			usuario = await recuperarUsuarioPorId(usuario.id);
+			localStorage.setItem("usuario", JSON.stringify(usuario));
 			barraSuperior.mostrarDatos(usuario);
 		}
     });
@@ -46,7 +47,7 @@ $(document).ready(async function() {
 	async function actualizarIdJuego() {
 		let usuarioActualizar = {};
 		usuarioActualizar.id = usuario.id;
-		usuarioActualizar.idJuego = $("#inputIdJuego").val();
+		usuarioActualizar.juegoId = $("#inputIdJuego").val();
 		await actualizarUsuario(usuarioActualizar);
 	}
 	
@@ -61,5 +62,16 @@ $(document).ready(async function() {
 	$("#coleccionCartasApp").click(function() {
     	cambiarAplicacion.coleccionCartas();
     });
- 
+	$("#crearBarajasApp").click(function() {
+    	cambiarAplicacion.crearBarajas();
+    });
+	$("#misBarajasApp").click(function() {
+    	cambiarAplicacion.misBarajas();
+    });
+	$("#barajasPublicasApp").click(function() {
+    	cambiarAplicacion.barajasPublicas();
+    });
+	$("#perfilApp").click(function() {
+    	cambiarAplicacion.perfil();
+    });
 });

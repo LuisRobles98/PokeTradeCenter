@@ -6,23 +6,23 @@ const popupErroresOConfirmacion = {
         Swal.fire({
             icon: icono,
             title: titulo,
-            html: errores ? `<ul style="text-align: left; margin-left: 20px; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
+            html: errores ? `<ul style="text-align: left; color: #68768A; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
             confirmButtonText: "Aceptar",
-            confirmButtonColor: "#3085d6",
             customClass: {
-                confirmButton: 'swal-confirm-bold'
+				title: 'titlePopupErrorConfirmacion',
+                confirmButton: 'botonAceptar'
             },
             didOpen: (popup) => {
-                popup.style.borderRadius = "30px";          // esquinas redondeadas
+                popup.style.borderRadius = "30px";
             },
             didRender: () => {
-                // ⚡ Evitar que SweetAlert2 mueva el body
+                //Evitar que SweetAlert2 mueva el body
                 document.body.style.position = 'initial';
                 document.body.style.top = '';
                 document.body.style.left = '';
             },
             willClose: () => {
-                // ⚡ restaurar padding si quieres
+                //restaurar padding si quieres
                 document.body.style.paddingRight = '';
             }
         });
@@ -81,9 +81,14 @@ const barraSuperior = {
     },
 
     mostrarDatos: function(usuario) {
-        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.icono + ".png");
+        $("#iconoJuegoBarra").attr("src", "/imagenes/iconos/" + usuario.iconoId + ".png");
+        
         $("#nombreUsuarioBarra").text(usuario.nombre);
-        $("#idUsuarioBarra").text("ID: " + usuario.idJuego);
+        $("#juegoIdUsuarioBarra").text(usuario.juegoId);
+        
+        $("#emblema1Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema1Id + ".png");
+        $("#emblema2Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema2Id + ".png");
+        $("#emblema3Barra").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png");
     }
 };
 
@@ -96,5 +101,17 @@ const cambiarAplicacion = {
 	},
 	coleccionCartas: function() {
 		window.location.href = "/coleccionCartas/html/coleccionCartas.html";
-	}	
+	},
+	crearBarajas: function() {
+		window.location.href = "/crearBarajas/html/crearBarajas.html";
+	},
+	misBarajas: function() {
+		window.location.href = "/misBarajas/html/misBarajas.html";
+	},
+	barajasPublicas: function() {
+		window.location.href = "/barajasPublicas/html/barajasPublicas.html";
+	},
+	perfil: function() {
+		window.location.href = "/perfil/html/perfil.html";
+	}
 };

@@ -4,30 +4,26 @@ import java.util.List;
 
 public class CriteriosCartaUsuario {
 	
-	private Integer id;
 	private Integer usuarioId;
-	private Integer expansionId;
 	private Integer cartaJuegoId;
 	private String nombre;
+	private List<Integer> expansiones;
 	private List<Integer> rarezas;
 	private List<Integer> energias;
 	private List<Integer> tipos;
 	private Boolean obtenida;
 	
-	public Integer getId() {return id;}
-	public void setId(Integer id) {this.id = id;}
-	
 	public Integer getUsuarioId() {return usuarioId;}
 	public void setUsuarioId(Integer usuarioId) {this.usuarioId = usuarioId;}
-	
-	public Integer getExpansionId() {return expansionId;}
-	public void setExpansionId(Integer expansionId) {this.expansionId = expansionId;}
 	
 	public Integer getCartaJuegoId() {return cartaJuegoId;}
 	public void setCartaJuegoId(Integer cartaJuegoId) {this.cartaJuegoId = cartaJuegoId;}
 	
 	public String getNombre() {return nombre;}
 	public void setNombre(String nombre) {this.nombre = nombre;}
+	
+	public List<Integer> getExpansiones() {return expansiones;}
+	public void setExpansiones(List<Integer> expansiones) {this.expansiones = expansiones;}
 	
 	public List<Integer> getRarezas() {return rarezas;}
 	public void setRarezas(List<Integer> rarezas) {this.rarezas = rarezas;}

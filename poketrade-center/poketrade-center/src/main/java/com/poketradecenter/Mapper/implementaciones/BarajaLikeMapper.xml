@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaLikeMapper">
+ 
+	 <!-- SQL para recuperar las barajas que el usuario logado le ha dado like por criterios-->
+	 <select id="recuperarBarajaLikePorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
+	        resultType="com.poketradecenter.Clase.BarajaLike">
+	    SELECT usuario_id AS usuarioId, baraja_id AS barajaId 
+	    FROM barajas_like
+	    <where>
+   	        <if test="usuarioId != null">
+	            AND usuario_id = #{usuarioId}
+	        </if>
+	        <if test="barajaId != null">
+	            AND baraja_id = #{barajaId}
+	        </if>
+	    </where>
+	</select>
+	
+ 	 <!-- SQL para insertar la combinacion usuario baraja al dar like-->
+	 <insert id="crear" parameterType="com.poketradecenter.Clase.BarajaLike">
+	    INSERT INTO barajas_like
+	    (usuario_id, baraja_id)
+	    VALUES (#{usuarioId}, #{barajaId});
+	</insert>
+	
+</mapper>

@@ -1,27 +1,22 @@
 $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
-	let expansionSeleccionada = null;
+	let listaExpansiones = [];
 	let listaRarezas = [];
 	let listaEnergias = [];
 	let listaTipos = [];
 	let obtenida = null;
 	
-	$(".expansionLogo").click(function() {
-		limpiarBuscador();
-		$("#buscadorCartas").show();
-		expansionSeleccionada = $(this).data("id");
-		let imagen = $(this).attr("id");
-		$("#imagenPopupBuscador").attr("src", "/imagenes/expansiones/" + imagen + ".png");
-		cargarCartas();
-	});
+	limpiarBuscador();
+	cargarCartas();
 	
 	function limpiarBuscador() {
-		//quitamos campo expansion
-		expansionSeleccionada = null;
-		
 		//limpiamos input nombre carta
 		$("#inputNombreCarta").val("");
+		
+		//vaciamos lista expansiones y eliminamos campos seleccionados
+		listaExpansiones = [];
+		$(".expansionCarta").removeClass("expansionSeleccionada");
 		
 		//vaciamos lista rarezas y eliminamos campos seleccionados
 		listaRarezas = [];
@@ -39,6 +34,21 @@ $(document).ready(function() {
 	}
 	
 	$("#inputNombreCarta").on("input", function() {
+    	buscarCartasUsuarioPorCriterios();
+	});
+	
+	//funcionalidad click expansiones
+	$(".expansionCarta").click(function() {
+		let id = $(this).data("id");
+		if(listaExpansiones.includes(id)) {
+        	// Quitar fondo gris y quitar de la lista
+        	listaExpansiones = listaExpansiones.filter(e => e != id);
+        	$(this).removeClass("expansionSeleccionada");
+    	} else {
+        	// Agregar fondo gris y añadir en la lista
+        	listaExpansiones.push(id);
+        	$(this).addClass("expansionSeleccionada");
+    	}
     	buscarCartasUsuarioPorCriterios();
 	});
 	
@@ -109,7 +119,7 @@ $(document).ready(function() {
 	async function buscarCartasUsuarioPorCriterios() {
 		let criterios = {};
 		criterios.usuarioId = usuario.id;
-		criterios.expansionId = expansionSeleccionada;
+		criterios.expansiones = listaExpansiones;
 		criterios.nombre = $("#inputNombreCarta").val();
 		criterios.rarezas = listaRarezas;
 		criterios.energias = listaEnergias;
@@ -131,7 +141,8 @@ $(document).ready(function() {
         	let img = document.createElement("img");
         	img.classList.add("carta"); // clase para aplicar CSS
         	img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
-        	img.dataset.id = carta.id;
+        	img.dataset.expansionId = carta.expansionId;
+        	img.dataset.cartaJuegoId = carta.cartaJuegoId;
         	img.dataset.obtenida = carta.obtenida;
         	
 	        if (!carta.obtenida) {
@@ -139,6 +150,7 @@ $(document).ready(function() {
         	}
         	contenedor.appendChild(img);
     	});
+    	contenedor.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
 	function calcularContadores(cartas) {
@@ -173,27 +185,36 @@ $(document).ready(function() {
 	
 	    // Creamos el span con el contador
 	    let span = document.createElement("span");
-	    span.textContent = " - " + contadorObtenida + "/"  + contadorTotal;
+	    span.textContent = contadorObtenida + "/"  + contadorTotal;
 	    contenedor.appendChild(span);
 	}
 	
 	//funcion seleccionar carta
 	$("#mostrarCartas").on("click", ".carta", function() {
 		let carta = {};
-		carta.id = $(this).data("id");
+		carta.expansionId = $(this).data("expansionId");
+		carta.cartaJuegoId = $(this).data("cartaJuegoId");
     	carta.obtenida = $(this).data("obtenida");
     	carta.src = $(this).attr("src");
     	abrirAmpliarCarta(carta);
 	});
 	
 
-function abrirAmpliarCarta(carta) {
+async function abrirAmpliarCarta(carta) {
     // Guardamos los campos importantes
-    $("#cartaSeleccionada").data("id", carta.id);
+    $("#cartaSeleccionada").data("expansion", carta.expansionId);
+    $("#cartaSeleccionada").data("cartaJuegoId", carta.cartaJuegoId);
     $("#cartaSeleccionada").data("obtenida", carta.obtenida);
+    
 
     // Mostramos el popup
     $("#cartaSeleccionada").show();
+    
+    // Actualizamos la expansion de la carta
+     $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
+     
+     //Actualizamos el numero de carta con respecto al total de cartas de la expansion
+     $("#infoNumero").text(carta.cartaJuegoId + "/" + await recuperarTotalCartasExpansionId(carta.expansionId));
 
     // Actualizamos la imagen del popup
     $("#cartaSeleccionadaAmpliada").attr("src", carta.src);
@@ -274,33 +295,47 @@ function abrirAmpliarCarta(carta) {
 
 	async function obtenerCarta(carta) {
 		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido añadir esta carta de la colección", "Ya tienes esta carta");
+			popupErroresOConfirmacion.mostrar("error", "No puedes obtener una carta que ya tienes", "");
 		} else {
-			carta.obtenida = true;
-			await actualizarObtenida(carta);
-			popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección");
-			$("#cartaSeleccionada").hide();
-			buscarCartasUsuarioPorCriterios();
+			try {
+				carta.obtenida = true;
+				await actualizarObtenida(carta);
+				popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección", "");
+				$("#cartaSeleccionada").hide();
+				buscarCartasUsuarioPorCriterios();	
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error.message);
+			}
 		}
 	}
 	
 	async function quitarCarta(carta) {
-				if(!carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No se ha podido quitar esta carta de la colección", "No tienes esta carta");
+		if(!carta.obtenida) {
+			popupErroresOConfirmacion.mostrar("error", "No puedes eliminar una carta que no tienes", "");
 		} else {
-			carta.obtenida = false;
-			await actualizarObtenida(carta);
-			popupErroresOConfirmacion.mostrar("success", "La carta ha sido eliminada de la colección");
-			$("#cartaSeleccionada").hide();
-			buscarCartasUsuarioPorCriterios();
+			try {
+				carta.obtenida = false;
+				await actualizarObtenida(carta);
+				popupErroresOConfirmacion.mostrar("success","La carta ha sido eliminada de la colección", "");
+				$("#cartaSeleccionada").hide();
+				buscarCartasUsuarioPorCriterios();	
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error);
+			}
 		}
 	}
 	
 	async function actualizarObtenida(carta) {
 		let cartaActualizar = {};
-		cartaActualizar.id = carta.id;
+		cartaActualizar.usuarioId = usuario.id;
+		cartaActualizar.expansionId = carta.expansionId;
+		cartaActualizar.cartaJuegoId = carta.cartaJuegoId;
 		cartaActualizar.obtenida = carta.obtenida;
 		await actualizarCarta(cartaActualizar);
+	}
+	
+	async function recuperarTotalCartasExpansionId(expansionId) {
+		 return await recuperarTotalCartasExpansion(expansionId);
 	}
 
 });

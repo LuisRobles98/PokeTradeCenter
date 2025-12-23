@@ -1,0 +1,69 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.ICartaMapper">
+
+	 <!-- SQL para recuperar el total de cartas de una expansion-->
+    <select id="recuperarTotalCartasPorExpansion" parameterType="Integer"  resultType="Integer">
+    	SELECT COUNT(*)
+    	FROM cartas
+    	WHERE expansion_id = #{expansionId}
+	</select>
+	
+	 <!-- SQL para recuperar cartas del buscador de crear barajas -->
+    <select id="recuperarCartasCrearBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosCarta" 
+    resultType="com.poketradecenter.Clase.Carta">
+    	SELECT
+    		expansion_id AS expansionId,
+    		carta_juego_id AS cartaJuegoId,
+    		nombre AS nombre,
+    		rareza_id AS rarezaId,
+    		energia_id AS energiaId,
+    		tipo_id AS tipoId,
+    		basico AS basico
+    	FROM cartas
+    	<where>
+        	<if test="cartaJuegoId != null">
+           	 	AND carta_juego_id = #{cartaJuegoId}
+        	</if>
+        	<if test="nombre != null and nombre != ''">
+           		AND nombre LIKE CONCAT('%', #{nombre}, '%')
+        	</if>
+			<choose>
+    			<when test="rarezas != null and rarezas.size() > 0">
+        			AND rareza_id IN
+        			<foreach collection="rarezas" item="rarezaId" open="(" separator="," close=")">
+            			#{rarezaId}
+        			</foreach>
+    			</when>
+    			<otherwise>
+        			AND rareza_id IN (1, 2, 3, 4, 12)
+    			</otherwise>
+			</choose>
+        	<choose>
+    			<when test="expansiones != null and expansiones.size() > 0">
+        			AND expansion_id IN
+        			<foreach collection="expansiones" item="expansionId" open="(" separator="," close=")">
+            			#{expansionId}
+        			</foreach>
+    			</when>
+    			<otherwise>
+        			AND expansion_id != 11
+    			</otherwise>
+			</choose>
+        	<if test="energias != null and energias.size() > 0">
+            	AND energia_id IN
+            	<foreach collection="energias" item="energiaId" open="(" separator="," close=")">
+                	#{energiaId}
+            	</foreach>
+        	</if>
+        	<if test="tipos != null and tipos.size() > 0">
+            	AND tipo_id IN
+            	<foreach collection="tipos" item="tipoId" open="(" separator="," close=")">
+                	#{tipoId}
+            	</foreach>
+        	</if>
+        	AND (carta_promo_usable_barajas != 0 OR carta_promo_usable_barajas IS NULL)
+    	</where>
+    	ORDER BY expansion_id ASC, carta_juego_id ASC;
+	</select>
+	
+</mapper>
