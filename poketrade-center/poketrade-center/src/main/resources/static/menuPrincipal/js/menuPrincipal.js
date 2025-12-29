@@ -59,6 +59,9 @@ $(document).ready(async function() {
 	}
 	    
     //llamadas a las distintas aplicaciones
+	$("#crearIntercambioApp").click(function() {
+    	cambiarAplicacion.crearIntercambio();
+    });
 	$("#coleccionCartasApp").click(function() {
     	cambiarAplicacion.coleccionCartas();
     });

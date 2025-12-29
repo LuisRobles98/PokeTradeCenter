@@ -1,0 +1,369 @@
+.expansionLogo {
+    width: 116px;
+}
+
+/*----------------------------------------- POPUP LISTADO CARTAS BARAJA ------------------------------------*/
+
+.baraja {
+    display: flex;
+    position: absolute;
+    top: 86px;
+    left: 50px;
+    height: 122px;
+    width: 1800px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.cartasBarajaOfrecer {
+	margin-left: 35px;
+	width: 500px;
+}
+
+.cartasBarajaQuerer {
+	margin-left: 35px;
+	width: 500px;
+}
+
+.cartaBaraja {
+	margin-top: 20px;
+    margin-right: 5px;
+    width: 75px;
+    border-radius: 8px;
+}
+
+.cartaBarajaAniadida {
+	cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cartaBarajaAniadida:hover {
+	transform: scale(1.03);
+}
+
+.boton {
+	margin-top: 42px;
+	margin-left: 5px;
+    width: 200px;
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.boton:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8;
+}
+
+.labelOfrecerCartas {
+	display: flex;
+    position: absolute;
+    top: 82px;
+    left: 408px;
+    z-index: 1;
+}
+
+.labelQuererCartas {
+	display: flex;
+    position: absolute;
+    top: 82px;
+    left: 1166px;
+    z-index: 1;
+}
+
+.tipoIntercambio {
+    display: flex;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.tipoIntercambio:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.tipoIntercambio.tipoSeleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+.labelInfoRojo {
+	display: block;
+	margin-top: 15px;
+	color: red;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+	text-align: center;
+}
+
+.ofrecerQuerer {
+	width: 175px;
+	margin-left: 40px;
+    margin-top: 35px;
+}
+
+/* -----------------------------------------POPUP BUSCADOR CARTAS--------------------------------------- */
+.buscadorCartas {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 245px;
+    left: 50px;
+    height: 606px;
+    max-width: fit-content;
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+/*--------------------------- TODOS LOS LABELS ----------------------*/
+.label {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #68768A;
+}
+
+/* ---------------------------EXPANSIONES BUSCADOR CARTAS------------------------------------------- */
+.selectExpansionCarta {
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+.expansion {
+    display: flex;          /* organiza los hijos en fila */
+    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+	align-items: left;
+    gap: 10px;
+    margin: 5px;
+}
+.expansionCarta {
+    display: flex;
+    padding: 1px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.expansionCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.expansionCarta.expansionSeleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+
+/* ----------------------------------INPUTS BUSCADOR CARTAS---------------------------------------- */
+.inputBuscadorCartas {
+	align-items: center;
+	width: 362px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.inputBuscadorCartas:hover {
+    border-color: #7A8BA3;
+}
+
+.inputBuscadorCartas:focus {
+	outline: none; /* eliminar lo que pone por defecto el navegador */
+    border-color: #68768A;
+}
+
+/* ---------------------------RAREZAS BUSCADOR CARTAS------------------------------------------- */
+.selectRarezasCarta {
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+.rareza {
+    display: flex;          /* organiza los hijos en fila */
+    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+	align-items: left;
+    gap: 10px;
+    margin: 5px;
+}
+.rarezaCarta {
+    display: flex;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    width: 75px;
+    justify-content: center;
+    flex-wrap: nowrap;
+
+}
+
+.rarezaCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.rarezaCarta.rarezaSeleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+
+/* --------------------------- ENERGIAS BUSCADOR CARTAS --------------------------- */
+.selectEnergiasCarta {
+	margin-top: 5px;
+    justify-content: flex-start;
+}
+.energia {
+    display: flex;
+    flex-wrap: wrap;
+	align-items: left;
+    gap: 10px;
+    margin: 5px;
+}
+.energiaCarta {
+    display: flex;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 42px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.energiaCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.energiaCarta.energiaSeleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+/* --------------------------- TIPOS BUSCADOR CARTAS --------------------------- */
+.selectTiposCarta {
+	margin-top: 5px;
+    justify-content: flex-start;
+}
+.tipo {
+    display: flex;
+    flex-wrap: wrap;
+	align-items: left;
+    gap: 12px;
+    margin: 5px;
+}
+.tipoCarta {
+    display: flex;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.tipoCarta:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.tipoCarta.tipoSeleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+/* -------------------------------------------------------------POPUP RESULTADOS CARTAS------------------------------------------------------------ */
+
+/* --------------------------- POPUP ----------------------------------------- */
+.resultadosCartas {
+	display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 245px;
+    left: 600px;
+    height: 606px;
+    width: 1230px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ---------------- CONTENEDOR CARTAS ------------------------- */
+
+.mostrarCartas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-height: 642px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* ---------------- CARTA ------------------------- */
+.carta {
+  width: 225px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+.carta:hover {
+	transform: scale(1.03);
+}
+
+.fuenteNormal {
+	font-weight: 600;
+}
