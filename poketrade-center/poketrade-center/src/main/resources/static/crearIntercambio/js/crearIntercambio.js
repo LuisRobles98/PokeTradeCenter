@@ -44,9 +44,12 @@ $(document).ready(function() {
     	cartasBarajaOfrecer = Array.from({ length: 5 }, () => ({
 			expansionId: 0,
 			cartaJuegoId: 0,
+			rarezaId: 0,
 			nombre: null,
 			basico: null
 		}));
+		listaSeleccionada = null;
+		$(".tipoIntercambio").removeClass("tipoSeleccionada");
     	recargarOfrecer();
 	}
 	
@@ -55,9 +58,12 @@ $(document).ready(function() {
     	cartasBarajaQuerer = Array.from({ length: 5 }, () => ({
 			expansionId: 0,
 			cartaJuegoId: 0,
+			rarezaId: 0,
 			nombre: null,
 			basico: null
 		}));
+		listaSeleccionada = null;
+		$(".tipoIntercambio").removeClass("tipoSeleccionada");
     	recargarQuerer();
 	}
 	
@@ -77,6 +83,7 @@ $(document).ready(function() {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
+    			img.dataset.rarezaId = 0;
     			img.dataset.nombre = null;
     			img.dataset.basico = null;
 			}
@@ -87,7 +94,7 @@ $(document).ready(function() {
 	function recargarQuerer() {
 		let contenedor = document.getElementById("cartasBarajaQuerer");
 		contenedor.innerHTML = "";
-		cartasBarajaOfrecer.forEach((carta, index) => {
+		cartasBarajaQuerer.forEach((carta, index) => {
     		let img = document.createElement("img");
     		img.classList.add("cartaBaraja");
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
@@ -100,6 +107,7 @@ $(document).ready(function() {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
+    			img.dataset.rarezaId = 0;
     			img.dataset.nombre = null;
     			img.dataset.basico = null;
 			}
@@ -108,7 +116,7 @@ $(document).ready(function() {
 	}
 	
 	$("#inputNombreCarta").on("input", function() {
-    	buscarCartasBarajasPorCriterios();
+    	buscarCartasIntercambioPorCriterios();
 	});
 	
 	//funcionalidad click expansiones
@@ -123,7 +131,7 @@ $(document).ready(function() {
         	listaExpansiones.push(id);
         	$(this).addClass("expansionSeleccionada");
     	}
-    	buscarCartasBarajasPorCriterios();
+    	buscarCartasIntercambioPorCriterios();
 	});
 	
 	//funcionalidad click rarezas
@@ -138,7 +146,7 @@ $(document).ready(function() {
         	listaRarezas.push(id);
         	$(this).addClass("rarezaSeleccionada");
     	}
-    	buscarCartasBarajasPorCriterios();
+    	buscarCartasIntercambioPorCriterios();
 	});
 	
 	//funcionalidad click energia
@@ -153,7 +161,7 @@ $(document).ready(function() {
         	listaEnergias.push(id);
         	$(this).addClass("energiaSeleccionada");
     	}
-    	buscarCartasBarajasPorCriterios();
+    	buscarCartasIntercambioPorCriterios();
 	});
 	
 	//funcionalidad click tipo
@@ -168,23 +176,23 @@ $(document).ready(function() {
         	listaTipos.push(id);
         	$(this).addClass("tipoSeleccionada");
     	}
-    	buscarCartasBarajasPorCriterios();
+    	buscarCartasIntercambioPorCriterios();
 	});
 	
 	//cargar cartas
 	function cargarCartas() {
 		$("#resultadosCartas").show();
-		buscarCartasBarajasPorCriterios();
+		buscarCartasIntercambioPorCriterios();
 	}
 	
-	async function buscarCartasBarajasPorCriterios() {
+	async function buscarCartasIntercambioPorCriterios() {
 		let criterios = {};
 		criterios.expansiones = listaExpansiones;
 		criterios.nombre = $("#inputNombreCarta").val();
 		criterios.rarezas = listaRarezas;
 		criterios.energias = listaEnergias;
 		criterios.tipos = listaTipos;
-		let cartas = await recuperarCartasBarajasPorCriterios(criterios);
+		let cartas = await recuperarCartasIntercambioPorCriterios(criterios);
 		mostrarCartas(cartas)
 	}
 	
@@ -198,6 +206,7 @@ $(document).ready(function() {
         	img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
         	img.dataset.expansionId = carta.expansionId;
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
+        	img.dataset.rarezaId = carta.rarezaId;
         	img.dataset.nombre = carta.nombre;
         	img.dataset.basico = carta.basico;
         	contenedor.appendChild(img);
@@ -210,6 +219,7 @@ $(document).ready(function() {
 		let carta = {};
 		carta.expansionId = $(this).data("expansionId");
 		carta.cartaJuegoId = $(this).data("cartaJuegoId");
+		carta.rarezaId = $(this).data("rarezaId");
     	carta.src = $(this).attr("src");
     	carta.nombre = $(this).data("nombre");
     	carta.basico = $(this).data("basico");
@@ -224,6 +234,7 @@ $(document).ready(function() {
 					carta.src = "/imagenes/cartas/" + nuevaCarta.expansionId + "/" + nuevaCarta.cartaJuegoId + ".png";
 					carta.expansionId = nuevaCarta.expansionId;
 	        		carta.cartaJuegoId = nuevaCarta.cartaJuegoId;
+	        		carta.rarezaId = nuevaCarta.rarezaId;
 	        		carta.nombre = nuevaCarta.nombre;
 	        		carta.basico = nuevaCarta.basico;
 	        		carta.posicion = index;
@@ -237,6 +248,7 @@ $(document).ready(function() {
 					carta.src = "/imagenes/cartas/" + nuevaCarta.expansionId + "/" + nuevaCarta.cartaJuegoId + ".png";
 					carta.expansionId = nuevaCarta.expansionId;
 	        		carta.cartaJuegoId = nuevaCarta.cartaJuegoId;
+	        		carta.rarezaId = nuevaCarta.rarezaId;
 	        		carta.nombre = nuevaCarta.nombre;
 	        		carta.basico = nuevaCarta.basico;
 	        		carta.posicion = index;
@@ -246,6 +258,18 @@ $(document).ready(function() {
 			recargarQuerer();
 		}
 	}
+	
+	//funcionalidad click boton ofrecer cartas
+	$(".tipoIntercambio").click(function() {
+		let valor = $(this).data("id");
+		$(".tipoIntercambio").removeClass("tipoSeleccionada");
+		if(listaSeleccionada === valor) {
+			listaSeleccionada = null;
+		} else {
+			listaSeleccionada = valor;
+			$(this).addClass("tipoSeleccionada");
+		}
+	});
 	
 	//funcion eliminar carta de la seccion de ofrecer
 	$("#cartasBarajaOfrecer").on("click", ".cartaBarajaAniadida", function() {
@@ -266,6 +290,7 @@ $(document).ready(function() {
     		cartasBarajaOfrecer.push({
     			expansionId: 0,
     			cartaJuegoId: 0,
+    			rarezaId: 0,
     			nombre: null,
     			basico: null
   			});
@@ -279,38 +304,36 @@ $(document).ready(function() {
     		cartasBarajaQuerer.push({
     			expansionId: 0,
     			cartaJuegoId: 0,
+    			rarezaId: 0,
     			nombre: null,
     			basico: null
   			});
   		}
 		recargarQuerer();
 	}
-	 
-    async function guardarBaraja() {
-		let errores = validarDatos();
-		if(errores != ""){
-			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
-		} else {
-			try {
-				let baraja = construirBaraja();
-				await guardar(baraja);
-				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
-				limpiar();
-			}catch(error) {
-				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
-			}
-		}
-	}
 	
-    async function guardarYPublicarBaraja() {
+	$("#btnPublicarIntercambio").click(function() {
+		$("#confirmar").show();
+	});
+	
+	$("#btnCancelar").click(function() {
+		$("#confirmar").hide();
+	});
+	
+	$("#btnPublicar").click(function() {
+		publicarIntercambio();
+		$("#confirmar").hide();
+	});
+	 
+    async function publicarIntercambio() {
 		let errores = validarDatos();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
-				let baraja = construirBaraja();
-				await guardarPublicar(baraja);
-				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+				let intercambio = construirIntercambio();
+				//await publicar(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha publicad correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
 				limpiar();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
@@ -320,64 +343,126 @@ $(document).ready(function() {
 	
 	function validarDatos() {
 		let errores = "";
-		//validar que hay 20 cartas
+		//validar que hay al menos una carta que ofrezcas
 		let contadorCartas = 0;
-		cartasBaraja.forEach(carta => {
+		cartasBarajaOfrecer.forEach(carta => {
 			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
 				contadorCartas++;
 			}
 		});
-		if(contadorCartas != 20) {
-			errores += "- La baraja debe tener 20 cartas" + "<br>";
+		if(contadorCartas == 0) {
+			errores += "- Tienes que ofrecer al menos una carta" + "<br>";
 		}
 		
-		//validar que no hay una misma carta mas de dos veces
-		let masDeDosCartas = new Set();
-		cartasBaraja.forEach(carta1 => {
+		//validar que hay al menos una carta que quieras
+		contadorCartas = 0;
+		cartasBarajaQuerer.forEach(carta => {
+			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				contadorCartas++;
+			}
+		});
+		if(contadorCartas == 0) {
+			errores += "- Tienes que añadir al menos una carta que quieras" + "<br>";
+		}
+		
+		//validar que no hay una misma carta mas de una vez en ofrecer
+		let cartaRepetidaOfrecer = new Set();
+		cartasBarajaOfrecer.forEach(carta1 => {
 			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
 				let contadorCartas = 0;
 				let nombreCarta = carta1.nombre;
-				cartasBaraja.forEach(carta2 => {
+				cartasBarajaOfrecer.forEach(carta2 => {
 					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
 						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
 							contadorCartas++;
 						}
 					}
 				});
-				if(contadorCartas > 2) {
-					masDeDosCartas.add(nombreCarta);
+				if(contadorCartas > 1) {
+					cartaRepetidaOfrecer.add(nombreCarta);
 				}
 			}
 		});
 		
-		masDeDosCartas.forEach(nombreCarta => {
-			errores += "- La carta " + nombreCarta + " no puede estar más de dos veces" + "<br>";
+		cartaRepetidaOfrecer.forEach(nombreCarta => {
+			errores += "- Has ofrecido la carta de " + nombreCarta + " mas de una vez" + "<br>";
 		});
 		
-		//validar que hay al menos una carta básica
-		let hayCartaBasica = false;
-		cartasBaraja.forEach(carta => {
-			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				if(carta.basico) {
-					hayCartaBasica = true;
+		//validar que no hay una misma carta mas de una vez en querer
+		let cartaRepetidaQuerer = new Set();
+		cartasBarajaQuerer.forEach(carta1 => {
+			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
+				let contadorCartas = 0;
+				let nombreCarta = carta1.nombre;
+				cartaRepetidaQuerer.forEach(carta2 => {
+					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
+						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
+							contadorCartas++;
+						}
+					}
+				});
+				if(contadorCartas > 1) {
+					cartaRepetidaQuerer.add(nombreCarta);
 				}
 			}
 		});
 		
-		if(!hayCartaBasica) {
-			errores += "- La baraja debe tener al menos una carta básica" + "<br>";
-		}
+		cartaRepetidaQuerer.forEach(nombreCarta => {
+			errores += "- Has puesto que quieres la carta de " + nombreCarta + " mas de una vez" + "<br>";
+		});
+		
+		//validar que hay al menos la misma rareza de ofrecer y querer
+		cartasBarajaOfrecer.forEach(carta1 => {
+			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
+				let coincideRareza = false;
+				cartasBarajaQuerer.forEach(carta2 => {
+					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
+						if(carta1.rarezaId == carta2.rarezaId) {
+							coincideRareza = true;
+						}
+					}
+				});
+				if(!coincideRareza) {
+					errores += "- No se ha incluido ninguna carta que quieras que tenga la misma rareza que la carta " + carta1.nombre + "<br>";
+				}
+			}
+		});	
+		cartasBarajaQuerer.forEach(carta1 => {
+			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
+				let coincideRareza = false;
+				cartasBarajaOfrecer.forEach(carta2 => {
+					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
+						if(carta1.rarezaId == carta2.rarezaId) {
+							coincideRareza = true;
+						}
+					}
+				});
+				if(!coincideRareza) {
+					errores += "- No se ha incluido ninguna carta que ofrezcas que tenga la misma rareza que la carta " + carta1.nombre + "<br>";
+				}
+			}
+		});
+
 		return errores;
 	}
 	
-	function construirBaraja() {
-		let baraja = {};
-		baraja.usuarioId = usuario.id;
-		let cartas = "";
-		cartasBaraja.forEach(carta => {
-			 cartas += carta.expansionId + "," + carta.cartaJuegoId + ";";
+	function construirIntercambio() {
+		let intercambio = {};
+		intercambio.creadorId = usuario.id;
+		let cartasOfrecer = "";
+		cartasBarajaOfrecer.forEach(carta => {
+			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				cartasOfrecer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
+			}
 		});
-		baraja.cartas = cartas;
-		return baraja;
+		intercambio.cartasOfrecer = cartasOfrecer;
+		let cartasQuerer = "";
+		cartasBarajaQuerer.forEach(carta => {
+			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				cartasQuerer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
+			}
+		});
+		intercambio.cartasQuerer = cartasQuerer;
+		return intercambio;
 	}
 });
