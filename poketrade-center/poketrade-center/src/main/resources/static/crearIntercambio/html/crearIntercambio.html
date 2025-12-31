@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+	<title>PoketDex</title>
+	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/crearIntercambio/css/crearIntercambio.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/generico/js/generico.js" defer></script>
+	<script src="/crearIntercambio/js/llamadasAjax.js" defer></script>
+	<script src="/crearIntercambio/js/crearIntercambio.js" defer></script>
+	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="fondo">
+
+	<!-- cargar Barra superior -->
+	<div id="barraContainer"></div>
+
+
+	<!-- lista de cartas que serán para hacer la oferta de intercambio -->
+	<span class="label labelOfrecerCartas">Cartas que ofrezco</span>
+	<span class="label labelQuererCartas">Cartas que quiero</span>
+	<div id="baraja" class="baraja">
+		<div id="ofrecer" class="ofrecerQuerer">
+			<div id="seleccionadaOfrecer" class="tipoIntercambio" data-id="true">
+				<span class="fuenteNormal">Ofrecer cartas</span>
+			</div>
+			<span class="labelInfoRojo">Selecciona el botón para poder añadir cartas a la lista</span>
+		</div>
+		<div id="cartasBarajaOfrecer" class="cartasBarajaOfrecer"></div>
+		<div id="querer" class="ofrecerQuerer">
+			<div id="seleccionadaQuerer" class="tipoIntercambio" data-id="false">
+				<span class="fuenteNormal">Querer cartas</span>
+			</div>
+			<span class="labelInfoRojo">Selecciona el botón para poder añadir cartas a la lista</span>
+		</div>
+		<div id="cartasBarajaQuerer" class="cartasBarajaQuerer"></div>
+		<div id="botoneraBaraja" class="botoneraBaraja">
+			<button id="btnPublicarIntercambio" class="boton">Publicar Intercambio</button>
+		</div>
+	</div>
+	
+	<div id="confirmar" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres publicar este intercambio?</span>
+			<div id="botonera" class="botoneraConfirmar">
+				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
+				<button id="btnPublicar" class="botonPublicar">Publicar</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Buscador -->
+	<div id="buscadorCartas">
+		<div class="buscadorCartas">
+			<input id="inputNombreCarta" class="inputBuscadorCartas" placeholder="Nombre de carta">
+			<div id="selectExpansionCarta" class="selectExpansionCarta">
+				<span class="label">Expansiones</span>
+				<div class="expansion">
+					<div id="expansion1carta" class="expansionCarta" data-id="1">
+						<img id="expansionGenesFormidables" src="/imagenes/expansiones/1.png" class="expansionLogo">
+					</div>
+					<div id="expansion2carta" class="expansionCarta" data-id="2">
+						<img id="expansionLaIslaSingular" src="/imagenes/expansiones/2.png" class="expansionLogo">
+					</div>
+					<div id="expansion3carta" class="expansionCarta" data-id="3">
+						<img id="expansionPugnaEspaciotemporal" src="/imagenes/expansiones/3.png" class="expansionLogo">
+					</div>
+				</div>
+				<div class="expansion">
+					<div id="expansion4carta" class="expansionCarta" data-id="4">
+						<img id="expansionLuzTriunfal" src="/imagenes/expansiones/4.png" class="expansionLogo">
+					</div>
+					<div id="expansion5carta" class="expansionCarta" data-id="5">
+						<img id="expansionFestivalBrillante" src="/imagenes/expansiones/5.png" class="expansionLogo">
+					</div>
+					<div id="expansion6carta" class="expansionCarta" data-id="6">
+						<img id="expansionGuardianesCelestiales" src="/imagenes/expansiones/6.png" class="expansionLogo">
+					</div>
+				</div>
+				<div class="expansion">
+					<div id="expansion7carta" class="expansionCarta" data-id="7">
+						<img id="expansionCrisisDimensional" src="/imagenes/expansiones/7.png" class="expansionLogo">
+					</div>
+					<div id="expansion8carta" class="expansionCarta" data-id="8">
+						<img id="expansionArboledaDeEevee" src="/imagenes/expansiones/8.png" class="expansionLogo">
+					</div>
+					<div id="expansion9carta" class="expansionCarta" data-id="9">
+						<img id="expansionSaberMarinoYCeleste" src="/imagenes/expansiones/9.png" class="expansionLogo">
+					</div>
+				</div>
+				<div class="expansion">
+					<div id="expansion10carta" class="expansionCarta" data-id="10">
+						<img id="expansionManantialOculto" src="/imagenes/expansiones/10.png" class="expansionLogo">
+					</div>
+					<div id="expansion11carta" class="expansionCarta" data-id="11">
+						<img id="expansionSobreDeluxeEx" src="/imagenes/expansiones/11.png" class="expansionLogo">
+					</div>
+				</div>
+			</div>
+			<div id="selectRarezaCarta" class="selectRarezasCarta">
+				<span class="label">Rarezas</span>
+				<div class="rareza">
+					<div id="romboX1RarezaCarta" class="rarezaCarta" data-id="1">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX2RarezaCarta" class="rarezaCarta" data-id="2">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX3RarezaCarta" class="rarezaCarta" data-id="3">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+					<div id="romboX4RarezaCarta" class="rarezaCarta" data-id="4">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+						<img src="/imagenes/rarezas/rombo.png">
+					</div>
+				</div>
+				<div class="rareza">
+					<div id="estrellaX1RarezaCarta" class="rarezaCarta" data-id="5">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+					<div id="estrellaX2RarezaCarta" class="rarezaCarta" data-id="6">
+						<img src="/imagenes/rarezas/estrella.png">
+						<img src="/imagenes/rarezas/estrella.png">
+					</div>
+					<div id="estrellaSX1RarezaCarta" class="rarezaCarta" data-id="8">
+						<img src="/imagenes/rarezas/estrellaS.png">
+					</div>
+					<div id="estrellaSX2RarezaCarta" class="rarezaCarta" data-id="9">
+						<img src="/imagenes/rarezas/estrellaS.png">
+						<img src="/imagenes/rarezas/estrellaS.png">
+					</div>
+				</div>
+			</div>
+			<div id="selectEnergiaCarta" class="selectEnergiasCarta">
+				<span class="label">Energías</span>
+				<div class="energia">
+					<div id="plantaEnergiaCarta" class="energiaCarta" data-id="1">
+						<img src="/imagenes/energias/energiaPlanta.png">
+					</div>
+					<div id="fuegoEnergiaCarta" class="energiaCarta" data-id="2">
+						<img src="/imagenes/energias/energiaFuego.png">
+					</div>
+					<div id="aguaEnergiaCarta" class="energiaCarta" data-id="3">
+						<img src="/imagenes/energias/energiaAgua.png">
+					</div>
+					<div id="rayoEnergiaCarta" class="energiaCarta" data-id="4">
+						<img src="/imagenes/energias/energiaRayo.png">
+					</div>
+					<div id="psiquicaEnergiaCarta" class="energiaCarta" data-id="5">
+						<img src="/imagenes/energias/energiaPsiquica.png">
+					</div>
+					<div id="luchaEnergiaCarta" class="energiaCarta" data-id="6">
+						<img src="/imagenes/energias/energiaLucha.png">
+					</div>
+				</div>
+				<div class="energia">
+					<div id="oscuraEnergiaCarta" class="energiaCarta" data-id="7">
+						<img src="/imagenes/energias/energiaOscura.png">
+					</div>
+					<div id="metalicaEnergiaCarta" class="energiaCarta" data-id="8">
+						<img src="/imagenes/energias/energiaMetalica.png">
+					</div>
+					<div id="dragonEnergiaCarta" class="energiaCarta" data-id="9">
+						<img src="/imagenes/energias/energiaDragon.png">
+					</div>
+					<div id="incoloraEnergiaCarta" class="energiaCarta" data-id="10">
+						<img src="/imagenes/energias/energiaIncolora.png">
+					</div>
+				</div>
+			</div>
+			<div id="selectTipoCarta" class="selectTiposCarta">
+				<span class="label">Tipos</span>
+				<div class="tipo">
+					<div id="pokemonTipoCarta" class="tipoCarta" data-id="1">
+						<span class="fuenteNormal">Pokemon</span>
+					</div>
+					<div id="itemTipoCarta" class="tipoCarta" data-id="2">
+						<span class="fuenteNormal">Objeto</span>
+					</div>
+					<div id="partidarioTipoCarta" class="tipoCarta" data-id="3">
+						<span class="fuenteNormal">Partidario</span>
+					</div>
+					<div id="herramientaTipoCarta" class="tipoCarta" data-id="4">
+						<span class="fuenteNormal">Herramienta</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Resultado -->
+	<div id="resultadosCartas">
+		<div class="resultadosCartas">
+			<div id="mostrarCartas" class="mostrarCartas"></div>
+		</div>
+	</div>
+
+</body>

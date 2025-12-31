@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IIntercambioMapper">
+
+    <!-- SQL para publicar un intercambio nuevo-->
+    <insert id="publicarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio">
+        INSERT INTO intercambio_carta
+        (ofertante_id, contraparte_id, cartas_ofrecer, cartas_querer, estado_id, carta_ofrecer_final, carta_querer_final, fecha_creacion, fecha_cambio)
+        VALUES (#{ofertanteId}, #{contraparteId}, #{cartasOfrecer}, #{cartasQuerer}, #{estadoId}, #{cartaOfrecerFinal}, #{cartaQuererFinal}, #{fechaCreacion}, #{fechaCambio})
+    </insert>
+    
+</mapper>

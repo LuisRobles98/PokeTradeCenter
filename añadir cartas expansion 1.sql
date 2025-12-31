@@ -257,4 +257,3 @@ INSERT INTO cartas
 (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
 SELECT 1, 52, "centiskorch", 2, 2, 1, 0, null
 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM cartas WHERE expansion_id = 1 AND carta_juego_id = 52);
-

@@ -99,6 +99,9 @@ const cambiarAplicacion = {
 	menuPrincipal: function() {
 		window.location.href = "/menuPrincipal/html/menuPrincipal.html";
 	},
+	crearIntercambio: function() {
+		window.location.href = "/crearIntercambio/html/crearIntercambio.html";
+	},
 	coleccionCartas: function() {
 		window.location.href = "/coleccionCartas/html/coleccionCartas.html";
 	},
