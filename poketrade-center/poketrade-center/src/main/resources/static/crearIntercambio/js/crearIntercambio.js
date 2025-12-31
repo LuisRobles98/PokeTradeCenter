@@ -332,7 +332,7 @@ $(document).ready(function() {
 		} else {
 			try {
 				let intercambio = construirIntercambio();
-				//await publicar(intercambio);
+				await publicar(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha publicad correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
 				limpiar();
 			}catch(error) {
@@ -448,7 +448,7 @@ $(document).ready(function() {
 	
 	function construirIntercambio() {
 		let intercambio = {};
-		intercambio.creadorId = usuario.id;
+		intercambio.ofertanteId = usuario.id;
 		let cartasOfrecer = "";
 		cartasBarajaOfrecer.forEach(carta => {
 			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
