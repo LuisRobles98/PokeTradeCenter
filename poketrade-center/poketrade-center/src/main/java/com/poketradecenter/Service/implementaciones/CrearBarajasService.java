@@ -28,7 +28,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasPorCriterios(criterios);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
 			criterios.setExpansiones(expansiones);
 			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 			if(cartasBBDD.isEmpty()) {
 				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
 			}
@@ -116,32 +116,40 @@ public class CrearBarajasService implements ICrearBarajasService {
 		expansiones.add(Integer.parseInt(cartaBaraja1[0].trim()));
 		criterios.setExpansiones(expansiones);
 		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja1[1].trim()));
-		Carta primeraCarta = cartaService.recuperarCartasPorCriterios(criterios).get(0);
+		Carta primeraCarta = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
 		
 		expansiones = new ArrayList<>();
 		expansiones.add(Integer.parseInt(cartaBaraja2[0].trim()));
 		criterios.setExpansiones(expansiones);
 		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja2[1].trim()));
-		Carta segundaCarta = cartaService.recuperarCartasPorCriterios(criterios).get(0);
+		Carta segundaCarta = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
 		
 		String nombreBaraja = "Baraja ";
-		if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
-			nombreBaraja += primeraCarta.getNombre() + " EX";
-		} else {
-			nombreBaraja += primeraCarta.getNombre();
-		}
-		
-		if((segundaCarta.getRarezaId() == 4) || (segundaCarta.getExpansionId() == 12)) {
-			if(segundaCarta.getNombre().charAt(0) != 'i') {
-				nombreBaraja += " y " + segundaCarta.getNombre() + " EX";
+		if(primeraCarta.getExpansionId() == segundaCarta.getExpansionId() && primeraCarta.getCartaJuegoId() == segundaCarta.getCartaJuegoId()) {
+			if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
+				nombreBaraja += primeraCarta.getNombre() + " EX";
 			} else {
-				nombreBaraja += " e " + segundaCarta.getNombre() + " EX";
+				nombreBaraja += primeraCarta.getNombre();
 			}
 		} else {
-			if(segundaCarta.getNombre().charAt(0) != 'i') { 
-				nombreBaraja += " y " + segundaCarta.getNombre();
+			if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
+				nombreBaraja += primeraCarta.getNombre() + " EX";
 			} else {
-				nombreBaraja += " e " + segundaCarta.getNombre();
+				nombreBaraja += primeraCarta.getNombre();
+			}
+			
+			if((segundaCarta.getRarezaId() == 4) || (segundaCarta.getExpansionId() == 12)) {
+				if(segundaCarta.getNombre().charAt(0) != 'i') {
+					nombreBaraja += " y " + segundaCarta.getNombre() + " EX";
+				} else {
+					nombreBaraja += " e " + segundaCarta.getNombre() + " EX";
+				}
+			} else {
+				if(segundaCarta.getNombre().charAt(0) != 'i') { 
+					nombreBaraja += " y " + segundaCarta.getNombre();
+				} else {
+					nombreBaraja += " e " + segundaCarta.getNombre();
+				}
 			}
 		}
 		

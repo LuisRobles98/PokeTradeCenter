@@ -51,7 +51,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	
 	@Override
 	public Carta recuperarCartaBarajasPublicas(CriteriosCarta criterios) {	
-		return cartaService.recuperarCartasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
 	}
 	
 	@Override

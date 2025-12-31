@@ -28,7 +28,7 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 	
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasPorCriterios(criterios);
+		return cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
 			criterios.setExpansiones(expansiones);
 			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 			if(cartasBBDD.isEmpty()) {
 				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
 			}
@@ -67,7 +67,7 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
 			criterios.setExpansiones(expansiones);
 			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 			if(cartasBBDD.isEmpty()) {
 				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
 			}

@@ -26,11 +26,20 @@ public class CartaService implements ICartaService {
 	}
 	
 	@Override
-	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
+	public List<Carta> recuperarCartasCrearBarajasPorCriterios(CriteriosCarta criterios) {
 		try {
 			return cartaMapper.recuperarCartasCrearBarajasPorCriterios(criterios);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar cartas durante la creacion de barajas", e);
+		}
+	}
+	
+	@Override
+	public List<Carta> recuperarCartasCrearIntercambioPorCriterios(CriteriosCarta criterios) {
+		try {
+			return cartaMapper.recuperarCartasCrearIntercambioPorCriterios(criterios);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al recuperar cartas durante la creacion de un intercambio", e);
 		}
 	}
 	

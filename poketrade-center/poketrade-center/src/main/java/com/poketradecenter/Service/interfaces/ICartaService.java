@@ -7,5 +7,6 @@ import com.poketradecenter.Clase.CriteriosCarta;
 
 public interface ICartaService {
 	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
-	List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios);
+	List<Carta> recuperarCartasCrearBarajasPorCriterios(CriteriosCarta criterios);
+	List<Carta> recuperarCartasCrearIntercambioPorCriterios(CriteriosCarta criterios);
 }
