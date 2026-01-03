@@ -1,12 +1,12 @@
-/*-----------------------------------POPUP BUSCADOR BARAJAS --------------------------------------*/
-.popupTablaBarajasBuscador {
+/*-----------------------------------POPUP BUSCADOR INTERCAMBIOS --------------------------------------*/
+.popupTablaIntercambiosBuscador {
 	display: flex;
     flex-direction: column;
     position: absolute;
 	top: 95px;
     left: 50px;
     height: 35px;
-    width: 685px;
+    width: 725px;
     background-color: white;
     padding: 30px;
     border-radius: 30px;
@@ -19,9 +19,9 @@
 	display: flex;
 }
 
-.inputNombreBaraja {
+.inputNombreCartaOfrecer {
     align-items: center;
-	width: 400px;
+	width: 200px;
     padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
@@ -32,11 +32,33 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.inputNombreBaraja:hover {
+.inputNombreCartaOfrecer:hover {
     border-color: #7A8BA3;
 }
 
-.inputNombreBaraja:focus {
+.inputNombreCartaOfrecer:focus {
+	outline: none;
+    border-color: #68768A;
+}
+
+.inputNombreCartaQuerer {
+    align-items: center;
+	width: 200px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: -5px;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.inputNombreCartaQuerer:hover {
+    border-color: #7A8BA3;
+}
+
+.inputNombreCartaQuerer:focus {
 	outline: none;
     border-color: #68768A;
 }
@@ -78,15 +100,15 @@
     margin-right: 10px;
 }
 
-/* -----------------------------------------POPUP TABLA BARAJAS--------------------------------------- */
-.popupTablaBarajas {
+/* -----------------------------------------POPUP TABLA INTERCAMBIOS--------------------------------------- */
+.popupTablaIntercambios {
 	display: flex;
     flex-direction: column;
     position: absolute;
     top: 221px;
     left: 50px;
     height: 597px;
-    width: 685px;
+    width: 725px;
     background-color: white;
     padding: 30px;
     border-radius: 30px;
@@ -133,7 +155,7 @@
 }
 
 
-#tablaBarajas {
+#tablaIntercambios {
 	margin-top: 15px;
     height: calc(95% + 0px);
     max-height: calc(100% + 0px);
@@ -153,7 +175,7 @@
 .tabulator-cell {
     left: 15px;
     height: 135px !important;
-    width: 635px !important;
+    width: 690px !important;
     margin-top: 12px;
 }
 

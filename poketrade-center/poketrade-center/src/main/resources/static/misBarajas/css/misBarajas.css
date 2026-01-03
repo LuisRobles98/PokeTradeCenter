@@ -123,6 +123,13 @@
     color: #68768A;
 }
 
+.tabulator-cell {
+    left: 15px;
+    height: 135px !important;
+    width: 635px !important;
+    margin-top: 12px;
+}
+
 /* --------------------------- POPUP MOSTRAR BARAJA ----------------------------------------- */
 .popupMostrarBaraja {
 	display: flex;

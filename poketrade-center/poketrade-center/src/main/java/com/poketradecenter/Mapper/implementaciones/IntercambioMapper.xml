@@ -5,8 +5,39 @@
     <!-- SQL para publicar un intercambio nuevo-->
     <insert id="publicarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio">
         INSERT INTO intercambio_carta
-        (ofertante_id, contraparte_id, cartas_ofrecer, cartas_querer, estado_id, carta_ofrecer_final, carta_querer_final, fecha_creacion, fecha_cambio)
-        VALUES (#{ofertanteId}, #{contraparteId}, #{cartasOfrecer}, #{cartasQuerer}, #{estadoId}, #{cartaOfrecerFinal}, #{cartaQuererFinal}, #{fechaCreacion}, #{fechaCambio})
+        (ofertante_id, contraparte_id, cartas_ofrecer, cartas_querer, cartas_ofrecer_nombre, cartas_querer_nombre, estado_id, 
+        carta_ofrecer_final, carta_querer_final, carta_ofrecer_final_nombre, carta_querer_final_nombre, fecha_creacion, fecha_cambio)
+        VALUES (#{ofertanteId}, #{contraparteId}, #{cartasOfrecer}, #{cartasQuerer}, #{cartasOfrecerNombre}, #{cartasQuererNombre}, #{estadoId}, 
+        #{cartaOfrecerFinal}, #{cartaQuererFinal}, #{cartaOfrecerFinalNombre}, #{cartaQuererFinalNombre}, #{fechaCreacion}, #{fechaCambio})
     </insert>
+    
+    <!-- SQL para recuperar los intercambios públicos por criterios-->
+	 <select id="recuperarIntercambiosPublicosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambiosPublicos"  
+	        resultType="com.poketradecenter.Clase.Intercambio">
+	    SELECT id, ofertante_id AS ofertanteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
+	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre, fecha_creacion AS fechaCreacion
+	    FROM intercambio_carta
+	    <where>
+ 	   	    <if test="usuarioId != null">
+	            AND ofertante_id != #{usuarioId}
+	        </if>
+	    	
+   	        <if test="cartasOfrecerNombre != null">
+	            AND cartas_ofrecer_nombre LIKE CONCAT('%', #{cartasOfrecerNombre}, '%')
+	        </if>
+        	<if test="cartasQuererNombre != null">
+	            AND cartas_querer_nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
+	        </if>
+	        AND estado_id = 1
+	    </where>
+		<choose>
+		    <when test="ordenacion != null">
+		        ORDER BY ${ordenacion}
+		    </when>
+		    <otherwise>
+		        ORDER BY fecha_creacion DESC
+		    </otherwise>
+		</choose>
+	</select>
     
 </mapper>

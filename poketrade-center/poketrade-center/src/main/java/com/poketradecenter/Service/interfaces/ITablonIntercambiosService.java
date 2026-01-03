@@ -1,13 +1,11 @@
-package com.poketradecenter.Mapper.interfaces;
+package com.poketradecenter.Service.interfaces;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
+import java.util.Map;
 
 import com.poketradecenter.Clase.CriteriosIntercambiosPublicos;
 import com.poketradecenter.Clase.Intercambio;
 
-@Mapper
-public interface IIntercambioMapper {
-	void publicarIntercambio(Intercambio intercambio);
+public interface ITablonIntercambiosService {
+	CriteriosIntercambiosPublicos crearCriteriosIntercambiosPublicosParams(Map<String, String> params);
 	List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambiosPublicos criterios);
 }
