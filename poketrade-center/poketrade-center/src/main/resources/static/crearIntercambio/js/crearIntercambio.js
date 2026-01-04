@@ -76,16 +76,16 @@ $(document).ready(function() {
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
 				img.classList.add("cartaBarajaAniadida");
 				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
-				img.dataset.basico = carta.basico;
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
     			img.dataset.rarezaId = 0;
     			img.dataset.nombre = null;
-    			img.dataset.basico = null;
 			}
     		contenedor.appendChild(img);
 		});

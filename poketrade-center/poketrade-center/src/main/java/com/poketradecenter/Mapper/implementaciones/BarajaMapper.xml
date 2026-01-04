@@ -19,7 +19,7 @@
 	       <!-- SQL para recuperar mis barajas por criterios-->
 	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosMisBarajas"  
 	        resultType="com.poketradecenter.Clase.Baraja">
-	    SELECT id, usuario_id, creador_id, nombre, cartas, fecha_creacion
+	    SELECT id, usuario_id AS usuarioId, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion
 	    FROM barajas_usuario
 	    <where>
    	        <if test="nombre != null">

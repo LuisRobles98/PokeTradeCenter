@@ -1,19 +1,27 @@
 $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
-	let barajaSeleccionadaCompleta = null;
-	let barajaSeleccionada = null;
 	let ordenSeleccionado = null;
 	let portadasMostrar = [];
+	let cartaQuieroSeleccionada = [];
+	let cartaOfrezcoSeleccionada = [];
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
 		$("#inputNombreCartaOfrecer").val("");
 		$("#inputNombreCartaQuerer").val("");
-		barajaSeleccionadaCompleta = null
-		barajaSeleccionada = null;
 		ordenSeleccionado = null;
+		cartaQuieroSeleccionada = Array.from({ length: 1 }, () => ({
+			expansionId: 0,
+			cartaJuegoId: 0
+		}));
+		recargarOfrecer();
+		cartaOfrezcoSeleccionada = Array.from({ length: 1 }, () => ({
+			expansionId: 0,
+			cartaJuegoId: 0
+		}));
+		//recargarQuerer();
 		initTabla();
 	}
 	
@@ -32,17 +40,19 @@ $(document).ready(function() {
 	     			field: "id",
 	     			formatter: function(cell) {
 						 let d = cell.getRow().getData();
-						 let portada = portadasMostrar.find(p => p.barajaId == d.id);
-						 let imgPortada = portada ? portada.imgPortada : "";
-                    	 let imgFondo = portada ? portada.imgFondo : "";
-                    	 let nombre = portada ? portada.nombre : "";
-                    	 let meGusta = portada ? portada.meGusta : 0;
+						 let portada = portadasMostrar.find(p => p.intercambioId == d.id);
+						 let imgPortadaOfrecer = portada ? portada.imgPortadaOfrecer : "";
+						 let imgPortadaQuerer = portada ? portada.imgPortadaQuerer : "";
 						 					
 	 					 return `<div class="tablaCell">
-	 					 			<img class="fondo" src="${imgFondo}">
-	                        		<img class="portada" src="${imgPortada}">
-	                        		<span>${nombre}<i class="fa-regular fa-heart" style="color:red; margin-left: 20px;"></i>           ${meGusta}</span>
-	                    		</div>`;
+	                        		<div class="abanicoOfrecer-${portada.imgPortadaOfrecer.length}">
+                    					${portada.imgPortadaOfrecer.map(img => `<img src="${img}" class="portada">`).join("")}
+                					</div>
+                					<i class="fa-solid fa-arrow-right-arrow-left iconoIntercambioPortada"></i>
+	                    			<div class="abanicoQuerer-${portada.imgPortadaQuerer.length}">
+                    					${portada.imgPortadaQuerer.map(img => `<img src="${img}" class="portada">`).join("")}
+                					</div>
+            					</div>`;
 					}
 				}
 			]
@@ -51,14 +61,14 @@ $(document).ready(function() {
 		tablaIntercambios.on("rowClick", function(e, row){
 			barajaSeleccionadaCompleta = row.getData();
 			barajaSeleccionada = row.getData().id;
-	    	mostrarBaraja(row.getData());
+	    	mostrarIntercambio(row.getData());
 		});
 		
 		$("#inputNombreCartaOfrecer").on("input", async function() {
 			let barajas = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(barajas);
 			await renderizarTabla(tablaIntercambios, barajas);
-    		mostrarBaraja(barajaSeleccionadaCompleta);
+    		mostrarIntercambio(barajaSeleccionadaCompleta);
 		});
 		
 		//funcionalidad botones busqueda
@@ -74,7 +84,7 @@ $(document).ready(function() {
 			let barajas = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(barajas);
     		await renderizarTabla(tablaIntercambios, barajas);
-	    	mostrarBaraja(barajaSeleccionadaCompleta);
+	    	mostrarIntercambio(barajaSeleccionadaCompleta);
 		});
 		
 		//boton actualizar
@@ -82,7 +92,7 @@ $(document).ready(function() {
 			let barajas = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(barajas);
 			await renderizarTabla(tablaIntercambios, barajas);
-			mostrarBaraja(barajaSeleccionadaCompleta);
+			mostrarIntercambio(barajaSeleccionadaCompleta);
 		});
 	}
 	
@@ -92,9 +102,9 @@ $(document).ready(function() {
 		for (const intercambio of intercambiosRecuperadas) {
 			let portada = {};
 			portada.imgPortadaOfrecer = [];
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";").filter(c => c.trim() !== "");;
+			let cartasOfrecer = intercambio.cartasOfrecer.split(";").filter(c => c.trim() !== "");
 			portada.imgPortadaQuerer = [];
-			let cartasQuerer = intercambio.cartasQuerer.split(";").filter(c => c.trim() !== "");;
+			let cartasQuerer = intercambio.cartasQuerer.split(";").filter(c => c.trim() !== "");
 
 			portada.intercambioId = intercambio.id;
 			
@@ -133,33 +143,55 @@ $(document).ready(function() {
 		return intercambios;
 	}
 	
-	async function mostrarBaraja(baraja) {
-		if(baraja != null) {
-			$("#popupMostrarBaraja").show();
-			let criterios = {};
-			criterios.id = baraja.creadorId;
-			let creador = await recuperarCreador(criterios);
-			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
-			let contenedor = document.getElementById("mostrarCartas");
-			contenedor.innerHTML = "";
-			let cartas = baraja.cartas.split(";");
-			cartas.pop();//para eliminar el ultimo creado por el split ";"
-			cartas.forEach(carta => {
+	async function mostrarIntercambio(intercambio) {
+		if(intercambio != null) {
+			$("#popupMostrarIntercambio").show();
+			
+			//let creador = await recuperarCreador();
+			if(intercambio.cartasOfrecer.length == 1) {
+				$("#textoOfrecer").text("" + " ofrece la siguiente carta:");
+			} else {
+				$("#textoOfrecer").text("" + " ofrece una de las siguientes cartas:");	
+			}
+			let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer");
+			contenedorOfrecer.innerHTML = "";
+			let cartasOfrecer = intercambio.cartasOfrecer.split(";").filter(c => c.trim() !== "");
+			contenedorOfrecer.className = "mostrarCartasOfrecer abanicoMostrarOfrecer-" + cartasOfrecer.length;
+			cartasOfrecer.forEach(carta => {
 				let img = document.createElement("img");
         		img.classList.add("carta");
         		let [expansionId, cartaJuegoId] = carta.split(",");
         		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        		contenedor.appendChild(img);
+        		contenedorOfrecer.appendChild(img);
 			});
-    		contenedor.scrollTo({ top: 0, behavior: "smooth" });
+    		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
+    		
+    		if(intercambio.cartasQuerer.length == 1) {
+				$("#textoQuerer").text("A cambio de la siguiente carta:");
+			} else {
+				$("#textoQuerer").text("A cambio de una de las siguientes cartas:");
+			}
+			let contenedorQuerer = document.getElementById("mostrarCartasQuerer");
+			contenedorQuerer.innerHTML = "";
+			let cartasQuerer = intercambio.cartasQuerer.split(";").filter(c => c.trim() !== "");
+			contenedorQuerer.className = "mostrarCartasQuerer abanicoMostrarQuerer-" + cartasQuerer.length;
+			cartasQuerer.forEach(carta => {
+				let img = document.createElement("img");
+        		img.classList.add("carta");
+        		let [expansionId, cartaJuegoId] = carta.split(",");
+        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        		contenedorQuerer.appendChild(img);
+			});
+    		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
+    		
+    		$("#textoQuererYo").text("Me quedo con esta carta:");
+			
+    		$("#textoOfrecerYo").text("Te doy esta carta:");
 		}
 	}
 		
-	$("#btnMeGusta").click(function() {
-		$("#confirmarDarMeGusta").show();
-	});
 	
-	$("#btnGuardarBaraja").click(function() {
+	$("#btnSolicitarIntercambio").click(function() {
 		$("#confirmarGuardar").show();
 	});
 	
@@ -171,19 +203,7 @@ $(document).ready(function() {
 		$("#confirmarGuardar").hide();
 	});
 	
-	$("#btnLike").click(async function() {
-		if(! await comprobarSiLike()) {
-			await darLike();
-			popupErroresOConfirmacion.mostrar("success", "Se ha dado like a la baraja correctamente", "");
-			$("#botonActualizar").click();
-		} else {
-			popupErroresOConfirmacion.mostrar("error", "Ya has dado like a esta baraja", "");
-			mostrarBaraja(barajaSeleccionadaCompleta);
-		}
-		
-		$("#confirmarDarMeGusta").hide();
-	});
-	
+
 	$("#btnGuardar").click(async function() {
 		await guardarBaraja();
 		popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
@@ -191,20 +211,50 @@ $(document).ready(function() {
 		$("#confirmarGuardar").hide();
 	});
 	
-	async function comprobarSiLike() {
-		let criterios = {};
-		criterios.usuarioId = usuario.id;
-		criterios.barajaId = barajaSeleccionada;
-		return await comprobarSiLikeABaraja(criterios);
+	
+	//funcion seleccionar carta quiero
+	$("#mostrarCartasOfrecer").on("click", ".carta", function() {
+    	cartaQuieroSeleccionada = Array.from({ length: 1 }, () => ({
+			expansionId: $(this).data("expansionId"),
+			cartaJuegoId: $(this).data("cartaJuegoId"),
+			src: $(this).attr("src")
+		}));
+		recargarOfrecer();
+	});
+	
+	//funcion seleccionar carta doy
+	$("#mostrarCartasQuerer").on("click", ".carta", function() {
+    	cartaOfrezcoSeleccionada = Array.from({ length: 1 }, () => ({
+			expansionId: $(this).data("expansionId"),
+			cartaJuegoId: $(this).data("cartaJuegoId"),
+			src: $(this).attr("src")
+		}));
+		recargarQuerer();
+	});
+	
+	function recargarOfrecer() {
+		let contenedor = document.getElementById("cartaQuererYo");
+		contenedor.innerHTML = "";
+		cartaQuieroSeleccionada.forEach((carta, index) => {
+    		let img = document.createElement("img");
+    		img.classList.add("cartaIntercambioAniadida");
+    		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				img.classList.add("carta");
+				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
+				img.dataset.posicion = carta.posicion;
+			} else {
+				img.classList.add("carta");
+				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
+				img.dataset.expansionId = 0;
+    			img.dataset.cartaJuegoId = 0;
+			}
+    		contenedor.appendChild(img);
+		});
 	}
 	
-	async function darLike() {
-		let criterios = {};
-		criterios.usuarioId = usuario.id;
-		criterios.barajaId = barajaSeleccionada;
-		await darLikeABaraja(criterios);
-	}
-	
+
 	async function guardarBaraja() {
 		let criterios = {};
 		criterios.usuarioId = usuario.id;

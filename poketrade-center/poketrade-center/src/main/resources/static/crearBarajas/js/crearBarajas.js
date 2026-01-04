@@ -56,6 +56,8 @@ $(document).ready(function() {
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
 				img.classList.add("cartaBarajaAniadida");
 				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
 				img.dataset.basico = carta.basico;
