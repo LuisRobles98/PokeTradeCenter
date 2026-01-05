@@ -33,10 +33,10 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
     	        	case "usuarioId":
     	        		criterios.setUsuarioId(Integer.parseInt(value));
     	        		break;
-    	            case "cartasOfrecerNombre":
+    	            case "nombreOfrecer":
     	                criterios.setCartasOfrecerNombre(value);
     	                break;
-    	            case "cartasQuererNombre":
+    	            case "nombreQuerer":
     	            	criterios.setCartasQuererNombre(value);
     	            	break;
     	            case "ordenacion":

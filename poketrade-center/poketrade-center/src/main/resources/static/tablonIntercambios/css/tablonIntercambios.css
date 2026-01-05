@@ -501,52 +501,76 @@
 
 /*1*/
 .abanicoMostrarOfrecer-1 .carta {
-    margin-left: 95px;
+	position: relative;
+    margin-left: 198px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-1 .carta {
-    margin-left: 440px;
-    transform: rotate(-0deg);
+	position: relative;
+    margin-left: 198px;
+    transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
+}
+
+.abanicoMostrarOfrecer-1 .carta:nth-child(1):hover {
+    transform: rotate(0deg) scale(1.03);
+}
+
+.abanicoMostrarQuerer-1 .carta:nth-child(1):hover {
+    transform: rotate(0deg) scale(1.03);
 }
 
 /*2*/
 .abanicoMostrarOfrecer-2 .carta:nth-child(1) {
-    margin-left: 50px;
+	position: relative;
+    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarOfrecer-2 .carta:nth-child(2) {
-    margin-left: 130px;
+	position: relative;
+    margin-left: -30px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-2 .carta:nth-child(1) {
-    margin-left: 400px;
+	position: relative;
+    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-2 .carta:nth-child(2) {
-    margin-left: 480px;
+	position: relative;
+    margin-left: -30px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
+}
+
+.abanicoMostrarOfrecer-2 .carta:nth-child(1):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-2 .carta:nth-child(2):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-2 .carta:nth-child(1):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-2 .carta:nth-child(2):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
 }
 
 /*3*/
 .abanicoMostrarOfrecer-3 .carta:nth-child(1) {
 	position: relative;
-    margin-left: 20px;
+    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -568,7 +592,7 @@
 
 .abanicoMostrarQuerer-3 .carta:nth-child(1) {
 	position: relative;
-    margin-left: 20px;
+    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -615,129 +639,214 @@
 
 /*4*/
 .abanicoMostrarOfrecer-4 .carta:nth-child(1) {
-    margin-left: 5px;
+	position: relative;
+    margin-left: 40px;
     transform: rotate(-6deg);
-    margin-top: -12px;
-    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-4 .carta:nth-child(2) {
-    margin-left: 60px;
+	position: relative;
+	top: -5px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarOfrecer-4 .carta:nth-child(3) {
-    margin-left: 120px;
+	position: relative;
+	top: -5px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarOfrecer-4 .carta:nth-child(4) {
-    margin-left: 180px;
+	position: relative;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -12px;
 }
 
 
 .abanicoMostrarQuerer-4 .carta:nth-child(1) {
-    margin-left: 350px;
+	position: relative;
+    margin-left: 40px;
     transform: rotate(-6deg);
-    margin-top: -12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-4 .carta:nth-child(2) {
-    margin-left: 410px;
+	position: relative;
+	top: -5px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-4 .carta:nth-child(3) {
-    margin-left: 470px;
+	position: relative;
+	top: -5px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-4 .carta:nth-child(4) {
-    margin-left: 530px;
+	position: relative;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -12px;
+}
+
+.abanicoMostrarOfrecer-4 .carta:nth-child(1):hover {
+    transform: rotate(-6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-4 .carta:nth-child(2):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-4 .carta:nth-child(3):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-4 .carta:nth-child(4):hover {
+    transform: rotate(6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-4 .carta:nth-child(1):hover {
+    transform: rotate(-6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-4 .carta:nth-child(2):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-4 .carta:nth-child(3):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-4 .carta:nth-child(4):hover {
+    transform: rotate(6deg) translateY(-30px) scale(1.03);
 }
 
 /*5*/
 .abanicoMostrarOfrecer-5 .carta:nth-child(1) {
-    margin-left: 0px;
+	position: relative;
+    margin-left: 10px;
     transform: rotate(-6deg);
-    margin-top: -12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(2) {
-    margin-left: 44px;
+	position: relative;
+	top: -5px;
+    margin-left: -55px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -15px;
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(3) {
-    margin-left: 95px;
+	position: relative;
+	top: -8px;
+    margin-left: -55px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(4) {
-    margin-left: 142px;
+	position: relative;
+	top: -5px;
+    margin-left: -55px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -15px;
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(5) {
-    margin-left: 197px;
+	position: relative;
+    margin-left: -55px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -12px;
 }
 
 
 .abanicoMostrarQuerer-5 .carta:nth-child(1) {
-    margin-left: 335px;
+	position: relative;
+    margin-left: 10px;
     transform: rotate(-6deg);
-    margin-top: -12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(2) {
-    margin-left: 386px;
+	position: relative;
+	top: -5px;
+    margin-left: -55px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -15px;
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(3) {
-    margin-left: 437px;
+	position: relative;
+	top: -8px;
+    margin-left: -55px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -18px;
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(4) {
-    margin-left: 488px;
+	position: relative;
+	top: -5px;
+    margin-left: -55px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -15px;
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(5) {
-    margin-left: 539px;
+	position: relative;
+    margin-left: -55px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -12px;
+}
+
+.abanicoMostrarOfrecer-5 .carta:nth-child(1):hover {
+    transform: rotate(-6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-5 .carta:nth-child(2):hover {
+    transform: rotate(-3deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-5 .carta:nth-child(3):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-5 .carta:nth-child(4):hover {
+    transform: rotate(3deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarOfrecer-5 .carta:nth-child(5):hover {
+    transform: rotate(6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-5 .carta:nth-child(1):hover {
+    transform: rotate(-6deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-5 .carta:nth-child(2):hover {
+    transform: rotate(-3deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-5 .carta:nth-child(3):hover {
+    transform: rotate(0deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-5 .carta:nth-child(4):hover {
+    transform: rotate(3deg) translateY(-30px) scale(1.03);
+}
+
+.abanicoMostrarQuerer-5 .carta:nth-child(5):hover {
+    transform: rotate(6deg) translateY(-30px) scale(1.03);
 }
 
 
@@ -795,23 +904,47 @@
 
 .cartaOfrecerYo {
 	position: absolute;
-	top: 500px;
+	top: 464px;
 	left: 724px;
+	width: 150px;
+	border-radius: 8px;
 }
 
 .cartaQuererYo {
 	position: absolute;
     top: 106px;
     left: 724px;
+    width: 150px;
+    border-radius: 8px;
 }
-
 
 .cartaIntercambioAniadida {
-	cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
+.cartaIntercambioAniadida:hover {
+	transform: scale(1.03);
+}
+
+.flechaIntercambiarQuererYo {
+    position: absolute;
+    margin-left: 600px;
+    color: #68768A;
+    margin-top: 150px;
+    font-size: 55px;
+}
+
+.flechaIntercambiarOfrecerYo {
+    position: absolute;
+    margin-left: 600px;
+    color: #68768A;
+    margin-top: 505px;
+    font-size: 55px;
+}
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
 

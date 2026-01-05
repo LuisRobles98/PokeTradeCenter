@@ -5,24 +5,34 @@ $(document).ready(function() {
 	let portadasMostrar = [];
 	let cartaQuieroSeleccionada = [];
 	let cartaOfrezcoSeleccionada = [];
+	let intercambioSeleccionadaCompleta = null;
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
-		$("#popupMostrarBaraja").hide();
+		$("#popupMostrarIntercambio").hide();
 		$("#inputNombreCartaOfrecer").val("");
 		$("#inputNombreCartaQuerer").val("");
 		ordenSeleccionado = null;
+		intercambioSeleccionadaCompleta = null;
+		vaciarCartaQuiero();
+		vaciarCartaOfrezco();
+		initTabla();
+	}
+	
+	function vaciarCartaQuiero() {
 		cartaQuieroSeleccionada = Array.from({ length: 1 }, () => ({
 			expansionId: 0,
 			cartaJuegoId: 0
 		}));
 		recargarOfrecer();
+	}
+	
+	function vaciarCartaOfrezco() {
 		cartaOfrezcoSeleccionada = Array.from({ length: 1 }, () => ({
 			expansionId: 0,
 			cartaJuegoId: 0
 		}));
-		//recargarQuerer();
-		initTabla();
+		recargarQuerer();
 	}
 	
 	async function initTabla() {
@@ -59,16 +69,24 @@ $(document).ready(function() {
 		});
 			
 		tablaIntercambios.on("rowClick", function(e, row){
-			barajaSeleccionadaCompleta = row.getData();
-			barajaSeleccionada = row.getData().id;
-	    	mostrarIntercambio(row.getData());
+			intercambioSeleccionadaCompleta = row.getData();
+			vaciarCartaQuiero();
+			vaciarCartaOfrezco();
+			mostrarIntercambio(row.getData());
 		});
 		
 		$("#inputNombreCartaOfrecer").on("input", async function() {
-			let barajas = await recuperarIntercambiosPublicosPorCriterios();
-    		await formarPortadas(barajas);
-			await renderizarTabla(tablaIntercambios, barajas);
-    		mostrarIntercambio(barajaSeleccionadaCompleta);
+			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+    		await formarPortadas(intercambios);
+			await renderizarTabla(tablaIntercambios, intercambios);
+    		mostrarIntercambio(intercambioSeleccionadaCompleta);
+		});
+		
+		$("#inputNombreCartaQuerer").on("input", async function() {
+			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+    		await formarPortadas(intercambios);
+			await renderizarTabla(tablaIntercambios, intercambios);
+    		mostrarIntercambio(intercambioSeleccionadaCompleta);
 		});
 		
 		//funcionalidad botones busqueda
@@ -81,18 +99,18 @@ $(document).ready(function() {
 				ordenSeleccionado = valor;
 				$(this).addClass("seleccionada");
 			}
-			let barajas = await recuperarIntercambiosPublicosPorCriterios();
-    		await formarPortadas(barajas);
-    		await renderizarTabla(tablaIntercambios, barajas);
-	    	mostrarIntercambio(barajaSeleccionadaCompleta);
+			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+    		await formarPortadas(intercambios);
+    		await renderizarTabla(tablaIntercambios, intercambios);
+	    	mostrarIntercambio(intercambioSeleccionadaCompleta);
 		});
 		
 		//boton actualizar
 		$("#botonActualizar").click(async function() {
-			let barajas = await recuperarIntercambiosPublicosPorCriterios();
-    		await formarPortadas(barajas);
-			await renderizarTabla(tablaIntercambios, barajas);
-			mostrarIntercambio(barajaSeleccionadaCompleta);
+			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+    		await formarPortadas(intercambios);
+			await renderizarTabla(tablaIntercambios, intercambios);
+			mostrarIntercambio(intercambioSeleccionadaCompleta);
 		});
 	}
 	
@@ -162,6 +180,8 @@ $(document).ready(function() {
         		img.classList.add("carta");
         		let [expansionId, cartaJuegoId] = carta.split(",");
         		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+	        	img.dataset.expansionId = expansionId;
+        		img.dataset.cartaJuegoId = cartaJuegoId;
         		contenedorOfrecer.appendChild(img);
 			});
     		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
@@ -180,12 +200,13 @@ $(document).ready(function() {
         		img.classList.add("carta");
         		let [expansionId, cartaJuegoId] = carta.split(",");
         		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+	        	img.dataset.expansionId = expansionId;
+        		img.dataset.cartaJuegoId = cartaJuegoId;
         		contenedorQuerer.appendChild(img);
 			});
     		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
     		
     		$("#textoQuererYo").text("Me quedo con esta carta:");
-			
     		$("#textoOfrecerYo").text("Te doy esta carta:");
 		}
 	}
@@ -233,19 +254,18 @@ $(document).ready(function() {
 	});
 	
 	function recargarOfrecer() {
-		let contenedor = document.getElementById("cartaQuererYo");
+		let contenedor = document.getElementById("divCartaQuererYo");
 		contenedor.innerHTML = "";
 		cartaQuieroSeleccionada.forEach((carta, index) => {
     		let img = document.createElement("img");
-    		img.classList.add("cartaIntercambioAniadida");
+    		img.classList.add("cartaQuererYo");
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				img.classList.add("carta");
+				img.classList.add("cartaIntercambioAniadida");
 				img.src = carta.src;
 				img.dataset.expansionId = carta.expansionId;
     			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.posicion = carta.posicion;
 			} else {
-				img.classList.add("carta");
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
@@ -254,11 +274,40 @@ $(document).ready(function() {
 		});
 	}
 	
+	function recargarQuerer() {
+		let contenedor = document.getElementById("divCartaOfrecerYo");
+		contenedor.innerHTML = "";
+		cartaOfrezcoSeleccionada.forEach((carta, index) => {
+    		let img = document.createElement("img");
+    		img.classList.add("cartaOfrecerYo");
+    		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
+				img.classList.add("cartaIntercambioAniadida");
+				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
+				img.dataset.posicion = carta.posicion;
+			} else {
+				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
+				img.dataset.expansionId = 0;
+    			img.dataset.cartaJuegoId = 0;
+			}
+    		contenedor.appendChild(img);
+		});
+	}
+	
+	//funcion eliminar carta que quiero
+	$("#divCartaQuererYo").on("click", ".cartaIntercambioAniadida", function() {
+		vaciarCartaQuiero();
+	});
+	
+	//funcion eliminar carta que ofrezco
+	$("#divCartaOfrecerYo").on("click", ".cartaIntercambioAniadida", function() {
+		vaciarCartaOfrezco();
+	});
 
 	async function guardarBaraja() {
 		let criterios = {};
 		criterios.usuarioId = usuario.id;
-		criterios.barajaId = barajaSeleccionada;
 		await guardarBarajaPublica(criterios);
 	}
 	
