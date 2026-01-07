@@ -134,7 +134,6 @@ $(document).ready(function() {
 			let contenedor = document.getElementById("mostrarCartas");
 			contenedor.innerHTML = "";
 			let cartas = baraja.cartas.split(";");
-			cartas.pop();//para eliminar el ultimo creado por el split ";"
 			cartas.forEach(carta => {
 				let img = document.createElement("img");
         		img.classList.add("carta");

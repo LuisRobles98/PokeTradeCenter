@@ -24,7 +24,7 @@ async function guardar(baraja) {
     }
 };
 
-async function guardarPublicar(baraja) {
+async function publicar(baraja) {
     let parameters = {
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ async function guardarPublicar(baraja) {
         },
         body: JSON.stringify(baraja),
     };
-    let response = await fetch('http://localhost:8080/cartasBarajas/guardarPublicar', parameters);
+    let response = await fetch('http://localhost:8080/cartasBarajas/publicar', parameters);
     if (!response.ok) {
         let msg = await response.text();
         throw new Error(msg || 'Error desconocido del servidor');

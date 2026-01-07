@@ -4,7 +4,7 @@
  
 	 <!-- SQL para recuperar las barajas públicas por criterios-->
 	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
-	        resultType="com.poketradecenter.Clase.Baraja">
+	        resultType="com.poketradecenter.Clase.BarajaPublica">
 	    SELECT id, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion, me_gusta AS meGusta
 	    FROM barajas_publicas
 	    <where>
@@ -25,7 +25,14 @@
 		</choose>
 	</select>
 	
-	<update id="actualizarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
+	<!-- SQL para publicar una baraja creada-->
+    <insert id="publicarBaraja" parameterType="com.poketradecenter.Clase.BarajaPublica">
+        INSERT INTO barajas_publicas
+        (creador_id, nombre, cartas, fecha_creacion, me_gusta)
+        VALUES (#{creadorId}, #{nombre}, #{cartas},#{fechaCreacion}, 0)
+    </insert>
+	
+	<update id="actualizarBaraja" parameterType="com.poketradecenter.Clase.BarajaPublica">
 	    UPDATE barajas_publicas
 	    SET
 	    creador_id = #{creadorId},

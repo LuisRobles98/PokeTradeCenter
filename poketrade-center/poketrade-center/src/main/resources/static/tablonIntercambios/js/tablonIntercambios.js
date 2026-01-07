@@ -120,9 +120,9 @@ $(document).ready(function() {
 		for (const intercambio of intercambiosRecuperadas) {
 			let portada = {};
 			portada.imgPortadaOfrecer = [];
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";").filter(c => c.trim() !== "");
+			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 			portada.imgPortadaQuerer = [];
-			let cartasQuerer = intercambio.cartasQuerer.split(";").filter(c => c.trim() !== "");
+			let cartasQuerer = intercambio.cartasQuerer.split(";");
 
 			portada.intercambioId = intercambio.id;
 			
@@ -173,7 +173,7 @@ $(document).ready(function() {
 			}
 			let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer");
 			contenedorOfrecer.innerHTML = "";
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";").filter(c => c.trim() !== "");
+			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 			contenedorOfrecer.className = "mostrarCartasOfrecer abanicoMostrarOfrecer-" + cartasOfrecer.length;
 			cartasOfrecer.forEach(carta => {
 				let img = document.createElement("img");
@@ -193,7 +193,7 @@ $(document).ready(function() {
 			}
 			let contenedorQuerer = document.getElementById("mostrarCartasQuerer");
 			contenedorQuerer.innerHTML = "";
-			let cartasQuerer = intercambio.cartasQuerer.split(";").filter(c => c.trim() !== "");
+			let cartasQuerer = intercambio.cartasQuerer.split(";")
 			contenedorQuerer.className = "mostrarCartasQuerer abanicoMostrarQuerer-" + cartasQuerer.length;
 			cartasQuerer.forEach(carta => {
 				let img = document.createElement("img");

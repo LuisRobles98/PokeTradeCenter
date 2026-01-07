@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosMisBarajas;
@@ -25,7 +26,7 @@ public class MisBarajasController {
 	private IMisBarajasService misBarajasService;
 
     @GetMapping("/misBarajas")
-    public List<Baraja> recuperarMisBarajasPorCriterios(@RequestParam Map<String, String> params) {
+    public List<BarajaUsuario> recuperarMisBarajasPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosMisBarajas criterios = misBarajasService.crearCriteriosMisBarajasParams(params);
        return misBarajasService.recuperarMisBarajasPorCriterios(criterios);
     }
@@ -37,7 +38,7 @@ public class MisBarajasController {
     }
     
     @DeleteMapping("/misBarajas")
-    public ResponseEntity<?> eliminarMiBaraja(@RequestBody Baraja baraja) {
+    public ResponseEntity<?> eliminarMiBaraja(@RequestBody BarajaUsuario baraja) {
     	try {
     		 misBarajasService.eliminarMiBaraja(baraja);
     		return ResponseEntity.ok().build();

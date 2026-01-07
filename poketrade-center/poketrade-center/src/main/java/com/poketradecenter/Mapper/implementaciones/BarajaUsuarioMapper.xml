@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaMapper">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper">
 
     <!-- SQL para guardar una baraja creada-->
-    <insert id="guardarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
+    <insert id="guardarBaraja" parameterType="com.poketradecenter.Clase.BarajaUsuario">
         INSERT INTO barajas_usuario
         (usuario_id, creador_id, nombre, cartas, fecha_creacion)
         VALUES (#{usuarioId}, #{creadorId}, #{nombre}, #{cartas},#{fechaCreacion})
     </insert>
-    
-        <!-- SQL para publicar una baraja creada-->
-    <insert id="publicarBaraja" parameterType="com.poketradecenter.Clase.Baraja">
-        INSERT INTO barajas_publicas
-        (creador_id, nombre, cartas, fecha_creacion, me_gusta)
-        VALUES (#{creadorId}, #{nombre}, #{cartas},#{fechaCreacion}, 0)
-    </insert>
-    
-	       <!-- SQL para recuperar mis barajas por criterios-->
+        
+	 <!-- SQL para recuperar mis barajas por criterios-->
 	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosMisBarajas"  
-	        resultType="com.poketradecenter.Clase.Baraja">
+	        resultType="com.poketradecenter.Clase.BarajaUsuario">
 	    SELECT id, usuario_id AS usuarioId, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion
 	    FROM barajas_usuario
 	    <where>

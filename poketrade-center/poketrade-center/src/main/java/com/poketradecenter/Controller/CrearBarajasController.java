@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaPublica;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
@@ -28,7 +29,7 @@ public class CrearBarajasController {
     }
     
     @PostMapping("/cartasBarajas/guardar")
-    public ResponseEntity<?> guardarBaraja(@RequestBody Baraja baraja) {
+    public ResponseEntity<?> guardarBaraja(@RequestBody BarajaUsuario baraja) {
     	try {
     		crearBarajasService.guardarBaraja(baraja);
     		return ResponseEntity.ok().build();
@@ -37,10 +38,10 @@ public class CrearBarajasController {
     	}
     }
     
-    @PostMapping("/cartasBarajas/guardarPublicar")
-    public ResponseEntity<?> guardarPublicarBaraja(@RequestBody Baraja baraja) {
+    @PostMapping("/cartasBarajas/publicar")
+    public ResponseEntity<?> publicarBaraja(@RequestBody BarajaPublica baraja) {
     	try {
-    		crearBarajasService.guardarPublicarBaraja(baraja);
+    		crearBarajasService.publicarBaraja(baraja);
     		return ResponseEntity.ok().build();
     	} catch(RuntimeException e) {
     		return ResponseEntity.badRequest().body(e.getMessage());

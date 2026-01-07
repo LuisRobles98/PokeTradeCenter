@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaLike;
+import com.poketradecenter.Clase.BarajaPublica;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 import com.poketradecenter.Clase.CriteriosCarta;
@@ -41,9 +43,10 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	private ICrearBarajasService crearBarajasService;
 	
 	@Override
-	public List<Baraja> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios) {
+	public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios) {
 		try {
-			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			List<BarajaPublica> barajas = barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			return barajas;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar las barajas públicas", e);
 		}
@@ -77,12 +80,12 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	private void darLike(CriteriosBarajasPublicas criterios) {
 		CriteriosBarajasPublicas criteriosBusqueda = new CriteriosBarajasPublicas();
 		criteriosBusqueda.setBarajaId(criterios.getBarajaId());
-		Baraja baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
+		BarajaPublica baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
 		baraja.setMeGusta(baraja.getMeGusta() + 1);
 		actualizarBaraja(baraja);
 	}
 	
-	private void actualizarBaraja(Baraja baraja) {
+	private void actualizarBaraja(BarajaPublica baraja) {
 		try {
 			barajaPublicaMapper.actualizarBaraja(baraja);
 		} catch(RuntimeException e) {
@@ -109,9 +112,10 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	public void guardarBaraja(CriteriosBarajasPublicas criterios) {
 		CriteriosBarajasPublicas criteriosBusqueda = new CriteriosBarajasPublicas();
 		criteriosBusqueda.setBarajaId(criterios.getBarajaId());
-		Baraja baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
-		baraja.setUsuarioId(criterios.getUsuarioId());
-		crearBarajasService.guardarBaraja(baraja);
+		BarajaPublica barajaPublica = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
+		BarajaUsuario barajaUsuario = new BarajaUsuario(barajaPublica); 
+		barajaUsuario.setUsuarioId(criterios.getUsuarioId());
+		crearBarajasService.guardarBaraja(barajaUsuario);
 	}
 	
 	@Override

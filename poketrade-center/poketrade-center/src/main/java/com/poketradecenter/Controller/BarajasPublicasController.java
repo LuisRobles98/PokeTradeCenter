@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 import com.poketradecenter.Clase.CriteriosCarta;
@@ -25,7 +26,7 @@ public class BarajasPublicasController {
 	private IBarajasPublicasService barajasPublicasService;
 
     @GetMapping("/barajasPublicas")
-    public List<Baraja> recuperarBarajasPublicasPorCriterios(@RequestParam Map<String, String> params) {
+    public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosBarajasPublicas criterios = barajasPublicasService.crearCriteriosBarajasPublicasParams(params);
        return barajasPublicasService.recuperarBarajasPublicasPorCriterios(criterios);
     }

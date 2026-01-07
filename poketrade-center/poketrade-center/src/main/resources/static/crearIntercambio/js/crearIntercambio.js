@@ -449,20 +449,14 @@ $(document).ready(function() {
 	function construirIntercambio() {
 		let intercambio = {};
 		intercambio.ofertanteId = usuario.id;
-		let cartasOfrecer = "";
-		cartasBarajaOfrecer.forEach(carta => {
-			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				cartasOfrecer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
-			}
-		});
-		intercambio.cartasOfrecer = cartasOfrecer;
-		let cartasQuerer = "";
-		cartasBarajaQuerer.forEach(carta => {
-			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				cartasQuerer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
-			}
-		});
-		intercambio.cartasQuerer = cartasQuerer;
+		intercambio.cartasOfrecer = cartasBarajaOfrecer
+			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
+			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
+			.join(";")
+		intercambio.cartasQuerer = cartasBarajaQuerer
+			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
+			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
+			.join(";")
 		return intercambio;
 	}
 });

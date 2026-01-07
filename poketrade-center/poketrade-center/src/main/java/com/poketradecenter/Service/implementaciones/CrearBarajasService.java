@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaPublica;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Mapper.interfaces.IBarajaMapper;
+import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
+import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
+import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
 
@@ -23,33 +27,31 @@ public class CrearBarajasService implements ICrearBarajasService {
 	@Autowired
 	private ICartaService cartaService;
 	@Autowired
-	private IBarajaMapper barajaMapper;
-	
-
+	private IBarajaUsuarioMapper barajaUsuarioMapper;
+	@Autowired
+	private IBarajaPublicaMapper barajaPublicaMapper;
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
 		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 	}
 	
 	@Override
-	public void guardarBaraja(Baraja baraja) {
-		validarCartas(baraja);
+	public void guardarBaraja(BarajaUsuario baraja) {
+		validarCartas(baraja.getCartas());
 		construirBaraja(baraja);
 		guardar(baraja);
 	}
 	
 	@Override
-	public void guardarPublicarBaraja(Baraja baraja) {
-		validarCartas(baraja);
+	public void publicarBaraja(BarajaPublica baraja) {
+		validarCartas(baraja.getCartas());
 		construirBaraja(baraja);
-		guardar(baraja);
-		baraja.setCreadorId(baraja.getUsuarioId());
 		publicar(baraja);
 	}
 	
-	private void validarCartas(Baraja baraja) {
+	private void validarCartas(String cartasBarajaGuardarPublicar) {
 		List<Carta> cartas = new ArrayList<>();
-		String[] cartasBaraja = baraja.getCartas().split(";");
+		String[] cartasBaraja = cartasBarajaGuardarPublicar.split(";");
 		
 		for(String carta : cartasBaraja) {
 			String[] cartaBaraja = carta.split(",");
@@ -126,48 +128,29 @@ public class CrearBarajasService implements ICrearBarajasService {
 		
 		String nombreBaraja = "Baraja ";
 		if(primeraCarta.getExpansionId() == segundaCarta.getExpansionId() && primeraCarta.getCartaJuegoId() == segundaCarta.getCartaJuegoId()) {
-			if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
-				nombreBaraja += primeraCarta.getNombre() + " EX";
-			} else {
-				nombreBaraja += primeraCarta.getNombre();
-			}
+			nombreBaraja += primeraCarta.getNombre();
 		} else {
-			if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
-				nombreBaraja += primeraCarta.getNombre() + " EX";
-			} else {
-				nombreBaraja += primeraCarta.getNombre();
-			}
-			
-			if((segundaCarta.getRarezaId() == 4) || (segundaCarta.getExpansionId() == 12)) {
-				if(segundaCarta.getNombre().charAt(0) != 'i') {
-					nombreBaraja += " y " + segundaCarta.getNombre() + " EX";
-				} else {
-					nombreBaraja += " e " + segundaCarta.getNombre() + " EX";
-				}
-			} else {
-				if(segundaCarta.getNombre().charAt(0) != 'i') { 
-					nombreBaraja += " y " + segundaCarta.getNombre();
-				} else {
-					nombreBaraja += " e " + segundaCarta.getNombre();
-				}
-			}
+			nombreBaraja += primeraCarta.getNombre();
+			char inicialSegundaCarta = segundaCarta.getNombre().charAt(0);
+			String conjuncion = (inicialSegundaCarta == 'i') ? " e " : " y ";
+			nombreBaraja += conjuncion + segundaCarta.getNombre();
 		}
-		
 		baraja.setNombre(nombreBaraja);
 		baraja.setFechaCreacion(LocalDateTime.now());
 	}
 	
-	private void guardar(Baraja baraja) {
+	private void guardar(BarajaUsuario baraja) {
 		try {
-			barajaMapper.guardarBaraja(baraja);
+			barajaUsuarioMapper.guardarBaraja(baraja);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al guardar la baraja", e);
 		}
 	}
 	
-	private void publicar(Baraja baraja) {
+
+	private void publicar(BarajaPublica baraja) {
 		try {
-			barajaMapper.publicarBaraja(baraja);
+			barajaPublicaMapper.publicarBaraja(baraja);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al publicar la baraja", e);
 		}
