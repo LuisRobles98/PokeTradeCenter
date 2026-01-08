@@ -333,7 +333,7 @@ $(document).ready(function() {
 			try {
 				let intercambio = construirIntercambio();
 				await publicar(intercambio);
-				popupErroresOConfirmacion.mostrar("success", "Se ha publicad correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
+				popupErroresOConfirmacion.mostrar("success", "Se ha publicado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
 				limpiar();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);

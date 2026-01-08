@@ -10,4 +10,5 @@ import com.poketradecenter.Clase.Intercambio;
 public interface IIntercambioMapper {
 	void publicarIntercambio(Intercambio intercambio);
 	List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambiosPublicos criterios);
+	void solicitarIntercambio(Intercambio intercambio);
 }

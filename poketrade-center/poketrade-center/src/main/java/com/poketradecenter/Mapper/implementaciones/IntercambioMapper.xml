@@ -39,5 +39,19 @@
 		    </otherwise>
 		</choose>
 	</select>
+	
+	<update id="solicitarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio">
+	   UPDATE intercambio_carta
+	   <set>
+	   	   contraparte_id = #{contraparteId},
+	   	   carta_ofrecer_final = #{cartaOfrecerFinal},
+	       carta_ofrecer_final_nombre = #{cartaOfrecerFinalNombre},
+	       carta_querer_final = #{cartaQuererFinal},
+	       carta_querer_final_nombre = #{cartaQuererFinalNombre},
+	       estado_id = #{estadoId},
+	       fecha_cambio = #{fechaCambio}
+	   </set>
+	   WHERE id = #{id}
+	</update>
     
 </mapper>

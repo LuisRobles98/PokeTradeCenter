@@ -5,7 +5,7 @@ $(document).ready(function() {
 	let portadasMostrar = [];
 	let cartaQuieroSeleccionada = [];
 	let cartaOfrezcoSeleccionada = [];
-	let intercambioSeleccionadaCompleta = null;
+	let intercambioSeleccionadoCompleto = null;
 	limpiarYCargarTabla();
 	
 	function limpiarYCargarTabla() {
@@ -13,7 +13,7 @@ $(document).ready(function() {
 		$("#inputNombreCartaOfrecer").val("");
 		$("#inputNombreCartaQuerer").val("");
 		ordenSeleccionado = null;
-		intercambioSeleccionadaCompleta = null;
+		intercambioSeleccionadoCompleto = null;
 		vaciarCartaQuiero();
 		vaciarCartaOfrezco();
 		initTabla();
@@ -69,7 +69,7 @@ $(document).ready(function() {
 		});
 			
 		tablaIntercambios.on("rowClick", function(e, row){
-			intercambioSeleccionadaCompleta = row.getData();
+			intercambioSeleccionadoCompleto = row.getData();
 			vaciarCartaQuiero();
 			vaciarCartaOfrezco();
 			mostrarIntercambio(row.getData());
@@ -79,14 +79,14 @@ $(document).ready(function() {
 			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
-    		mostrarIntercambio(intercambioSeleccionadaCompleta);
+    		mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 		
 		$("#inputNombreCartaQuerer").on("input", async function() {
 			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
-    		mostrarIntercambio(intercambioSeleccionadaCompleta);
+    		mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 		
 		//funcionalidad botones busqueda
@@ -102,7 +102,7 @@ $(document).ready(function() {
 			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(intercambios);
     		await renderizarTabla(tablaIntercambios, intercambios);
-	    	mostrarIntercambio(intercambioSeleccionadaCompleta);
+	    	mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 		
 		//boton actualizar
@@ -110,7 +110,7 @@ $(document).ready(function() {
 			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
-			mostrarIntercambio(intercambioSeleccionadaCompleta);
+			mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 	}
 	
@@ -147,7 +147,7 @@ $(document).ready(function() {
 		expansiones.push(expansionId);
 		criterios.expansiones = expansiones;
 		criterios.cartaJuegoId = cartaJuegoId;
-		return await recuperarCartaPrincipal(criterios);
+		return await recuperarCartaIntercambio(criterios);
 	}
 	
 	
@@ -164,12 +164,13 @@ $(document).ready(function() {
 	async function mostrarIntercambio(intercambio) {
 		if(intercambio != null) {
 			$("#popupMostrarIntercambio").show();
-			
-			//let creador = await recuperarCreador();
+			let criteriosCreador = {};
+			criteriosCreador.id = intercambio.ofertanteId;
+			let creador = await recuperarCreadorIntercambio(criteriosCreador);
 			if(intercambio.cartasOfrecer.length == 1) {
-				$("#textoOfrecer").text("" + " ofrece la siguiente carta:");
+				$("#textoOfrecer").text(creador.nombre + " ofrece la siguiente carta:");
 			} else {
-				$("#textoOfrecer").text("" + " ofrece una de las siguientes cartas:");	
+				$("#textoOfrecer").text(creador.nombre + " ofrece una de las siguientes cartas:");	
 			}
 			let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer");
 			contenedorOfrecer.innerHTML = "";
@@ -213,24 +214,57 @@ $(document).ready(function() {
 		
 	
 	$("#btnSolicitarIntercambio").click(function() {
-		$("#confirmarGuardar").show();
+		$("#confirmarIntercambio").show();
 	});
 	
 	$("#btnCancelar").click(function() {
-		$("#confirmarDarMeGusta").hide();
+		$("#confirmarIntercambio").hide();
 	});
 	
-	$("#btnCancelarGuardar").click(function() {
-		$("#confirmarGuardar").hide();
+	$("#btnSolicitar").click(async function() {
+		let errores = await validarDatos();
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				let intercambio = construirSolicitudIntercambio();
+				await solicitarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha solicitado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
+				$("#confirmarIntercambio").hide();
+				limpiarYCargarTabla();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}
+		}
 	});
 	
-
-	$("#btnGuardar").click(async function() {
-		await guardarBaraja();
-		popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
-		$("#botonActualizar").click();
-		$("#confirmarGuardar").hide();
-	});
+	async function validarDatos() {
+		let errores = "";
+		if(cartaQuieroSeleccionada[0].expansionId == 0 && cartaQuieroSeleccionada[0].cartaJuegoId == 0) {
+			errores = errores += "- No has seleccionado ninguna carta para quedarte" + "<br>";
+		}
+		
+		if(cartaOfrezcoSeleccionada[0].expansionId == 0 && cartaOfrezcoSeleccionada[0].cartaJuegoId == 0) {
+			errores = errores += "- No has seleccionado ninguna carta para dar" + "<br>";
+		}
+		
+		if(errores == "") {
+			let cartaQuiero = await recuperarCarta(cartaQuieroSeleccionada[0].expansionId, cartaQuieroSeleccionada[0].cartaJuegoId);
+			let cartaOfrezco = await recuperarCarta(cartaOfrezcoSeleccionada[0].expansionId, cartaOfrezcoSeleccionada[0].cartaJuegoId);
+			if(cartaQuiero.rarezaId != cartaOfrezco.rarezaId) {
+				errores = errores += "- Las rarezas de las cartas seleccionadas no coinciden" + "<br>";
+			}
+		}
+		return errores;
+	}
+	
+	function construirSolicitudIntercambio() {
+		let intercambio = intercambioSeleccionadoCompleto;
+		intercambio.cartaQuererFinal = cartaOfrezcoSeleccionada[0].expansionId + "," + cartaOfrezcoSeleccionada[0].cartaJuegoId;
+		intercambio.cartaOfrecerFinal = cartaQuieroSeleccionada[0].expansionId + "," + cartaQuieroSeleccionada[0].cartaJuegoId;
+		intercambio.contraparteId = usuario.id;
+		return intercambio;
+	}
 	
 	
 	//funcion seleccionar carta quiero
@@ -304,12 +338,6 @@ $(document).ready(function() {
 	$("#divCartaOfrecerYo").on("click", ".cartaIntercambioAniadida", function() {
 		vaciarCartaOfrezco();
 	});
-
-	async function guardarBaraja() {
-		let criterios = {};
-		criterios.usuarioId = usuario.id;
-		await guardarBarajaPublica(criterios);
-	}
 	
 	async function renderizarTabla(tablaIntercambios, barajas) {
 		tablaIntercambios.replaceData(barajas);
