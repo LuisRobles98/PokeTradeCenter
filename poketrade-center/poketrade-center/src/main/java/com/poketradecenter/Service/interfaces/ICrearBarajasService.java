@@ -8,7 +8,6 @@ import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 
 public interface ICrearBarajasService {
-	CriteriosCarta crearCriteriosCartaParams(Map<String, String> params);
 	List<Carta> recuperarCartasPorCriterios(CriteriosCarta criteriosCarta);
 	void guardarBaraja(BarajaUsuario baraja);
 	void publicarBaraja(BarajaPublica baraja);

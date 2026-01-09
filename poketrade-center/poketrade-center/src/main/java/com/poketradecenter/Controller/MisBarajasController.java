@@ -18,22 +18,26 @@ import com.poketradecenter.Clase.CriteriosMisBarajas;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class MisBarajasController {
 	
 	@Autowired
 	private IMisBarajasService misBarajasService;
+	
+	@Autowired
+	private ICrearCriterios crearCriterios;
 
     @GetMapping("/misBarajas")
     public List<BarajaUsuario> recuperarMisBarajasPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosMisBarajas criterios = misBarajasService.crearCriteriosMisBarajasParams(params);
+       CriteriosMisBarajas criterios = crearCriterios.crearCriteriosMisBarajasParams(params);
        return misBarajasService.recuperarMisBarajasPorCriterios(criterios);
     }
     
     @GetMapping("/misBarajas/carta")
     public Carta recuperarCartaMisBarajas(@RequestParam Map<String, String> params) {
-       CriteriosCarta criterios = misBarajasService.crearCriteriosCartaParams(params);
+       CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
        return misBarajasService.recuperarCartaMisBarajas(criterios);
     }
     
@@ -49,7 +53,7 @@ public class MisBarajasController {
     
     @GetMapping("/misBarajas/usuario")
     public Usuario recuperarCreadorBaraja(@RequestParam Map<String, String> params) {
-       CriteriosUsuario criterios = misBarajasService.crearCriteriosUsuarioParams(params);
+       CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
        return misBarajasService.recuperarCreadorMisBaraja(criterios);
     }
 }

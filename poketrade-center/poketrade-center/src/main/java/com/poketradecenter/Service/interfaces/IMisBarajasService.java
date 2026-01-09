@@ -11,9 +11,6 @@ import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 
 public interface IMisBarajasService {
-	CriteriosMisBarajas crearCriteriosMisBarajasParams(Map<String, String> params);
-	CriteriosCarta crearCriteriosCartaParams(Map<String, String> params);
-	CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params);
 	List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosMisBarajas criterios);
 	Carta recuperarCartaMisBarajas(CriteriosCarta criterios);
 	void eliminarMiBaraja(BarajaUsuario baraja);

@@ -2,10 +2,14 @@ package com.poketradecenter.Clase;
 
 public class CriteriosIntercambiosPublicos {
 	
+	private Integer id;
 	private Integer usuarioId;
 	private String cartasOfrecerNombre;
 	private String cartasQuererNombre;
 	private String ordenacion;
+	
+	public Integer getId() {return id;}
+	public void setId(Integer id) {this.id = id;}
 	
 	public Integer getUsuarioId() {return usuarioId;}
 	public void setUsuarioId(Integer usuarioId) {this.usuarioId = usuarioId;}

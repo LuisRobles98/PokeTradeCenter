@@ -10,10 +10,7 @@ import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Clase.Usuario;
 
 public interface ITablonIntercambiosService {
-	CriteriosIntercambiosPublicos crearCriteriosIntercambiosPublicosParams(Map<String, String> params);
 	List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambiosPublicos criterios);
-	CriteriosCarta crearCriteriosCartaParams(Map<String, String> params);
-	CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params);
 	Carta recuperarCartaPorCriterios(CriteriosCarta criterios);
 	void solicitarIntercambio(Intercambio intercambio);
 	Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios);

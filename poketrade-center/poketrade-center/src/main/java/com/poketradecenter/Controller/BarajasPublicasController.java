@@ -18,6 +18,7 @@ import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class BarajasPublicasController {
@@ -25,27 +26,30 @@ public class BarajasPublicasController {
 	@Autowired
 	private IBarajasPublicasService barajasPublicasService;
 
+	@Autowired
+	private ICrearCriterios crearCriterios;
+	
     @GetMapping("/barajasPublicas")
     public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosBarajasPublicas criterios = barajasPublicasService.crearCriteriosBarajasPublicasParams(params);
+       CriteriosBarajasPublicas criterios = crearCriterios.crearCriteriosBarajasPublicasParams(params);
        return barajasPublicasService.recuperarBarajasPublicasPorCriterios(criterios);
     }
     
     @GetMapping("/barajasPublicas/carta")
     public Carta recuperarCartaBarajasPublicas(@RequestParam Map<String, String> params) {
-       CriteriosCarta criterios = barajasPublicasService.crearCriteriosCartaParams(params);
+       CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
        return barajasPublicasService.recuperarCartaBarajasPublicas(criterios);
     }
     
     @GetMapping("/barajasPublicas/usuario")
     public Usuario recuperarCreadorBaraja(@RequestParam Map<String, String> params) {
-       CriteriosUsuario criterios = barajasPublicasService.crearCriteriosUsuarioParams(params);
+       CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
        return barajasPublicasService.recuperarCreadorBarajasPublicas(criterios);
     }
     
     @GetMapping("/barajasPublicas/like")
     public boolean recuperarLikeBarajasPublicas(@RequestParam Map<String, String> params) {
-       CriteriosBarajasPublicas criterios = barajasPublicasService.crearCriteriosBarajasPublicasParams(params);
+       CriteriosBarajasPublicas criterios = crearCriterios.crearCriteriosBarajasPublicasParams(params);
        return barajasPublicasService.comprobarLikeABaraja(criterios);
     }
     

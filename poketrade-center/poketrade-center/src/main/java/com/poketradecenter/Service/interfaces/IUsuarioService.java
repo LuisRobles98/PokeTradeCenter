@@ -9,5 +9,4 @@ public interface IUsuarioService {
 	void crearUsuario(Usuario usuario);
 	List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criteriosUsuario);
 	void actualizarUsuario(Usuario usuario);
-	CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params);
 }

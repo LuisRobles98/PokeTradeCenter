@@ -15,6 +15,7 @@ import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class CrearBarajasController {
@@ -22,9 +23,12 @@ public class CrearBarajasController {
 	@Autowired
 	private ICrearBarajasService crearBarajasService;
 	
+	@Autowired
+	private ICrearCriterios crearCriterios;
+	
     @GetMapping("/cartasBarajas")
     public List<Carta> recuperarCartasPorCriterios(@RequestParam Map<String, String> params) {
-        CriteriosCarta criterios = crearBarajasService.crearCriteriosCartaParams(params);
+        CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
         return crearBarajasService.recuperarCartasPorCriterios(criterios);
     }
     

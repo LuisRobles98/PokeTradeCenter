@@ -255,6 +255,14 @@ $(document).ready(function() {
 				errores = errores += "- Las rarezas de las cartas seleccionadas no coinciden" + "<br>";
 			}
 		}
+		
+		let criterios = {};
+		criterios.id = intercambioSeleccionadoCompleto.id;
+		let intercambioBBDD = await recuperarIntercambiosPublicos(criterios);
+		if(intercambioBBDD == null || intercambioBBDD == undefined) {
+			errores = errores += "- Parece que alguien se ha adelantado y ya ha solicitado el intercambio" + "<br>";
+		}
+		
 		return errores;
 	}
 	

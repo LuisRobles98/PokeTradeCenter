@@ -18,6 +18,10 @@
 	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre, fecha_creacion AS fechaCreacion
 	    FROM intercambio_carta
 	    <where>
+	    	<if test="id != null">
+	            AND id = #{id}
+	        </if>
+	    
  	   	    <if test="usuarioId != null">
 	            AND ofertante_id != #{usuarioId}
 	        </if>

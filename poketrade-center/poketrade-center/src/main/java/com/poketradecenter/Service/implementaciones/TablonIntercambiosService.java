@@ -69,6 +69,13 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		if(cartaParaOfrecer.getRarezaId() != cartaParaQuerer.getRarezaId()) {
 			throw new RuntimeException("Las rarezas de las cartas seleccionadas no coinciden");
 		}
+		
+		CriteriosIntercambiosPublicos criterios = new CriteriosIntercambiosPublicos();
+		criterios.setId(intercambio.getId());
+		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(0);
+		if(intercambioBBDD.getEstadoId() != 1) {
+			throw new RuntimeException("Parece que alguien se te ha adelantado y ya ha solicitado el intercambio");
+		}
 	}
 	
 	private Carta recuperarCarta(String cartaIntercambio) {
@@ -96,103 +103,5 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al actualizar un intercambios público del tablón", e);
 		}
-	}
-	
-	@Override
-	public CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params) {
-    	CriteriosUsuario criterios = new CriteriosUsuario();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	            case "email":
-    	                criterios.setEmail(value);
-    	                break;
-    	            case "password":
-    	                criterios.setPassword(value);
-    	                break;
-    	            case "nombre":
-    	                criterios.setNombre(value);
-    	                break;
-    	            case "juegoId":
-    	                criterios.setJuegoId(value);
-    	                break;
-      	            case "iconoId":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema1Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema2Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema3Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-    	            case "id":
-    	                criterios.setId(Integer.parseInt(value));
-    	                break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
-	}
-	
-	@Override
-	public CriteriosIntercambiosPublicos crearCriteriosIntercambiosPublicosParams(Map<String, String> params) {
-		CriteriosIntercambiosPublicos criterios = new CriteriosIntercambiosPublicos();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	        	case "usuarioId":
-    	        		criterios.setUsuarioId(Integer.parseInt(value));
-    	        		break;
-    	            case "nombreOfrecer":
-    	                criterios.setCartasOfrecerNombre(value);
-    	                break;
-    	            case "nombreQuerer":
-    	            	criterios.setCartasQuererNombre(value);
-    	            	break;
-    	            case "ordenacion":
-    	            	criterios.setOrdenacion(convertirOrdenacion(value));
-    	            	break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
-	}
-	
-	private String convertirOrdenacion(String ordenacion) {
-		switch(ordenacion) {
-			case "fecha_desc":
-				return "fecha_creacion DESC";
-			case "fecha_asc":
-				return "fecha_creacion ASC";
-			default:
-				return null;
-		}
-	}
-	
-	
-	@Override
-	public CriteriosCarta crearCriteriosCartaParams(Map<String, String> params) {
-    	CriteriosCarta criterios = new CriteriosCarta();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	            case "expansiones":
-    	            	List<Integer> expansiones = Arrays.stream(value.split(","))
-            				.map(String::trim)
-            				.filter(s -> !s.isEmpty())
-            				.map(Integer::parseInt)
-            				.collect(Collectors.toList());
-    	                criterios.setExpansiones(expansiones);
-    	                break;
-    	            case "cartaJuegoId":
-    	                criterios.setCartaJuegoId(Integer.parseInt(value));
-    	                break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
 	}
 }

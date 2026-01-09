@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private ICrearCriterios crearCriterios;
 	
     @PostMapping("/usuario")
     public void crearUsuario(@RequestBody Usuario usuario) {
@@ -39,7 +43,7 @@ public class UsuarioController {
     
     @GetMapping("/usuario")
     public List<Usuario> recuperarUsuarioPorCriterios(@RequestParam Map<String, String> params) {
-        CriteriosUsuario criterios = usuarioService.crearCriteriosUsuarioParams(params);
+        CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
         return usuarioService.recuperarUsuarioPorCriterios(criterios);
     }
 }

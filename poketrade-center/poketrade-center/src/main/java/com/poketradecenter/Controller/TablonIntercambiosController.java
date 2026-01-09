@@ -17,28 +17,32 @@ import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.ITablonIntercambiosService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class TablonIntercambiosController {
 	
 	@Autowired
 	private ITablonIntercambiosService tablonIntercambiosService;
+	
+	@Autowired
+	private ICrearCriterios crearCriterios;
 
     @GetMapping("/intercambiosPublicos")
     public List<Intercambio> recuperarIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosIntercambiosPublicos criterios = tablonIntercambiosService.crearCriteriosIntercambiosPublicosParams(params);
+       CriteriosIntercambiosPublicos criterios = crearCriterios.crearCriteriosIntercambiosPublicosParams(params);
        return tablonIntercambiosService.recuperarIntercambiosPublicosPorCriterios(criterios);
     }
     
     @GetMapping("/intercambiosPublicos/usuario")
     public Usuario recuperarUsuarioIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosUsuario criterios = tablonIntercambiosService.crearCriteriosUsuarioParams(params);
+       CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
        return tablonIntercambiosService.recuperarUsuarioPorCriterios(criterios);
     }
     
     @GetMapping("/intercambiosPublicos/carta")
     public Carta recuperarCartaIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosCarta criterios = tablonIntercambiosService.crearCriteriosCartaParams(params);
+       CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
        return tablonIntercambiosService.recuperarCartaPorCriterios(criterios);
     }
     
