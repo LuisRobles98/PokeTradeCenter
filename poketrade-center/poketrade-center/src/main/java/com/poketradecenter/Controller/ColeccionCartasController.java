@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poketradecenter.Clase.CartaUsuario;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
 import com.poketradecenter.Service.interfaces.IColeccionCartasService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class ColeccionCartasController {
@@ -21,10 +22,13 @@ public class ColeccionCartasController {
 	@Autowired
 	private IColeccionCartasService coleccionCartasService;
 	
+	@Autowired
+	private ICrearCriterios crearCriterios;
+	
 
     @GetMapping("/coleccionCartas")
     public List<CartaUsuario> recuperarCartasUsuarioPorCriterios(@RequestParam Map<String, String> params) {
-        CriteriosCartaUsuario criterios = coleccionCartasService.crearCriteriosCartaUsuarioParams(params);
+        CriteriosCartaUsuario criterios = crearCriterios.crearCriteriosCartaUsuarioParams(params);
         return coleccionCartasService.recuperarCartaUsuarioPorCriterios(criterios);
     }
 

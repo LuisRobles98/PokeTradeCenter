@@ -14,6 +14,7 @@ import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Service.interfaces.ICrearIntercambioService;
+import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
 public class CrearIntercambioController {
@@ -21,9 +22,12 @@ public class CrearIntercambioController {
 	@Autowired
 	private ICrearIntercambioService crearIntercambioService;
 	
+	@Autowired
+	private ICrearCriterios crearCriterios;
+	
     @GetMapping("/cartasIntercambio")
     public List<Carta> recuperarCartasPorCriterios(@RequestParam Map<String, String> params) {
-        CriteriosCarta criterios = crearIntercambioService.crearCriteriosCartaParams(params);
+        CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
         return crearIntercambioService.recuperarCartasPorCriterios(criterios);
     }
     

@@ -3,11 +3,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 
 @Mapper
 public interface IBarajaPublicaMapper {
-	List<Baraja> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios);
-	void actualizarBaraja(Baraja baraja);
+	List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios);
+	void guardar(BarajaPublica barajaPublica);
+	void actualizar(BarajaPublica baraja);
 }

@@ -8,7 +8,7 @@ $(document).ready(function() {
 	
 	function limpiarYCargarTabla() {
 		$("#popupMostrarBaraja").hide();
-		$("#inputNombreBaraja").val("");
+		$("#inputNombreCarta").val("");
 		barajaSeleccionadaCompleta = null;
 		barajaSeleccionada = null;
 		ordenSeleccionado = null;
@@ -19,12 +19,13 @@ $(document).ready(function() {
 		let barajasRecuperadas = await recuperarBarajasPorCriterios();
 		let portadas = [];
 		
-		for (const baraja of barajasRecuperadas) {
+		for (const barajaUsuario of barajasRecuperadas) {
 			let portada = {};
+			let baraja = barajaUsuario.baraja;
 			let primeraCarta = baraja.cartas.split(";")[0];
 			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
 			let carta = await recuperarCarta(expansionId,cartaJuegoId);
-			portada.barajaId = baraja.id;
+			portada.barajaUsuarioId = barajaUsuario.id;
 			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
 			let cartaEnergia = carta.energiaId ?? "null";
 			portada.imgFondo = `/imagenes/fondos/fondo${cartaEnergia}.png`;
@@ -43,7 +44,7 @@ $(document).ready(function() {
 	     			field: "id",
 	     			formatter: function(cell) {
 						 let d = cell.getRow().getData();
-						 let portada = portadas.find(p => p.barajaId == d.id);
+						 let portada = portadas.find(p => p.barajaUsuarioId == d.id);
 						 let imgPortada = portada ? portada.imgPortada : "";
                     	 let imgFondo = portada ? portada.imgFondo : "";
                     	 let nombre = portada ? portada.nombre : "";
@@ -65,7 +66,7 @@ $(document).ready(function() {
 		});
 		
 		//busqueda por nombre de baraja
-		$("#inputNombreBaraja").on("input", async function() {
+		$("#inputNombreCarta").on("input", async function() {
     		let barajas = await recuperarBarajasPorCriterios();
     		renderizarTabla(tablaBarajas, barajas)
     		mostrarBaraja(barajaSeleccionadaCompleta);
@@ -99,28 +100,28 @@ $(document).ready(function() {
 	
 	async function recuperarBarajasPorCriterios() {
 		let criterios = {};
-		criterios.nombre = $("#inputNombreBaraja").val();
+		criterios.cartaNombre = $("#inputNombreCarta").val();
 		criterios.usuarioId = usuario.id;
 		criterios.ordenacion = ordenSeleccionado;
 		let barajas = await recuperarBarajasUsuario(criterios);
 		return barajas;
 	}
 	
-	async function mostrarBaraja(baraja) {
-		if(baraja != null) {
+	async function mostrarBaraja(barajaUsuario) {
+		if(barajaUsuario != null) {
+			let baraja = barajaUsuario.baraja;
 			$("#popupMostrarBaraja").show();
-			if(baraja.creadorId == null) {
+			if(barajaUsuario.barajaPublicaId == null) {
 				$("#textoCreador").text(baraja.nombre + " creada por " + usuario.nombre);
 			} else {
 				let criterios = {};
-				criterios.id = baraja.creadorId;
+				criterios.id = barajaUsuario.barajaPublicaId;
 				let creador = await recuperarCreador(criterios);
 				$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
 			}
 			let contenedor = document.getElementById("mostrarCartas");
 			contenedor.innerHTML = "";
 			let cartas = baraja.cartas.split(";");
-			cartas.pop();//para eliminar el ultimo creado por el split ";"
 			cartas.forEach(carta => {
 				let img = document.createElement("img");
 	        	img.classList.add("carta");
@@ -147,10 +148,10 @@ $(document).ready(function() {
 	});
 	
 	async function eliminarBaraja() {
-		let baraja = {};
-		baraja.id = barajaSeleccionada;
-		baraja.usuarioId = usuario.id
-		await eliminar(baraja);
+		let barajaUsuario = {};
+		barajaUsuario.id = barajaSeleccionadaCompleta.id;
+		barajaUsuario.usuarioId = usuario.id
+		await eliminar(barajaUsuario);
 		popupErroresOConfirmacion.mostrar("success", "La baraja se ha eliminado correctamente", "");
 		limpiarYCargarTabla();
 	}

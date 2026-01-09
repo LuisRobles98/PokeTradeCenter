@@ -56,6 +56,8 @@ $(document).ready(function() {
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
 				img.classList.add("cartaBarajaAniadida");
 				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
 				img.dataset.basico = carta.basico;
@@ -216,13 +218,31 @@ $(document).ready(function() {
 		recargarBaraja();
 	}
 	
-	$("#btnGuardar").off("click").on("click", () => {
+  
+	$("#btnGuardarOPublicar").off("click").on("click", () => {
+		$("#confirmar").show();
+    });
+    
+	$("#btnCancelar").off("click").on("click", () => {
+		$("#confirmar").hide();
+    });
+    
+    $("#btnGuardar").off("click").on("click", () => {
 		guardarBaraja();
+		$("#confirmar").hide();
+    });
+    
+    $("#btnPublicar").off("click").on("click", () => {
+		publicarBaraja();
+		$("#confirmar").hide();
     });
     
 	$("#btnGuardarYPublicar").off("click").on("click", () => {
 		guardarYPublicarBaraja();
+		$("#confirmar").hide();
     });
+    
+    
     
     async function guardarBaraja() {
 		let errores = validarDatos();
@@ -230,9 +250,25 @@ $(document).ready(function() {
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
-				let baraja = construirBaraja();
+				let baraja = construirBarajaGuardar();
 				await guardar(baraja);
 				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+				limpiar();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}
+		}
+	}
+	
+    async function publicarBaraja() {
+		let errores = validarDatos();
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				let baraja = construirBarajaPublicar();
+				await publicar(baraja);
+				popupErroresOConfirmacion.mostrar("success", "Se ha publicado correctamente la baraja. Podrás verla en la aplicación de 'Barajas públicas'", "");
 				limpiar();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
@@ -246,9 +282,9 @@ $(document).ready(function() {
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
-				let baraja = construirBaraja();
+				baraja = construirBarajaPublicar();
 				await guardarPublicar(baraja);
-				popupErroresOConfirmacion.mostrar("success", "Se ha guardado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas'", "");
+				popupErroresOConfirmacion.mostrar("success", "Se ha guardado y publicado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas' y en 'Barajas públicas'", "");
 				limpiar();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
@@ -308,14 +344,21 @@ $(document).ready(function() {
 		return errores;
 	}
 	
-	function construirBaraja() {
+	function construirBarajaGuardar() {
+		let barajaUsuario = {};
+		barajaUsuario.usuarioId = usuario.id;
 		let baraja = {};
-		baraja.usuarioId = usuario.id;
-		let cartas = "";
-		cartasBaraja.forEach(carta => {
-			 cartas += carta.expansionId + "," + carta.cartaJuegoId + ";";
-		});
-		baraja.cartas = cartas;
-		return baraja;
+		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		barajaUsuario.baraja = baraja;
+		return barajaUsuario;
+	}
+	
+	function construirBarajaPublicar() {
+		let barajaPublica = {};
+		barajaPublica.creadorId = usuario.id;
+		let baraja = {};
+		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		barajaPublica.baraja = baraja;
+		return barajaPublica;
 	}
 });

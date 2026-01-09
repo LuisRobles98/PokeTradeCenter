@@ -285,13 +285,6 @@ body.fondo {
     transform: scale(1.03);
 }
 
-.tabulator-cell {
-    left: 10px;
-    height: 135px !important;
-    width: 640px !important;
-    margin-top: 12px;
-}
-
 .tabulator-row {
 	background-color: transparent !important;
 }

@@ -62,6 +62,9 @@ $(document).ready(async function() {
 	$("#crearIntercambioApp").click(function() {
     	cambiarAplicacion.crearIntercambio();
     });
+	$("#tablonIntercambiosApp").click(function() {
+    	cambiarAplicacion.tablonIntercambios();
+    });
 	$("#coleccionCartasApp").click(function() {
     	cambiarAplicacion.coleccionCartas();
     });

@@ -2,18 +2,18 @@ package com.poketradecenter.Service.implementaciones;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaPublica;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Mapper.interfaces.IBarajaMapper;
+import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
+import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
+import com.poketradecenter.Service.interfaces.IBarajaService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
 
@@ -23,46 +23,59 @@ public class CrearBarajasService implements ICrearBarajasService {
 	@Autowired
 	private ICartaService cartaService;
 	@Autowired
-	private IBarajaMapper barajaMapper;
+	private IBarajaUsuarioMapper barajaUsuarioMapper;
+	@Autowired
+	private IBarajaPublicaMapper barajaPublicaMapper;
+	@Autowired
+	private IBarajaService barajaService;
 	
-
+	
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasPorCriterios(criterios);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 	}
 	
 	@Override
-	public void guardarBaraja(Baraja baraja) {
-		validarCartas(baraja);
-		construirBaraja(baraja);
-		guardar(baraja);
+	public void guardarBaraja(BarajaUsuario barajaUsuario) {
+		validarCartas(barajaUsuario.getBaraja().getCartas());
+		construirBaraja(barajaUsuario.getBaraja());
+		guardarBaraja(barajaUsuario.getBaraja());
+		construirBarajaUsuario(barajaUsuario);
+		guardarBarajaUsuario(barajaUsuario);	
 	}
 	
 	@Override
-	public void guardarPublicarBaraja(Baraja baraja) {
-		validarCartas(baraja);
-		construirBaraja(baraja);
-		guardar(baraja);
-		baraja.setCreadorId(baraja.getUsuarioId());
-		publicar(baraja);
+	public void publicarBaraja(BarajaPublica barajaPublica) {
+		validarCartas(barajaPublica.getBaraja().getCartas());
+		construirBaraja(barajaPublica.getBaraja());
+		guardarBaraja(barajaPublica.getBaraja());
+		construirBarajaPublica(barajaPublica);
+		guardarBarajaPublica(barajaPublica);
 	}
 	
-	private void validarCartas(Baraja baraja) {
-		List<Carta> cartas = new ArrayList<>();
-		String[] cartasBaraja = baraja.getCartas().split(";");
+	@Override
+	public void guardarPublicarBaraja(BarajaPublica barajaPublica) {
+		validarCartas(barajaPublica.getBaraja().getCartas());
+		construirBaraja(barajaPublica.getBaraja());
+		guardarBaraja(barajaPublica.getBaraja());
+		construirBarajaPublica(barajaPublica);
+		guardarBarajaPublica(barajaPublica);
 		
-		for(String carta : cartasBaraja) {
-			String[] cartaBaraja = carta.split(",");
-			CriteriosCarta criterios = new CriteriosCarta();
-			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
-			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
-			if(cartasBBDD.isEmpty()) {
-				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
-			}
-			cartas.add(cartasBBDD.get(0));
+		BarajaUsuario barajaUsuario = new BarajaUsuario();
+		barajaUsuario.setUsuarioId(barajaPublica.getCreadorId());
+		barajaUsuario.setBarajaPublicaId(barajaPublica.getId());
+		barajaUsuario.setBarajaId(barajaPublica.getBarajaId());
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+		guardarBarajaUsuario(barajaUsuario);
+	}
+	
+	private void validarCartas(String cartasBarajaGuardarPublicar) {
+		List<Carta> cartas = new ArrayList<>();
+		String[] cartasBaraja = cartasBarajaGuardarPublicar.split(";");
+		
+		for(String cartaBaraja : cartasBaraja) {
+			Carta carta = recuperarCartaString(cartaBaraja);
+			cartas.add(carta);
 		}
 		
 		//validar tamaño baraja
@@ -108,111 +121,83 @@ public class CrearBarajasService implements ICrearBarajasService {
 	}
 	
 	private void construirBaraja(Baraja baraja) {
-		String[] cartaBaraja1 = baraja.getCartas().split(";")[0].split(",");
-		String[] cartaBaraja2 = baraja.getCartas().split(";")[1].split(",");
+		String cartaBaraja1 = baraja.getCartas().split(";")[0];
+		String cartaBaraja2 = baraja.getCartas().split(";")[1];
 		
-		CriteriosCarta criterios = new CriteriosCarta();
-		List<Integer> expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(cartaBaraja1[0].trim()));
-		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja1[1].trim()));
-		Carta primeraCarta = cartaService.recuperarCartasPorCriterios(criterios).get(0);
-		
-		expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(cartaBaraja2[0].trim()));
-		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja2[1].trim()));
-		Carta segundaCarta = cartaService.recuperarCartasPorCriterios(criterios).get(0);
+		Carta primeraCarta = recuperarCartaString(cartaBaraja1);
+		Carta segundaCarta = recuperarCartaString(cartaBaraja2);
 		
 		String nombreBaraja = "Baraja ";
-		if((primeraCarta.getRarezaId() == 4) || (primeraCarta.getExpansionId() == 12)) {
-			nombreBaraja += primeraCarta.getNombre() + " EX";
+		if(primeraCarta.getExpansionId() == segundaCarta.getExpansionId() && primeraCarta.getCartaJuegoId() == segundaCarta.getCartaJuegoId()) {
+			nombreBaraja += primeraCarta.getNombre();
 		} else {
 			nombreBaraja += primeraCarta.getNombre();
+			char inicialSegundaCarta = segundaCarta.getNombre().charAt(0);
+			String conjuncion = (inicialSegundaCarta == 'i') ? " e " : " y ";
+			nombreBaraja += conjuncion + segundaCarta.getNombre();
 		}
-		
-		if((segundaCarta.getRarezaId() == 4) || (segundaCarta.getExpansionId() == 12)) {
-			if(segundaCarta.getNombre().charAt(0) != 'i') {
-				nombreBaraja += " y " + segundaCarta.getNombre() + " EX";
-			} else {
-				nombreBaraja += " e " + segundaCarta.getNombre() + " EX";
-			}
-		} else {
-			if(segundaCarta.getNombre().charAt(0) != 'i') { 
-				nombreBaraja += " y " + segundaCarta.getNombre();
-			} else {
-				nombreBaraja += " e " + segundaCarta.getNombre();
-			}
-		}
-		
 		baraja.setNombre(nombreBaraja);
-		baraja.setFechaCreacion(LocalDateTime.now());
+		
+		String nombreCartas = "";
+		String[] cartasBaraja = baraja.getCartas().split(";");
+		for(String cartaBaraja : cartasBaraja) {
+			Carta carta = recuperarCartaString(cartaBaraja);
+			nombreCartas += carta.getNombre() + " ";
+		}
+		baraja.setCartasNombre(nombreCartas);
 	}
 	
-	private void guardar(Baraja baraja) {
+	private Carta recuperarCartaString(String carta) {
+		String[] cartaBaraja = carta.split(",");
+		CriteriosCarta criterios = new CriteriosCarta();
+		List<Integer> expansiones = new ArrayList<>();
+		expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+		criterios.setExpansiones(expansiones);
+		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+		List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
+		if(cartasBBDD.isEmpty()) {
+			throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
+		}
+		return cartasBBDD.get(0);
+	}
+	
+	private Baraja guardarBaraja(Baraja baraja) {
+		return barajaService.guardarBaraja(baraja);
+	}
+	
+	private void construirBarajaUsuario(BarajaUsuario barajaUsuario) {
+		barajaUsuario.setBarajaId(barajaUsuario.getBaraja().getId());
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+	}
+	
+	private void construirBarajaPublica(BarajaPublica barajaPublica) {
+		barajaPublica.setBarajaId(barajaPublica.getBaraja().getId());
+		barajaPublica.setMeGusta(0);
+		barajaPublica.setFechaCreacion(LocalDateTime.now());
+	}
+	
+	private BarajaUsuario guardarBarajaUsuario(BarajaUsuario barajaUsuario) {
 		try {
-			barajaMapper.guardarBaraja(baraja);
+			barajaUsuarioMapper.guardar(barajaUsuario);
+			return barajaUsuario;
 		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al guardar la baraja", e);
+			throw new RuntimeException("Ha ocurrido un error al guardar la baraja del usuario", e);
 		}
 	}
 	
-	private void publicar(Baraja baraja) {
+
+	private BarajaPublica guardarBarajaPublica(BarajaPublica barajaPublica) {
 		try {
-			barajaMapper.publicarBaraja(baraja);
+			barajaPublicaMapper.guardar(barajaPublica);
+			return barajaPublica;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al publicar la baraja", e);
 		}
 	}
 	
-
 	@Override
-	public CriteriosCarta crearCriteriosCartaParams(Map<String, String> params) {
-    	CriteriosCarta criterios = new CriteriosCarta();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	            case "expansiones":
-    	            	List<Integer> expansiones = Arrays.stream(value.split(","))
-            				.map(String::trim)
-            				.filter(s -> !s.isEmpty())
-            				.map(Integer::parseInt)
-            				.collect(Collectors.toList());
-    	                criterios.setExpansiones(expansiones);
-    	                break;
-    	            case "cartaJuegoId":
-    	                criterios.setCartaJuegoId(Integer.parseInt(value));
-    	                break;
-    	            case "nombre":
-    	                criterios.setNombre(value);
-    	                break;
-    	            case "rarezas":
-    	            	List<Integer> rarezas = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setRarezas(rarezas);
-    	                break;
-       	            case "energias":
-    	            	List<Integer> energias = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setEnergias(energias);
-    	                break;
-       	            case "tipos":
-    	            	List<Integer> tipos = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setTipos(tipos);
-    	                break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
+	public void guardarBarajaPublicaComoUsuario(BarajaUsuario barajaUsuario) {
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+		guardarBarajaUsuario(barajaUsuario);
 	}
 }

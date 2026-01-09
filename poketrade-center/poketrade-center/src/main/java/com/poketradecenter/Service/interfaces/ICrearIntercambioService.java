@@ -7,7 +7,6 @@ import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.Intercambio;
 
 public interface ICrearIntercambioService {
-	CriteriosCarta crearCriteriosCartaParams(Map<String, String> params);
 	List<Carta> recuperarCartasPorCriterios(CriteriosCarta criteriosCarta);
 	void publicarIntercambio(Intercambio intercambio);
 }

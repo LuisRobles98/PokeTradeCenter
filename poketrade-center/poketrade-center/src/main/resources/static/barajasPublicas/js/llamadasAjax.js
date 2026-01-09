@@ -42,13 +42,13 @@ async function comprobarSiLikeABaraja(criterios) {
     .then(response => response.json());
 };
 
-async function darLikeABaraja(criterios) {
+async function darLikeABaraja(barajaLike) {
     let parameters = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(criterios),
+        body: JSON.stringify(barajaLike),
     };
     let response = await fetch('http://localhost:8080/barajasPublicas', parameters);
     if (!response.ok) {
@@ -57,13 +57,24 @@ async function darLikeABaraja(criterios) {
     }
 };
 
-async function guardarBarajaPublica(criterios) {
+async function comprobarSiBarajaYaGuardada(criterios) {
+	let query = QueryURL.formar(criterios);
+    return fetch(`http://localhost:8080/barajasPublicas/barajaGuardada?${query}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json());
+};
+
+async function guardarBarajaPublica(barajaUsuario) {
     let parameters = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(criterios),
+        body: JSON.stringify(barajaUsuario),
     };
     let response = await fetch('http://localhost:8080/barajasPublicas/guardar', parameters);
     if (!response.ok) {

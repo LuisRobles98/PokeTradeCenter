@@ -19,7 +19,7 @@
 	display: flex;
 }
 
-.inputNombreBaraja {
+.inputNombreCarta {
     align-items: center;
 	width: 400px;
     padding: 10px;
@@ -32,11 +32,11 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.inputNombreBaraja:hover {
+.inputNombreCarta:hover {
     border-color: #7A8BA3;
 }
 
-.inputNombreBaraja:focus {
+.inputNombreCarta:focus {
 	outline: none;
     border-color: #68768A;
 }
@@ -148,6 +148,13 @@
 
 #botonActualizar:hover {
 	animation: fa-spin 2s infinite linear;
+}
+
+.tabulator-cell {
+    left: 15px;
+    height: 135px !important;
+    width: 635px !important;
+    margin-top: 12px;
 }
 
 /* --------------------------- POPUP MOSTRAR BARAJA ----------------------------------------- */

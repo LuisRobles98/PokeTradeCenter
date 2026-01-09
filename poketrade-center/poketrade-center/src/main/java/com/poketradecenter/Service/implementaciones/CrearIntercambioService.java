@@ -28,7 +28,7 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 	
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasPorCriterios(criterios);
+		return cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 	}
 	
 	@Override
@@ -40,40 +40,9 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 	
 	private void validarPublicarIntercambio(Intercambio intercambio) {
 		//validar que las cartas ofertadas y queridas existen en el sistema
-		List<Carta> cartasOfrecer = new ArrayList<>();
-		String[] cartasBarajaOfrecer = intercambio.getCartasOfrecer().split(";");
-		
-		for(String carta : cartasBarajaOfrecer) {
-			String[] cartaBaraja = carta.split(",");
-			CriteriosCarta criterios = new CriteriosCarta();
-			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
-			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
-			if(cartasBBDD.isEmpty()) {
-				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
-			}
-			cartasOfrecer.add(cartasBBDD.get(0));
-		}
-		
-		List<Carta> cartasQuerer = new ArrayList<>();
-		String[] cartasBarajaQuerer = intercambio.getCartasQuerer().split(";");
-		
-		for(String carta : cartasBarajaQuerer) {
-			String[] cartaBaraja = carta.split(",");
-			CriteriosCarta criterios = new CriteriosCarta();
-			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
-			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasPorCriterios(criterios);
-			if(cartasBBDD.isEmpty()) {
-				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
-			}
-			cartasQuerer.add(cartasBBDD.get(0));
-		}
-		
+		List<Carta> cartasOfrecer = recuperarCartasOfrecer(intercambio);
+		List<Carta> cartasQuerer = recuperarCartasQuerer(intercambio);
+			
 		//validar que hay al menos una carta que ofrezcas y quieras
 		if(cartasOfrecer.isEmpty()) {
 			throw new RuntimeException("No has seleccionado ninguna carta para ofrecer");
@@ -136,9 +105,20 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 	
 	private void rellenarDatosPublicar(Intercambio intercambio) {
 		intercambio.setContraparteId(null);
+		
+		List<Carta> cartasOfrecer = recuperarCartasOfrecer(intercambio);
+		String nombreCartasOfrecerIntercambio = cartasOfrecer.stream().map(Carta::getNombre).collect(Collectors.joining(" "));
+		intercambio.setCartasOfrecerNombre(nombreCartasOfrecerIntercambio);
+		
+		List<Carta> cartasQuerer = recuperarCartasQuerer(intercambio);
+		String nombreCartasQuererIntercambio = cartasQuerer.stream().map(Carta::getNombre).collect(Collectors.joining(" "));
+		intercambio.setCartasQuererNombre(nombreCartasQuererIntercambio);
+		
 		intercambio.setEstadoId(1);//abierta
 		intercambio.setCartaOfrecerFinal(null);
 		intercambio.setCartaQuererFinal(null);
+		intercambio.setCartaOfrecerFinalNombre(null);
+		intercambio.setCartaQuererFinalNombre(null);
 		intercambio.setFechaCreacion(LocalDateTime.now());
 		intercambio.setFechaCambio(LocalDateTime.now());
 	}
@@ -151,53 +131,43 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 		}
 	}
 	
-	@Override
-	public CriteriosCarta crearCriteriosCartaParams(Map<String, String> params) {
-    	CriteriosCarta criterios = new CriteriosCarta();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	            case "expansiones":
-    	            	List<Integer> expansiones = Arrays.stream(value.split(","))
-            				.map(String::trim)
-            				.filter(s -> !s.isEmpty())
-            				.map(Integer::parseInt)
-            				.collect(Collectors.toList());
-    	                criterios.setExpansiones(expansiones);
-    	                break;
-    	            case "cartaJuegoId":
-    	                criterios.setCartaJuegoId(Integer.parseInt(value));
-    	                break;
-    	            case "nombre":
-    	                criterios.setNombre(value);
-    	                break;
-    	            case "rarezas":
-    	            	List<Integer> rarezas = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setRarezas(rarezas);
-    	                break;
-       	            case "energias":
-    	            	List<Integer> energias = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setEnergias(energias);
-    	                break;
-       	            case "tipos":
-    	            	List<Integer> tipos = Arrays.stream(value.split(","))
-	            			.map(String::trim)
-	                        .filter(s -> !s.isEmpty())
-	                        .map(Integer::parseInt)
-	                        .collect(Collectors.toList());
-    	            	criterios.setTipos(tipos);
-    	                break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
+	private List<Carta> recuperarCartasOfrecer(Intercambio intercambio) {
+		List<Carta> cartasOfrecer = new ArrayList<>();
+		String[] cartasBarajaOfrecer = intercambio.getCartasOfrecer().split(";");
+		
+		for(String carta : cartasBarajaOfrecer) {
+			String[] cartaBaraja = carta.split(",");
+			CriteriosCarta criterios = new CriteriosCarta();
+			List<Integer> expansiones = new ArrayList<>();
+			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+			criterios.setExpansiones(expansiones);
+			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
+			if(cartasBBDD.isEmpty()) {
+				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
+			}
+			cartasOfrecer.add(cartasBBDD.get(0));
+		}
+		return cartasOfrecer;
+	}
+	
+	private List<Carta> recuperarCartasQuerer(Intercambio intercambio) { 
+		List<Carta> cartasQuerer = new ArrayList<>();
+		String[] cartasBarajaQuerer = intercambio.getCartasQuerer().split(";");
+		
+		for(String carta : cartasBarajaQuerer) {
+			String[] cartaBaraja = carta.split(",");
+			CriteriosCarta criterios = new CriteriosCarta();
+			List<Integer> expansiones = new ArrayList<>();
+			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+			criterios.setExpansiones(expansiones);
+			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
+			if(cartasBBDD.isEmpty()) {
+				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
+			}
+			cartasQuerer.add(cartasBBDD.get(0));
+		}
+		return cartasQuerer;
 	}
 }

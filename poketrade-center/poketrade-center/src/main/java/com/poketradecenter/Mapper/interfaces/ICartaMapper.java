@@ -10,4 +10,5 @@ import com.poketradecenter.Clase.CriteriosCarta;
 public interface ICartaMapper {
 	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
 	List<Carta> recuperarCartasCrearBarajasPorCriterios(CriteriosCarta criterios);
+	List<Carta> recuperarCartasCrearIntercambioPorCriterios(CriteriosCarta criterios);
 }

@@ -20,13 +20,13 @@ async function recuperarCartaPrincipal(criterios) {
     .then(response => response.json());
 };
 
-async function eliminar(baraja) {
+async function eliminar(barajaUsuario) {
     let parameters = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(baraja),
+        body: JSON.stringify(barajaUsuario),
     };
     let response = await fetch('http://localhost:8080/misBarajas', parameters);
     if (!response.ok) {

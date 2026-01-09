@@ -29,8 +29,7 @@
 	<div id="baraja" class="baraja">
 		<div id="cartasBaraja" class="cartasBaraja"></div>
 		<div id="botoneraBaraja" class="botoneraBaraja">
-			<button id="btnGuardar" class="boton">Guardar</button>
-			<button id="btnGuardarYPublicar" class="boton">Guardar/Publicar</button>
+			<button id="btnGuardarOPublicar" class="boton">Guardar/Publicar</button>
 		</div>
 	</div>
 
@@ -171,6 +170,19 @@
 	<div id="resultadosCartas">
 		<div class="resultadosCartas">
 			<div id="mostrarCartas" class="mostrarCartas"></div>
+		</div>
+	</div>
+	
+	<!-- Confirmar acciones de la baraja -->
+	<div id="confirmar" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion">¿Qué deseas hacer con esta baraja?</span>
+			<div id="botonera" class="botoneraConfirmar">
+				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
+				<button id="btnGuardar" class="botonAceptar">Guardar</button>
+				<button id="btnPublicar" class="botonAceptar">Publicar</button>
+				<button id="btnGuardarYPublicar" class="botonAceptar">Guardar/Publicar</button>
+			</div>
 		</div>
 	</div>
 

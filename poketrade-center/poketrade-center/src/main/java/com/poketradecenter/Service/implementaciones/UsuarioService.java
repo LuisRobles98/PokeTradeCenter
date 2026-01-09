@@ -138,43 +138,4 @@ public class UsuarioService implements IUsuarioService {
 			usuario.setPassword(null);
 		}
 	}
-	
-	@Override
-	public CriteriosUsuario crearCriteriosUsuarioParams(Map<String, String> params) {
-    	CriteriosUsuario criterios = new CriteriosUsuario();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	            case "email":
-    	                criterios.setEmail(value);
-    	                break;
-    	            case "password":
-    	                criterios.setPassword(value);
-    	                break;
-    	            case "nombre":
-    	                criterios.setNombre(value);
-    	                break;
-    	            case "juegoId":
-    	                criterios.setJuegoId(value);
-    	                break;
-      	            case "iconoId":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema1Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema2Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-      	            case "emblema3Id":
-    	                criterios.setIconoId(Integer.parseInt(value));
-    	                break;
-    	            case "id":
-    	                criterios.setId(Integer.parseInt(value));
-    	                break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
-	}
 }

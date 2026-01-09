@@ -76,16 +76,16 @@ $(document).ready(function() {
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
 				img.classList.add("cartaBarajaAniadida");
 				img.src = carta.src;
+				img.dataset.expansionId = carta.expansionId;
+    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
-				img.dataset.basico = carta.basico;
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
     			img.dataset.rarezaId = 0;
     			img.dataset.nombre = null;
-    			img.dataset.basico = null;
 			}
     		contenedor.appendChild(img);
 		});
@@ -333,7 +333,7 @@ $(document).ready(function() {
 			try {
 				let intercambio = construirIntercambio();
 				await publicar(intercambio);
-				popupErroresOConfirmacion.mostrar("success", "Se ha publicad correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
+				popupErroresOConfirmacion.mostrar("success", "Se ha publicado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
 				limpiar();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
@@ -449,20 +449,14 @@ $(document).ready(function() {
 	function construirIntercambio() {
 		let intercambio = {};
 		intercambio.ofertanteId = usuario.id;
-		let cartasOfrecer = "";
-		cartasBarajaOfrecer.forEach(carta => {
-			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				cartasOfrecer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
-			}
-		});
-		intercambio.cartasOfrecer = cartasOfrecer;
-		let cartasQuerer = "";
-		cartasBarajaQuerer.forEach(carta => {
-			if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				cartasQuerer += carta.expansionId + "," + carta.cartaJuegoId + ";";	
-			}
-		});
-		intercambio.cartasQuerer = cartasQuerer;
+		intercambio.cartasOfrecer = cartasBarajaOfrecer
+			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
+			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
+			.join(";")
+		intercambio.cartasQuerer = cartasBarajaQuerer
+			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
+			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
+			.join(";")
 		return intercambio;
 	}
 });
