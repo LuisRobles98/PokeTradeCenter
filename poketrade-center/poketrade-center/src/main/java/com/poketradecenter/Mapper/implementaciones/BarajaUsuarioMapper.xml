@@ -2,24 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper">
 
+
+	<resultMap id="BarajaUsuarioConBarajaMap" type="com.poketradecenter.Clase.BarajaUsuario">
+	    <!-- Campos de BarajaPublica -->
+	    <id property="id" column="bu_id"/>
+	    <result property="usuarioId" column="usuarioId"/>
+   	    <result property="barajaPublicaId" column="barajaPublicaId"/>
+	    <result property="barajaId" column="barajaId"/>
+	    <result property="fechaCreacion" column="fechaCreacion"/>
+	    
+	    <!-- Asociación con Baraja -->
+	    <association property="baraja" javaType="com.poketradecenter.Clase.Baraja">
+	        <id property="id" column="b_id"/>
+	        <result property="nombre" column="b_nombre"/>
+	        <result property="cartas" column="b_cartas"/>
+	    </association>
+	</resultMap>
+
+
     <!-- SQL para guardar una baraja creada-->
-    <insert id="guardarBaraja" parameterType="com.poketradecenter.Clase.BarajaUsuario">
-        INSERT INTO barajas_usuario
-        (usuario_id, creador_id, nombre, cartas, fecha_creacion)
-        VALUES (#{usuarioId}, #{creadorId}, #{nombre}, #{cartas},#{fechaCreacion})
+    <insert id="guardar" parameterType="com.poketradecenter.Clase.BarajaUsuario" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO baraja_usuario
+        (usuario_id, baraja_publica_id, baraja_id, fecha_creacion)
+        VALUES (#{usuarioId}, #{barajaPublicaId}, #{barajaId},#{fechaCreacion})
     </insert>
         
 	 <!-- SQL para recuperar mis barajas por criterios-->
 	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosMisBarajas"  
-	        resultType="com.poketradecenter.Clase.BarajaUsuario">
-	    SELECT id, usuario_id AS usuarioId, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion
-	    FROM barajas_usuario
+	        resultMap="BarajaUsuarioConBarajaMap">
+	    SELECT bu.id AS bu_id, bu.usuario_id AS usuarioId, bu.baraja_publica_id AS barajaPublicaId, bu.fecha_creacion AS fechaCreacion,
+	    b.id AS b_id, b.nombre AS b_nombre, b.cartas AS b_cartas
+	    FROM baraja_usuario bu
+	    JOIN baraja b ON b.id = bu.baraja_id
 	    <where>
-   	        <if test="nombre != null">
-	            AND nombre LIKE CONCAT('%', #{nombre}, '%')
+   	        <if test="cartaNombre != null">
+	            AND b.cartas_nombre LIKE CONCAT('%', #{cartaNombre}, '%')
 	        </if>
 	        <if test="usuarioId != null">
-	            AND usuario_id = #{usuarioId}
+	            AND bu.usuario_id = #{usuarioId}
+	        </if>
+     	    <if test="barajaPublicaId != null">
+	            AND bu.baraja_publica_id = #{barajaPublicaId}
 	        </if>
 	    </where>
 		<choose>
@@ -27,13 +50,13 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY bu.fecha_creacion DESC
 		    </otherwise>
 		</choose>
 	</select>
 	
 	 <delete id="eliminarMiBaraja" parameterType="com.poketradecenter.Clase.Baraja">
-	 	DELETE FROM barajas_usuario
+	 	DELETE FROM baraja_usuario
 	 	WHERE id = #{id} AND usuario_id = #{usuarioId}
  	 </delete>
 

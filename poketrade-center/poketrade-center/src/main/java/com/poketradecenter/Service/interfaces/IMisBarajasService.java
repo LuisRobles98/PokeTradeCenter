@@ -5,6 +5,7 @@ import java.util.Map;
 import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
+import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosMisBarajas;
 import com.poketradecenter.Clase.CriteriosUsuario;
@@ -14,5 +15,5 @@ public interface IMisBarajasService {
 	List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosMisBarajas criterios);
 	Carta recuperarCartaMisBarajas(CriteriosCarta criterios);
 	void eliminarMiBaraja(BarajaUsuario baraja);
-	Usuario recuperarCreadorMisBaraja(CriteriosUsuario criterios);
+	Usuario recuperarCreadorMisBaraja(CriteriosBarajasPublicas criterios);
 }

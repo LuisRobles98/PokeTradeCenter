@@ -282,10 +282,8 @@ $(document).ready(function() {
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
-				let baraja = construirBarajaGuardar();
-				await guardar(baraja);
 				baraja = construirBarajaPublicar();
-				await publicar(baraja);
+				await guardarPublicar(baraja);
 				popupErroresOConfirmacion.mostrar("success", "Se ha guardado y publicado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas' y en 'Barajas públicas'", "");
 				limpiar();
 			}catch(error) {
@@ -347,16 +345,20 @@ $(document).ready(function() {
 	}
 	
 	function construirBarajaGuardar() {
+		let barajaUsuario = {};
+		barajaUsuario.usuarioId = usuario.id;
 		let baraja = {};
-		baraja.usuarioId = usuario.id;
 		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
-		return baraja;
+		barajaUsuario.baraja = baraja;
+		return barajaUsuario;
 	}
 	
 	function construirBarajaPublicar() {
+		let barajaPublica = {};
+		barajaPublica.creadorId = usuario.id;
 		let baraja = {};
-		baraja.creadorId = usuario.id;
 		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
-		return baraja;
+		barajaPublica.baraja = baraja;
+		return barajaPublica;
 	}
 });

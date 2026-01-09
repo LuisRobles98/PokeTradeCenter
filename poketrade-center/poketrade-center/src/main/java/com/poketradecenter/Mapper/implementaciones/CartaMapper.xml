@@ -4,7 +4,7 @@
 	 <!-- SQL para recuperar el total de cartas de una expansion-->
     <select id="recuperarTotalCartasPorExpansion" parameterType="Integer"  resultType="Integer">
     	SELECT COUNT(*)
-    	FROM cartas
+    	FROM carta
     	WHERE expansion_id = #{expansionId}
 	</select>
 	
@@ -19,7 +19,7 @@
     		energia_id AS energiaId,
     		tipo_id AS tipoId,
     		basico AS basico
-    	FROM cartas
+    	FROM carta
     	<where>
         	<if test="cartaJuegoId != null">
            	 	AND carta_juego_id = #{cartaJuegoId}
@@ -77,7 +77,7 @@
     		energia_id AS energiaId,
     		tipo_id AS tipoId,
     		basico AS basico
-    	FROM cartas
+    	FROM carta
     	<where>
         	<if test="cartaJuegoId != null">
            	 	AND carta_juego_id = #{cartaJuegoId}

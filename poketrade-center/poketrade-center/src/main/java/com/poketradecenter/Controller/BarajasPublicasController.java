@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poketradecenter.Clase.Baraja;
+import com.poketradecenter.Clase.BarajaLike;
 import com.poketradecenter.Clase.BarajaPublica;
+import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 import com.poketradecenter.Clase.CriteriosCarta;
+import com.poketradecenter.Clase.CriteriosMisBarajas;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
@@ -54,19 +57,25 @@ public class BarajasPublicasController {
     }
     
     @PostMapping("/barajasPublicas")
-    public ResponseEntity<?> darLike(@RequestBody CriteriosBarajasPublicas criterios) {
+    public ResponseEntity<?> darLike(@RequestBody BarajaLike barajaLike) {
     	try {
-    		barajasPublicasService.darLikeABaraja(criterios);
+    		barajasPublicasService.darLikeABaraja(barajaLike);
     		return ResponseEntity.ok().build();
     	}catch(RuntimeException e) {
     		return ResponseEntity.badRequest().body(e.getMessage());
     	}
     }
     
+    @GetMapping("/barajasPublicas/barajaGuardada")
+    public boolean recuperarBarajaPublicaGuardada(@RequestParam Map<String, String> params) {
+       CriteriosMisBarajas criterios = crearCriterios.crearCriteriosMisBarajasParams(params);
+       return barajasPublicasService.comprobarBarajaPublicaGuardada(criterios);
+    }
+    
     @PostMapping("/barajasPublicas/guardar")
-    public ResponseEntity<?> guardarBaraja(@RequestBody CriteriosBarajasPublicas criterios) {
+    public ResponseEntity<?> guardarBarajaPublicaComoUsuario(@RequestBody BarajaUsuario barajaUsuario) {
     	try {
-    		barajasPublicasService.guardarBaraja(criterios);
+    		barajasPublicasService.guardarBarajaPublicaComoUsuario(barajaUsuario);
     		return ResponseEntity.ok().build();
     	}catch(RuntimeException e) {
     		return ResponseEntity.badRequest().body(e.getMessage());

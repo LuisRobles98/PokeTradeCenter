@@ -15,8 +15,8 @@
            c.energia_id AS energiaId,
            c.tipo_id AS tipoId,
            ccu.obtenida
-    FROM coleccion_cartas_usuario ccu
-    JOIN cartas c
+    FROM carta_usuario ccu
+    JOIN carta c
       ON ccu.expansion_id = c.expansion_id
      AND ccu.carta_juego_id = c.carta_juego_id
     <where>
@@ -63,7 +63,7 @@
     
     <!-- SQL para actualizar los datos de la carta -->
 	<update id="actualizar" parameterType="com.poketradecenter.Clase.CartaUsuario">
-	   UPDATE coleccion_cartas_usuario
+	   UPDATE carta_usuario
 	   <set>
 	       <if test="obtenida != null">
 	           obtenida = #{obtenida}

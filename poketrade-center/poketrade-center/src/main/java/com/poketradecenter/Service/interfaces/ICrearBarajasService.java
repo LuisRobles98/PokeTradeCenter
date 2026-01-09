@@ -11,4 +11,6 @@ public interface ICrearBarajasService {
 	List<Carta> recuperarCartasPorCriterios(CriteriosCarta criteriosCarta);
 	void guardarBaraja(BarajaUsuario baraja);
 	void publicarBaraja(BarajaPublica baraja);
+	void guardarPublicarBaraja(BarajaPublica barajaPublica);
+	void guardarBarajaPublicaComoUsuario(BarajaUsuario barajaUsuario);
 }

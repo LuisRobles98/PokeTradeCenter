@@ -51,5 +51,15 @@ public class CrearBarajasController {
     		return ResponseEntity.badRequest().body(e.getMessage());
     	}
     }
+    
+    @PostMapping("/cartasBarajas/guardarPublicar")
+    public ResponseEntity<?> guardarPublicarBaraja(@RequestBody BarajaPublica baraja) {
+    	try {
+    		crearBarajasService.guardarPublicarBaraja(baraja);
+    		return ResponseEntity.ok().build();
+    	} catch(RuntimeException e) {
+    		return ResponseEntity.badRequest().body(e.getMessage());
+    	}
+    }
 
 }

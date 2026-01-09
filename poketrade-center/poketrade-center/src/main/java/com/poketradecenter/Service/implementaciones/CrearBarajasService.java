@@ -2,11 +2,7 @@ package com.poketradecenter.Service.implementaciones;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +13,7 @@ import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
 import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
-import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
+import com.poketradecenter.Service.interfaces.IBarajaService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
 
@@ -30,41 +26,56 @@ public class CrearBarajasService implements ICrearBarajasService {
 	private IBarajaUsuarioMapper barajaUsuarioMapper;
 	@Autowired
 	private IBarajaPublicaMapper barajaPublicaMapper;
+	@Autowired
+	private IBarajaService barajaService;
+	
+	
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
 		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 	}
 	
 	@Override
-	public void guardarBaraja(BarajaUsuario baraja) {
-		validarCartas(baraja.getCartas());
-		construirBaraja(baraja);
-		guardar(baraja);
+	public void guardarBaraja(BarajaUsuario barajaUsuario) {
+		validarCartas(barajaUsuario.getBaraja().getCartas());
+		construirBaraja(barajaUsuario.getBaraja());
+		guardarBaraja(barajaUsuario.getBaraja());
+		construirBarajaUsuario(barajaUsuario);
+		guardarBarajaUsuario(barajaUsuario);	
 	}
 	
 	@Override
-	public void publicarBaraja(BarajaPublica baraja) {
-		validarCartas(baraja.getCartas());
-		construirBaraja(baraja);
-		publicar(baraja);
+	public void publicarBaraja(BarajaPublica barajaPublica) {
+		validarCartas(barajaPublica.getBaraja().getCartas());
+		construirBaraja(barajaPublica.getBaraja());
+		guardarBaraja(barajaPublica.getBaraja());
+		construirBarajaPublica(barajaPublica);
+		guardarBarajaPublica(barajaPublica);
+	}
+	
+	@Override
+	public void guardarPublicarBaraja(BarajaPublica barajaPublica) {
+		validarCartas(barajaPublica.getBaraja().getCartas());
+		construirBaraja(barajaPublica.getBaraja());
+		guardarBaraja(barajaPublica.getBaraja());
+		construirBarajaPublica(barajaPublica);
+		guardarBarajaPublica(barajaPublica);
+		
+		BarajaUsuario barajaUsuario = new BarajaUsuario();
+		barajaUsuario.setUsuarioId(barajaPublica.getCreadorId());
+		barajaUsuario.setBarajaPublicaId(barajaPublica.getId());
+		barajaUsuario.setBarajaId(barajaPublica.getBarajaId());
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+		guardarBarajaUsuario(barajaUsuario);
 	}
 	
 	private void validarCartas(String cartasBarajaGuardarPublicar) {
 		List<Carta> cartas = new ArrayList<>();
 		String[] cartasBaraja = cartasBarajaGuardarPublicar.split(";");
 		
-		for(String carta : cartasBaraja) {
-			String[] cartaBaraja = carta.split(",");
-			CriteriosCarta criterios = new CriteriosCarta();
-			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
-			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
-			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
-			if(cartasBBDD.isEmpty()) {
-				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
-			}
-			cartas.add(cartasBBDD.get(0));
+		for(String cartaBaraja : cartasBaraja) {
+			Carta carta = recuperarCartaString(cartaBaraja);
+			cartas.add(carta);
 		}
 		
 		//validar tamaño baraja
@@ -110,21 +121,11 @@ public class CrearBarajasService implements ICrearBarajasService {
 	}
 	
 	private void construirBaraja(Baraja baraja) {
-		String[] cartaBaraja1 = baraja.getCartas().split(";")[0].split(",");
-		String[] cartaBaraja2 = baraja.getCartas().split(";")[1].split(",");
+		String cartaBaraja1 = baraja.getCartas().split(";")[0];
+		String cartaBaraja2 = baraja.getCartas().split(";")[1];
 		
-		CriteriosCarta criterios = new CriteriosCarta();
-		List<Integer> expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(cartaBaraja1[0].trim()));
-		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja1[1].trim()));
-		Carta primeraCarta = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
-		
-		expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(cartaBaraja2[0].trim()));
-		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja2[1].trim()));
-		Carta segundaCarta = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		Carta primeraCarta = recuperarCartaString(cartaBaraja1);
+		Carta segundaCarta = recuperarCartaString(cartaBaraja2);
 		
 		String nombreBaraja = "Baraja ";
 		if(primeraCarta.getExpansionId() == segundaCarta.getExpansionId() && primeraCarta.getCartaJuegoId() == segundaCarta.getCartaJuegoId()) {
@@ -136,23 +137,67 @@ public class CrearBarajasService implements ICrearBarajasService {
 			nombreBaraja += conjuncion + segundaCarta.getNombre();
 		}
 		baraja.setNombre(nombreBaraja);
-		baraja.setFechaCreacion(LocalDateTime.now());
+		
+		String nombreCartas = "";
+		String[] cartasBaraja = baraja.getCartas().split(";");
+		for(String cartaBaraja : cartasBaraja) {
+			Carta carta = recuperarCartaString(cartaBaraja);
+			nombreCartas += carta.getNombre() + " ";
+		}
+		baraja.setCartasNombre(nombreCartas);
 	}
 	
-	private void guardar(BarajaUsuario baraja) {
+	private Carta recuperarCartaString(String carta) {
+		String[] cartaBaraja = carta.split(",");
+		CriteriosCarta criterios = new CriteriosCarta();
+		List<Integer> expansiones = new ArrayList<>();
+		expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+		criterios.setExpansiones(expansiones);
+		criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+		List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
+		if(cartasBBDD.isEmpty()) {
+			throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
+		}
+		return cartasBBDD.get(0);
+	}
+	
+	private Baraja guardarBaraja(Baraja baraja) {
+		return barajaService.guardarBaraja(baraja);
+	}
+	
+	private void construirBarajaUsuario(BarajaUsuario barajaUsuario) {
+		barajaUsuario.setBarajaId(barajaUsuario.getBaraja().getId());
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+	}
+	
+	private void construirBarajaPublica(BarajaPublica barajaPublica) {
+		barajaPublica.setBarajaId(barajaPublica.getBaraja().getId());
+		barajaPublica.setMeGusta(0);
+		barajaPublica.setFechaCreacion(LocalDateTime.now());
+	}
+	
+	private BarajaUsuario guardarBarajaUsuario(BarajaUsuario barajaUsuario) {
 		try {
-			barajaUsuarioMapper.guardarBaraja(baraja);
+			barajaUsuarioMapper.guardar(barajaUsuario);
+			return barajaUsuario;
 		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al guardar la baraja", e);
+			throw new RuntimeException("Ha ocurrido un error al guardar la baraja del usuario", e);
 		}
 	}
 	
 
-	private void publicar(BarajaPublica baraja) {
+	private BarajaPublica guardarBarajaPublica(BarajaPublica barajaPublica) {
 		try {
-			barajaPublicaMapper.publicarBaraja(baraja);
+			barajaPublicaMapper.guardar(barajaPublica);
+			return barajaPublica;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al publicar la baraja", e);
 		}
+	}
+	
+	@Override
+	public void guardarBarajaPublicaComoUsuario(BarajaUsuario barajaUsuario) {
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
+		guardarBarajaUsuario(barajaUsuario);
 	}
 }

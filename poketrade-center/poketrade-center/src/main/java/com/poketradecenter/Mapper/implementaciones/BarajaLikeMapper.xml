@@ -5,23 +5,23 @@
 	 <!-- SQL para recuperar las barajas que el usuario logado le ha dado like por criterios-->
 	 <select id="recuperarBarajaLikePorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
 	        resultType="com.poketradecenter.Clase.BarajaLike">
-	    SELECT usuario_id AS usuarioId, baraja_id AS barajaId 
-	    FROM barajas_like
+	    SELECT usuario_id AS usuarioId, baraja_publica_id AS barajaPublicaId 
+	    FROM baraja_like
 	    <where>
    	        <if test="usuarioId != null">
 	            AND usuario_id = #{usuarioId}
 	        </if>
-	        <if test="barajaId != null">
-	            AND baraja_id = #{barajaId}
+	        <if test="barajaPublicaId != null">
+	            AND baraja_publica_id = #{barajaPublicaId}
 	        </if>
 	    </where>
 	</select>
 	
  	 <!-- SQL para insertar la combinacion usuario baraja al dar like-->
 	 <insert id="crear" parameterType="com.poketradecenter.Clase.BarajaLike">
-	    INSERT INTO barajas_like
-	    (usuario_id, baraja_id)
-	    VALUES (#{usuarioId}, #{barajaId});
+	    INSERT INTO baraja_like
+	    (usuario_id, baraja_publica_id)
+	    VALUES (#{usuarioId}, #{barajaPublicaId});
 	</insert>
 	
 </mapper>

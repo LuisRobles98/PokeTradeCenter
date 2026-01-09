@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper">
+
+
+	 <resultMap id="BarajaPublicaConBarajaMap" type="com.poketradecenter.Clase.BarajaPublica">
+	    <!-- Campos de BarajaPublica -->
+	    <id property="id" column="bp_id"/>
+	    <result property="creadorId" column="creadorId"/>
+	    <result property="barajaId" column="barajaId"/>
+	    <result property="meGusta" column="meGusta"/>
+	    <result property="fechaCreacion" column="fechaCreacion"/>
+	    
+	    <!-- Asociación con Baraja -->
+	    <association property="baraja" javaType="com.poketradecenter.Clase.Baraja">
+	        <id property="id" column="b_id"/>
+	        <result property="nombre" column="b_nombre"/>
+	        <result property="cartas" column="b_cartas"/>
+	    </association>
+	 </resultMap>
  
 	 <!-- SQL para recuperar las barajas públicas por criterios-->
 	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
-	        resultType="com.poketradecenter.Clase.BarajaPublica">
-	    SELECT id, creador_id AS creadorId, nombre, cartas, fecha_creacion AS fechaCreacion, me_gusta AS meGusta
-	    FROM barajas_publicas
+	        resultMap="BarajaPublicaConBarajaMap">
+	    SELECT bp.id AS bp_id, bp.creador_id AS creadorId, bp.baraja_id AS barajaId, bp.me_gusta AS meGusta, bp.fecha_creacion AS fechaCreacion,
+	    b.id AS b_id, b.nombre AS b_nombre, b.cartas AS b_cartas
+	    FROM baraja_publica bp
+	    JOIN baraja b ON b.id = bp.baraja_id
 	    <where>
-   	        <if test="nombre != null">
-	            AND nombre LIKE CONCAT('%', #{nombre}, '%')
+   	        <if test="cartaNombre != null">
+	            AND b.cartas_nombre LIKE CONCAT('%', #{cartaNombre}, '%')
 	        </if>
-	        <if test="barajaId != null">
-	            AND id = #{barajaId}
+	        <if test="barajaPublicaId != null">
+	            AND bp.id = #{barajaPublicaId}
 	        </if>
 	    </where>
 		<choose>
@@ -20,24 +39,21 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY bp.fecha_creacion DESC
 		    </otherwise>
 		</choose>
 	</select>
 	
 	<!-- SQL para publicar una baraja creada-->
-    <insert id="publicarBaraja" parameterType="com.poketradecenter.Clase.BarajaPublica">
-        INSERT INTO barajas_publicas
-        (creador_id, nombre, cartas, fecha_creacion, me_gusta)
-        VALUES (#{creadorId}, #{nombre}, #{cartas},#{fechaCreacion}, 0)
+    <insert id="guardar" parameterType="com.poketradecenter.Clase.BarajaPublica" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO baraja_publica
+        (creador_id, baraja_id, me_gusta, fecha_creacion)
+        VALUES (#{creadorId}, #{barajaId}, #{meGusta},#{fechaCreacion})
     </insert>
 	
-	<update id="actualizarBaraja" parameterType="com.poketradecenter.Clase.BarajaPublica">
-	    UPDATE barajas_publicas
+	<update id="actualizar" parameterType="com.poketradecenter.Clase.BarajaPublica">
+	    UPDATE baraja_publica
 	    SET
-	    creador_id = #{creadorId},
-	    cartas = #{cartas},
-	    fecha_creacion = #{fechaCreacion},
 	    me_gusta = #{meGusta}
 	    WHERE id = #{id}
 	</update>

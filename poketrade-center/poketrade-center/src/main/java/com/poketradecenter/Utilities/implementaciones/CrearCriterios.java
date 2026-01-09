@@ -178,14 +178,14 @@ public class CrearCriterios implements ICrearCriterios {
 	        	case "usuarioId":
 	        		criterios.setUsuarioId(Integer.parseInt(value));
 	        		break;
-	            case "nombre":
-	                criterios.setNombre(value);
+	            case "cartaNombre":
+	                criterios.setCartaNombre(value);
 	                break;
 	            case "ordenacion":
 	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionBarajasPublicas(value));
 	            	break;
-	            case "barajaId":
-	            	criterios.setBarajaId(Integer.parseInt(value));
+	            case "barajaPublicaId":
+	            	criterios.setBarajaPublicaId(Integer.parseInt(value));
 	            	break;
 	            default:
 	                break;
@@ -202,8 +202,11 @@ public class CrearCriterios implements ICrearCriterios {
 	            case "usuarioId":
 	                criterios.setUsuarioId(Integer.parseInt(value));
 	                break;
-	            case "nombre":
-	                criterios.setNombre(value);
+	            case "barajaPublicaId":
+	                criterios.setBarajaPublicaId(Integer.parseInt(value));
+	                break;
+	            case "cartaNombre":
+	                criterios.setCartaNombre(value);
 	                break;
 	            case "ordenacion":
 	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionMisBarajas(value));

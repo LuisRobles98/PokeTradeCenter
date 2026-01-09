@@ -10,7 +10,7 @@ import com.poketradecenter.Clase.CriteriosMisBarajas;
 
 @Mapper
 public interface IBarajaUsuarioMapper {
-	void guardarBaraja(BarajaUsuario baraja);
+	void guardar(BarajaUsuario baraja);
 	List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosMisBarajas criterios);
 	void eliminarMiBaraja(BarajaUsuario baraja);
 }

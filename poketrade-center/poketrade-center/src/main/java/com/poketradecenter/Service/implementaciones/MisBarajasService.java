@@ -1,20 +1,20 @@
 package com.poketradecenter.Service.implementaciones;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
+import com.poketradecenter.Clase.CriteriosBarajasPublicas;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosMisBarajas;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
+import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
 import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
+import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
@@ -30,6 +30,9 @@ public class MisBarajasService implements IMisBarajasService {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IBarajaPublicaMapper barajaPublicaMapper;
 	
 	@Override
 	public List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosMisBarajas criterios) {
@@ -55,7 +58,18 @@ public class MisBarajasService implements IMisBarajasService {
 	}
 	
 	@Override
-	public Usuario recuperarCreadorMisBaraja(CriteriosUsuario criterios) {	
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+	public Usuario recuperarCreadorMisBaraja(CriteriosBarajasPublicas criterios) {
+		BarajaPublica baraja = recuperarBarajaPublica(criterios);
+		CriteriosUsuario criteriosUsuario = new CriteriosUsuario();
+		criteriosUsuario.setId(baraja.getCreadorId());
+		return usuarioService.recuperarUsuarioPorCriterios(criteriosUsuario).get(0);
+	}
+	
+	private BarajaPublica recuperarBarajaPublica(CriteriosBarajasPublicas criterios) {
+		try {
+			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios).get(0);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al recuperar la baraja pública", e);
+		}
 	}
 }
