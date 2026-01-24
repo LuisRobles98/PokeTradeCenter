@@ -2,17 +2,13 @@ package com.poketradecenter.Service.implementaciones;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosIntercambiosPublicos;
+import com.poketradecenter.Clase.CriteriosIntercambio;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Clase.Usuario;
@@ -32,7 +28,7 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 	private IUsuarioService usuarioService;
 	
 	@Override
-	public List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambiosPublicos criterios) {
+	public List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambio criterios) {
 		try {
 			return intercambioMapper.recuperarIntercambiosPublicosPorCriterios(criterios);
 		} catch(RuntimeException e) {
@@ -70,7 +66,7 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 			throw new RuntimeException("Las rarezas de las cartas seleccionadas no coinciden");
 		}
 		
-		CriteriosIntercambiosPublicos criterios = new CriteriosIntercambiosPublicos();
+		CriteriosIntercambio criterios = new CriteriosIntercambio();
 		criterios.setId(intercambio.getId());
 		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(0);
 		if(intercambioBBDD.getEstadoId() != 1) {
@@ -92,7 +88,7 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		Carta cartaParaOfrecer = recuperarCarta(intercambio.getCartaOfrecerFinal());
 		Carta cartaParaQuerer = recuperarCarta(intercambio.getCartaQuererFinal());
 		intercambio.setCartaOfrecerFinalNombre(cartaParaOfrecer.getNombre());
-		intercambio.setCartaOfrecerFinalNombre(cartaParaQuerer.getNombre());
+		intercambio.setCartaQuererFinalNombre(cartaParaQuerer.getNombre());
 		intercambio.setEstadoId(2);
 		intercambio.setFechaCambio(LocalDateTime.now());
 	}

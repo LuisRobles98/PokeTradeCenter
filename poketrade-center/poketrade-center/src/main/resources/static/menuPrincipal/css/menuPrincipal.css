@@ -67,66 +67,69 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
     z-index: 20;
-    width: 300px;
+    width: 485px;
 }
 
 /*------------------ LABEL POPUP INCLUIR ID JUEGO ------------------*/
 .labelIncluirIdJuego {
-  	font-size: 14px;
-	font-family: Arial, sans-serif;
-    font-weight: 600;
+	color: #68768A;
 }
 
 /*------------------ IMAGEN POPUP INCLUIR ID JUEGO ------------------*/
 .imagenIncluirIdJuego {
-	width: 30px;
+    position: absolute;
+    margin-top: -1px;
+    width: 28px;
 }
 
 
 /*------------------INPUT POPUP INCLUIR ID JUEGO----------------------*/
 .inputIncluirIdJuego {
-	align-items: center;
-	width: 90%;
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+    margin-top: 15px;
+    width: 255px;
     padding: 10px;
-    margin-top: 20px;
     border-radius: 10px;
-    border: 2px solid #008CBA;
+    border: 2px solid #8EA0B8;
     font-weight: normal;
     font-size: 1em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .inputIncluirIdJuego:hover {
-    border-color: #007bb5;
+    border-color: #7A8BA3;
 }
 
 .inputIncluirIdJuego:focus {
 	outline: none; /* eliminar lo que pone por defecto el navegador */
-    border-color: #005f87;
+   	border-color: #68768A;
 }
 
 
 /*---------BOTON POPUP INCLUIR ID JUEGO -------*/
 .botonIncluirIdJuego {
-	padding: 10px 20px;
-    margin: 0px 15px;
+	display: flex;
+    margin-top: 15px;
+    margin-left: 150px;
+    width: 177px;
+    padding: 10px 20px;
     border: 2px solid #007bb5;
-    border-radius: 10px;
-    background-color: #008CBA;
+    border-radius: 30px;
+    background-color: cornflowerblue;
     color: white;
     font-weight: normal;
     font-size: 1em;
     cursor: pointer;
-    transition: background-color 0.3s;
     transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
 }
 
 .botonIncluirIdJuego:hover {
 	transform: scale(1.03);
 	border: 2px solid #005f87;
-	background-color: #007bb5;
+	background-color: #2F65C8;
 }
 
 /*---------------------------------*/

@@ -1,6 +1,6 @@
 package com.poketradecenter.Clase;
 
-public class CriteriosBarajasPublicas {
+public class CriteriosBarajaPublica {
 	
 	private Integer barajaPublicaId;
 	private Integer usuarioId;

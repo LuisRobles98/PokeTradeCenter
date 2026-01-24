@@ -14,29 +14,11 @@ $(document).ready(function() {
 		$("#inputNombreCartaQuerer").val("");
 		ordenSeleccionado = null;
 		intercambioSeleccionadoCompleto = null;
-		vaciarCartaQuiero();
-		vaciarCartaOfrezco();
 		initTabla();
 	}
 	
-	function vaciarCartaQuiero() {
-		cartaQuieroSeleccionada = Array.from({ length: 1 }, () => ({
-			expansionId: 0,
-			cartaJuegoId: 0
-		}));
-		recargarOfrecer();
-	}
-	
-	function vaciarCartaOfrezco() {
-		cartaOfrezcoSeleccionada = Array.from({ length: 1 }, () => ({
-			expansionId: 0,
-			cartaJuegoId: 0
-		}));
-		recargarQuerer();
-	}
-	
 	async function initTabla() {
-		let intercambiosRecuperadas = await recuperarIntercambiosPublicosPorCriterios();
+		let intercambiosRecuperadas = await recuperarIntercambiosActivosPorCriterios();
 		await formarPortadas(intercambiosRecuperadas);
 		
 		const tablaIntercambios = new Tabulator("#tablaIntercambios", {
@@ -70,20 +52,18 @@ $(document).ready(function() {
 			
 		tablaIntercambios.on("rowClick", function(e, row){
 			intercambioSeleccionadoCompleto = row.getData();
-			vaciarCartaQuiero();
-			vaciarCartaOfrezco();
 			mostrarIntercambio(row.getData());
 		});
 		
 		$("#inputNombreCartaOfrecer").on("input", async function() {
-			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+			let intercambios = await recuperarIntercambiosActivosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
     		mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 		
 		$("#inputNombreCartaQuerer").on("input", async function() {
-			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+			let intercambios = await recuperarIntercambiosActivosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
     		mostrarIntercambio(intercambioSeleccionadoCompleto);
@@ -99,7 +79,7 @@ $(document).ready(function() {
 				ordenSeleccionado = valor;
 				$(this).addClass("seleccionada");
 			}
-			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+			let intercambios = await recuperarIntercambiosActivosPorCriterios();
     		await formarPortadas(intercambios);
     		await renderizarTabla(tablaIntercambios, intercambios);
 	    	mostrarIntercambio(intercambioSeleccionadoCompleto);
@@ -107,7 +87,7 @@ $(document).ready(function() {
 		
 		//boton actualizar
 		$("#botonActualizar").click(async function() {
-			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
+			let intercambios = await recuperarIntercambiosActivosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
 			mostrarIntercambio(intercambioSeleccionadoCompleto);
@@ -151,13 +131,13 @@ $(document).ready(function() {
 	}
 	
 	
-	async function recuperarIntercambiosPublicosPorCriterios() {
+	async function recuperarIntercambiosActivosPorCriterios() {
 		let criterios = {};
 		criterios.usuarioId = usuario.id;
 		criterios.nombreOfrecer = $("#inputNombreCartaOfrecer").val();
 		criterios.nombreQuerer = $("#inputNombreCartaQuerer").val();
 		criterios.ordenacion = ordenSeleccionado;
-		let intercambios = await recuperarIntercambiosPublicos(criterios);
+		let intercambios = await recuperarIntercambiosActivos(criterios);
 		return intercambios;
 	}
 	
@@ -258,7 +238,7 @@ $(document).ready(function() {
 		
 		let criterios = {};
 		criterios.id = intercambioSeleccionadoCompleto.id;
-		let intercambioBBDD = await recuperarIntercambiosPublicos(criterios);
+		let intercambioBBDD = await recuperarIntercambiosActivos(criterios);
 		if(intercambioBBDD == null || intercambioBBDD == undefined) {
 			errores = errores += "- Parece que alguien se ha adelantado y ya ha solicitado el intercambio" + "<br>";
 		}
@@ -336,16 +316,6 @@ $(document).ready(function() {
     		contenedor.appendChild(img);
 		});
 	}
-	
-	//funcion eliminar carta que quiero
-	$("#divCartaQuererYo").on("click", ".cartaIntercambioAniadida", function() {
-		vaciarCartaQuiero();
-	});
-	
-	//funcion eliminar carta que ofrezco
-	$("#divCartaOfrecerYo").on("click", ".cartaIntercambioAniadida", function() {
-		vaciarCartaOfrezco();
-	});
 	
 	async function renderizarTabla(tablaIntercambios, barajas) {
 		tablaIntercambios.replaceData(barajas);

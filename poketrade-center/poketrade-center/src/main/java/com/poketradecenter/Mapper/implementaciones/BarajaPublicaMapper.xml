@@ -20,7 +20,7 @@
 	 </resultMap>
  
 	 <!-- SQL para recuperar las barajas públicas por criterios-->
-	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
+	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaPublica"  
 	        resultMap="BarajaPublicaConBarajaMap">
 	    SELECT bp.id AS bp_id, bp.creador_id AS creadorId, bp.baraja_id AS barajaId, bp.me_gusta AS meGusta, bp.fecha_creacion AS fechaCreacion,
 	    b.id AS b_id, b.nombre AS b_nombre, b.cartas AS b_cartas

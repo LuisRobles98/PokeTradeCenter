@@ -4,10 +4,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.poketradecenter.Clase.BarajaLike;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 
 @Mapper
 public interface IBarajaLikeMapper {
-	List<BarajaLike> recuperarBarajaLikePorCriterios(CriteriosBarajasPublicas criterios);
+	List<BarajaLike> recuperarBarajaLikePorCriterios(CriteriosBarajaPublica criterios);
 	void crear(BarajaLike baraja);
 }

@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
-import com.poketradecenter.Clase.CriteriosIntercambiosPublicos;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosIntercambio;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Utilities.interfaces.IConvertirOrdenacion;
 import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
@@ -171,8 +171,8 @@ public class CrearCriterios implements ICrearCriterios {
 	}
 	
 	@Override
-	public CriteriosBarajasPublicas crearCriteriosBarajasPublicasParams(Map<String, String> params) {
-	   CriteriosBarajasPublicas criterios = new CriteriosBarajasPublicas();
+	public CriteriosBarajaPublica crearCriteriosBarajaPublicaParams(Map<String, String> params) {
+	   CriteriosBarajaPublica criterios = new CriteriosBarajaPublica();
 	   params.forEach((key, value) -> {
 	        switch(key) {
 	        	case "usuarioId":
@@ -195,8 +195,8 @@ public class CrearCriterios implements ICrearCriterios {
 	}
 	
 	@Override
-	public CriteriosMisBarajas crearCriteriosMisBarajasParams(Map<String, String> params) {
-	   CriteriosMisBarajas criterios = new CriteriosMisBarajas();
+	public CriteriosBarajaUsuario crearCriteriosBarajaUsuarioParams(Map<String, String> params) {
+	   CriteriosBarajaUsuario criterios = new CriteriosBarajaUsuario();
 	   params.forEach((key, value) -> {
 	        switch(key) {
 	            case "usuarioId":
@@ -219,8 +219,8 @@ public class CrearCriterios implements ICrearCriterios {
 	}
 	
 	@Override
-	public CriteriosIntercambiosPublicos crearCriteriosIntercambiosPublicosParams(Map<String, String> params) {
-		CriteriosIntercambiosPublicos criterios = new CriteriosIntercambiosPublicos();
+	public CriteriosIntercambio crearCriteriosIntercambioParams(Map<String, String> params) {
+		CriteriosIntercambio criterios = new CriteriosIntercambio();
     	   params.forEach((key, value) -> {
     	        switch(key) {
     	        	case "id":

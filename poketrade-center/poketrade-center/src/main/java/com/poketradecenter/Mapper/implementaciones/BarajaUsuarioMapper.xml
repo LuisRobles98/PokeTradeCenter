@@ -28,7 +28,7 @@
     </insert>
         
 	 <!-- SQL para recuperar mis barajas por criterios-->
-	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosMisBarajas"  
+	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaUsuario"  
 	        resultMap="BarajaUsuarioConBarajaMap">
 	    SELECT bu.id AS bu_id, bu.usuario_id AS usuarioId, bu.baraja_publica_id AS barajaPublicaId, bu.fecha_creacion AS fechaCreacion,
 	    b.id AS b_id, b.nombre AS b_nombre, b.cartas AS b_cartas

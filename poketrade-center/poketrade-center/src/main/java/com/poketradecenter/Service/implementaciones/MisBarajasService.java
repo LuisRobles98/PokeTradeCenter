@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
@@ -35,7 +35,7 @@ public class MisBarajasService implements IMisBarajasService {
 	private IBarajaPublicaMapper barajaPublicaMapper;
 	
 	@Override
-	public List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosMisBarajas criterios) {
+	public List<BarajaUsuario> recuperarMisBarajasPorCriterios(CriteriosBarajaUsuario criterios) {
 		try {
 			return barajaUsuarioMapper.recuperarMisBarajasPorCriterios(criterios);
 		} catch(RuntimeException e) {
@@ -58,14 +58,14 @@ public class MisBarajasService implements IMisBarajasService {
 	}
 	
 	@Override
-	public Usuario recuperarCreadorMisBaraja(CriteriosBarajasPublicas criterios) {
+	public Usuario recuperarCreadorMisBaraja(CriteriosBarajaPublica criterios) {
 		BarajaPublica baraja = recuperarBarajaPublica(criterios);
 		CriteriosUsuario criteriosUsuario = new CriteriosUsuario();
 		criteriosUsuario.setId(baraja.getCreadorId());
 		return usuarioService.recuperarUsuarioPorCriterios(criteriosUsuario).get(0);
 	}
 	
-	private BarajaPublica recuperarBarajaPublica(CriteriosBarajasPublicas criterios) {
+	private BarajaPublica recuperarBarajaPublica(CriteriosBarajaPublica criterios) {
 		try {
 			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios).get(0);
 		} catch(RuntimeException e) {

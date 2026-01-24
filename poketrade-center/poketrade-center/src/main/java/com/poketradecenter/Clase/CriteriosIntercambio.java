@@ -1,6 +1,6 @@
 package com.poketradecenter.Clase;
 
-public class CriteriosIntercambiosPublicos {
+public class CriteriosIntercambio {
 	
 	private Integer id;
 	private Integer usuarioId;

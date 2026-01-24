@@ -5,18 +5,18 @@ import com.poketradecenter.Clase.BarajaLike;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 
 public interface IBarajasPublicasService {
-	List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios);
+	List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajaPublica criterios);
 	Carta recuperarCartaBarajasPublicas(CriteriosCarta criterios);
 	Usuario recuperarCreadorBarajasPublicas(CriteriosUsuario criterios);
-	boolean comprobarLikeABaraja(CriteriosBarajasPublicas criterios);
+	boolean comprobarLikeABaraja(CriteriosBarajaPublica criterios);
 	void darLikeABaraja(BarajaLike barajaLike);
 	void guardarBarajaPublicaComoUsuario(BarajaUsuario barajaUsuario);
-	boolean comprobarBarajaPublicaGuardada(CriteriosMisBarajas criterios);
+	boolean comprobarBarajaPublicaGuardada(CriteriosBarajaUsuario criterios);
 }
