@@ -394,7 +394,7 @@ $(document).ready(function() {
 			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
 				let contadorCartas = 0;
 				let nombreCarta = carta1.nombre;
-				cartaRepetidaQuerer.forEach(carta2 => {
+				cartasBarajaQuerer.forEach(carta2 => {
 					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
 						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
 							contadorCartas++;
@@ -409,6 +409,26 @@ $(document).ready(function() {
 		
 		cartaRepetidaQuerer.forEach(nombreCarta => {
 			errores += "- Has puesto que quieres la carta de " + nombreCarta + " mas de una vez" + "<br>";
+		});
+		
+		//validar que no hay cartas en ofrecer iguales que en quiero
+		let cartaRepetida = new Set();
+		cartasBarajaQuerer.forEach(carta1 => {
+			if(carta1.expansionId != 0 && carta1.cartaJuegoId != 0) {
+				let nombreCarta = carta1.nombre;
+				cartasBarajaOfrecer.forEach(carta2 => {
+					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
+						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
+							cartaRepetida.add(nombreCarta);
+						}
+					}
+				});
+
+			}
+		});
+		
+		cartaRepetida.forEach(nombreCarta => {
+			errores += "- Has puesto que quieres y ofreces a la vez la carta de " + nombreCarta + "<br>";
 		});
 		
 		//validar que hay al menos la misma rareza de ofrecer y querer

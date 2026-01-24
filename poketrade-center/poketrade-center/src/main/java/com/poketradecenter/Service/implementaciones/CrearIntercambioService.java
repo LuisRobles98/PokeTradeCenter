@@ -77,6 +77,16 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 			}
 		}
 		
+		//validar que no hay cartas iguales en ofrecer y querer
+		for(Carta carta1 : cartasOfrecer) {
+			for(Carta carta2 : cartasQuerer) {
+				if(carta1.getExpansionId() == carta2.getExpansionId() && carta1.getCartaJuegoId() == carta2.getCartaJuegoId()) {
+					throw new RuntimeException("Has añadido una carta en ofrecer igual en querer");
+				}
+			}
+		}
+		
+		
 		//validar que hay al menos la misma rareza de ofrecer y querer
 		for(Carta carta1 : cartasOfrecer) {
 			boolean coincideRareza = false;

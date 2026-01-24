@@ -167,14 +167,14 @@ $(document).ready(function() {
 			let criteriosCreador = {};
 			criteriosCreador.id = intercambio.ofertanteId;
 			let creador = await recuperarCreadorIntercambio(criteriosCreador);
-			if(intercambio.cartasOfrecer.length == 1) {
-				$("#textoOfrecer").text(creador.nombre + " ofrece la siguiente carta:");
+			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+			if(cartasOfrecer.length == 1) {
+				$("#textoOfrecer").text(creador.nombre + " ofrece la siguiente carta:").removeClass("textoOfrecer").addClass("textoOfrecerUna");
 			} else {
-				$("#textoOfrecer").text(creador.nombre + " ofrece una de las siguientes cartas:");	
+				$("#textoOfrecer").text(creador.nombre + " ofrece una de las siguientes cartas:").removeClass("textoOfrecerUna").addClass("textoOfrecer");	
 			}
 			let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer");
 			contenedorOfrecer.innerHTML = "";
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 			contenedorOfrecer.className = "mostrarCartasOfrecer abanicoMostrarOfrecer-" + cartasOfrecer.length;
 			cartasOfrecer.forEach(carta => {
 				let img = document.createElement("img");
@@ -187,14 +187,14 @@ $(document).ready(function() {
 			});
     		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
     		
-    		if(intercambio.cartasQuerer.length == 1) {
-				$("#textoQuerer").text("A cambio de la siguiente carta:");
+    		let cartasQuerer = intercambio.cartasQuerer.split(";")
+    		if(cartasQuerer.length == 1) {
+				$("#textoQuerer").text("A cambio de la siguiente carta:").removeClass("textoQuerer").addClass("textoQuererUna");
 			} else {
-				$("#textoQuerer").text("A cambio de una de las siguientes cartas:");
+				$("#textoQuerer").text("A cambio de una de las siguientes cartas:").removeClass("textoQuererUna").addClass("textoQuerer");
 			}
 			let contenedorQuerer = document.getElementById("mostrarCartasQuerer");
 			contenedorQuerer.innerHTML = "";
-			let cartasQuerer = intercambio.cartasQuerer.split(";")
 			contenedorQuerer.className = "mostrarCartasQuerer abanicoMostrarQuerer-" + cartasQuerer.length;
 			cartasQuerer.forEach(carta => {
 				let img = document.createElement("img");

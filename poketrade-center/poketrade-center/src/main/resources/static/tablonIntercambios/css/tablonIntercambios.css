@@ -148,7 +148,7 @@
 
 /*1*/
 .tablaCell .abanicoOfrecer-1 .portada {
-    margin-left: 95px;
+    margin-left: 195px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -157,7 +157,7 @@
 }
 
 .tablaCell .abanicoQuerer-1 .portada {
-    margin-left: 440px;
+    margin-left: 340px;
     transform: rotate(-0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -168,7 +168,7 @@
 /*2*/
 
 .tablaCell .abanicoOfrecer-2 .portada:nth-child(1) {
-    margin-left: 50px;
+    margin-left: 115px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -177,7 +177,7 @@
 }
 
 .tablaCell .abanicoOfrecer-2 .portada:nth-child(2) {
-    margin-left: 130px;
+    margin-left: 195px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -186,7 +186,7 @@
 }
 
 .tablaCell .abanicoQuerer-2 .portada:nth-child(1) {
-    margin-left: 400px;
+    margin-left: 340px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -195,7 +195,7 @@
 }
 
 .tablaCell .abanicoQuerer-2 .portada:nth-child(2) {
-    margin-left: 480px;
+    margin-left: 420px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -206,7 +206,7 @@
 /*3*/
 
 .tablaCell .abanicoOfrecer-3 .portada:nth-child(1) {
-    margin-left: 20px;
+    margin-left: 55px;
     transform: rotate(-6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -215,7 +215,7 @@
 }
 
 .tablaCell .abanicoOfrecer-3 .portada:nth-child(2) {
-    margin-left: 90px;
+    margin-left: 125px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -224,7 +224,7 @@
 }
 
 .tablaCell .abanicoOfrecer-3 .portada:nth-child(3) {
-    margin-left: 160px;
+    margin-left: 195px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -233,7 +233,7 @@
 }
 
 .tablaCell .abanicoQuerer-3 .portada:nth-child(1) {
-    margin-left: 370px;
+    margin-left: 340px;
     transform: rotate(-6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -242,7 +242,7 @@
 }
 
 .tablaCell .abanicoQuerer-3 .portada:nth-child(2) {
-    margin-left: 440px;
+    margin-left: 410px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -251,7 +251,7 @@
 }
 
 .tablaCell .abanicoQuerer-3 .portada:nth-child(3) {
-    margin-left: 510px;
+    margin-left: 480px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -262,14 +262,14 @@
 
 /*4*/
 .tablaCell .abanicoOfrecer-4 .portada:nth-child(1) {
-    margin-left: 5px;
+    margin-left: 20px;
     transform: rotate(-6deg);
     margin-top: -12px;
     z-index: 2;
 }
 
 .tablaCell .abanicoOfrecer-4 .portada:nth-child(2) {
-    margin-left: 60px;
+    margin-left: 75px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -278,7 +278,7 @@
 }
 
 .tablaCell .abanicoOfrecer-4 .portada:nth-child(3) {
-    margin-left: 120px;
+    margin-left: 135px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -287,7 +287,7 @@
 }
 
 .tablaCell .abanicoOfrecer-4 .portada:nth-child(4) {
-    margin-left: 180px;
+    margin-left: 195px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -297,14 +297,14 @@
 
 
 .tablaCell .abanicoQuerer-4 .portada:nth-child(1) {
-    margin-left: 350px;
+    margin-left: 340px;
     transform: rotate(-6deg);
     margin-top: -12px;
     z-index: 2;
 }
 
 .tablaCell .abanicoQuerer-4 .portada:nth-child(2) {
-    margin-left: 410px;
+    margin-left: 400px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -313,7 +313,7 @@
 }
 
 .tablaCell .abanicoQuerer-4 .portada:nth-child(3) {
-    margin-left: 470px;
+    margin-left: 460px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -322,7 +322,7 @@
 }
 
 .tablaCell .abanicoQuerer-4 .portada:nth-child(4) {
-    margin-left: 530px;
+    margin-left: 520px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -333,14 +333,14 @@
 /*5*/
 
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(1) {
-    margin-left: 0px;
+    margin-left: -2px;
     transform: rotate(-6deg);
     margin-top: -12px;
     z-index: 2;
 }
 
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(2) {
-    margin-left: 44px;
+    margin-left: 42px;
     transform: rotate(-3deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -349,7 +349,7 @@
 }
 
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(3) {
-    margin-left: 95px;
+    margin-left: 93px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -358,7 +358,7 @@
 }
 
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(4) {
-    margin-left: 142px;
+    margin-left: 140px;
     transform: rotate(3deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -367,7 +367,7 @@
 }
 
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(5) {
-    margin-left: 197px;
+    margin-left: 195px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -377,14 +377,14 @@
 
 
 .tablaCell .abanicoQuerer-5 .portada:nth-child(1) {
-    margin-left: 335px;
+    margin-left: 340px;
     transform: rotate(-6deg);
     margin-top: -12px;
     z-index: 2;
 }
 
 .tablaCell .abanicoQuerer-5 .portada:nth-child(2) {
-    margin-left: 386px;
+    margin-left: 391px;
     transform: rotate(-3deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -393,7 +393,7 @@
 }
 
 .tablaCell .abanicoQuerer-5 .portada:nth-child(3) {
-    margin-left: 437px;
+    margin-left: 442px;
     transform: rotate(0deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -402,7 +402,7 @@
 }
 
 .tablaCell .abanicoQuerer-5 .portada:nth-child(4) {
-    margin-left: 488px;
+    margin-left: 493px;
     transform: rotate(3deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -411,7 +411,7 @@
 }
 
 .tablaCell .abanicoQuerer-5 .portada:nth-child(5) {
-    margin-left: 539px;
+    margin-left: 544px;
     transform: rotate(6deg);
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -881,10 +881,24 @@
 	color: #68768A;
 }
 
+.textoOfrecerUna {
+    position: absolute;
+    top: 35px;
+    margin-left: 160px;
+	color: #68768A;
+}
+
 .textoQuerer {
     position: absolute;
     top: 380px;
     margin-left: 126px;
+    color: #68768A;
+}
+
+.textoQuererUna {
+    position: absolute;
+    top: 380px;
+    margin-left: 166px;
     color: #68768A;
 }
 
