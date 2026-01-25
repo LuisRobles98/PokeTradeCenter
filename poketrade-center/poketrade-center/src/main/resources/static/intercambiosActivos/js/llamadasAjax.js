@@ -9,7 +9,7 @@ async function recuperarIntercambiosActivos(criterios) {
     .then(response => response.json());
 };
 
-async function recuperarCreadorIntercambio(criterios) {
+async function recuperarUsuarioIntercambio(criterios) {
 	let query = QueryURL.formar(criterios);
     return fetch(`http://localhost:8080/intercambiosActivos/usuario?${query}`, {
         method: 'GET',

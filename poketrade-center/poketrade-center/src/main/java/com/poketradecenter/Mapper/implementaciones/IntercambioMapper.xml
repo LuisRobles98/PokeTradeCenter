@@ -14,7 +14,7 @@
     <!-- SQL para recuperar los intercambios públicos por criterios-->
 	 <select id="recuperarIntercambiosPublicosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" 
 	 		resultType="com.poketradecenter.Clase.Intercambio">
-	    SELECT id, ofertante_id AS ofertanteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
+	    SELECT id, ofertante_id AS ofertanteId, contraparte_id AS contraparteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
 	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre,
 	    estado_id AS estadoId, carta_ofrecer_final AS cartaOfrecerFinal, carta_querer_final AS cartaOfrecerFinal,
 	    carta_ofrecer_final_nombre AS cartaOfrecerFinalNombre, carta_querer_final_nombre AS cartaQuererFinalNombre, 
@@ -64,9 +64,9 @@
 	<!-- SQL para recuperar los intercambios activos por criterios-->
 	 <select id="recuperarIntercambiosActivosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" 
 	 		resultType="com.poketradecenter.Clase.Intercambio">
-	    SELECT id, ofertante_id AS ofertanteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
+	    SELECT id, ofertante_id AS ofertanteId, contraparte_id AS contraparteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
 	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre, 
-   	    estado_id AS estadoId, carta_ofrecer_final AS cartaOfrecerFinal, carta_querer_final AS cartaOfrecerFinal,
+   	    estado_id AS estadoId, carta_ofrecer_final AS cartaOfrecerFinal, carta_querer_final AS cartaQuererFinal,
 	    carta_ofrecer_final_nombre AS cartaOfrecerFinalNombre, carta_querer_final_nombre AS cartaQuererFinalNombre, 
 	    fecha_creacion AS fechaCreacion
 	    FROM intercambio

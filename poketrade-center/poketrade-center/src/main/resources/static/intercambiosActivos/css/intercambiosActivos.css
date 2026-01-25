@@ -459,11 +459,12 @@
     font-size: 36px;
 }
 
-/* --------------------------- POPUP MOSTRAR BARAJA ----------------------------------------- */
+/* --------------------------- POPUP MOSTRAR INTERCAMBIO ----------------------------------------- */
 .popupMostrarIntercambio {
 	display: flex;
     flex-direction: column;
     position: absolute;
+    align-items: center;
     top: 95px;
 	left: 890px;
     height: 724px;
@@ -477,20 +478,6 @@
 
 /*formatos de imagen en funcion del numero de cartas del intercambio en el popup de mostrar*/
 
-.mostrarCartasOfrecer {
- 	position: absolute;
-    top: 100px;
-    gap: 12px;
-    padding: 10px;
-}
-
-.mostrarCartasQuerer {
- 	position: absolute;
-    top: 450px;
-    gap: 12px;
-    padding: 10px;
-}
-
 .carta {
   width: 150px;
   cursor: pointer;
@@ -501,15 +488,11 @@
 
 /*1*/
 .abanicoMostrarOfrecer-1 .carta {
-	position: relative;
-    margin-left: 198px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-1 .carta {
-	position: relative;
-    margin-left: 198px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -524,8 +507,6 @@
 
 /*2*/
 .abanicoMostrarOfrecer-2 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -538,8 +519,6 @@
 }
 
 .abanicoMostrarQuerer-2 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -569,8 +548,6 @@
 
 /*3*/
 .abanicoMostrarOfrecer-3 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -591,8 +568,6 @@
 }
 
 .abanicoMostrarQuerer-3 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -639,8 +614,6 @@
 
 /*4*/
 .abanicoMostrarOfrecer-4 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 40px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -670,8 +643,6 @@
 
 
 .abanicoMostrarQuerer-4 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 40px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -733,8 +704,6 @@
 
 /*5*/
 .abanicoMostrarOfrecer-5 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 10px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -772,8 +741,6 @@
 
 
 .abanicoMostrarQuerer-5 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 10px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -850,87 +817,100 @@
 }
 
 
-.botonSolicitarIntercambio {
-	position: absolute;
-	left: 410px;
-    top: 720px;
+.btnEliminarIntercambio {
     width: 190px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.botonGuardarBaraja:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
+.btnAceptarIntercambio {
+    width: 190px;
 }
 
-.textoOfrecer {
-    position: absolute;
-    top: 35px;
-    margin-left: 110px;
-	color: #68768A;
+.btnRechazarIntercambio {
+    width: 190px;
 }
 
-.textoOfrecerUna {
-    position: absolute;
-    top: 35px;
-    margin-left: 160px;
-	color: #68768A;
+.mostrarCartasOfrecer1 {
+	display: flex;
+    justify-content: center;
+	margin-top: 50px;
 }
 
-.textoQuerer {
-    position: absolute;
-    top: 380px;
-    margin-left: 126px;
-    color: #68768A;
+.mostrarCartasOfrecer2 {
+	display: flex;
+    justify-content: center;
+	margin-top: 50px;
 }
 
-.textoQuererUna {
-    position: absolute;
-    top: 380px;
-    margin-left: 166px;
-    color: #68768A;
+.mostrarCartasQuerer1 {
+	display: flex;
+    justify-content: center;
+ 	margin-top: 50px;
 }
 
-.textoOfrecerYo {
-    position: absolute;
-    top: 380px;
-    margin-left: 700px;
-	color: #68768A;
+.mostrarCartasQuerer2 {
+	display: flex;
+    justify-content: center;
+ 	margin-top: 50px;
 }
 
-.textoQuererYo {
-    position: absolute;
-    top: 35px;
-    margin-left: 675px;
-    color: #68768A;
+
+.textoEstado {
+	margin-top: 10px;
 }
 
-.cartaOfrecerYo {
-	position: absolute;
-	top: 464px;
-	left: 724px;
-	width: 150px;
-	border-radius: 8px;
+.cartasOfrecer1 {
+	margin-top: 30px;
 }
 
-.cartaQuererYo {
-	position: absolute;
-    top: 106px;
-    left: 724px;
-    width: 150px;
-    border-radius: 8px;
+.cartasOfrecer2 {
+	margin-top: -40px;
 }
+
+.cartasQuerer1 {
+	margin-top: 30px;
+}
+
+.cartasQuerer2 {
+	margin-top: -40px;
+}
+
+
+.textoOfrecer1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.textoOfrecer2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -25px;
+}
+
+.textoQuerer1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.textoQuerer2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -25px;
+}
+
+.botonera1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.botonera2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 243px;
+}
+
 
 .cartaIntercambioAniadida {
   width: 150px;
@@ -944,20 +924,33 @@
 	transform: scale(1.03);
 }
 
-.flechaIntercambiarQuererYo {
-    position: absolute;
-    margin-left: 600px;
-    color: #68768A;
-    margin-top: 150px;
+.flechaIntercambiar {
+	display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 55px;
+
 }
 
-.flechaIntercambiarOfrecerYo {
-    position: absolute;
-    margin-left: 600px;
-    color: #68768A;
-    margin-top: 505px;
-    font-size: 55px;
+.verOferta2 {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 85px;
+    margin-top: 200px;
+}
+
+.textoEsperar2 {
+	margin-top: 140px;
+    display: flex;
+}
+
+.btnRechazarIntercambio {
+	width: 200px;
+}
+
+.btnAceptarIntercambio {
+	width: 200px;
 }
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
@@ -1030,7 +1023,7 @@
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.5s;
-    transition: transform 0.2s;
+    transition: transform 0.3s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 

@@ -141,57 +141,125 @@ $(document).ready(function() {
 		return intercambios;
 	}
 	
-	async function mostrarIntercambio(intercambio) {
+	function mostrarIntercambio(intercambio) {
 		if(intercambio != null) {
-			$("#popupMostrarIntercambio").show();
-			let criteriosCreador = {};
-			criteriosCreador.id = intercambio.ofertanteId;
-			let creador = await recuperarCreadorIntercambio(criteriosCreador);
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
-			if(cartasOfrecer.length == 1) {
-				$("#textoOfrecer").text(creador.nombre + " ofrece la siguiente carta:").removeClass("textoOfrecer").addClass("textoOfrecerUna");
-			} else {
-				$("#textoOfrecer").text(creador.nombre + " ofrece una de las siguientes cartas:").removeClass("textoOfrecerUna").addClass("textoOfrecer");	
+			if(intercambio.estadoId == 1) {
+				mostrarIntercambioEstado1(intercambio);
+			} else if(intercambio.estadoId == 2) {
+				mostrarIntercambioEstado2(intercambio);
+			} else if(intercambio.estadoId == 3) {
+				mostrarIntercambioEstado3(intercambio);
 			}
-			let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer");
-			contenedorOfrecer.innerHTML = "";
-			contenedorOfrecer.className = "mostrarCartasOfrecer abanicoMostrarOfrecer-" + cartasOfrecer.length;
-			cartasOfrecer.forEach(carta => {
-				let img = document.createElement("img");
-        		img.classList.add("carta");
-        		let [expansionId, cartaJuegoId] = carta.split(",");
-        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-	        	img.dataset.expansionId = expansionId;
-        		img.dataset.cartaJuegoId = cartaJuegoId;
-        		contenedorOfrecer.appendChild(img);
-			});
-    		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
-    		
-    		let cartasQuerer = intercambio.cartasQuerer.split(";")
-    		if(cartasQuerer.length == 1) {
-				$("#textoQuerer").text("A cambio de la siguiente carta:").removeClass("textoQuerer").addClass("textoQuererUna");
-			} else {
-				$("#textoQuerer").text("A cambio de una de las siguientes cartas:").removeClass("textoQuererUna").addClass("textoQuerer");
-			}
-			let contenedorQuerer = document.getElementById("mostrarCartasQuerer");
-			contenedorQuerer.innerHTML = "";
-			contenedorQuerer.className = "mostrarCartasQuerer abanicoMostrarQuerer-" + cartasQuerer.length;
-			cartasQuerer.forEach(carta => {
-				let img = document.createElement("img");
-        		img.classList.add("carta");
-        		let [expansionId, cartaJuegoId] = carta.split(",");
-        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-	        	img.dataset.expansionId = expansionId;
-        		img.dataset.cartaJuegoId = cartaJuegoId;
-        		contenedorQuerer.appendChild(img);
-			});
-    		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
-    		
-    		$("#textoQuererYo").text("Me quedo con esta carta:");
-    		$("#textoOfrecerYo").text("Te doy esta carta:");
 		}
 	}
+	
+	async function mostrarIntercambioEstado1(intercambio) {
+		$("#popupMostrarIntercambio").show();
+		$("#divEstado1").show();
+		$("#divEstado2").hide();
+		$("#divEstado3").hide();
+		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio");
+		let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+		if(cartasOfrecer.length == 1) {
+			$("#textoOfrecer1").text("Carta para ofrecer");
+		} else {
+			$("#textoOfrecer1").text("Cartas para ofrecer");	
+		}
+		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer1");
+		contenedorOfrecer.innerHTML = "";
+		contenedorOfrecer.className = "mostrarCartasOfrecer1 abanicoMostrarOfrecer-" + cartasOfrecer.length;
+		cartasOfrecer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorOfrecer.appendChild(img);
+		});
+		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 		
+		let cartasQuerer = intercambio.cartasQuerer.split(";")
+		if(cartasQuerer.length == 1) {
+			$("#textoQuerer1").text("Carta para recibir");
+		} else {
+			$("#textoQuerer1").text("Cartas para recibir");
+		}
+		let contenedorQuerer = document.getElementById("mostrarCartasQuerer1");
+		contenedorQuerer.innerHTML = "";
+		contenedorQuerer.className = "mostrarCartasQuerer1 abanicoMostrarQuerer-" + cartasQuerer.length;
+		cartasQuerer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorQuerer.appendChild(img);
+		});
+		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
+	}
+	
+	async function mostrarIntercambioEstado2(intercambio) {
+		$("#popupMostrarIntercambio").show();
+		$("#divEstado1").hide();
+		$("#divEstado2").show();
+		$("#divEstado3").hide();
+		
+		let criteriosUsuario = {};
+		if(intercambio.ofertanteId == usuario.id) {
+			criteriosUsuario.id = intercambio.contraparteId;
+			let contraparte = await recuperarUsuarioIntercambio(criteriosUsuario);
+			$("#textoEstado").text(contraparte.nombre + " te han hecho la siguiente oferta:");
+			$("#textoOfrecer2").text("Darás");
+			$("#textoQuerer2").text("Recibirás");
+			$("#textoEsperar2").hide();
+			$("#botonera2").show();
+		} else {
+			criteriosUsuario.id = intercambio.ofertanteId;
+			let ofertante = await recuperarUsuarioIntercambio(criteriosUsuario);
+			$("#textoEstado").text("Le has hecho la siguente oferta a " + ofertante.nombre);
+			$("#textoQuerer2").text("Darás");
+			$("#textoOfrecer2").text("Recibirás");
+			$("#textoEsperar2").show();
+			$("#botonera2").hide();
+		}
+		
+		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
+		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer2");
+		contenedorOfrecer.innerHTML = "";
+		contenedorOfrecer.className = "mostrarCartasOfrecer2 abanicoMostrarOfrecer-" + cartasOfrecer.length;
+		cartasOfrecer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorOfrecer.appendChild(img);
+		});
+		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
+		
+		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
+		let contenedorQuerer = document.getElementById("mostrarCartasQuerer2");
+		contenedorQuerer.innerHTML = "";
+		contenedorQuerer.className = "mostrarCartasQuerer2 abanicoMostrarQuerer-" + cartasQuerer.length;
+		cartasQuerer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorQuerer.appendChild(img);
+		});
+		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
+		
+	}
+	
+	async function mostrarIntercambioEstado3(intercambio) {
+		
+	}
 	
 	$("#btnSolicitarIntercambio").click(function() {
 		$("#confirmarIntercambio").show();
@@ -253,70 +321,7 @@ $(document).ready(function() {
 		intercambio.contraparteId = usuario.id;
 		return intercambio;
 	}
-	
-	
-	//funcion seleccionar carta quiero
-	$("#mostrarCartasOfrecer").on("click", ".carta", function() {
-    	cartaQuieroSeleccionada = Array.from({ length: 1 }, () => ({
-			expansionId: $(this).data("expansionId"),
-			cartaJuegoId: $(this).data("cartaJuegoId"),
-			src: $(this).attr("src")
-		}));
-		recargarOfrecer();
-	});
-	
-	//funcion seleccionar carta doy
-	$("#mostrarCartasQuerer").on("click", ".carta", function() {
-    	cartaOfrezcoSeleccionada = Array.from({ length: 1 }, () => ({
-			expansionId: $(this).data("expansionId"),
-			cartaJuegoId: $(this).data("cartaJuegoId"),
-			src: $(this).attr("src")
-		}));
-		recargarQuerer();
-	});
-	
-	function recargarOfrecer() {
-		let contenedor = document.getElementById("divCartaQuererYo");
-		contenedor.innerHTML = "";
-		cartaQuieroSeleccionada.forEach((carta, index) => {
-    		let img = document.createElement("img");
-    		img.classList.add("cartaQuererYo");
-    		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				img.classList.add("cartaIntercambioAniadida");
-				img.src = carta.src;
-				img.dataset.expansionId = carta.expansionId;
-    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
-				img.dataset.posicion = carta.posicion;
-			} else {
-				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
-				img.dataset.expansionId = 0;
-    			img.dataset.cartaJuegoId = 0;
-			}
-    		contenedor.appendChild(img);
-		});
-	}
-	
-	function recargarQuerer() {
-		let contenedor = document.getElementById("divCartaOfrecerYo");
-		contenedor.innerHTML = "";
-		cartaOfrezcoSeleccionada.forEach((carta, index) => {
-    		let img = document.createElement("img");
-    		img.classList.add("cartaOfrecerYo");
-    		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
-				img.classList.add("cartaIntercambioAniadida");
-				img.src = carta.src;
-				img.dataset.expansionId = carta.expansionId;
-    			img.dataset.cartaJuegoId = carta.cartaJuegoId;
-				img.dataset.posicion = carta.posicion;
-			} else {
-				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
-				img.dataset.expansionId = 0;
-    			img.dataset.cartaJuegoId = 0;
-			}
-    		contenedor.appendChild(img);
-		});
-	}
-	
+		
 	async function renderizarTabla(tablaIntercambios, barajas) {
 		tablaIntercambios.replaceData(barajas);
 		let rows = tablaIntercambios.getRows();

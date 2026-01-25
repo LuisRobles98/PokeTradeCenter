@@ -127,11 +127,13 @@ body.fondo {
 }
 .barraSuperior {
 	height: var(--altura-barra-superior);
-	top: 0; 
+	top: 0;
+	z-index: 1000;
 }
 .barraInferior {
 	height: 4px;
 	top: var(--separacion-barras);
+	z-index: 1000;
 }
 
 /* Barra del menú (entre las barras) */
@@ -318,3 +320,56 @@ body.fondo {
     scroll-behavior: smooth;
 }
 
+
+/*-------------------------------- BOTONERA Y BOTONES ---------------------------------------------*/
+
+.botonera {
+	display: flex;
+    justify-content: center;
+}
+
+.aceptar {
+	margin: 0px 10px;
+    padding: 10px 20px;
+    border: 2px solid #007bb5;
+    border-radius: 30px;
+    background-color: cornflowerblue;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.aceptar:hover {
+	transform: scale(1.03);
+	border: 2px solid #005f87;
+	background-color: #2F65C8;
+}
+
+.cancelar {
+	margin: 0px 10px;
+    padding: 10px 20px;
+    border: 2px solid #B85C5C;
+    border-radius: 30px;
+    background-color: #E07A7A;
+    color: white;
+    font-weight: normal;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.cancelar:hover {
+    transform: scale(1.03);
+    border: 2px solid #9C4A4A;
+    background-color: #C75C5C;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/*-------------------------------- LABELS ---------------------------------------------*/
+.label {
+	color: #68768A;
+}

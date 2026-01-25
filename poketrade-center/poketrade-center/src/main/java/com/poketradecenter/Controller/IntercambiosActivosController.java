@@ -32,7 +32,7 @@ public class IntercambiosActivosController {
     }
 
     @GetMapping("/intercambiosActivos/usuario")
-    public Usuario recuperarUsuarioIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
+    public Usuario recuperarUsuarioIntercambiosActivosPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
        return intercambiosActivosService.recuperarUsuarioPorCriterios(criterios);
     }
