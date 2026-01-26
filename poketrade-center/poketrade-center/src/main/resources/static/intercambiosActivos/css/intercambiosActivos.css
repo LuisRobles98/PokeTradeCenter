@@ -817,25 +817,13 @@
 }
 
 
-.btnEliminarIntercambio {
-    width: 190px;
-}
-
-.btnAceptarIntercambio {
-    width: 190px;
-}
-
-.btnRechazarIntercambio {
-    width: 190px;
-}
-
 .mostrarCartasOfrecer1 {
 	display: flex;
     justify-content: center;
 	margin-top: 50px;
 }
 
-.mostrarCartasOfrecer2 {
+.mostrarCartasOfrecer23 {
 	display: flex;
     justify-content: center;
 	margin-top: 50px;
@@ -847,7 +835,7 @@
  	margin-top: 50px;
 }
 
-.mostrarCartasQuerer2 {
+.mostrarCartasQuerer23 {
 	display: flex;
     justify-content: center;
  	margin-top: 50px;
@@ -862,7 +850,7 @@
 	margin-top: 30px;
 }
 
-.cartasOfrecer2 {
+.cartasOfrecer23 {
 	margin-top: -40px;
 }
 
@@ -870,7 +858,7 @@
 	margin-top: 30px;
 }
 
-.cartasQuerer2 {
+.cartasQuerer23 {
 	margin-top: -40px;
 }
 
@@ -881,7 +869,7 @@
     margin-top: 20px;
 }
 
-.textoOfrecer2 {
+.textoOfrecer23 {
     display: flex;
     justify-content: center;
     margin-bottom: -25px;
@@ -893,7 +881,7 @@
     margin-top: 20px;
 }
 
-.textoQuerer2 {
+.textoQuerer23 {
     display: flex;
     justify-content: center;
     margin-bottom: -25px;
@@ -911,6 +899,12 @@
     margin-top: 243px;
 }
 
+.botonera3 {
+    display: flex;
+    justify-content: center;
+    margin-top: 82px;
+}
+
 
 .cartaIntercambioAniadida {
   width: 150px;
@@ -924,12 +918,9 @@
 	transform: scale(1.03);
 }
 
-.flechaIntercambiar {
-	display: flex;
-    align-items: center;
-    justify-content: center;
+.iconoEstadoIntercambio {
+	margin-top: -55px;
     font-size: 55px;
-
 }
 
 .verOferta2 {
@@ -937,20 +928,69 @@
     align-items: center;
     justify-content: center;
     gap: 85px;
-    margin-top: 200px;
+    margin-top: 246px;
 }
 
-.textoEsperar2 {
+.verOferta3 {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 85px;
+    margin-top: 150px;
+}
+
+.textoEsperar {
 	margin-top: 140px;
     display: flex;
 }
 
-.btnRechazarIntercambio {
+.textoAgregar {
+	margin-top: 110px;
+    display: flex;
+    width: 740px;
+    text-align: center;
+}
+
+.textoUsuario {
+	margin-top: 30px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.btnBotonera1 {
+    width: 190px;
+}
+
+.btnBotonera2 {
 	width: 200px;
 }
 
-.btnAceptarIntercambio {
-	width: 200px;
+.idJuegoIntercambio {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: 160px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.idJuegoIntercambio:hover {
+    border-color: #7A8BA3;
+}
+
+.idJuegoIntercambio:focus {
+	outline: none;
+    border-color: #68768A;
+}
+
+.btnBotonera3 {
+	width: 192px;
 }
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/

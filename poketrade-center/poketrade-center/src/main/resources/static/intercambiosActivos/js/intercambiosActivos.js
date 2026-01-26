@@ -158,7 +158,7 @@ $(document).ready(function() {
 		$("#divEstado1").show();
 		$("#divEstado2").hide();
 		$("#divEstado3").hide();
-		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio");
+		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio:");
 		let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 		if(cartasOfrecer.length == 1) {
 			$("#textoOfrecer1").text("Carta para ofrecer");
@@ -213,7 +213,7 @@ $(document).ready(function() {
 			$("#textoEstado").text(contraparte.nombre + " te han hecho la siguiente oferta:");
 			$("#textoOfrecer2").text("Darás");
 			$("#textoQuerer2").text("Recibirás");
-			$("#textoEsperar2").hide();
+			$("#textoEsperar").hide();
 			$("#botonera2").show();
 		} else {
 			criteriosUsuario.id = intercambio.ofertanteId;
@@ -221,7 +221,7 @@ $(document).ready(function() {
 			$("#textoEstado").text("Le has hecho la siguente oferta a " + ofertante.nombre);
 			$("#textoQuerer2").text("Darás");
 			$("#textoOfrecer2").text("Recibirás");
-			$("#textoEsperar2").show();
+			$("#textoEsperar").show();
 			$("#botonera2").hide();
 		}
 		
@@ -254,11 +254,64 @@ $(document).ready(function() {
     		contenedorQuerer.appendChild(img);
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
-		
 	}
 	
 	async function mostrarIntercambioEstado3(intercambio) {
+		$("#popupMostrarIntercambio").show();
+		$("#divEstado1").hide();
+		$("#divEstado2").hide();
+		$("#divEstado3").show();
 		
+		let criteriosUsuario = {};
+		if(intercambio.ofertanteId == usuario.id) {
+			criteriosUsuario.id = intercambio.contraparteId;
+			let contraparte = await recuperarUsuarioIntercambio(criteriosUsuario);
+			$("#textoEstado").text("Has aceptado la oferta de " + contraparte.nombre + ":");
+			$("#textoOfrecer3").text("Darás");
+			$("#textoQuerer3").text("Recibirás");
+			$("#nombreUsuario").text("Id Pokemon TCG Pocket de " + contraparte.nombre);
+			$("#idJuegoIntercambio").text(contraparte.juegoId);
+			$("#botonera3").show();
+		} else {
+			criteriosUsuario.id = intercambio.ofertanteId;
+			let ofertante = await recuperarUsuarioIntercambio(criteriosUsuario);
+			$("#textoEstado").text(ofertante.nombre + "ha aceptado tu oferta:");
+			$("#textoQuerer3").text("Darás");
+			$("#textoOfrecer3").text("Recibirás");
+			$("#nombreUsuario").text("Id Pokemon TCG Pocket de " + ofertante.nombre);
+			$("#idJuegoIntercambio").text(ofertante.juegoId);
+			$("#botonera3").hide();
+		}
+		
+		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
+		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer3");
+		contenedorOfrecer.innerHTML = "";
+		contenedorOfrecer.className = "mostrarCartasOfrecer3 abanicoMostrarOfrecer-" + cartasOfrecer.length;
+		cartasOfrecer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorOfrecer.appendChild(img);
+		});
+		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
+		
+		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
+		let contenedorQuerer = document.getElementById("mostrarCartasQuerer3");
+		contenedorQuerer.innerHTML = "";
+		contenedorQuerer.className = "mostrarCartasQuerer3 abanicoMostrarQuerer-" + cartasQuerer.length;
+		cartasQuerer.forEach(carta => {
+			let img = document.createElement("img");
+    		img.classList.add("carta");
+    		let [expansionId, cartaJuegoId] = carta.split(",");
+    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        	img.dataset.expansionId = expansionId;
+    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		contenedorQuerer.appendChild(img);
+		});
+		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
 	$("#btnSolicitarIntercambio").click(function() {
