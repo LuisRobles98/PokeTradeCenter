@@ -6,7 +6,7 @@
 	top: 95px;
     left: 50px;
     height: 35px;
-    width: 736px;
+    width: 1764px;
     background-color: white;
     padding: 30px;
     border-radius: 30px;
@@ -17,11 +17,29 @@
 
 .contenidoBuscador {
 	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.inputsTexto {
+	display: flex;
+    margin-top: 10px;
+}
+
+.botonesEstados {
+	display: flex;
+    margin-left: 70px;
+}
+
+.botonesOrden {
+	display: flex;
+    margin-left: 70px;
 }
 
 .inputNombreCartaOfrecer {
     align-items: center;
-	width: 200px;
+	width: 340px;
     padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
@@ -43,7 +61,7 @@
 
 .inputNombreCartaQuerer {
     align-items: center;
-	width: 200px;
+	width: 340px;
     padding: 10px;
     margin-left: 20px;
     margin-top: -5px;
@@ -63,11 +81,36 @@
     border-color: #68768A;
 }
 
+.botonEstado {
+    display: flex;
+    width: 130px;
+    padding: 5px;
+    margin-left: 25px;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.botonEstado:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.botonEstado.seleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
 .botonOrden {
     display: flex;
-    width: 100px;
+    width: 130px;
     padding: 5px;
-    margin-top: -5px;
     margin-left: 25px;
     padding: 5px;
     border: 2px solid #8EA0B8;
@@ -78,6 +121,7 @@
     transition: border-color 0.2s;
     transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
 }
 
 .botonOrden:hover {
@@ -433,6 +477,24 @@
     max-height: calc(100% + 0px);
 }
 
+.textoBuscadorNombre {
+	position: absolute;
+    top: 10px;
+    left: 338px;
+}
+
+.textoBuscadorEstado {
+	position: absolute;
+    top: 10px;
+    left: 1030px;
+}
+
+.textoBuscadorOrden {
+	position: absolute;
+    top: 10px;
+    left: 1563px;
+}
+
 .textoActualizar {
     display: flex;
     margin-left: 10px;
@@ -465,9 +527,9 @@
     flex-direction: column;
     position: absolute;
     align-items: center;
-    top: 95px;
+    top: 221px;
 	left: 890px;
-    height: 724px;
+    height: 597px;
     width: 925px;
     background-color: white;
     padding: 30px;
@@ -513,7 +575,7 @@
 
 .abanicoMostrarOfrecer-2 .carta:nth-child(2) {
 	position: relative;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -525,7 +587,7 @@
 
 .abanicoMostrarQuerer-2 .carta:nth-child(2) {
 	position: relative;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -555,14 +617,14 @@
 .abanicoMostrarOfrecer-3 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-3 .carta:nth-child(3) {
 	position: relative;
-    margin-left: -20px;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -575,14 +637,14 @@
 .abanicoMostrarQuerer-3 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-3 .carta:nth-child(3) {
 	position: relative;
-    margin-left: -20px;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -621,7 +683,7 @@
 .abanicoMostrarOfrecer-4 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -629,14 +691,14 @@
 .abanicoMostrarOfrecer-4 .carta:nth-child(3) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-4 .carta:nth-child(4) {
 	position: relative;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -650,7 +712,7 @@
 .abanicoMostrarQuerer-4 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -658,14 +720,14 @@
 .abanicoMostrarQuerer-4 .carta:nth-child(3) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-4 .carta:nth-child(4) {
 	position: relative;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -711,7 +773,7 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -719,7 +781,7 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(3) {
 	position: relative;
 	top: -8px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -727,14 +789,14 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(4) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(5) {
 	position: relative;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -748,7 +810,7 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -756,7 +818,7 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(3) {
 	position: relative;
 	top: -8px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -764,14 +826,14 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(4) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(5) {
 	position: relative;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -820,7 +882,7 @@
 .mostrarCartasOfrecer1 {
 	display: flex;
     justify-content: center;
-	margin-top: 50px;
+	margin-top: 55px;
 }
 
 .mostrarCartasOfrecer23 {
@@ -832,7 +894,7 @@
 .mostrarCartasQuerer1 {
 	display: flex;
     justify-content: center;
- 	margin-top: 50px;
+ 	margin-top: 55px;
 }
 
 .mostrarCartasQuerer23 {
@@ -842,12 +904,8 @@
 }
 
 
-.textoEstado {
-	margin-top: 10px;
-}
-
 .cartasOfrecer1 {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 .cartasOfrecer23 {
@@ -855,7 +913,7 @@
 }
 
 .cartasQuerer1 {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 .cartasQuerer23 {
@@ -866,43 +924,41 @@
 .textoOfrecer1 {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .textoOfrecer23 {
     display: flex;
     justify-content: center;
-    margin-bottom: -25px;
+    margin-bottom: 20px;
 }
 
 .textoQuerer1 {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .textoQuerer23 {
     display: flex;
     justify-content: center;
-    margin-bottom: -25px;
+    margin-bottom: 20px;
 }
 
 .botonera1 {
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 155px;
 }
 
 .botonera2 {
     display: flex;
     justify-content: center;
-    margin-top: 243px;
+    margin-top: 171px;
 }
 
 .botonera3 {
     display: flex;
     justify-content: center;
-    margin-top: 82px;
+    margin-top: 25px;
 }
 
 
@@ -923,12 +979,19 @@
     font-size: 55px;
 }
 
+.verOferta1 {
+    display: flex;
+    width: 925px;
+    margin-top: 80px;
+    justify-content: space-around;
+}
+
 .verOferta2 {
 	display: flex;
     align-items: center;
     justify-content: center;
     gap: 85px;
-    margin-top: 246px;
+    margin-top: 155px;
 }
 
 .verOferta3 {
@@ -936,23 +999,23 @@
     align-items: center;
     justify-content: center;
     gap: 85px;
-    margin-top: 150px;
+    margin-top: 129px;
 }
 
 .textoEsperar {
-	margin-top: 140px;
+	margin-top: 110px;
     display: flex;
 }
 
 .textoAgregar {
-	margin-top: 110px;
+	margin-top: 45px;
     display: flex;
     width: 740px;
     text-align: center;
 }
 
 .textoUsuario {
-	margin-top: 30px;
+	margin-top: 15px;
     display: flex;
     text-align: center;
     justify-content: space-around;
@@ -971,7 +1034,7 @@
     justify-content: center;
     padding: 10px;
     width: 160px;
-    margin: 20px auto;
+    margin: 15px auto;
     border-radius: 10px;
     border: 2px solid #8EA0B8;
     font-weight: normal;
@@ -993,7 +1056,7 @@
 	width: 192px;
 }
 
-/*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
+/*---------------------------- POPUPS CONFIRMACION  ----------------------------*/
 
 .confirmar {
     display: flex;
@@ -1013,63 +1076,20 @@
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
-}
-
-.botoneraConfirmar {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	margin-left: -20px;
+    width: 400px;
 }
 
 .textoConfirmacion {
-    display: flex;
+	display: flex;
     text-align: center;
-	color: #68768A;
+    justify-content: space-around;
 }
 
-.botonSolicitar {
-	width: 115px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+.botoneraConfirmar {
+	margin-top: 20px;
 }
 
-.botonSolicitar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
+.btnConfirmar {
+	width: 107px;
 }
 
-
-.botonCancelar {
-	width: 115px;
-    padding: 10px 20px;
-    margin: 0px 15px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.botonCancelar:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}

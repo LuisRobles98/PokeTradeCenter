@@ -30,3 +30,18 @@ async function recuperarCartaIntercambio(criterios) {
     })
     .then(response => response.json());
 };
+
+async function actualizarIntercambio(intercambio) {
+    let parameters = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(intercambio),
+    };
+    let response = await fetch('http://localhost:8080/intercambiosActivos', parameters);
+    if (!response.ok) {
+        let msg = await response.text();
+        throw new Error(msg || 'Error desconocido del servidor');
+    }
+};

@@ -11,7 +11,6 @@ $(document).ready(function() {
 		$("#inputNombreCarta").val("");
 		barajaSeleccionadaCompleta = null;
 		barajaSeleccionada = null;
-		ordenSeleccionado = null;
 		initTabla();
 	}
 	
@@ -73,7 +72,7 @@ $(document).ready(function() {
 		});
 		
 		//funcionalidad botones busqueda(ordenación por fechas)
-		$(".botonOrden").click(async function() {
+		$(".botonOrden").off("click").click(async function() {
 			let valor = $(this).data("id");
 			$(".botonOrden").removeClass("seleccionada");
 			if(ordenSeleccionado === valor) {

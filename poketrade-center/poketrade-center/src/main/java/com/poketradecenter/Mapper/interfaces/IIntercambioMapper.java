@@ -12,4 +12,5 @@ public interface IIntercambioMapper {
 	List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambio criterios);
 	void solicitarIntercambio(Intercambio intercambio);
 	List<Intercambio> recuperarIntercambiosActivosPorCriterios(CriteriosIntercambio criterios);
+	void actualizar(Intercambio intercambio);
 }

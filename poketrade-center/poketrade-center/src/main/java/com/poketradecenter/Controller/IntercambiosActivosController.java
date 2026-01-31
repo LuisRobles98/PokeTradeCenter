@@ -3,7 +3,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +44,15 @@ public class IntercambiosActivosController {
     public Carta recuperarCartaIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
        return intercambiosActivosService.recuperarCartaPorCriterios(criterios);
+    }
+    
+    @PutMapping("/intercambiosActivos")
+    public ResponseEntity<?> actualizarIntercambio(@RequestBody Intercambio intercambio) {
+       try {
+    	   intercambiosActivosService.actualizarIntercambio(intercambio);
+    	   return ResponseEntity.ok().build();
+	   	}catch(RuntimeException e) {
+	   		return ResponseEntity.badRequest().body(e.getMessage());
+	   	}
     }
 }

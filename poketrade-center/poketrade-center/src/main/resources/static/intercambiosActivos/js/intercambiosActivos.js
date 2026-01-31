@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	//constantes
 	let usuario = usuarioLogado.recuperar();
+	let estadoSeleccionado = null;
 	let ordenSeleccionado = null;
 	let portadasMostrar = [];
 	let cartaQuieroSeleccionada = [];
@@ -12,7 +13,6 @@ $(document).ready(function() {
 		$("#popupMostrarIntercambio").hide();
 		$("#inputNombreCartaOfrecer").val("");
 		$("#inputNombreCartaQuerer").val("");
-		ordenSeleccionado = null;
 		intercambioSeleccionadoCompleto = null;
 		initTabla();
 	}
@@ -69,8 +69,25 @@ $(document).ready(function() {
     		mostrarIntercambio(intercambioSeleccionadoCompleto);
 		});
 		
-		//funcionalidad botones busqueda
-		$(".botonOrden").click(async function() {
+		//funcionalidad botones busqueda estado
+		$(".botonEstado").off("click").on("click", async function() {	
+			let valor = $(this).data("id");
+			$(".botonEstado").removeClass("seleccionada");
+			if(estadoSeleccionado === valor) {
+				estadoSeleccionado = null;
+			} else {
+				estadoSeleccionado = valor;
+				$(this).addClass("seleccionada");
+			}
+			let intercambios = await recuperarIntercambiosActivosPorCriterios();
+    		await formarPortadas(intercambios);
+    		await renderizarTabla(tablaIntercambios, intercambios);
+	    	mostrarIntercambio(intercambioSeleccionadoCompleto);
+		});
+		
+		
+		//funcionalidad botones busqueda orden
+		$(".botonOrden").off("click").on("click", async function() {
 			let valor = $(this).data("id");
 			$(".botonOrden").removeClass("seleccionada");
 			if(ordenSeleccionado === valor) {
@@ -86,7 +103,7 @@ $(document).ready(function() {
 		});
 		
 		//boton actualizar
-		$("#botonActualizar").click(async function() {
+		$("#botonActualizar").off("click").click(async function() {
 			let intercambios = await recuperarIntercambiosActivosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);
@@ -136,6 +153,7 @@ $(document).ready(function() {
 		criterios.usuarioId = usuario.id;
 		criterios.nombreOfrecer = $("#inputNombreCartaOfrecer").val();
 		criterios.nombreQuerer = $("#inputNombreCartaQuerer").val();
+		criterios.estadoId = estadoSeleccionado;
 		criterios.ordenacion = ordenSeleccionado;
 		let intercambios = await recuperarIntercambiosActivos(criterios);
 		return intercambios;
@@ -278,7 +296,7 @@ $(document).ready(function() {
 			$("#textoEstado").text(ofertante.nombre + "ha aceptado tu oferta:");
 			$("#textoQuerer3").text("Darás");
 			$("#textoOfrecer3").text("Recibirás");
-			$("#nombreUsuario").text("Id Pokemon TCG Pocket de " + ofertante.nombre);
+			$("#nombreUsuario").text("Id Pokémon TCG Pocket de " + ofertante.nombre);
 			$("#idJuegoIntercambio").text(ofertante.juegoId);
 			$("#botonera3").hide();
 		}
@@ -314,65 +332,151 @@ $(document).ready(function() {
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
-	$("#btnSolicitarIntercambio").click(function() {
-		$("#confirmarIntercambio").show();
+	
+	
+	$("#btnEliminarIntercambio").click(function() {
+		$("#confirmarEliminarIntercambio").show();
 	});
 	
-	$("#btnCancelar").click(function() {
-		$("#confirmarIntercambio").hide();
+	$("#btnRechazarIntercambio").click(function() {
+		$("#confirmarRechazarIntercambio").show();
 	});
 	
-	$("#btnSolicitar").click(async function() {
-		let errores = await validarDatos();
+	$("#btnAceptarIntercambio").click(function() {
+		$("#confirmarAceptarIntercambio").show();
+	});
+	
+	$("#btnFinalizarIntercambio").click(function() {
+		$("#confirmarFinalizarIntercambio").show();
+	});
+	
+	$("#btnCancelarEliminar").click(function() {
+		$("#confirmarEliminarIntercambio").hide();
+	});
+	
+	$("#btnCancelarRechazar").click(function() {
+		$("#confirmarRechazarIntercambio").hide();
+	});
+	
+	$("#btnCancelarAceptar").click(function() {
+		$("#confirmarAceptarIntercambio").hide();
+	});
+	
+	$("#btnCancelarFinalizar").click(function() {
+		$("#confirmarFinalizarIntercambio").hide();
+	});
+	
+	
+	$("#btnEliminarEliminar").click(async function() {
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, null);
+		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
-				let intercambio = construirSolicitudIntercambio();
-				await solicitarIntercambio(intercambio);
-				popupErroresOConfirmacion.mostrar("success", "Se ha solicitado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
-				$("#confirmarIntercambio").hide();
+				await actualizarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha eliminado correctamente el intercambio", "");
+				$("#confirmarEliminarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
-			}
+			}	
 		}
 	});
 	
-	async function validarDatos() {
+	$("#btnEliminarRechazar").click(async function() {
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, intercambioSeleccionadoCompleto.contraparteId);
+		let errores = await validarDatos(intercambio);
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				await actualizarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha eliminado correctamente el intercambio", "");
+				$("#confirmarRechazarIntercambio").hide();
+				limpiarYCargarTabla();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}	
+		}
+	});
+	
+	$("#btnOfertarRechazar").click(async function() {
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 1, null);
+		let errores = await validarDatos(intercambio);
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				await actualizarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha vuelto a ofertar correctamente el intercambio", "");
+				$("#confirmarRechazarIntercambio").hide();
+				limpiarYCargarTabla();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}	
+		}
+	});
+	
+	$("#btnAceptarAceptar").click(async function() {
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 3, intercambioSeleccionadoCompleto.contraparteId);
+		let errores = await validarDatos(intercambio);
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				await actualizarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha aceptado correctamente el intercambio", "");
+				$("#confirmarAceptarIntercambio").hide();
+				limpiarYCargarTabla();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}	
+		}
+	});
+	
+	$("#btnFinalizarFinalizar").click(async function() {
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, intercambioSeleccionadoCompleto.contraparteId);
+		let errores = await validarDatos(intercambio);
+		if(errores != ""){
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
+		} else {
+			try {
+				await actualizarIntercambio(intercambio);
+				popupErroresOConfirmacion.mostrar("success", "Se ha finalizado correctamente el intercambio", "");
+				$("#confirmarFinalizarIntercambio").hide();
+				limpiarYCargarTabla();
+			}catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}	
+		}
+	});
+	
+
+	function construirActualizarIntercambio(id, estado, contraparteId) {
+		let intercambio = {};
+		intercambio.id = id;
+		intercambio.estadoId = estado;
+		intercambio.contraparteId = contraparteId;
+		return intercambio;
+	}
+		
+	async function validarDatos(intercambio) {
 		let errores = "";
-		if(cartaQuieroSeleccionada[0].expansionId == 0 && cartaQuieroSeleccionada[0].cartaJuegoId == 0) {
-			errores = errores += "- No has seleccionado ninguna carta para quedarte" + "<br>";
+		
+		if(intercambio.estadoId == 2) {
+			errores = errores += "- Se ha insertado un estado que no corresponde" + "<br>";
 		}
 		
-		if(cartaOfrezcoSeleccionada[0].expansionId == 0 && cartaOfrezcoSeleccionada[0].cartaJuegoId == 0) {
-			errores = errores += "- No has seleccionado ninguna carta para dar" + "<br>";
+		if(intercambio.estadoId == 1 && intercambio.contraparteId != null) {
+			errores = errores += "- Si se vuelve a publicar el intercambio no puede haber una persona como contraparte" + "<br>";
 		}
-		
-		if(errores == "") {
-			let cartaQuiero = await recuperarCarta(cartaQuieroSeleccionada[0].expansionId, cartaQuieroSeleccionada[0].cartaJuegoId);
-			let cartaOfrezco = await recuperarCarta(cartaOfrezcoSeleccionada[0].expansionId, cartaOfrezcoSeleccionada[0].cartaJuegoId);
-			if(cartaQuiero.rarezaId != cartaOfrezco.rarezaId) {
-				errores = errores += "- Las rarezas de las cartas seleccionadas no coinciden" + "<br>";
-			}
-		}
-		
-		let criterios = {};
-		criterios.id = intercambioSeleccionadoCompleto.id;
-		let intercambioBBDD = await recuperarIntercambiosActivos(criterios);
-		if(intercambioBBDD == null || intercambioBBDD == undefined) {
-			errores = errores += "- Parece que alguien se ha adelantado y ya ha solicitado el intercambio" + "<br>";
+
+		if(intercambio.estadoId == 3 && intercambio.contraparteId == null) {
+			errores = errores += "- Tiene que haber una persona como contraparte al aceptar el intercambio" + "<br>";
 		}
 		
 		return errores;
-	}
-	
-	function construirSolicitudIntercambio() {
-		let intercambio = intercambioSeleccionadoCompleto;
-		intercambio.cartaQuererFinal = cartaOfrezcoSeleccionada[0].expansionId + "," + cartaOfrezcoSeleccionada[0].cartaJuegoId;
-		intercambio.cartaOfrecerFinal = cartaQuieroSeleccionada[0].expansionId + "," + cartaQuieroSeleccionada[0].cartaJuegoId;
-		intercambio.contraparteId = usuario.id;
-		return intercambio;
 	}
 		
 	async function renderizarTabla(tablaIntercambios, barajas) {

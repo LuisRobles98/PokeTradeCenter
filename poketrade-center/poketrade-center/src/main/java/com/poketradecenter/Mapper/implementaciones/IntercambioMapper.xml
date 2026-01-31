@@ -85,6 +85,14 @@
         	<if test="cartasQuererNombre != null">
 	            AND cartas_querer_nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
 	        </if>
+             <choose>
+			    <when test="estadoId != null">
+			        AND estado_id = #{estadoId}
+			    </when>
+			    <otherwise>
+			        AND estado_id != 4
+			    </otherwise>
+			</choose>
 	    </where>
 		<choose>
 		    <when test="ordenacion != null">
@@ -95,5 +103,23 @@
 		    </otherwise>
 		</choose>
 	</select>
+	
+	<update id="actualizar" parameterType="com.poketradecenter.Clase.Intercambio">
+	   UPDATE intercambio
+	   <set>
+	       <if test="contraparteId != null">
+	           contraparte_id = #{contraparteId},
+	       </if>
+	
+	       <if test="estadoId != null">
+	           estado_id = #{estadoId},
+	       </if>
+	
+	       <if test="fechaCambio != null">
+	           fecha_cambio = #{fechaCambio},
+	       </if>
+	   </set>
+	   WHERE id = #{id}
+	</update>
     
 </mapper>

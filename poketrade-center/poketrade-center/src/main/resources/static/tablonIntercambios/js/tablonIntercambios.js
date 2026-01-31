@@ -12,7 +12,6 @@ $(document).ready(function() {
 		$("#popupMostrarIntercambio").hide();
 		$("#inputNombreCartaOfrecer").val("");
 		$("#inputNombreCartaQuerer").val("");
-		ordenSeleccionado = null;
 		intercambioSeleccionadoCompleto = null;
 		vaciarCartaQuiero();
 		vaciarCartaOfrezco();
@@ -90,7 +89,7 @@ $(document).ready(function() {
 		});
 		
 		//funcionalidad botones busqueda
-		$(".botonOrden").click(async function() {
+		$(".botonOrden").off("click").click(async function() {
 			let valor = $(this).data("id");
 			$(".botonOrden").removeClass("seleccionada");
 			if(ordenSeleccionado === valor) {
@@ -106,7 +105,7 @@ $(document).ready(function() {
 		});
 		
 		//boton actualizar
-		$("#botonActualizar").click(async function() {
+		$("#botonActualizar").off("click").click(async function() {
 			let intercambios = await recuperarIntercambiosPublicosPorCriterios();
     		await formarPortadas(intercambios);
 			await renderizarTabla(tablaIntercambios, intercambios);

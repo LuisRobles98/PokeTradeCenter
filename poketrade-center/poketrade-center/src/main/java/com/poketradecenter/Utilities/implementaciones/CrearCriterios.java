@@ -235,6 +235,9 @@ public class CrearCriterios implements ICrearCriterios {
     	            case "nombreQuerer":
     	            	criterios.setCartasQuererNombre(value);
     	            	break;
+    	            case "estadoId":
+    	            	criterios.setEstadoId(Integer.parseInt(value));
+    	            	break;
     	            case "ordenacion":
     	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionTablonIntercambios(value));
     	            	break;

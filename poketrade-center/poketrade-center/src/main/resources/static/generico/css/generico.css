@@ -302,6 +302,7 @@ body.fondo {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     transition: transform 0.2s;
+    user-select: none;
 }
 
 .tabulator-row .tabulator-cell:hover {
@@ -372,4 +373,5 @@ body.fondo {
 /*-------------------------------- LABELS ---------------------------------------------*/
 .label {
 	color: #68768A;
+	user-select: none;
 }

@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,37 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	@Override
 	public Carta recuperarCartaPorCriterios(CriteriosCarta criterios) {
 		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+	}
+	
+	@Override
+	public void actualizarIntercambio(Intercambio intercambio) {
+		validarIntercambio(intercambio);
+		completarDatosActualizarIntercambio(intercambio);
+		actualizar(intercambio);
+	}
+	
+	private void validarIntercambio(Intercambio intercambio) {
+		if(intercambio.getEstadoId() == 2) {
+			throw new RuntimeException("Se ha insertado un estado que no corresponde");
+		}
+		if(intercambio.getEstadoId() == 1 && intercambio.getContraparteId() != null) {
+			throw new RuntimeException("Si se vuelve a publicar el intercambio no puede haber una persona como contraparte");
+		}
+		if(intercambio.getEstadoId() == 3 && intercambio.getContraparteId() == null) {
+			throw new RuntimeException("Tiene que haber una persona como contraparte al aceptar el intercambio");
+		}
+	}
+	
+	private void completarDatosActualizarIntercambio(Intercambio intercambio) {
+		intercambio.setFechaCambio(LocalDateTime.now());
+	}
+	
+
+	private void actualizar(Intercambio intercambio) {
+		try {
+			intercambioMapper.actualizar(intercambio);
+		} catch(RuntimeException e) {
+			throw new RuntimeException("Ha ocurrido un error al actualizar el intercambio", e);
+		}
 	}
 }

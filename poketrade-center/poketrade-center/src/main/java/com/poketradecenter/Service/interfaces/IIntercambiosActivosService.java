@@ -11,4 +11,5 @@ public interface IIntercambiosActivosService {
 	List<Intercambio> recuperarIntercambiosActivosPorCriterios(CriteriosIntercambio criterios);
 	Carta recuperarCartaPorCriterios(CriteriosCarta criterios);
 	Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios);
+	void actualizarIntercambio(Intercambio intercambio);
 }
