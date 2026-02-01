@@ -290,6 +290,9 @@ body.fondo {
 }
 
 
+
+/*-------------------------- ESTILOS GENERICOS ----------------------------------*/
+
 /*-------------------------------- TABLAS GENERICAS ---------------------------------------------*/
 .tabulator {
     overflow: hidden;
@@ -320,15 +323,12 @@ body.fondo {
 .tabulator .tabulator-tableHolder {
     scroll-behavior: smooth;
 }
-
-
-/*-------------------------------- BOTONERA Y BOTONES ---------------------------------------------*/
-
+/*-------------------------------- BOTONERA ---------------------------------------------*/
 .botonera {
 	display: flex;
     justify-content: center;
 }
-
+/*-------------------------------- BOTONES ---------------------------------------------*/
 .aceptar {
 	margin: 0px 10px;
     padding: 10px 20px;
@@ -341,6 +341,7 @@ body.fondo {
     cursor: pointer;
     transition: transform 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
 }
 
 .aceptar:hover {
@@ -361,6 +362,7 @@ body.fondo {
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    user-select: none;
 }
 
 .cancelar:hover {
@@ -369,9 +371,77 @@ body.fondo {
     background-color: #C75C5C;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
+/*-------------------------------- BOTONES SELECCIONAR ---------------------------------------------*/
+.boton {
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.boton:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.boton.seleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
+.fuenteNormal {
+	font-weight: 600;
+}
 
 /*-------------------------------- LABELS ---------------------------------------------*/
 .label {
 	color: #68768A;
 	user-select: none;
 }
+/*-------------------------------- INPUTS ----------------------------------------*/
+.input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.input:hover {
+    border-color: #7A8BA3;
+}
+
+.input:focus {
+	outline: none;
+    border-color: #68768A;
+}
+/*-------------------------------- POPUP ----------------------------------------*/
+
+.popup {
+    position: absolute;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/*-------------------------------- POPUP EMERGENTES ----------------------------------------*/
+
+.popupConfirmar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+

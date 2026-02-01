@@ -156,6 +156,11 @@ $(document).ready(function() {
 		criterios.estadoId = estadoSeleccionado;
 		criterios.ordenacion = ordenSeleccionado;
 		let intercambios = await recuperarIntercambiosActivos(criterios);
+		if(intercambios.length === 0) {
+			$("#textoNoResultados").show();
+		} else {
+			$("#textoNoResultados").hide();
+		}
 		return intercambios;
 	}
 	
@@ -228,7 +233,7 @@ $(document).ready(function() {
 		if(intercambio.ofertanteId == usuario.id) {
 			criteriosUsuario.id = intercambio.contraparteId;
 			let contraparte = await recuperarUsuarioIntercambio(criteriosUsuario);
-			$("#textoEstado").text(contraparte.nombre + " te han hecho la siguiente oferta:");
+			$("#textoEstado").text(contraparte.nombre + " te ha hecho la siguiente oferta:");
 			$("#textoOfrecer2").text("Darás");
 			$("#textoQuerer2").text("Recibirás");
 			$("#textoEsperar").hide();
@@ -298,7 +303,7 @@ $(document).ready(function() {
 			$("#textoOfrecer3").text("Recibirás");
 			$("#nombreUsuario").text("Id Pokémon TCG Pocket de " + ofertante.nombre);
 			$("#idJuegoIntercambio").text(ofertante.juegoId);
-			$("#botonera3").hide();
+			$("#botonera3").show();
 		}
 		
 		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");

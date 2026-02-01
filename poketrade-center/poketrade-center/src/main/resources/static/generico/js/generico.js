@@ -1,6 +1,6 @@
 // funciones genericas
 
-//popupErrores
+// popup de errores o confirmacion
 const popupErroresOConfirmacion = {
     mostrar: function(icono, titulo, errores) {
         Swal.fire({
@@ -40,13 +40,14 @@ const QueryURL = {
 	}
 }
 
+// recuperar usuario logado
 const usuarioLogado = {
 	recuperar: function() {
 		return JSON.parse(localStorage.getItem("usuario"));	
 	}
 }
 
-
+// cargar barra superior
 const barraSuperior = {
     cargar: function() {
         // Solo cargamos si NO es la página de login
@@ -92,6 +93,7 @@ const barraSuperior = {
     }
 };
 
+// abrir aplicaciones del menú
 const cambiarAplicacion = {
 	paginaPrincipal: function() {
 		window.location.href = "/paginaPrincipal/html/paginaPrincipal.html";

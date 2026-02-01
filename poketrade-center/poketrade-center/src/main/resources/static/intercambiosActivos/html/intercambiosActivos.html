@@ -27,46 +27,47 @@
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
 	
-	<div id="popupTablaIntercambiosBuscador" class="popupTablaIntercambiosBuscador">
+	<div id="popupTablaIntercambiosBuscador" class="popupTablaIntercambiosBuscador popup">
 		<div id="contenidoBuscador" class="contenidoBuscador">
 			<span id="textoBuscadorNombre" class="textoBuscadorNombre label">Nombre de carta</span>
 			<div class="inputsTexto">
-				<input id="inputNombreCartaOfrecer"class="inputNombreCartaOfrecer" placeholder="Carta para recibir">
-				<input id="inputNombreCartaQuerer"class="inputNombreCartaQuerer" placeholder="Carta para dar">
+				<input id="inputNombreCartaOfrecer"class="inputNombreCartaOfrecer input" placeholder="Carta para recibir">
+				<input id="inputNombreCartaQuerer"class="inputNombreCartaQuerer input" placeholder="Carta para dar">
 			</div>
 			<span id="textoBuscadorEstado" class="textoBuscadorEstado label">Estado del intercambio</span>
 			<div class="botonesEstados">
-				<div id="sinOferta" class="botonEstado" data-id="1">
+				<div id="sinOferta" class="botonEstado boton" data-id="1">
 					<span class="fuenteNormal">Sin oferta</span>
 				</div>
-				<div id="recibidaOferta" class="botonEstado" data-id="2">
+				<div id="recibidaOferta" class="botonEstado boton" data-id="2">
 					<span class="fuenteNormal">Oferta recibida</span>
 				</div>
-				<div id="finalizadaOferta" class="botonEstado" data-id="3">
+				<div id="finalizadaOferta" class="botonEstado boton" data-id="3">
 					<span class="fuenteNormal">Oferta aceptada</span>
 				</div>
 			</div>
 			<span id="textoBuscadorOrden" class="textoBuscadorOrden label">Ordenación</span>
 			<div class="botonesOrden">
-				<div id="nuevas" class="botonOrden" data-id="fecha_asc">
+				<div id="nuevas" class="botonOrden boton" data-id="fecha_asc">
 					<span class="fuenteNormal">Nuevas</span>
 				</div>
-				<div id="antiguas" class="botonOrden" data-id="fecha_desc">
+				<div id="antiguas" class="botonOrden boton" data-id="fecha_desc">
 					<span class="fuenteNormal">Antiguas</span>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="popupTablaIntercambios" class="popupTablaIntercambios">
+	<div id="popupTablaIntercambios" class="popupTablaIntercambios popup">
 		<div id="actualizar" class="actualizar">
 			<span id="textoActualizar" class="textoActualizar label">Actualizar</span>
 			<i id="botonActualizar" class="fa-solid fa-arrows-rotate iconoFontAwesomeNoCircle"></i>
 		</div>
 		<div id="tablaIntercambios"></div>
+		<span id="textoNoResultados" class="textoNoResultados label">No se han encontrado resultados</span>
 	</div>
 
-	<div id="popupMostrarIntercambio" class="popupMostrarIntercambio">
+	<div id="popupMostrarIntercambio" class="popupMostrarIntercambio popup">
 		<span id="textoEstado" class="label"></span>
 		<div id="divEstado1">
 			<div class="verOferta1">
@@ -122,7 +123,7 @@
 		</div>
 	</div>
 		
-	<div id="confirmarEliminarIntercambio" class="confirmar" style="display: none;">
+	<div id="confirmarEliminarIntercambio" class="popupConfirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
 			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres eliminar el intercambio?</span>
 			<div id="botoneraEliminarIntercambio" class="botoneraConfirmar botonera">
@@ -132,7 +133,7 @@
 		</div>
 	</div>
 	
-	<div id="confirmarRechazarIntercambio" class="confirmar" style="display: none;">
+	<div id="confirmarRechazarIntercambio" class="popupConfirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
 			<span for="textoConfirmacion" class="textoConfirmacion label">¿Que quieres hacer con el intercambio?</span>
 			<div id="botoneraRechazarIntercambio" class="botoneraConfirmar botonera">
@@ -143,7 +144,7 @@
 		</div>
 	</div>
 	
-	<div id="confirmarAceptarIntercambio" class="confirmar" style="display: none;">
+	<div id="confirmarAceptarIntercambio" class="popupConfirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
 			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres aceptar el intercambio?</span>
 			<div id="botoneraAceptarIntercambio" class="botoneraConfirmar botonera">
@@ -153,7 +154,7 @@
 		</div>
 	</div>
 	
-	<div id="confirmarFinalizarIntercambio" class="confirmar" style="display: none;">
+	<div id="confirmarFinalizarIntercambio" class="popupConfirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
 			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres finalizar el intercambio?</span>
 			<div id="botoneraFinalizarIntercambio" class="botoneraConfirmar botonera">
