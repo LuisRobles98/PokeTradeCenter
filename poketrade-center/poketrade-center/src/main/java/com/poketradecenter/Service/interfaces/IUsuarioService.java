@@ -1,7 +1,5 @@
 package com.poketradecenter.Service.interfaces;
 import java.util.List;
-import java.util.Map;
-
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 

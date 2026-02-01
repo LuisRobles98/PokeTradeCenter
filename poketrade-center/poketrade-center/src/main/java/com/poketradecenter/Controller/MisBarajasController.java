@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
@@ -32,7 +32,7 @@ public class MisBarajasController {
 
     @GetMapping("/misBarajas")
     public List<BarajaUsuario> recuperarMisBarajasPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosMisBarajas criterios = crearCriterios.crearCriteriosMisBarajasParams(params);
+       CriteriosBarajaUsuario criterios = crearCriterios.crearCriteriosBarajaUsuarioParams(params);
        return misBarajasService.recuperarMisBarajasPorCriterios(criterios);
     }
     
@@ -54,7 +54,7 @@ public class MisBarajasController {
     
     @GetMapping("/misBarajas/usuario")
     public Usuario recuperarCreadorBaraja(@RequestParam Map<String, String> params) {
-       CriteriosBarajasPublicas criterios = crearCriterios.crearCriteriosBarajasPublicasParams(params);
+       CriteriosBarajaPublica criterios = crearCriterios.crearCriteriosBarajaPublicaParams(params);
        return misBarajasService.recuperarCreadorMisBaraja(criterios);
     }
 }

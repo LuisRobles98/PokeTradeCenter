@@ -7,9 +7,9 @@ import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Clase.Usuario;
 
-public interface ITablonIntercambiosService {
-	List<Intercambio> recuperarIntercambiosPublicosPorCriterios(CriteriosIntercambio criterios);
+public interface IIntercambiosActivosService {
+	List<Intercambio> recuperarIntercambiosActivosPorCriterios(CriteriosIntercambio criterios);
 	Carta recuperarCartaPorCriterios(CriteriosCarta criterios);
-	void solicitarIntercambio(Intercambio intercambio);
 	Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios);
+	void actualizarIntercambio(Intercambio intercambio);
 }

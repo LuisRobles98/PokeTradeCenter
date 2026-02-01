@@ -15,9 +15,9 @@ import com.poketradecenter.Clase.BarajaLike;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
@@ -34,7 +34,7 @@ public class BarajasPublicasController {
 	
     @GetMapping("/barajasPublicas")
     public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(@RequestParam Map<String, String> params) {
-       CriteriosBarajasPublicas criterios = crearCriterios.crearCriteriosBarajasPublicasParams(params);
+       CriteriosBarajaPublica criterios = crearCriterios.crearCriteriosBarajaPublicaParams(params);
        return barajasPublicasService.recuperarBarajasPublicasPorCriterios(criterios);
     }
     
@@ -52,7 +52,7 @@ public class BarajasPublicasController {
     
     @GetMapping("/barajasPublicas/like")
     public boolean recuperarLikeBarajasPublicas(@RequestParam Map<String, String> params) {
-       CriteriosBarajasPublicas criterios = crearCriterios.crearCriteriosBarajasPublicasParams(params);
+       CriteriosBarajaPublica criterios = crearCriterios.crearCriteriosBarajaPublicaParams(params);
        return barajasPublicasService.comprobarLikeABaraja(criterios);
     }
     
@@ -68,7 +68,7 @@ public class BarajasPublicasController {
     
     @GetMapping("/barajasPublicas/barajaGuardada")
     public boolean recuperarBarajaPublicaGuardada(@RequestParam Map<String, String> params) {
-       CriteriosMisBarajas criterios = crearCriterios.crearCriteriosMisBarajasParams(params);
+       CriteriosBarajaUsuario criterios = crearCriterios.crearCriteriosBarajaUsuarioParams(params);
        return barajasPublicasService.comprobarBarajaPublicaGuardada(criterios);
     }
     

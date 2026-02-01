@@ -3,7 +3,7 @@
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaLikeMapper">
  
 	 <!-- SQL para recuperar las barajas que el usuario logado le ha dado like por criterios-->
-	 <select id="recuperarBarajaLikePorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajasPublicas"  
+	 <select id="recuperarBarajaLikePorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaPublica"  
 	        resultType="com.poketradecenter.Clase.BarajaLike">
 	    SELECT usuario_id AS usuarioId, baraja_publica_id AS barajaPublicaId 
 	    FROM baraja_like

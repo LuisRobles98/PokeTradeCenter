@@ -1,11 +1,12 @@
 package com.poketradecenter.Clase;
 
-public class CriteriosIntercambiosPublicos {
+public class CriteriosIntercambio {
 	
 	private Integer id;
 	private Integer usuarioId;
 	private String cartasOfrecerNombre;
 	private String cartasQuererNombre;
+	private Integer estadoId;
 	private String ordenacion;
 	
 	public Integer getId() {return id;}
@@ -19,6 +20,9 @@ public class CriteriosIntercambiosPublicos {
 	
 	public String getCartasQuererNombre() {return cartasQuererNombre;}
 	public void setCartasQuererNombre(String cartasQuererNombre) {this.cartasQuererNombre = cartasQuererNombre;}
+	
+	public Integer getEstadoId() {return estadoId;}
+	public void setEstadoId(Integer estadoId) {this.estadoId = estadoId;}
 	
 	public String getOrdenacion() {return ordenacion;}
 	public void setOrdenacion(String ordenacion) {this.ordenacion = ordenacion;}

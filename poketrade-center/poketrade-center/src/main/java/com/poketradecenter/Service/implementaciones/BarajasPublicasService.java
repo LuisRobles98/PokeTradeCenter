@@ -8,9 +8,9 @@ import com.poketradecenter.Clase.BarajaLike;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
-import com.poketradecenter.Clase.CriteriosBarajasPublicas;
+import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
-import com.poketradecenter.Clase.CriteriosMisBarajas;
+import com.poketradecenter.Clase.CriteriosBarajaUsuario;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Mapper.interfaces.IBarajaLikeMapper;
@@ -38,7 +38,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	private IMisBarajasService misBarajasService;
 	
 	@Override
-	public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajasPublicas criterios) {
+	public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajaPublica criterios) {
 		try {
 			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
 		} catch(RuntimeException e) {
@@ -57,7 +57,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	}
 	
 	@Override
-	public boolean comprobarLikeABaraja(CriteriosBarajasPublicas criterios) {
+	public boolean comprobarLikeABaraja(CriteriosBarajaPublica criterios) {
 		try {
 			return barajaLikeMapper.recuperarBarajaLikePorCriterios(criterios).size() > 0;
 		} catch(RuntimeException e) {
@@ -72,7 +72,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	}
 	
 	private void darLike(BarajaLike barajaLike) {
-		CriteriosBarajasPublicas criteriosBusqueda = new CriteriosBarajasPublicas();
+		CriteriosBarajaPublica criteriosBusqueda = new CriteriosBarajaPublica();
 		criteriosBusqueda.setBarajaPublicaId(barajaLike.getBarajaPublicaId());
 		BarajaPublica baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
 		baraja.setMeGusta(baraja.getMeGusta() + 1);
@@ -96,7 +96,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	}
 	
 	@Override
-	public boolean comprobarBarajaPublicaGuardada(CriteriosMisBarajas criterios) {
+	public boolean comprobarBarajaPublicaGuardada(CriteriosBarajaUsuario criterios) {
 		return misBarajasService.recuperarMisBarajasPorCriterios(criterios).size() > 0;
 	}
 	

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
+	<title>PoketDex</title>
+	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/intercambiosActivos/css/intercambiosActivos.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="/generico/js/generico.js" defer></script>
+	<script src="/intercambiosActivos/js/llamadasAjax.js" defer></script>
+	<script src="/intercambiosActivos/js/intercambiosActivos.js" defer></script>
+	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+
+</head>
+
+<body class="fondo">
+
+	<!-- cargar Barra superior -->
+	<div id="barraContainer"></div>
+	
+	<div id="popupTablaIntercambiosBuscador" class="popupTablaIntercambiosBuscador">
+		<div id="contenidoBuscador" class="contenidoBuscador">
+			<span id="textoBuscadorNombre" class="textoBuscadorNombre label">Nombre de carta</span>
+			<div class="inputsTexto">
+				<input id="inputNombreCartaOfrecer"class="inputNombreCartaOfrecer" placeholder="Carta para recibir">
+				<input id="inputNombreCartaQuerer"class="inputNombreCartaQuerer" placeholder="Carta para dar">
+			</div>
+			<span id="textoBuscadorEstado" class="textoBuscadorEstado label">Estado del intercambio</span>
+			<div class="botonesEstados">
+				<div id="sinOferta" class="botonEstado" data-id="1">
+					<span class="fuenteNormal">Sin oferta</span>
+				</div>
+				<div id="recibidaOferta" class="botonEstado" data-id="2">
+					<span class="fuenteNormal">Oferta recibida</span>
+				</div>
+				<div id="finalizadaOferta" class="botonEstado" data-id="3">
+					<span class="fuenteNormal">Oferta aceptada</span>
+				</div>
+			</div>
+			<span id="textoBuscadorOrden" class="textoBuscadorOrden label">Ordenación</span>
+			<div class="botonesOrden">
+				<div id="nuevas" class="botonOrden" data-id="fecha_asc">
+					<span class="fuenteNormal">Nuevas</span>
+				</div>
+				<div id="antiguas" class="botonOrden" data-id="fecha_desc">
+					<span class="fuenteNormal">Antiguas</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="popupTablaIntercambios" class="popupTablaIntercambios">
+		<div id="actualizar" class="actualizar">
+			<span id="textoActualizar" class="textoActualizar label">Actualizar</span>
+			<i id="botonActualizar" class="fa-solid fa-arrows-rotate iconoFontAwesomeNoCircle"></i>
+		</div>
+		<div id="tablaIntercambios"></div>
+	</div>
+
+	<div id="popupMostrarIntercambio" class="popupMostrarIntercambio">
+		<span id="textoEstado" class="label"></span>
+		<div id="divEstado1">
+			<div class="verOferta1">
+				<div id="cartasOfrecer1" class="cartasOfrecer1">
+					<span id="textoOfrecer1" class="textoOfrecer1 label"></span>
+					<div id="mostrarCartasOfrecer1" class="mostrarCartasOfrecer1"></div>
+				</div>
+				<div id="cartasQuerer1" class="cartasQuerer1">
+					<span id="textoQuerer1" class="textoQuerer1 label"></span>
+					<div id="mostrarCartasQuerer1" class="mostrarCartasQuerer1"></div>
+				</div>
+			</div>
+			<div id="botonera1" class="botonera1 botonera">
+				<button id="btnEliminarIntercambio" class="btnBotonera1 aceptar">Eliminar intercambio</button>
+			</div>
+		</div>
+		<div id="divEstado2">
+			<div class="verOferta2">
+				<div id="cartasOfrecer2" class="cartasOfrecer23">
+					<span id="textoOfrecer2" class="textoOfrecer23 label"></span>
+					<div id="mostrarCartasOfrecer2" class="mostrarCartasOfrecer23"></div>
+				</div>
+				<i class="fa-solid fa-arrow-right-arrow-left iconoEstadoIntercambio label"></i>
+				<div id="cartasQuerer2" class="cartasQuerer23">
+					<span id="textoQuerer2" class="textoQuerer23 label"></span>
+					<div id="mostrarCartasQuerer2" class="mostrarCartasQuerer23"></div>
+				</div>
+			</div>
+			<span id="textoEsperar" class="textoEsperar label">Tendrás que esperar a que el usuario acepte el intercambio. Si la rechaza desaparecerá de esta aplicación</span>
+			<div id="botonera2" class="botonera2 botonera">
+				<button id="btnRechazarIntercambio" class="btnBotonera2 aceptar">Rechazar intercambio</button>
+				<button id="btnAceptarIntercambio" class="btnBotonera2 aceptar">Aceptar intercambio</button>
+			</div>
+		</div>
+		<div id="divEstado3">
+			<div class="verOferta3">
+				<div id="cartasOfrecer3" class="cartasOfrecer23">
+					<span id="textoOfrecer3" class="textoOfrecer23 label"></span>
+					<div id="mostrarCartasOfrecer3" class="mostrarCartasOfrecer23"></div>
+				</div>
+				<i class="fa-regular fa-handshake iconoEstadoIntercambio label"></i>
+				<div id="cartasQuerer3" class="cartasQuerer23">
+					<span id="textoQuerer3" class="textoQuerer23 label"></span>
+					<div id="mostrarCartasQuerer3" class="mostrarCartasQuerer23"></div>
+				</div>
+			</div>
+			<span id="textoAgregar" class="textoAgregar label">Agrega al usuario y terminar el intercambio en el juego. Una vez finalizado el intercambio, presiona el botón de "finalizar intercambio" para eliminarlo</span>
+			<span id="nombreUsuario" class="textoUsuario label"></span>
+			<span id="idJuegoIntercambio" class="idJuegoIntercambio"></span>
+			<div id="botonera3" class="botonera3 botonera">
+				<button id="btnFinalizarIntercambio" class="btnBotonera3 aceptar">Finalizar intercambio</button>
+			</div>
+		</div>
+	</div>
+		
+	<div id="confirmarEliminarIntercambio" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres eliminar el intercambio?</span>
+			<div id="botoneraEliminarIntercambio" class="botoneraConfirmar botonera">
+				<button id="btnCancelarEliminar" class="btnConfirmar cancelar">Cancelar</button>
+				<button id="btnEliminarEliminar" class="btnConfirmar aceptar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="confirmarRechazarIntercambio" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Que quieres hacer con el intercambio?</span>
+			<div id="botoneraRechazarIntercambio" class="botoneraConfirmar botonera">
+				<button id="btnCancelarRechazar" class="btnConfirmar cancelar">Cancelar</button>
+				<button id="btnEliminarRechazar" class="btnConfirmar aceptar">Eliminar</button>
+				<button id="btnOfertarRechazar" class="btnConfirmar aceptar">Ofertar</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="confirmarAceptarIntercambio" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres aceptar el intercambio?</span>
+			<div id="botoneraAceptarIntercambio" class="botoneraConfirmar botonera">
+				<button id="btnCancelarAceptar" class="btnConfirmar cancelar">Cancelar</button>
+				<button id="btnAceptarAceptar" class="btnConfirmar aceptar">Aceptar</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="confirmarFinalizarIntercambio" class="confirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres finalizar el intercambio?</span>
+			<div id="botoneraFinalizarIntercambio" class="botoneraConfirmar botonera">
+				<button id="btnCancelarFinalizar" class="btnConfirmar cancelar">Cancelar</button>
+				<button id="btnFinalizarFinalizar" class="btnConfirmar aceptar">Finalizar</button>
+			</div>
+		</div>
+	</div>
+
+</body>

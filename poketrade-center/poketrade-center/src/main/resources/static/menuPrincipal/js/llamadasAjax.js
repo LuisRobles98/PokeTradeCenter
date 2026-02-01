@@ -6,7 +6,12 @@ async function actualizarUsuario(usuario) {
         },
         body: JSON.stringify(usuario),
     };
-    await fetch('http://localhost:8080/usuario', parameters);
+    let response = await fetch('http://localhost:8080/usuario', parameters);
+    
+    if (!response.ok) {
+        let msg = await response.text();
+        throw new Error(msg || 'Error desconocido del servidor');
+    }
 };
 
 async function recuperarUsuario(usuario) {

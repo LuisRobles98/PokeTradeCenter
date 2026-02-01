@@ -6,7 +6,7 @@
 	top: 95px;
     left: 50px;
     height: 35px;
-    width: 736px;
+    width: 1764px;
     background-color: white;
     padding: 30px;
     border-radius: 30px;
@@ -17,11 +17,29 @@
 
 .contenidoBuscador {
 	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.inputsTexto {
+	display: flex;
+    margin-top: 10px;
+}
+
+.botonesEstados {
+	display: flex;
+    margin-left: 70px;
+}
+
+.botonesOrden {
+	display: flex;
+    margin-left: 70px;
 }
 
 .inputNombreCartaOfrecer {
     align-items: center;
-	width: 200px;
+	width: 340px;
     padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
@@ -43,7 +61,7 @@
 
 .inputNombreCartaQuerer {
     align-items: center;
-	width: 200px;
+	width: 340px;
     padding: 10px;
     margin-left: 20px;
     margin-top: -5px;
@@ -63,11 +81,36 @@
     border-color: #68768A;
 }
 
+.botonEstado {
+    display: flex;
+    width: 130px;
+    padding: 5px;
+    margin-left: 25px;
+    padding: 5px;
+    border: 2px solid #8EA0B8;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.botonEstado:hover {
+	transform: scale(1.03);
+	border: 2px solid #7A8BA3;
+}
+
+.botonEstado.seleccionada {
+    background-color: #B0B0B0;
+    border-color: #68768A;
+}
+
 .botonOrden {
     display: flex;
-    width: 100px;
+    width: 130px;
     padding: 5px;
-    margin-top: -5px;
     margin-left: 25px;
     padding: 5px;
     border: 2px solid #8EA0B8;
@@ -78,6 +121,7 @@
     transition: border-color 0.2s;
     transition: transform 0.2s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
 }
 
 .botonOrden:hover {
@@ -433,6 +477,24 @@
     max-height: calc(100% + 0px);
 }
 
+.textoBuscadorNombre {
+	position: absolute;
+    top: 10px;
+    left: 338px;
+}
+
+.textoBuscadorEstado {
+	position: absolute;
+    top: 10px;
+    left: 1030px;
+}
+
+.textoBuscadorOrden {
+	position: absolute;
+    top: 10px;
+    left: 1563px;
+}
+
 .textoActualizar {
     display: flex;
     margin-left: 10px;
@@ -459,14 +521,15 @@
     font-size: 36px;
 }
 
-/* --------------------------- POPUP MOSTRAR BARAJA ----------------------------------------- */
+/* --------------------------- POPUP MOSTRAR INTERCAMBIO ----------------------------------------- */
 .popupMostrarIntercambio {
 	display: flex;
     flex-direction: column;
     position: absolute;
-    top: 95px;
+    align-items: center;
+    top: 221px;
 	left: 890px;
-    height: 724px;
+    height: 597px;
     width: 925px;
     background-color: white;
     padding: 30px;
@@ -476,20 +539,6 @@
 }
 
 /*formatos de imagen en funcion del numero de cartas del intercambio en el popup de mostrar*/
-
-.mostrarCartasOfrecer {
- 	position: absolute;
-    top: 100px;
-    gap: 12px;
-    padding: 10px;
-}
-
-.mostrarCartasQuerer {
- 	position: absolute;
-    top: 450px;
-    gap: 12px;
-    padding: 10px;
-}
 
 .carta {
   width: 150px;
@@ -501,15 +550,11 @@
 
 /*1*/
 .abanicoMostrarOfrecer-1 .carta {
-	position: relative;
-    margin-left: 198px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-1 .carta {
-	position: relative;
-    margin-left: 198px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -524,29 +569,25 @@
 
 /*2*/
 .abanicoMostrarOfrecer-2 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-2 .carta:nth-child(2) {
 	position: relative;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-2 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 136px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-2 .carta:nth-child(2) {
 	position: relative;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -569,8 +610,6 @@
 
 /*3*/
 .abanicoMostrarOfrecer-3 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -578,21 +617,19 @@
 .abanicoMostrarOfrecer-3 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-3 .carta:nth-child(3) {
 	position: relative;
-    margin-left: -20px;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-3 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 72px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -600,14 +637,14 @@
 .abanicoMostrarQuerer-3 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -30px;
+    margin-left: -45px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-3 .carta:nth-child(3) {
 	position: relative;
-    margin-left: -20px;
+    margin-left: -45px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -639,8 +676,6 @@
 
 /*4*/
 .abanicoMostrarOfrecer-4 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 40px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -648,7 +683,7 @@
 .abanicoMostrarOfrecer-4 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -656,22 +691,20 @@
 .abanicoMostrarOfrecer-4 .carta:nth-child(3) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-4 .carta:nth-child(4) {
 	position: relative;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 
 .abanicoMostrarQuerer-4 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 40px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -679,7 +712,7 @@
 .abanicoMostrarQuerer-4 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -687,14 +720,14 @@
 .abanicoMostrarQuerer-4 .carta:nth-child(3) {
 	position: relative;
 	top: -5px;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-4 .carta:nth-child(4) {
 	position: relative;
-    margin-left: -45px;
+    margin-left: -70px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -733,8 +766,6 @@
 
 /*5*/
 .abanicoMostrarOfrecer-5 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 10px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -742,7 +773,7 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -750,7 +781,7 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(3) {
 	position: relative;
 	top: -8px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -758,22 +789,20 @@
 .abanicoMostrarOfrecer-5 .carta:nth-child(4) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarOfrecer-5 .carta:nth-child(5) {
 	position: relative;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 
 .abanicoMostrarQuerer-5 .carta:nth-child(1) {
-	position: relative;
-    margin-left: 10px;
     transform: rotate(-6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -781,7 +810,7 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(2) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(-3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -789,7 +818,7 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(3) {
 	position: relative;
 	top: -8px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -797,14 +826,14 @@
 .abanicoMostrarQuerer-5 .carta:nth-child(4) {
 	position: relative;
 	top: -5px;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(3deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .abanicoMostrarQuerer-5 .carta:nth-child(5) {
 	position: relative;
-    margin-left: -55px;
+    margin-left: -80px;
     transform: rotate(6deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -850,87 +879,88 @@
 }
 
 
-.botonSolicitarIntercambio {
-	position: absolute;
-	left: 410px;
-    top: 720px;
-    width: 190px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+.mostrarCartasOfrecer1 {
+	display: flex;
+    justify-content: center;
+	margin-top: 55px;
 }
 
-.botonGuardarBaraja:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
+.mostrarCartasOfrecer23 {
+	display: flex;
+    justify-content: center;
+	margin-top: 50px;
 }
 
-.textoOfrecer {
-    position: absolute;
-    top: 35px;
-    margin-left: 110px;
-	color: #68768A;
+.mostrarCartasQuerer1 {
+	display: flex;
+    justify-content: center;
+ 	margin-top: 55px;
 }
 
-.textoOfrecerUna {
-    position: absolute;
-    top: 35px;
-    margin-left: 160px;
-	color: #68768A;
+.mostrarCartasQuerer23 {
+	display: flex;
+    justify-content: center;
+ 	margin-top: 50px;
 }
 
-.textoQuerer {
-    position: absolute;
-    top: 380px;
-    margin-left: 126px;
-    color: #68768A;
+
+.cartasOfrecer1 {
+	margin-top: 20px;
 }
 
-.textoQuererUna {
-    position: absolute;
-    top: 380px;
-    margin-left: 166px;
-    color: #68768A;
+.cartasOfrecer23 {
+	margin-top: -40px;
 }
 
-.textoOfrecerYo {
-    position: absolute;
-    top: 380px;
-    margin-left: 700px;
-	color: #68768A;
+.cartasQuerer1 {
+	margin-top: 20px;
 }
 
-.textoQuererYo {
-    position: absolute;
-    top: 35px;
-    margin-left: 675px;
-    color: #68768A;
+.cartasQuerer23 {
+	margin-top: -40px;
 }
 
-.cartaOfrecerYo {
-	position: absolute;
-	top: 464px;
-	left: 724px;
-	width: 150px;
-	border-radius: 8px;
+
+.textoOfrecer1 {
+    display: flex;
+    justify-content: center;
 }
 
-.cartaQuererYo {
-	position: absolute;
-    top: 106px;
-    left: 724px;
-    width: 150px;
-    border-radius: 8px;
+.textoOfrecer23 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
+
+.textoQuerer1 {
+    display: flex;
+    justify-content: center;
+}
+
+.textoQuerer23 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.botonera1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 155px;
+}
+
+.botonera2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 171px;
+}
+
+.botonera3 {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
 
 .cartaIntercambioAniadida {
   width: 150px;
@@ -944,23 +974,89 @@
 	transform: scale(1.03);
 }
 
-.flechaIntercambiarQuererYo {
-    position: absolute;
-    margin-left: 600px;
-    color: #68768A;
-    margin-top: 150px;
+.iconoEstadoIntercambio {
+	margin-top: -55px;
     font-size: 55px;
 }
 
-.flechaIntercambiarOfrecerYo {
-    position: absolute;
-    margin-left: 600px;
-    color: #68768A;
-    margin-top: 505px;
-    font-size: 55px;
+.verOferta1 {
+    display: flex;
+    width: 925px;
+    margin-top: 80px;
+    justify-content: space-around;
 }
 
-/*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
+.verOferta2 {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 85px;
+    margin-top: 155px;
+}
+
+.verOferta3 {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 85px;
+    margin-top: 129px;
+}
+
+.textoEsperar {
+	margin-top: 110px;
+    display: flex;
+}
+
+.textoAgregar {
+	margin-top: 45px;
+    display: flex;
+    width: 740px;
+    text-align: center;
+}
+
+.textoUsuario {
+	margin-top: 15px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.btnBotonera1 {
+    width: 190px;
+}
+
+.btnBotonera2 {
+	width: 200px;
+}
+
+.idJuegoIntercambio {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: 160px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.idJuegoIntercambio:hover {
+    border-color: #7A8BA3;
+}
+
+.idJuegoIntercambio:focus {
+	outline: none;
+    border-color: #68768A;
+}
+
+.btnBotonera3 {
+	width: 192px;
+}
+
+/*---------------------------- POPUPS CONFIRMACION  ----------------------------*/
 
 .confirmar {
     display: flex;
@@ -980,63 +1076,20 @@
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
-}
-
-.botoneraConfirmar {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	margin-left: -20px;
+    width: 400px;
 }
 
 .textoConfirmacion {
-    display: flex;
+	display: flex;
     text-align: center;
-	color: #68768A;
+    justify-content: space-around;
 }
 
-.botonSolicitar {
-	width: 115px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+.botoneraConfirmar {
+	margin-top: 20px;
 }
 
-.botonSolicitar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
+.btnConfirmar {
+	width: 107px;
 }
 
-
-.botonCancelar {
-	width: 115px;
-    padding: 10px 20px;
-    margin: 0px 15px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.botonCancelar:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}

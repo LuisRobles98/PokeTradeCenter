@@ -102,6 +102,9 @@ const cambiarAplicacion = {
 	crearIntercambio: function() {
 		window.location.href = "/crearIntercambio/html/crearIntercambio.html";
 	},
+	intercambiosActivos: function() {
+		window.location.href = "/intercambiosActivos/html/intercambiosActivos.html";
+	},
 	tablonIntercambios: function() {
 		window.location.href = "/tablonIntercambios/html/tablonIntercambios.html";
 	},

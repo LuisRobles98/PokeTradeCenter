@@ -16,43 +16,43 @@ import com.poketradecenter.Clase.CriteriosIntercambio;
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Clase.Usuario;
-import com.poketradecenter.Service.interfaces.ITablonIntercambiosService;
+import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
 import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 
 @RestController
-public class TablonIntercambiosController {
+public class IntercambiosActivosController {
 	
 	@Autowired
-	private ITablonIntercambiosService tablonIntercambiosService;
+	private IIntercambiosActivosService intercambiosActivosService;
 	
 	@Autowired
 	private ICrearCriterios crearCriterios;
 
-    @GetMapping("/intercambiosPublicos")
-    public List<Intercambio> recuperarIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
+    @GetMapping("/intercambiosActivos")
+    public List<Intercambio> recuperarIntercambiosActivosPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosIntercambio criterios = crearCriterios.crearCriteriosIntercambioParams(params);
-       return tablonIntercambiosService.recuperarIntercambiosPublicosPorCriterios(criterios);
+       return intercambiosActivosService.recuperarIntercambiosActivosPorCriterios(criterios);
     }
-    
-    @GetMapping("/intercambiosPublicos/usuario")
-    public Usuario recuperarUsuarioIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
+
+    @GetMapping("/intercambiosActivos/usuario")
+    public Usuario recuperarUsuarioIntercambiosActivosPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);
-       return tablonIntercambiosService.recuperarUsuarioPorCriterios(criterios);
+       return intercambiosActivosService.recuperarUsuarioPorCriterios(criterios);
     }
     
-    @GetMapping("/intercambiosPublicos/carta")
+    @GetMapping("/intercambiosActivos/carta")
     public Carta recuperarCartaIntercambiosPublicosPorCriterios(@RequestParam Map<String, String> params) {
        CriteriosCarta criterios = crearCriterios.crearCriteriosCartaParams(params);
-       return tablonIntercambiosService.recuperarCartaPorCriterios(criterios);
+       return intercambiosActivosService.recuperarCartaPorCriterios(criterios);
     }
     
-    @PutMapping("/intercambiosPublicos")
-    public ResponseEntity<?> solicitarIntercambio(@RequestBody Intercambio intercambio) {
-    	try {
-    		tablonIntercambiosService.solicitarIntercambio(intercambio);
-    		return ResponseEntity.ok().build();
-    	}catch(RuntimeException e) {
-    		return ResponseEntity.badRequest().body(e.getMessage());
-    	}
+    @PutMapping("/intercambiosActivos")
+    public ResponseEntity<?> actualizarIntercambio(@RequestBody Intercambio intercambio) {
+       try {
+    	   intercambiosActivosService.actualizarIntercambio(intercambio);
+    	   return ResponseEntity.ok().build();
+	   	}catch(RuntimeException e) {
+	   		return ResponseEntity.badRequest().body(e.getMessage());
+	   	}
     }
 }

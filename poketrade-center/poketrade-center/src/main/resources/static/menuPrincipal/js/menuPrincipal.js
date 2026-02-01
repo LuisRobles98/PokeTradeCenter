@@ -18,12 +18,16 @@ $(document).ready(async function() {
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
-			await actualizarIdJuego();
-			popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
-			cerrarPopupInsertarIdJuego();
-			usuario = await recuperarUsuarioPorId(usuario.id);
-			localStorage.setItem("usuario", JSON.stringify(usuario));
-			barraSuperior.mostrarDatos(usuario);
+			try {
+				await actualizarIdJuego();
+				popupErroresOConfirmacion.mostrar("success", "" , "¡Se ha guardado correctamente tu id de juego!");
+				cerrarPopupInsertarIdJuego();
+				usuario = await recuperarUsuarioPorId(usuario.id);
+				localStorage.setItem("usuario", JSON.stringify(usuario));
+				barraSuperior.mostrarDatos(usuario);
+			} catch(error) {
+				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
+			}
 		}
     });
     
@@ -47,6 +51,12 @@ $(document).ready(async function() {
 	async function actualizarIdJuego() {
 		let usuarioActualizar = {};
 		usuarioActualizar.id = usuario.id;
+		usuarioActualizar.nombre = usuario.nombre;
+		usuarioActualizar.iconoId = usuario.iconoId;
+		usuarioActualizar.emblema1Id = usuario.emblema1Id;
+		usuarioActualizar.emblema2Id = usuario.emblema2Id
+		usuarioActualizar.emblema3Id = usuario.emblema3Id
+		usuarioActualizar.password = "";
 		usuarioActualizar.juegoId = $("#inputIdJuego").val();
 		await actualizarUsuario(usuarioActualizar);
 	}
@@ -61,6 +71,9 @@ $(document).ready(async function() {
     //llamadas a las distintas aplicaciones
 	$("#crearIntercambioApp").click(function() {
     	cambiarAplicacion.crearIntercambio();
+    });
+	$("#intercambiosActivosApp").click(function() {
+    	cambiarAplicacion.intercambiosActivos();
     });
 	$("#tablonIntercambiosApp").click(function() {
     	cambiarAplicacion.tablonIntercambios();

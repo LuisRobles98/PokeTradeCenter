@@ -1,9 +1,7 @@
 package com.poketradecenter.Service.implementaciones;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +74,16 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 				throw new RuntimeException("Has añadido una carta repetida en la sección de querer");
 			}
 		}
+		
+		//validar que no hay cartas iguales en ofrecer y querer
+		for(Carta carta1 : cartasOfrecer) {
+			for(Carta carta2 : cartasQuerer) {
+				if(carta1.getExpansionId() == carta2.getExpansionId() && carta1.getCartaJuegoId() == carta2.getCartaJuegoId()) {
+					throw new RuntimeException("Has añadido una carta en ofrecer igual en querer");
+				}
+			}
+		}
+		
 		
 		//validar que hay al menos la misma rareza de ofrecer y querer
 		for(Carta carta1 : cartasOfrecer) {
