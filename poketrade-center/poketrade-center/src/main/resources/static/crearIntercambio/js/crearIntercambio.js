@@ -18,25 +18,17 @@ $(document).ready(function() {
 		cargarCartas();	
 	}
 	
+	//limpiar datos del buscador
 	function limpiarBuscador() {
-		//limpiamos input nombre carta
 		$("#inputNombreCarta").val("");
-		
-		//vaciamos lista expansiones y eliminamos campos seleccionados
 		listaExpansiones = [];
-		$(".expansionCarta").removeClass("expansionSeleccionada");
-		
-		//vaciamos lista rarezas y eliminamos campos seleccionados
+		$(".expansionCarta").removeClass("seleccionada");
 		listaRarezas = [];
 		$(".rarezaCarta").removeClass("rarezaSeleccionada");
-		
-		//vaciamos lista energias y eliminamos campos seleccionados
 		listaEnergias = [];
-		$(".energiaCarta").removeClass("energiaSeleccionada");
-		
-		//vaciamos lista tipos y eliminamos campos seleccionados
+		$(".energiaCarta").removeClass("seleccionada");
 		listaTipos = [];
-		$(".tipoCarta").removeClass("tipoSeleccionada");
+		$(".tipoCarta").removeClass("seleccionada");
 	}
 	
 	function vaciarListadoOfrecer() {
@@ -49,7 +41,7 @@ $(document).ready(function() {
 			basico: null
 		}));
 		listaSeleccionada = null;
-		$(".tipoIntercambio").removeClass("tipoSeleccionada");
+		$(".tipoIntercambio").removeClass("seleccionada");
     	recargarOfrecer();
 	}
 	
@@ -63,7 +55,7 @@ $(document).ready(function() {
 			basico: null
 		}));
 		listaSeleccionada = null;
-		$(".tipoIntercambio").removeClass("tipoSeleccionada");
+		$(".tipoIntercambio").removeClass("seleccionada");
     	recargarQuerer();
 	}
 	
@@ -123,13 +115,11 @@ $(document).ready(function() {
 	$(".expansionCarta").click(function() {
 		let id = $(this).data("id");
 		if(listaExpansiones.includes(id)) {
-        	// Quitar fondo gris y quitar de la lista
         	listaExpansiones = listaExpansiones.filter(e => e != id);
-        	$(this).removeClass("expansionSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
-        	// Agregar fondo gris y añadir en la lista
         	listaExpansiones.push(id);
-        	$(this).addClass("expansionSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasIntercambioPorCriterios();
 	});
@@ -138,13 +128,11 @@ $(document).ready(function() {
 	$(".rarezaCarta").click(function() {
 		let id = $(this).data("id");
 		if(listaRarezas.includes(id)) {
-        	// Quitar fondo gris y quitar de la lista
         	listaRarezas = listaRarezas.filter(e => e != id);
-        	$(this).removeClass("rarezaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
-        	// Agregar fondo gris y añadir en la lista
         	listaRarezas.push(id);
-        	$(this).addClass("rarezaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasIntercambioPorCriterios();
 	});
@@ -153,13 +141,11 @@ $(document).ready(function() {
 	$(".energiaCarta").click(function() {
 		let id = $(this).data("id");
 		if(listaEnergias.includes(id)) {
-        	// Quitar fondo gris y quitar de la lista
         	listaEnergias = listaEnergias.filter(e => e != id);
-        	$(this).removeClass("energiaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
-        	// Agregar fondo gris y añadir en la lista
         	listaEnergias.push(id);
-        	$(this).addClass("energiaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasIntercambioPorCriterios();
 	});
@@ -170,13 +156,24 @@ $(document).ready(function() {
 		if(listaTipos.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaTipos = listaTipos.filter(e => e != id);
-        	$(this).removeClass("tipoSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
-        	// Agregar fondo gris y añadir en la lista
         	listaTipos.push(id);
-        	$(this).addClass("tipoSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasIntercambioPorCriterios();
+	});
+	
+	//funcionalidad click boton ofrecer cartas
+	$(".tipoIntercambio").click(function() {
+		let valor = $(this).data("id");
+		$(".tipoIntercambio").removeClass("seleccionada");
+		if(listaSeleccionada === valor) {
+			listaSeleccionada = null;
+		} else {
+			listaSeleccionada = valor;
+			$(this).addClass("seleccionada");
+		}
 	});
 	
 	//cargar cartas
@@ -196,7 +193,6 @@ $(document).ready(function() {
 		mostrarCartas(cartas)
 	}
 	
-
 	function mostrarCartas(cartas) {
 		let contenedor = document.getElementById("mostrarCartas");
 		contenedor.innerHTML = "";
@@ -258,19 +254,7 @@ $(document).ready(function() {
 			recargarQuerer();
 		}
 	}
-	
-	//funcionalidad click boton ofrecer cartas
-	$(".tipoIntercambio").click(function() {
-		let valor = $(this).data("id");
-		$(".tipoIntercambio").removeClass("tipoSeleccionada");
-		if(listaSeleccionada === valor) {
-			listaSeleccionada = null;
-		} else {
-			listaSeleccionada = valor;
-			$(this).addClass("tipoSeleccionada");
-		}
-	});
-	
+		
 	//funcion eliminar carta de la seccion de ofrecer
 	$("#cartasBarajaOfrecer").on("click", ".cartaBarajaAniadida", function() {
 		let posicionEliminar = $(this).data("posicion");
@@ -297,6 +281,7 @@ $(document).ready(function() {
   		}
 		recargarOfrecer();
 	}
+	
 	function eliminarCartaQuerer(posicionEliminar) {
 		const index = cartasBarajaQuerer.findIndex(carta => carta.posicion === posicionEliminar);
 		if (index !== -1) {

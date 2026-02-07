@@ -6,6 +6,7 @@
     left: 50px;
     height: 35px;
     width: 1764px;
+    padding: 30px;
     z-index: 3;
 }
 
@@ -74,6 +75,7 @@
     left: 50px;
     height: 597px;
     width: 736px;
+    padding: 30px;
     z-index: 1;
 }
 
@@ -448,6 +450,7 @@
 	left: 890px;
     height: 597px;
     width: 925px;
+    padding: 30px;
 }
 
 /*formatos de imagen en funcion del numero de cartas del intercambio en el popup de mostrar*/

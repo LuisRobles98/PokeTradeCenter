@@ -401,6 +401,14 @@ body.fondo {
 	color: #68768A;
 	user-select: none;
 }
+
+.labelRojo {
+    color: red;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    user-select: none;
+}
 /*-------------------------------- INPUTS ----------------------------------------*/
 .input {
     padding: 10px;
@@ -425,7 +433,6 @@ body.fondo {
 .popup {
     position: absolute;
     background-color: white;
-    padding: 30px;
     border-radius: 30px;
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
