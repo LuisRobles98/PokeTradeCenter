@@ -260,10 +260,6 @@
 	transform: scale(1.03);
 }
 
-.fuenteNormal {
-	font-weight: 600;
-}
-
 /*---------- POPUP CONFIRMAR -----------*/
 .contenidoConfirmar {
     background-color: white;

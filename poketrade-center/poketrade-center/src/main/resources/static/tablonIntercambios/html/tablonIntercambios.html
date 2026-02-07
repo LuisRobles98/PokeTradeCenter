@@ -27,50 +27,53 @@
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
 	
-	<div id="popupTablaIntercambiosBuscador" class="popupTablaIntercambiosBuscador">
+	<div id="popupTablaIntercambiosBuscador" class="popupTablaIntercambiosBuscador popup">
 		<div id="contenidoBuscador" class="contenidoBuscador">
-			<input id="inputNombreCartaOfrecer"class="inputNombreCartaOfrecer" placeholder="Carta para recibir">
-			<input id="inputNombreCartaQuerer"class="inputNombreCartaQuerer" placeholder="Carta para dar">
-			<div id="nuevas" class="botonOrden" data-id="fecha_asc">
-				<span class="fuenteNormal">Fecha ↑</span>
-			</div>
-			<div id="antiguas" class="botonOrden" data-id="fecha_desc">
-				<span class="fuenteNormal">Fecha ↓</span>
+			<input id="inputNombreCartaOfrecer"class="inputNombreCartaOfrecer input" placeholder="Carta para recibir">
+			<input id="inputNombreCartaQuerer"class="inputNombreCartaQuerer input" placeholder="Carta para dar">
+			<span id="textoOrden" class="textoOrden label">Ordenación</span>
+			<div id="botonesOrden" class="botonesOrden">
+				<div id="nuevas" class="botonOrden boton" data-id="fecha_asc">
+					<span class="fuenteNormal">Antiguas</span>
+				</div>
+				<div id="antiguas" class="botonOrden boton" data-id="fecha_desc">
+					<span class="fuenteNormal">Nuevas</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="popupTablaIntercambios" class="popupTablaIntercambios">
+	<div id="popupTablaIntercambios" class="popupTablaIntercambios popup">
 		<div id="actualizar" class="actualizar">
-			<span id="textoActualizar" class="textoActualizar">Actualizar</span>
+			<span id="textoActualizar" class="textoActualizar label">Actualizar</span>
 			<i id="botonActualizar" class="fa-solid fa-arrows-rotate iconoFontAwesomeNoCircle"></i>
 		</div>
 		<div id="tablaIntercambios"></div>
 	</div>
 
-	<div id="popupMostrarIntercambio" class="popupMostrarIntercambio">
-		<span id="textoOfrecer"></span>
+	<div id="popupMostrarIntercambio" class="popupMostrarIntercambio popup">
+		<span id="textoOfrecer" class="label"></span>
 		<div id="mostrarCartasOfrecer" class="mostrarCartasOfrecer"></div>
-		<span id="textoQuerer"></span>
+		<span id="textoQuerer" class="label"></span>
 		<div id="mostrarCartasQuerer" class="mostrarCartasQuerer"></div>
 		
 		<div id="divCartaQuererYo" class="divCartaQuererYo"></div>
-		<span id="textoQuererYo" class="textoQuererYo"></span>
+		<span id="textoQuererYo" class="textoQuererYo label"></span>
 		<i class="fa-solid fa-arrow-right flechaIntercambiarQuererYo"></i>
 		<div id="cartaQuererYo" class="cartaQuererYo"></div>
 		<div id="divCartaOfrecerYo" class="divCartaOfrecerYo"></div>
-		<span id="textoOfrecerYo" class="textoOfrecerYo"></span>
+		<span id="textoOfrecerYo" class="textoOfrecerYo label"></span>
 		<i class="fa-solid fa-arrow-right flechaIntercambiarOfrecerYo"></i>
 		<div id="cartaOfrecerYo" class="cartaOfrecerYo"></div>
-		<button id="btnSolicitarIntercambio" class="botonSolicitarIntercambio">Solicitar intercambio</button>
+		<button id="btnSolicitarIntercambio" class="btnSolicitarIntercambio aceptar">Solicitar intercambio</button>
 	</div>
 		
 	<div id="confirmarIntercambio" class="confirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
 			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres solicitar este intercambio?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
-				<button id="btnSolicitar" class="botonSolicitar">Solicitar</button>
+				<button id="btnCancelar" class="btnCancelar cancelar">Cancelar</button>
+				<button id="btnSolicitar" class="btnSolicitar aceptar">Solicitar</button>
 			</div>
 		</div>
 	</div>

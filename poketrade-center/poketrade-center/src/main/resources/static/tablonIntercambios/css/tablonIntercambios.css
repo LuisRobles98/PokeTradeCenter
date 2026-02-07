@@ -2,16 +2,11 @@
 .popupTablaIntercambiosBuscador {
 	display: flex;
     flex-direction: column;
-    position: absolute;
 	top: 95px;
     left: 50px;
     height: 35px;
     width: 736px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 3;
 }
 
@@ -22,76 +17,37 @@
 .inputNombreCartaOfrecer {
     align-items: center;
 	width: 200px;
-    padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputNombreCartaOfrecer:hover {
-    border-color: #7A8BA3;
-}
-
-.inputNombreCartaOfrecer:focus {
-	outline: none;
-    border-color: #68768A;
 }
 
 .inputNombreCartaQuerer {
     align-items: center;
 	width: 200px;
-    padding: 10px;
     margin-left: 20px;
     margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.inputNombreCartaQuerer:hover {
-    border-color: #7A8BA3;
+.textoOrden {
+	position: absolute;
+    top: 7px;
+    left: 602px;
 }
 
-.inputNombreCartaQuerer:focus {
-	outline: none;
-    border-color: #68768A;
+.botonesOrden {
+    display: flex;
+    position: absolute;
+    top: 26px;
+    left: 494px;
+    width: 277px;
 }
-
 .botonOrden {
     display: flex;
     width: 100px;
-    padding: 5px;
-    margin-top: -5px;
+    margin-top: 5px;
     margin-left: 25px;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonOrden:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.botonOrden.seleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
-.fuenteNormal {
-	font-weight: 600;
 }
 
 .actualizar {
@@ -104,16 +60,11 @@
 .popupTablaIntercambios {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 221px;
     left: 50px;
     height: 597px;
     width: 736px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
 }
 
@@ -463,16 +414,11 @@
 .popupMostrarIntercambio {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 95px;
 	left: 890px;
     height: 724px;
     width: 925px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /*formatos de imagen en funcion del numero de cartas del intercambio en el popup de mostrar*/
@@ -482,6 +428,7 @@
     top: 100px;
     gap: 12px;
     padding: 10px;
+    user-select: none;
 }
 
 .mostrarCartasQuerer {
@@ -489,6 +436,7 @@
     top: 450px;
     gap: 12px;
     padding: 10px;
+    user-select: none;
 }
 
 .carta {
@@ -497,6 +445,7 @@
   transition: transform 0.25s ease;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  user-select: none;
 }
 
 /*1*/
@@ -850,70 +799,47 @@
 }
 
 
-.botonSolicitarIntercambio {
+.btnSolicitarIntercambio {
 	position: absolute;
-	left: 410px;
+	left: 394px;
     top: 720px;
     width: 190px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonGuardarBaraja:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
 }
 
 .textoOfrecer {
     position: absolute;
     top: 35px;
     margin-left: 110px;
-	color: #68768A;
 }
 
 .textoOfrecerUna {
     position: absolute;
     top: 35px;
     margin-left: 160px;
-	color: #68768A;
 }
 
 .textoQuerer {
     position: absolute;
     top: 380px;
     margin-left: 126px;
-    color: #68768A;
 }
 
 .textoQuererUna {
     position: absolute;
     top: 380px;
     margin-left: 166px;
-    color: #68768A;
 }
 
 .textoOfrecerYo {
     position: absolute;
     top: 380px;
     margin-left: 700px;
-	color: #68768A;
 }
 
 .textoQuererYo {
     position: absolute;
     top: 35px;
     margin-left: 675px;
-    color: #68768A;
 }
 
 .cartaOfrecerYo {
@@ -922,6 +848,7 @@
 	left: 724px;
 	width: 150px;
 	border-radius: 8px;
+	user-select: none;
 }
 
 .cartaQuererYo {
@@ -930,6 +857,7 @@
     left: 724px;
     width: 150px;
     border-radius: 8px;
+    user-select: none;
 }
 
 .cartaIntercambioAniadida {
@@ -950,6 +878,7 @@
     color: #68768A;
     margin-top: 150px;
     font-size: 55px;
+    user-select: none;
 }
 
 .flechaIntercambiarOfrecerYo {
@@ -958,6 +887,7 @@
     color: #68768A;
     margin-top: 505px;
     font-size: 55px;
+    user-select: none;
 }
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
@@ -980,14 +910,13 @@
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 412px;
 }
 
 .botoneraConfirmar {
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
-	margin-left: -20px;
 }
 
 .textoConfirmacion {
@@ -996,47 +925,10 @@
 	color: #68768A;
 }
 
-.botonSolicitar {
+.btnSolicitar {
 	width: 115px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.botonSolicitar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
-}
-
-
-.botonCancelar {
+.btnCancelar {
 	width: 115px;
-    padding: 10px 20px;
-    margin: 0px 15px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.botonCancelar:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
