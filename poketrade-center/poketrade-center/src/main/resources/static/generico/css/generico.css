@@ -449,6 +449,7 @@ body.fondo {
     border-radius: 30px;
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
 }
 /*-------------------------------- POPUP EMERGENTES ----------------------------------------*/
 
@@ -463,5 +464,5 @@ body.fondo {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    user-select: none;
 }
-
