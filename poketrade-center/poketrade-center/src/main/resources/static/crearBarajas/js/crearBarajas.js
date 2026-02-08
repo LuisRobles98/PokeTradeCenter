@@ -21,19 +21,19 @@ $(document).ready(function() {
 		
 		//vaciamos lista expansiones y eliminamos campos seleccionados
 		listaExpansiones = [];
-		$(".expansionCarta").removeClass("expansionSeleccionada");
+		$(".expansionCarta").removeClass("seleccionada");
 		
 		//vaciamos lista rarezas y eliminamos campos seleccionados
 		listaRarezas = [];
-		$(".rarezaCarta").removeClass("rarezaSeleccionada");
+		$(".rarezaCarta").removeClass("seleccionada");
 		
 		//vaciamos lista energias y eliminamos campos seleccionados
 		listaEnergias = [];
-		$(".energiaCarta").removeClass("energiaSeleccionada");
+		$(".energiaCarta").removeClass("seleccionada");
 		
 		//vaciamos lista tipos y eliminamos campos seleccionados
 		listaTipos = [];
-		$(".tipoCarta").removeClass("tipoSeleccionada");
+		$(".tipoCarta").removeClass("seleccionada");
 	}
 	
 	function vaciarListadoBaraja() {
@@ -83,11 +83,11 @@ $(document).ready(function() {
 		if(listaExpansiones.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaExpansiones = listaExpansiones.filter(e => e != id);
-        	$(this).removeClass("expansionSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaExpansiones.push(id);
-        	$(this).addClass("expansionSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasBarajasPorCriterios();
 	});
@@ -98,11 +98,11 @@ $(document).ready(function() {
 		if(listaRarezas.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaRarezas = listaRarezas.filter(e => e != id);
-        	$(this).removeClass("rarezaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaRarezas.push(id);
-        	$(this).addClass("rarezaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasBarajasPorCriterios();
 	});
@@ -113,11 +113,11 @@ $(document).ready(function() {
 		if(listaEnergias.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaEnergias = listaEnergias.filter(e => e != id);
-        	$(this).removeClass("energiaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaEnergias.push(id);
-        	$(this).addClass("energiaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasBarajasPorCriterios();
 	});
@@ -128,11 +128,11 @@ $(document).ready(function() {
 		if(listaTipos.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaTipos = listaTipos.filter(e => e != id);
-        	$(this).removeClass("tipoSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaTipos.push(id);
-        	$(this).addClass("tipoSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasBarajasPorCriterios();
 	});
@@ -154,7 +154,6 @@ $(document).ready(function() {
 		mostrarCartas(cartas)
 	}
 	
-
 	function mostrarCartas(cartas) {
 		let contenedor = document.getElementById("mostrarCartas");
 		contenedor.innerHTML = "";
@@ -200,7 +199,6 @@ $(document).ready(function() {
 	
 	//funcion eliminar carta de la baraja
 	$("#cartasBaraja").on("click", ".cartaBarajaAniadida", function() {
-		let posicionEliminar = $(this).data("posicion");
     	eliminarCartaBaraja($(this).data("posicion"));
 	});
 	
@@ -218,7 +216,6 @@ $(document).ready(function() {
 		recargarBaraja();
 	}
 	
-  
 	$("#btnGuardarOPublicar").off("click").on("click", () => {
 		$("#confirmar").show();
     });
@@ -241,8 +238,6 @@ $(document).ready(function() {
 		guardarYPublicarBaraja();
 		$("#confirmar").hide();
     });
-    
-    
     
     async function guardarBaraja() {
 		let errores = validarDatos();
@@ -286,7 +281,7 @@ $(document).ready(function() {
 				await guardarPublicar(baraja);
 				popupErroresOConfirmacion.mostrar("success", "Se ha guardado y publicado correctamente la baraja. Podrás verla en la aplicación de 'Mis barajas' y en 'Barajas públicas'", "");
 				limpiar();
-			}catch(error) {
+			} catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}
 		}

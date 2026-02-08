@@ -3,7 +3,6 @@ $(document).ready(function() {
 	let usuario = usuarioLogado.recuperar();
 	cargarPerfilUsuario(usuario);
 	
-	
 	function cargarPerfilUsuario(usuario) {
 		$("#inputNombreUsuario").val(usuario.nombre);
 		$("#inputJuegoIdUsuario").val(usuario.juegoId);
@@ -14,7 +13,6 @@ $(document).ready(function() {
         $("#emblema3Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png");
 	}
 	
-
 	$("#iconoUsuario").click(function() {
 		$("#iconos").show();
 		let contenedor = document.getElementById("mostrarIconos");
@@ -78,7 +76,6 @@ $(document).ready(function() {
 		}
     	$("#emblemas").hide();
 	});
-	
 	
 	$("#btnModificarDatosUsuario").click(async function() {
 		let errores = validarDatos();
