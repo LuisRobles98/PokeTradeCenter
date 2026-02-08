@@ -10,13 +10,12 @@
 	<link rel="stylesheet" href="/crearBarajas/css/crearBarajas.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/crearBarajas/js/llamadasAjax.js" defer></script>
 	<script src="/crearBarajas/js/crearBarajas.js" defer></script>
-	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script defer>document.addEventListener("DOMContentLoaded", function () {barraSuperior.cargar();});</script>
 </head>
 
 <body class="fondo">

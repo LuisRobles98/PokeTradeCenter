@@ -9,13 +9,12 @@
 	<link rel="stylesheet" href="/generico/css/generico.css">
 	<link rel="stylesheet" href="/perfil/css/perfil.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/perfil/js/llamadasAjax.js" defer></script>
 	<script src="/perfil/js/perfil.js" defer></script>
-	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script defer>document.addEventListener("DOMContentLoaded", function () {barraSuperior.cargar();});</script>
 </head>
 
 <body class="fondo">

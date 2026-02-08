@@ -11,15 +11,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/misBarajas/js/llamadasAjax.js" defer></script>
 	<script src="/misBarajas/js/misBarajas.js" defer></script>
-	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
-
+	<script defer>document.addEventListener("DOMContentLoaded", function () {barraSuperior.cargar();});</script>
 </head>
 
 <body class="fondo">
@@ -27,34 +25,38 @@
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
 	
-	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador">
+	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador popup">
 		<div id="contenidoBuscador" class="contenidoBuscador">
-			<input id="inputNombreCarta"class="inputNombreCarta" placeholder="Nombre de la carta">
-			<div id="nuevas" class="botonOrden" data-id="fecha_asc">
-				<span class="fuenteNormal">Fecha ↑</span>
-			</div>
-			<div id="antiguas" class="botonOrden" data-id="fecha_desc">
-				<span class="fuenteNormal">Fecha ↓</span>
+			<span id="textoNombreCarta" class="textoNombreCarta label">Nombre de carta</span>
+			<input id="inputNombreCarta"class="inputNombreCarta input" placeholder="Nombre de la carta">
+			<span id="textoOrdenacion" class="textoOrdenacion label">Ordenación</span>
+			<div id="botonesOrden" class="botonesOrden">
+				<div id="antiguas" class="botonOrden boton" data-id="fecha_asc">
+					<span class="fuenteNormal">Antiguas</span>
+				</div>
+				<div id="nuevas" class="botonOrden boton" data-id="fecha_desc">
+					<span class="fuenteNormal">Nuevas</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="popupTablaBarajas" class="popupTablaBarajas">
+	<div id="popupTablaBarajas" class="popupTablaBarajas popup">
 		<div id="tablaBarajas"></div>
 	</div>
 	
-	<div id="popupMostrarBaraja" class="popupMostrarBaraja">
-		<span id="textoCreador" class="textoCreador"></span>
+	<div id="popupMostrarBaraja" class="popupMostrarBaraja popup">
+		<span id="textoCreador" class="textoCreador label"></span>
 		<div id="mostrarCartas" class="mostrarCartas"></div>
-		<button id="botonEliminarBaraja" class="botonEliminarBaraja">Eliminar Baraja</button>
+		<button id="botonEliminarBaraja" class="btnEliminarBaraja aceptar">Eliminar Baraja</button>
 	</div>
 	
-	<div id="confirmar" class="confirmar" style="display: none;">
+	<div id="confirmar" class="popupConfirmar" style="display: none;">
 		<div id="contenidoConfirmar" class="contenidoConfirmar">
-			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres eliminar esta baraja?</span>
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres eliminar esta baraja?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
-				<button id="btnEliminar" class="botonEliminar">Eliminar</button>
+				<button id="btnCancelar" class="botonesEliminarBaraja cancelar">Cancelar</button>
+				<button id="btnEliminar" class="botonesEliminarBaraja aceptar">Eliminar</button>
 			</div>
 		</div>
 	</div>
