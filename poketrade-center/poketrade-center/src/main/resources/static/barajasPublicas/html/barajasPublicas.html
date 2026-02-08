@@ -25,54 +25,60 @@
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
 	
-	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador">
+	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador popup">
 		<div id="contenidoBuscador" class="contenidoBuscador">
-			<input id="inputNombreCarta"class="inputNombreCarta" placeholder="Nombre de la carta">
-			<div id="+likes" class="botonOrden" data-id="likes_asc">
-				<span class="fuenteNormal">Likes ↑</span>
+			<span id="textoCartas" class="textoNombreCarta label">Nombre de carta</span>
+			<input id="inputNombreCarta"class="inputNombreCarta input" placeholder="Nombre de carta en baraja">
+			<span id="textoOrdenacion" class="textoOrdenacion label">Ordenación</span>
+			<div id="botonesOrden" class="botonesOrden">
+				<div id="antiguas" class="botonOrden boton" data-id="fecha_asc">
+					<span class="fuenteNormal">Antiguas</span>
+				</div>
+				<div id="-likes" class="botonOrden boton" data-id="likes_asc">
+					<span class="fuenteNormal">Menos likes</span>
+				</div>
 			</div>
-			<div id="-likes" class="botonOrden" data-id="likes_desc">
-				<span class="fuenteNormal">Likes ↓</span>
-			</div>
-			<div id="nuevas" class="botonOrden" data-id="fecha_asc">
-				<span class="fuenteNormal">Fecha ↑</span>
-			</div>
-			<div id="antiguas" class="botonOrden" data-id="fecha_desc">
-				<span class="fuenteNormal">Fecha ↓</span>
+			<div id="botonesOrden" class="botonesOrdenLikes">
+				<div id="nuevas" class="botonOrden boton" data-id="fecha_desc">
+					<span class="fuenteNormal">Nuevas</span>
+				</div>
+				<div id="+likes" class="botonOrden boton" data-id="likes_desc">
+					<span class="fuenteNormal">Más likes</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="popupTablaBarajas" class="popupTablaBarajas">
+	<div id="popupTablaBarajas" class="popupTablaBarajas popup">
 		<div id="actualizar" class="actualizar">
-			<span id="textoActualizar" class="textoActualizar">Actualizar</span>
+			<span id="textoActualizar" class="textoActualizar label">Actualizar</span>
 			<i id="botonActualizar" class="fa-solid fa-arrows-rotate iconoFontAwesomeNoCircle"></i>
 		</div>
 		<div id="tablaBarajas"></div>
 	</div>
 	
-	<div id="popupMostrarBaraja" class="popupMostrarBaraja">
-		<span id="textoCreador" class="textoCreador"></span>
+	<div id="popupMostrarBaraja" class="popupMostrarBaraja popup">
+		<span id="textoCreador" class="textoCreador label"></span>
 		<div id="mostrarCartas" class="mostrarCartas"></div>
-		<button id="btnMeGusta" class="botonMeGusta">Dar like</button>
-		<button id="btnGuardarBaraja" class="botonGuardarBaraja">Guardar baraja</button>
+		<button id="btnMeGusta" class="btnMeGusta aceptar">Dar like</button>
+		<button id="btnGuardarBaraja" class="btnGuardarBaraja aceptar">Guardar baraja</button>
 	</div>
 	
-	<div id="confirmarDarMeGusta" class="confirmar" style="display: none;">
-		<div id="contenidoConfirmar" class="contenidoConfirmar">
-			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres dejar un like a esta baraja?</span>
+	<div id="confirmarDarMeGusta" class="popupConfirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmarMeGusta">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres dejar un like a esta baraja?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
-				<button id="btnLike" class="botonGuardar">Dar like</button>
+				<button id="btnCancelar" class="botones cancelar">Cancelar</button>
+				<button id="btnLike" class="botones aceptar">Dar like</button>
 			</div>
 		</div>
 	</div>
-	<div id="confirmarGuardar" class="confirmar" style="display: none;">
-		<div id="contenidoConfirmar" class="contenidoConfirmar">
-			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres guardar esta baraja?</span>
+	<div id="confirmarGuardar" class="popupConfirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmarGuardar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres guardar esta baraja?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelarGuardar" class="botonCancelar">Cancelar</button>
-				<button id="btnGuardar" class="botonGuardar">Guardar</button>
+				<button id="btnCancelarGuardar" class="botones cancelar">Cancelar</button>
+				<button id="btnGuardar" class="botones aceptar">Guardar</button>
 			</div>
 		</div>
 	</div>

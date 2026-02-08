@@ -2,74 +2,62 @@
 .popupTablaBarajasBuscador {
 	display: flex;
     flex-direction: column;
-    position: absolute;
 	top: 95px;
     left: 50px;
-    height: 35px;
+    height: 62px;
     width: 685px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 3;
 }
 
 .contenidoBuscador {
 	display: flex;
+	flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.textoNombreCarta {
+    position: absolute;
+    top: 9px;
+    left: 165px;
+}
+
+.textoOrdenacion {
+    position: absolute;
+    top: 9px;
+    left: 535px;
 }
 
 .inputNombreCarta {
     align-items: center;
-	width: 400px;
-    padding: 10px;
-    margin-left: 0px;
-    margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 375px;
+	margin-top: -30px;
 }
 
-.inputNombreCarta:hover {
-    border-color: #7A8BA3;
+.botonesOrden {
+	display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 12px;
 }
 
-.inputNombreCarta:focus {
-	outline: none;
-    border-color: #68768A;
+.botonesOrdenLikes {
+	display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 12px;
 }
 
 .botonOrden {
     display: flex;
     width: 100px;
-    padding: 5px;
     margin-top: -5px;
     margin-left: 25px;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonOrden:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.botonOrden.seleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
-.fuenteNormal {
-	font-weight: 600;
 }
 
 .actualizar {
@@ -82,16 +70,11 @@
 .popupTablaBarajas {
 	display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 221px;
+    top: 246px;
     left: 50px;
-    height: 597px;
+    height: 572px;
     width: 685px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
 }
 
@@ -142,7 +125,6 @@
 .textoActualizar {
     display: flex;
     margin-left: 10px;
-	color: #68768A;
 	margin-top: 8px;
 }
 
@@ -161,16 +143,11 @@
 .popupMostrarBaraja {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 95px;
     left: 847px;
     height: 724px;
     width: 984px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .mostrarCartas {
@@ -194,95 +171,55 @@
 	transform: scale(1.03);
 }
 
-.botonMeGusta {
+.btnMeGusta {
 	position: absolute;
     left: 350px;
     top: 727px;
     width: 155px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.botonMeGusta:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
-}
-
-.botonGuardarBaraja {
+.btnGuardarBaraja {
 	position: absolute;
     left: 522px;
     top: 727px;
     width: 155px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonGuardarBaraja:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
 }
 
 .textoCreador {
     display: flex;
     margin-left: 10px;
-	color: #68768A;
 }
-
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
-
-.confirmar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.contenidoConfirmar {
+.contenidoConfirmarMeGusta {
     background-color: white;
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 414px;
+}
+
+.contenidoConfirmarGuardar {
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 367px;
 }
 
 .botoneraConfirmar {
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
-	margin-left: -20px;
 }
 
 .textoConfirmacion {
     display: flex;
     text-align: center;
-	color: #68768A;
+}
+
+.botones {
+	width: 115px;
 }
 
 .botonGuardar {
