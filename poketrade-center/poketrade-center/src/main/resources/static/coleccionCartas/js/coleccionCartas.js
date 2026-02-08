@@ -16,19 +16,19 @@ $(document).ready(function() {
 		
 		//vaciamos lista expansiones y eliminamos campos seleccionados
 		listaExpansiones = [];
-		$(".expansionCarta").removeClass("expansionSeleccionada");
+		$(".expansionCarta").removeClass("seleccionada");
 		
 		//vaciamos lista rarezas y eliminamos campos seleccionados
 		listaRarezas = [];
-		$(".rarezaCarta").removeClass("rarezaSeleccionada");
+		$(".rarezaCarta").removeClass("seleccionada");
 		
 		//vaciamos lista energias y eliminamos campos seleccionados
 		listaEnergias = [];
-		$(".energiaCarta").removeClass("energiaSeleccionada");
+		$(".energiaCarta").removeClass("seleccionada");
 		
 		//vaciamos lista tipos y eliminamos campos seleccionados
 		listaTipos = [];
-		$(".tipoCarta").removeClass("tipoSeleccionada");
+		$(".tipoCarta").removeClass("seleccionada");
 		
 		obtenida = null;
 	}
@@ -43,11 +43,11 @@ $(document).ready(function() {
 		if(listaExpansiones.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaExpansiones = listaExpansiones.filter(e => e != id);
-        	$(this).removeClass("expansionSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaExpansiones.push(id);
-        	$(this).addClass("expansionSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasUsuarioPorCriterios();
 	});
@@ -58,11 +58,11 @@ $(document).ready(function() {
 		if(listaRarezas.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaRarezas = listaRarezas.filter(e => e != id);
-        	$(this).removeClass("rarezaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaRarezas.push(id);
-        	$(this).addClass("rarezaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasUsuarioPorCriterios();
 	});
@@ -73,11 +73,11 @@ $(document).ready(function() {
 		if(listaEnergias.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaEnergias = listaEnergias.filter(e => e != id);
-        	$(this).removeClass("energiaSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaEnergias.push(id);
-        	$(this).addClass("energiaSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasUsuarioPorCriterios();
 	});
@@ -88,11 +88,11 @@ $(document).ready(function() {
 		if(listaTipos.includes(id)) {
         	// Quitar fondo gris y quitar de la lista
         	listaTipos = listaTipos.filter(e => e != id);
-        	$(this).removeClass("tipoSeleccionada");
+        	$(this).removeClass("seleccionada");
     	} else {
         	// Agregar fondo gris y añadir en la lista
         	listaTipos.push(id);
-        	$(this).addClass("tipoSeleccionada");
+        	$(this).addClass("seleccionada");
     	}
     	buscarCartasUsuarioPorCriterios();
 	});
@@ -100,12 +100,12 @@ $(document).ready(function() {
 	//funcionalidad click obtenidas
 	$(".obtenidaCarta").click(function() {
 		let valor = $(this).data("id");
-		$(".obtenidaCarta").removeClass("obtenidaSeleccionada");
+		$(".obtenidaCarta").removeClass("seleccionada");
 		if(obtenida === valor) {
 			obtenida = null;
 		} else {
 			obtenida = valor;
-			$(this).addClass("obtenidaSeleccionada");
+			$(this).addClass("seleccionada");
 		}
     	buscarCartasUsuarioPorCriterios();
 	});

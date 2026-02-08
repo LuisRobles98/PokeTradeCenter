@@ -119,12 +119,6 @@
 .expansionCarta {
     display: flex;
     padding: 1px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* ----------------------------------INPUTS BUSCADOR CARTAS---------------------------------------- */
@@ -153,13 +147,6 @@
 }
 .rarezaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     align-items: center;
     width: 75px;
     justify-content: center;
@@ -181,13 +168,6 @@
 }
 .energiaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 42px;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -210,13 +190,6 @@
 }
 .tipoCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;

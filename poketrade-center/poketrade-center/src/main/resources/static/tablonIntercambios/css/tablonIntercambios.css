@@ -12,6 +12,13 @@
 
 .contenidoBuscador {
 	display: flex;
+	margin-top: 7px;
+}
+
+.textoCartas {
+	position: absolute;
+    top: 7px;
+    left: 167px;
 }
 
 .inputNombreCartaOfrecer {
@@ -37,7 +44,7 @@
 .botonesOrden {
     display: flex;
     position: absolute;
-    top: 26px;
+    top: 31px;
     left: 494px;
     width: 277px;
 }
