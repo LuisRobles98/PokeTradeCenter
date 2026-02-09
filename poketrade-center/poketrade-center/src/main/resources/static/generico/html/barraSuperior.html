@@ -4,25 +4,25 @@
 	<!-- Barra de menú -->
 	<div class="barraMenu">
 	    <div class="usuarioIzquierda">
-	        <img id="iconoJuegoBarra" class="iconoBarra"/>
+	        <img id="iconoJuegoBarra" class="iconoBarra icono"/>
 	        <div class="usuarioInfoNombre">
-				<label for="lblNombreUsuarioBarra" class="labelBarra">Nombre de usuario</label>
-	            <span class="usuarioInfoBarra" id="nombreUsuarioBarra"></span>
+				<label for="lblNombreUsuarioBarra" class="labelBarra label">Nombre de usuario</label>
+	            <span class="usuarioInfoBarra botonNoSeleccionar" id="nombreUsuarioBarra"></span>
 	        </div>
 	        <div class="usuarioInfoJuegoId">
-				<label for="lblJuegoIdUsuarioBarra" class="labelBarra">Id Pokémon TCG Pocket</label>  
-	            <span class="usuarioInfoBarra" id="juegoIdUsuarioBarra"></span>
+				<label for="lblJuegoIdUsuarioBarra" class="labelBarra label">Id Pokémon TCG Pocket</label>  
+	            <span class="usuarioInfoBarra botonNoSeleccionar" id="juegoIdUsuarioBarra"></span>
 	        </div>
 	        <div class="usuarioInfoEmblemas">
-	            <img id="emblema1Barra" class="emblemaBarra"/>
-	            <img id="emblema2Barra" class="emblemaBarra"/>
-	            <img id="emblema3Barra" class="emblemaBarra"/>
+	            <img id="emblema1Barra" class="emblemaBarra icono"/>
+	            <img id="emblema2Barra" class="emblemaBarra icono"/>
+	            <img id="emblema3Barra" class="emblemaBarra icono"/>
 	        </div>
 	    </div>
-	    <div id="botoneraBarra" class="botoneraBarra">
-			 <i id="botonVolverAtrasBarra" class="fa-solid fa-circle-arrow-left iconoFontAwesome" title="Volver atrás"></i>
-			 <i id="botonCerrarSesionBarra" class="fa-solid fa-circle-xmark iconoFontAwesome" title="Cerrar sesión"></i>
-		</div>
+	    <div class="botonesBarra">
+			<i id="botonVolverAtrasBarra" class="fa-solid fa-circle-arrow-left iconoFontAwesome btnVolver" title="Volver atrás"></i>
+			<i id="botonCerrarSesionBarra" class="fa-solid fa-circle-xmark iconoFontAwesome btnCerrarSesion" title="Cerrar sesión"></i>
+	    </div>
 	</div>
 
 	<!-- Barra inferior -->
@@ -30,12 +30,12 @@
 	
 	
 	 <!-- Popup Cerrar Sesion-->
-	<div id="popupCerrarSesion" class="cerrarSesion" style="display: none;">
+	<div id="popupCerrarSesion" class="popupConfirmar" style="display: none;">
 	    <div class="contenidoCerrarSesion">
-			<label for="lblCerrarSesion" class="labelCerrarSesion">¿Estás seguro que quieres cerrar la sesión?</label>
+			<label for="lblCerrarSesion" class="lblCerrarSesion label">¿Estás seguro que quieres cerrar la sesión?</label>
 	        <div class="botoneraCerrarSesion">
-				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
-	        	<button id="btnCerrarSesion" class="botonCerrarSesion">Cerrar Sesión</button>
+				<button id="btnCancelar" class="botones cancelar">Cancelar</button>
+	        	<button id="btnCerrarSesion" class="botones aceptar">Cerrar Sesión</button>
 			</div>
 	    </div>
 	</div>

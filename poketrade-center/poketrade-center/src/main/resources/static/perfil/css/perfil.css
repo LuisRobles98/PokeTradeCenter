@@ -46,7 +46,6 @@
 	margin-left: 2px;
 	font-weight: bold;
     font-size: 1.01em;
-    color: #68768A;
 }
 
 .inputUsuario {
@@ -57,6 +56,7 @@
 .cambioPassword {
 	margin-top: 15px;
 	text-decoration:underline;
+	color: #68768A;
 }
 
 .cambioPassword:hover {
@@ -65,7 +65,6 @@
 }
 
 /*--------------------COLUMNA DERECHA---------------------------*/
-
 .labelPersonalizacionesUsuario {
     margin-top: 20px;
     font-size: 1.2em;
@@ -102,17 +101,7 @@
     width: 80px;
     margin-top: 15px;
     margin-left: 136px;
-    border: 2px solid #8EA0B8;
-    border-radius: 55px;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.iconoUsuario:hover {
-	color: #7A8BA3;
-  	transform: scale(1.03);
-  	cursor: pointer;
+    cursor: pointer;
 }
 
 .personalizacionEmblemaUsuario {
@@ -130,23 +119,9 @@
     width: 80px;
     margin-left: 25px;
     margin-top: 15px;
-    border: 2px solid #8EA0B8;
-    border-radius: 50px;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-
-.emblemaUsuario:hover {
-	color: #7A8BA3;
-  	transform: scale(1.03);
-  	cursor: pointer;
-}
-
-
 
 /*--------------------BOTON---------------------------*/
-
 .botonera {
 	display: flex;
 	justify-content: center;
@@ -188,17 +163,12 @@
     object-fit: contain;
     display: block;
     margin-left: 38px;
-    border: 2px solid #8EA0B8;
-    border-radius: 55px;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .iconoSeleccionado:hover {
 	color: #7A8BA3;
   	transform: scale(1.03);
-  	cursor: pointer;
 }
 
 btnCancelar {
@@ -230,17 +200,12 @@ btnCancelar {
     object-fit: contain;
     display: block;
     margin-left: 38px;
-    border: 2px solid #8EA0B8;
-    border-radius: 55px;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .emblemaSeleccionado:hover {
 	color: #7A8BA3;
   	transform: scale(1.03);
-  	cursor: pointer;
 }
 
 /*-----------POPUP PASSWORD--------------*/

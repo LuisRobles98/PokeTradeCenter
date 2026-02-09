@@ -9,8 +9,8 @@ const popupErroresOConfirmacion = {
             html: errores ? `<ul style="text-align: left; color: #68768A; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
             confirmButtonText: "Aceptar",
             customClass: {
-				title: 'titlePopupErrorConfirmacion',
-                confirmButton: 'botonAceptar'
+				title: 'titlePopupErrorConfirmacion label',
+                confirmButton: 'botonPopupError aceptar'
             },
             didOpen: (popup) => {
                 popup.style.borderRadius = "30px";
