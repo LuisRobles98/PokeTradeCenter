@@ -33,12 +33,6 @@
 .expansionCarta {
     display: flex;
     padding: 1px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .expansionCarta:hover {
