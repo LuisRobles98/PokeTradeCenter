@@ -3,7 +3,6 @@ $(document).ready(function() {
 	let usuario = usuarioLogado.recuperar();
 	cargarPerfilUsuario(usuario);
 	
-	
 	function cargarPerfilUsuario(usuario) {
 		$("#inputNombreUsuario").val(usuario.nombre);
 		$("#inputJuegoIdUsuario").val(usuario.juegoId);
@@ -14,14 +13,13 @@ $(document).ready(function() {
         $("#emblema3Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png");
 	}
 	
-
 	$("#iconoUsuario").click(function() {
 		$("#iconos").show();
 		let contenedor = document.getElementById("mostrarIconos");
 		contenedor.innerHTML = "";
 		for(let i = 1; i <= 54; i++) {
         	let img = document.createElement("img");
-        	img.classList.add("iconoSeleccionado"); // clase para aplicar CSS
+        	img.classList.add("iconoSeleccionado", "icono"); // clase para aplicar CSS
         	img.src = "/imagenes/iconos/" + i + ".png";
         	img.dataset.id = i;
         	contenedor.appendChild(img);
@@ -54,7 +52,7 @@ $(document).ready(function() {
 		contenedor.innerHTML = "";
 		for(let i = 0; i <= 28; i++) {
         	let img = document.createElement("img");
-        	img.classList.add("emblemaSeleccionado"); // clase para aplicar CSS
+        	img.classList.add("emblemaSeleccionado", "icono"); // clase para aplicar CSS
         	img.src = "/imagenes/emblemas/" + i + ".png";
         	img.dataset.id = i;
         	img.dataset.emblema = emblema;
@@ -78,7 +76,6 @@ $(document).ready(function() {
 		}
     	$("#emblemas").hide();
 	});
-	
 	
 	$("#btnModificarDatosUsuario").click(async function() {
 		let errores = validarDatos();

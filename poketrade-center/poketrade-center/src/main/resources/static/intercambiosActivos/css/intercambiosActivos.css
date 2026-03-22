@@ -2,16 +2,11 @@
 .popupTablaIntercambiosBuscador {
 	display: flex;
     flex-direction: column;
-    position: absolute;
 	top: 95px;
     left: 50px;
     height: 35px;
     width: 1764px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 3;
 }
 
@@ -40,102 +35,31 @@
 .inputNombreCartaOfrecer {
     align-items: center;
 	width: 340px;
-    padding: 10px;
     margin-left: 0px;
     margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputNombreCartaOfrecer:hover {
-    border-color: #7A8BA3;
-}
-
-.inputNombreCartaOfrecer:focus {
-	outline: none;
-    border-color: #68768A;
 }
 
 .inputNombreCartaQuerer {
     align-items: center;
 	width: 340px;
-    padding: 10px;
     margin-left: 20px;
     margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputNombreCartaQuerer:hover {
-    border-color: #7A8BA3;
-}
-
-.inputNombreCartaQuerer:focus {
-	outline: none;
-    border-color: #68768A;
 }
 
 .botonEstado {
     display: flex;
     width: 130px;
-    padding: 5px;
     margin-left: 25px;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    user-select: none;
-}
-
-.botonEstado:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.botonEstado.seleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
 }
 
 .botonOrden {
     display: flex;
     width: 130px;
-    padding: 5px;
     margin-left: 25px;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    user-select: none;
-}
-
-.botonOrden:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.botonOrden.seleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
-.fuenteNormal {
-	font-weight: 600;
 }
 
 .actualizar {
@@ -143,21 +67,15 @@
     justify-content: flex-end;
     margin-right: 10px;
 }
-
 /* -----------------------------------------POPUP TABLA INTERCAMBIOS--------------------------------------- */
 .popupTablaIntercambios {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 221px;
     left: 50px;
     height: 597px;
     width: 736px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
 }
 
@@ -210,7 +128,6 @@
 }
 
 /*2*/
-
 .tablaCell .abanicoOfrecer-2 .portada:nth-child(1) {
     margin-left: 115px;
     transform: rotate(0deg);
@@ -248,7 +165,6 @@
 }
 
 /*3*/
-
 .tablaCell .abanicoOfrecer-3 .portada:nth-child(1) {
     margin-left: 55px;
     transform: rotate(-6deg);
@@ -375,7 +291,6 @@
 }
 
 /*5*/
-
 .tablaCell .abanicoOfrecer-5 .portada:nth-child(1) {
     margin-left: -2px;
     transform: rotate(-6deg);
@@ -498,7 +413,6 @@
 .textoActualizar {
     display: flex;
     margin-left: 10px;
-	color: #68768A;
 	margin-top: 8px;
 }
 
@@ -521,31 +435,32 @@
     font-size: 36px;
 }
 
+.textoNoResultados {
+    position: absolute;
+    top: 310px;
+    left: 260px;
+}
+
 /* --------------------------- POPUP MOSTRAR INTERCAMBIO ----------------------------------------- */
 .popupMostrarIntercambio {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     align-items: center;
     top: 221px;
 	left: 890px;
     height: 597px;
     width: 925px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /*formatos de imagen en funcion del numero de cartas del intercambio en el popup de mostrar*/
-
 .carta {
   width: 150px;
   cursor: pointer;
   transition: transform 0.25s ease;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  user-select: none;
 }
 
 /*1*/
@@ -961,19 +876,6 @@
     margin-top: 25px;
 }
 
-
-.cartaIntercambioAniadida {
-  width: 150px;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-  border-radius: 10px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-.cartaIntercambioAniadida:hover {
-	transform: scale(1.03);
-}
-
 .iconoEstadoIntercambio {
 	margin-top: -55px;
     font-size: 55px;
@@ -1057,19 +959,6 @@
 }
 
 /*---------------------------- POPUPS CONFIRMACION  ----------------------------*/
-
-.confirmar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
 
 .contenidoConfirmar {
     background-color: white;

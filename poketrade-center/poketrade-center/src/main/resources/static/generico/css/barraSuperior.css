@@ -1,0 +1,173 @@
+/*------------------------------------------------------------POPUP CERRAR SESION ------------------------------------------------------*/
+/*----------------------------------------BARRA SUPERIOR----------------------------------------*/
+/* Barras superior e inferior */
+.barraSuperior,
+.barraInferior {
+    width: 100%;
+    background-color: #8EA0B8;
+    position: fixed;
+}
+.barraSuperior {
+	height: var(--altura-barra-superior);
+	top: 0;
+	z-index: 1000;
+}
+.barraInferior {
+	height: 4px;
+	top: var(--separacion-barras);
+	z-index: 1000;
+}
+
+/* Barra del menú (entre las barras) */
+.barraMenu {
+	height: var(--altura-barra-menu);
+    top: var(--altura-barra-superior);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    box-sizing: border-box;
+    z-index: 11;
+}
+
+/* Contenedor del icono + texto */
+.usuarioIzquierda {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* espacio entre icono y texto */
+}
+
+/* Ajustes del icono */
+.iconoBarra {
+    width: 48px;
+    margin-left: 25px;
+    user-select: none;
+}
+
+.iconoBarra:hover {
+	color: #7A8BA3;
+  	transform: scale(1.03);
+}
+
+/*------------------NOMBRE USUARIO------------------*/
+.usuarioInfoNombre {
+    margin-left: 20px;
+    font-weight: 400;
+    margin-top: -2px;
+    min-width: 186px;
+    user-select: none;
+}
+
+.labelBarra {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+    font-size: 1em;
+}
+/*------------------ID TCGP------------------*/
+.usuarioInfoJuegoId {
+    margin-left: 20px;
+    font-weight: 400;
+    margin-top: -2px;
+    min-width: 186px;
+    user-select: none;
+}
+
+.usuarioInfoBarra {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.usuarioInfoBarra:hover {
+    border: 2px solid #8EA0B8;
+}
+
+/*------------------EMBLEMAS------------------*/
+.usuarioInfoEmblemas {
+	min-width: 240px;
+	user-select: none;
+}
+.emblemaBarra {
+    width: 48px;
+    margin-left: 25px;
+    margin-top: 3px;
+    user-select: none;
+}
+
+/*---------------BOTONES CERRAR SESION Y VOLVER--------------------------*/
+.botonesBarra {
+	display: flex;
+	position: relative;
+	margin-right: 20px;
+	user-select: none;
+}
+
+.btnVolver {
+    min-width: 30px;
+}
+
+.btnCerrarSesion {
+	min-width: 30px;
+}
+
+/*---------------BOTONERA CERRAR SESION Y VOLVER----------------------*/
+.iconoFontAwesome {
+  	font-size: 34px;
+  	color: #8EA0B8;
+  	cursor: pointer;
+  	margin-left: 15px;
+    border-radius: 35px;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.iconoFontAwesomeNoCircle {
+  	font-size: 34px;
+  	color: #8EA0B8;
+  	cursor: pointer;
+  	margin-left: 15px;
+    border-radius: 35px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.iconoFontAwesome:hover {
+  	color: #7A8BA3;
+  	transform: scale(1.03);
+}
+
+.iconoFontAwesomeNoCircle:hover {
+  	color: #7A8BA3;
+  	transform: scale(1.03);
+}
+
+/*------------------------- CONTENIDO POPUP CERRAR SESION --------------------------*/
+.contenidoCerrarSesion {
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 338px;
+}
+
+/*--------------------------LABEL CERRAR SESION--------------------------*/
+.lblCerrarSesion {
+    display: flex;
+    text-align: center;
+}
+
+/*-------------------------BOTONERA POPUP CERRAR SESION-------------------------*/
+.botoneraCerrarSesion {
+	display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/*-----------BOTONES POPUP CERRAR SESION---------*/
+.botones {
+    width: 143px;
+}

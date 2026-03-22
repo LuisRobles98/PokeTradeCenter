@@ -6,20 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
 	<title>PoketDex</title>
-	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/generico/css/body.css">
+	<link rel="stylesheet" href="/generico/css/barraSuperior.css">
+	<link rel="stylesheet" href="/generico/css/estilos.css">
 	<link rel="stylesheet" href="/barajasPublicas/css/barajasPublicas.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 	<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/barajasPublicas/js/llamadasAjax.js" defer></script>
 	<script src="/barajasPublicas/js/barajasPublicas.js" defer></script>
-	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
-
+	<script defer>document.addEventListener("DOMContentLoaded", function () {barraSuperior.cargar();});</script>
 </head>
 
 <body class="fondo">
@@ -27,54 +27,60 @@
 	<!-- cargar Barra superior -->
 	<div id="barraContainer"></div>
 	
-	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador">
+	<div id="popupTablaBarajasBuscador" class="popupTablaBarajasBuscador popup">
 		<div id="contenidoBuscador" class="contenidoBuscador">
-			<input id="inputNombreCarta"class="inputNombreCarta" placeholder="Nombre de la carta">
-			<div id="+likes" class="botonOrden" data-id="likes_asc">
-				<span class="fuenteNormal">Likes ↑</span>
+			<span id="textoCartas" class="textoNombreCarta label">Nombre de carta</span>
+			<input id="inputNombreCarta"class="inputNombreCarta input" placeholder="Nombre de carta en baraja">
+			<span id="textoOrdenacion" class="textoOrdenacion label">Ordenación</span>
+			<div id="botonesOrden" class="botonesOrden">
+				<div id="antiguas" class="botonOrden boton" data-id="fecha_asc">
+					<span class="fuenteNormal">Antiguas</span>
+				</div>
+				<div id="-likes" class="botonOrden boton" data-id="likes_asc">
+					<span class="fuenteNormal">Menos likes</span>
+				</div>
 			</div>
-			<div id="-likes" class="botonOrden" data-id="likes_desc">
-				<span class="fuenteNormal">Likes ↓</span>
-			</div>
-			<div id="nuevas" class="botonOrden" data-id="fecha_asc">
-				<span class="fuenteNormal">Fecha ↑</span>
-			</div>
-			<div id="antiguas" class="botonOrden" data-id="fecha_desc">
-				<span class="fuenteNormal">Fecha ↓</span>
+			<div id="botonesOrden" class="botonesOrdenLikes">
+				<div id="nuevas" class="botonOrden boton" data-id="fecha_desc">
+					<span class="fuenteNormal">Nuevas</span>
+				</div>
+				<div id="+likes" class="botonOrden boton" data-id="likes_desc">
+					<span class="fuenteNormal">Más likes</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="popupTablaBarajas" class="popupTablaBarajas">
+	<div id="popupTablaBarajas" class="popupTablaBarajas popup">
 		<div id="actualizar" class="actualizar">
-			<span id="textoActualizar" class="textoActualizar">Actualizar</span>
+			<span id="textoActualizar" class="textoActualizar label">Actualizar</span>
 			<i id="botonActualizar" class="fa-solid fa-arrows-rotate iconoFontAwesomeNoCircle"></i>
 		</div>
 		<div id="tablaBarajas"></div>
 	</div>
 	
-	<div id="popupMostrarBaraja" class="popupMostrarBaraja">
-		<span id="textoCreador" class="textoCreador"></span>
+	<div id="popupMostrarBaraja" class="popupMostrarBaraja popup">
+		<span id="textoCreador" class="textoCreador label"></span>
 		<div id="mostrarCartas" class="mostrarCartas"></div>
-		<button id="btnMeGusta" class="botonMeGusta">Dar like</button>
-		<button id="btnGuardarBaraja" class="botonGuardarBaraja">Guardar baraja</button>
+		<button id="btnMeGusta" class="btnMeGusta aceptar">Dar like</button>
+		<button id="btnGuardarBaraja" class="btnGuardarBaraja aceptar">Guardar baraja</button>
 	</div>
 	
-	<div id="confirmarDarMeGusta" class="confirmar" style="display: none;">
-		<div id="contenidoConfirmar" class="contenidoConfirmar">
-			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres dejar un like a esta baraja?</span>
+	<div id="confirmarDarMeGusta" class="popupConfirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmarMeGusta">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres dejar un like a esta baraja?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelar" class="botonCancelar">Cancelar</button>
-				<button id="btnLike" class="botonGuardar">Dar like</button>
+				<button id="btnCancelar" class="botones cancelar">Cancelar</button>
+				<button id="btnLike" class="botones aceptar">Dar like</button>
 			</div>
 		</div>
 	</div>
-	<div id="confirmarGuardar" class="confirmar" style="display: none;">
-		<div id="contenidoConfirmar" class="contenidoConfirmar">
-			<span for="textoConfirmacion" class="textoConfirmacion">¿Estás seguro que quieres guardar esta baraja?</span>
+	<div id="confirmarGuardar" class="popupConfirmar" style="display: none;">
+		<div id="contenidoConfirmar" class="contenidoConfirmarGuardar">
+			<span for="textoConfirmacion" class="textoConfirmacion label">¿Estás seguro que quieres guardar esta baraja?</span>
 			<div id="botonera" class="botoneraConfirmar">
-				<button id="btnCancelarGuardar" class="botonCancelar">Cancelar</button>
-				<button id="btnGuardar" class="botonGuardar">Guardar</button>
+				<button id="btnCancelarGuardar" class="botones cancelar">Cancelar</button>
+				<button id="btnGuardar" class="botones aceptar">Guardar</button>
 			</div>
 		</div>
 	</div>

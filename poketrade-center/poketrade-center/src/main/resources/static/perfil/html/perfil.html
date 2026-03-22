@@ -6,16 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="/generico/imagenes/poketDexNoText.ico" type="image/x-icon">
 	<title>PoketDex</title>
-	<link rel="stylesheet" href="/generico/css/generico.css">
+	<link rel="stylesheet" href="/generico/css/body.css">
+	<link rel="stylesheet" href="/generico/css/barraSuperior.css">
+	<link rel="stylesheet" href="/generico/css/estilos.css">
 	<link rel="stylesheet" href="/perfil/css/perfil.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 	<script src="/generico/js/generico.js" defer></script>
 	<script src="/perfil/js/llamadasAjax.js" defer></script>
 	<script src="/perfil/js/perfil.js" defer></script>
-	<script>$(document).ready(function () {barraSuperior.cargar();});</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script defer>document.addEventListener("DOMContentLoaded", function () {barraSuperior.cargar();});</script>
 </head>
 
 <body class="fondo">
@@ -24,63 +25,63 @@
 	<div id="barraContainer"></div>
 	
 	<!-- Popup info cuenta -->
-	<div id="popupUsuario" class="popupUsuario">
-		<div id="perfilUsuario" class="perfilUsuario"">
+	<div id="popupUsuario" class="popupUsuario popup">
+		<div id="perfilUsuario" class="perfilUsuario">
 			<div id="datosUsuario" class="datosUsuario">
-				<span class="labelDatosUsuario">Datos usuario</span>
+				<span class="labelDatosUsuario label">Datos usuario</span>
 				<div id="inputsUsuario" class="inputsUsuario">
-					<span class="labelDatoUsuario">Nombre de usuario</span>
-					<input id="inputNombreUsuario" class="inputUsuario">
-					<span class="labelDatoUsuario">Id Pokémon TCG Pocket</span>
-					<input id="inputJuegoIdUsuario" class="inputUsuario">
-					<span class="labelDatoUsuario">Correo electronico</span>
-					<input id="inputCorreoUsuario" class="inputUsuario" disabled>
+					<span class="labelDatoUsuario label">Nombre de usuario</span>
+					<input id="inputNombreUsuario" class="inputUsuario input">
+					<span class="labelDatoUsuario label">Id Pokémon TCG Pocket</span>
+					<input id="inputJuegoIdUsuario" class="inputUsuario input">
+					<span class="labelDatoUsuario label">Correo electronico</span>
+					<input id="inputCorreoUsuario" class="inputUsuario input" disabled>
 					<span id="cambioPassword" class="labelDatoUsuario cambioPassword">Cambiar Contraseña</span>
 				</div>
 			</div>
 			<div id="personalizacionUsuario" class="personalizacionUsuario">
-				<span class="labelPersonalizacionesUsuario">Personalización usuario</span>
+				<span class="labelPersonalizacionesUsuario label">Personalización usuario</span>
 				<div class="personalizacionIconoUsuario">
-					<span class="labelIconoUsuario">Icono</span>
-					<img id="iconoUsuario" class="iconoUsuario"/>
+					<span class="labelIconoUsuario label">Icono</span>
+					<img id="iconoUsuario" class="iconoUsuario icono"/>
 				</div>
 				<div class="personalizacionEmblemaUsuario">
-					<span class="labelEmblemaUsuario">Emblemas</span>
+					<span class="labelEmblemaUsuario label">Emblemas</span>
 					<div class="emblemasUsuario">
-						<img id="emblema1Usuario" class="emblemaUsuario"/>
-						<img id="emblema2Usuario" class="emblemaUsuario"/>
-						<img id="emblema3Usuario" class="emblemaUsuario"/>
+						<img id="emblema1Usuario" class="emblemaUsuario icono"/>
+						<img id="emblema2Usuario" class="emblemaUsuario icono"/>
+						<img id="emblema3Usuario" class="emblemaUsuario icono"/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="botonera" class="botonera">
-			<button id="btnModificarDatosUsuario" class="botonDatosUsuario">Guardar</button>
+			<button id="btnModificarDatosUsuario" class="btnDatosUsuario aceptar">Guardar</button>
 		</div>
 	</div>
 	
-	<div id="iconos" class="iconos" style="display: none;">
+	<div id="iconos" class="popupConfirmar" style="display: none;">
 		<div id="contenidoIconos" class="contenidoIconos">
 			<div id="mostrarIconos" class="mostrarIconos"></div>
-			<button id="btnCancelarIcono" class="botonCancelar botonPopup">Cancelar</button>
+			<button id="btnCancelarIcono" class="btnCancelar cancelar">Cancelar</button>
 		</div>
 	</div>
 	
-	<div id="emblemas" class="emblemas" style="display: none;">
+	<div id="emblemas" class="popupConfirmar" style="display: none;">
 		<div id="contenidoEmblemas" class="contenidoEmblemas">
 			<div id="mostrarEmblemas" class="mostrarEmblemas"></div>
-			<button id="btnCancelarEmblema" class="botonCancelar botonPopup">Cancelar</button>
+			<button id="btnCancelarEmblema" class="btnCancelar cancelar">Cancelar</button>
 		</div>
 	</div>
 
-	<div id="password" class="password" style="display: none;">
+	<div id="password" class="popupConfirmar" style="display: none;">
 		<div id="contenidoPassword" class="contenidoPassword">
-			<input id="inputPasswordUsuario" class="inputCambioPassword" type="password" placeholder="Introduzca la nueva contraseña">
-			<input id="inputPasswordUsuarioConfirmacion" class="inputCambioPassword" type="password" placeholder="vuelva a introducir la contraseña">
-			<label for="lblCambioPassword" class="lblCambioPassword">Los cambios se aplicarán al guardar</label>
+			<input id="inputPasswordUsuario" class="inputCambioPassword input" type="password" placeholder="Introduzca la nueva contraseña">
+			<input id="inputPasswordUsuarioConfirmacion" class="inputCambioPassword input" type="password" placeholder="vuelva a introducir la contraseña">
+			<label for="lblCambioPassword" class="lblCambioPassword labelRojo">Los cambios se aplicarán al guardar</label>
 			<div id="botonera" class="botoneraCambioPassword">
-				<button id="btnCancelarPassword" class="botonCancelar">Cancelar</button>
-				<button id="btnModificarPassword" class="botonCambioPassword">Modificar</button>
+				<button id="btnCancelarPassword" class="botonesCambioPassword cancelar">Cancelar</button>
+				<button id="btnModificarPassword" class="botonesCambioPassword aceptar">Modificar</button>
 			</div>
 		</div>
 	</div>

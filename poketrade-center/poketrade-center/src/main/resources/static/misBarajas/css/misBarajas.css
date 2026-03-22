@@ -2,87 +2,64 @@
 .popupTablaBarajasBuscador {
 	display: flex;
     flex-direction: column;
-    position: absolute;
 	top: 95px;
     left: 50px;
     height: 35px;
     width: 685px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 3;
 }
 
 .contenidoBuscador {
 	display: flex;
+	margin-top: 8px;
+}
+
+.textoNombreCarta {
+	position: absolute;
+	top: 9px;
+    left: 165px;
 }
 
 .inputNombreCarta {
     align-items: center;
 	width: 425px;
     padding: 10px;
-    margin-left: 0px;
     margin-top: -5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.inputNombreCarta:hover {
-    border-color: #7A8BA3;
+.textoOrdenacion {
+	position: absolute;
+    top: 9px;
+    left: 545px;
 }
 
-.inputNombreCarta:focus {
-	outline: none;
-    border-color: #68768A;
+.botonesOrden {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
-
 
 .botonOrden {
     display: flex;
     width: 100px;
-    padding: 5px;
     margin-top: -5px;
     margin-left: 25px;
     padding: 5px;
-    border: 2px solid #8EA0B8;
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonOrden:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.botonOrden.seleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
 }
 
 /* -----------------------------------------POPUP TABLA BARAJAS--------------------------------------- */
 .popupTablaBarajas {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 221px;
     left: 50px;
     height: 597px;
     width: 685px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
 }
 
@@ -134,16 +111,11 @@
 .popupMostrarBaraja {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 95px;
     left: 839px;
     height: 724px;
     width: 984px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .mostrarCartas {
@@ -167,112 +139,38 @@
 	transform: scale(1.03);
 }
 
-.botonEliminarBaraja {
+.btnEliminarBaraja {
 	position: absolute;
     left: 436px;
     top: 727px;
     padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.botonEliminarBaraja:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
 }
 
 .textoCreador {
     display: flex;
     margin-left: 10px;
-	color: #68768A;
 }
-
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/
-
-.confirmar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
 .contenidoConfirmar {
     background-color: white;
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 369px;
 }
 
 .botoneraConfirmar {
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
-	margin-left: -20px;
 }
 
 .textoConfirmacion {
     display: flex;
     text-align: center;
-	color: #68768A;
 }
 
 .botonEliminar {
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 120px;
 }
-
-.botonEliminar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
-}
-
-
-.botonCancelar {
-    padding: 10px 20px;
-    margin: 0px 15px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.botonCancelar:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-

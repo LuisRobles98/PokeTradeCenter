@@ -3,27 +3,19 @@
 }
 
 /* -----------------------------------------POPUP BUSCADOR CARTAS--------------------------------------- */
-.buscadorCartas {
+.popupBuscadorCartas {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 102px;
     left: 50px;
     height: 712px;
     max-width: fit-content;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 /*--------------------------- TODOS LOS LABELS ----------------------*/
-.label {
-    font-family: Arial, sans-serif;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #68768A;
+.labelBuscador {
+    margin-left: 6px;
 }
 
 /* ---------------------------EXPANSIONES BUSCADOR CARTAS------------------------------------------- */
@@ -32,8 +24,8 @@
     justify-content: flex-start;
 }
 .expansion {
-    display: flex;          /* organiza los hijos en fila */
-    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+    display: flex;
+    flex-wrap: wrap;
 	align-items: left;
     gap: 10px;
     margin: 5px;
@@ -41,12 +33,6 @@
 .expansionCarta {
     display: flex;
     padding: 1px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .expansionCarta:hover {
@@ -54,32 +40,17 @@
 	border: 2px solid #7A8BA3;
 }
 
-.expansionCarta.expansionSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
+/* ----------------------------------INPUTS BUSCADOR CARTAS---------------------------------------- */
+.inputCarta {
+	display: flex;
+    flex-direction: column;
+    margin-top: -7px;
 }
 
-
-/* ----------------------------------INPUTS BUSCADOR CARTAS---------------------------------------- */
 .inputBuscadorCartas {
 	align-items: center;
 	width: 362px;
-    padding: 10px;
     margin: 5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputBuscadorCartas:hover {
-    border-color: #7A8BA3;
-}
-
-.inputBuscadorCartas:focus {
-	outline: none; /* eliminar lo que pone por defecto el navegador */
-    border-color: #68768A;
 }
 
 /* ---------------------------RAREZAS BUSCADOR CARTAS------------------------------------------- */
@@ -88,8 +59,8 @@
     justify-content: flex-start;
 }
 .rareza {
-    display: flex;          /* organiza los hijos en fila */
-    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+    display: flex;
+    flex-wrap: wrap;
 	align-items: left;
     gap: 10px;
     margin: 5px;
@@ -97,29 +68,12 @@
 .rarezaCarta {
     display: flex;
     padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     align-items: center;
     width: 75px;
     justify-content: center;
     flex-wrap: nowrap;
 
 }
-
-.rarezaCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.rarezaCarta.rarezaSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
 
 /* --------------------------- ENERGIAS BUSCADOR CARTAS --------------------------- */
 .selectEnergiasCarta {
@@ -135,29 +89,12 @@
 }
 .energiaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 42px;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: center;
     align-items: center;
-}
-
-.energiaCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.energiaCarta.energiaSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
 }
 
 /* --------------------------- TIPOS BUSCADOR CARTAS --------------------------- */
@@ -174,30 +111,12 @@
 }
 .tipoCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: center;
     align-items: center;
 }
-
-.tipoCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.tipoCarta.tipoSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
 
 /* --------------------------- OBTENIDAS BUSCADOR CARTAS --------------------------- */
 .selectObtenidasCarta {
@@ -213,43 +132,18 @@
 }
 .obtenidaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.obtenidaCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.obtenidaCarta.obtenidaSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
 }
 
 /* -------------------------------------------------------------POPUP RESULTADOS CARTAS------------------------------------------------------------ */
-
-
 /* --------------------------- POPUP ----------------------------------------- */
-.resultadosCartas {
+.popupResultadosCartas {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 102px;
     left: 573px;
     height: 712px;
     width: 1230px;
-    background-color: white;
     padding: 30px;
-    border-radius: 30px;
-    /* overflow-y: auto; */
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* --------------------------- CONTADORES ----------------------------------------- */
@@ -266,11 +160,6 @@
 /* ---------------- CONTADOR ------------------------- */
 .contadorResultado {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    transition: border-color 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
@@ -279,12 +168,7 @@
     width: 100px;
 }
 
-.contadorResultado:hover {
-    border: 2px solid #7A8BA3;
-}
-
 /* ---------------- CONTENEDOR CARTAS ------------------------- */
-
 .mostrarCartas {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -302,6 +186,7 @@
   transition: transform 0.2s;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  user-select: none;
 }
 .carta:hover {
 	transform: scale(1.03);
@@ -310,7 +195,6 @@
 .deshabilitarParcial {
     filter: grayscale(100%);
 }
-
 
 /* ------------------------------------------------- POPUP AMPLIAR CARTA --------------------------------------------- */
 .cartaSeleccionada {
@@ -321,7 +205,7 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.75); /* fondo semi-transparente */
+    background-color: rgba(0,0,0,0.75);
     z-index: 1000;
 }
 
@@ -341,16 +225,13 @@
   width: 425px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
- 
   transform-style: preserve-3d; /* permite efecto 3D */
   transition: transform 0.2s ease;
   transform-origin: center center;
+  user-select: none;
 }
 
-
 /* ------------------------------ BOTONES CARTA AMPLIADA --------------------- */
-
-
 .infoCarta {
     background-color: white;
     border-radius: 30px;
@@ -361,9 +242,9 @@
     box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
     justify-content: space-around;
     flex-wrap: nowrap;
-    align-content: center;
     flex-direction: row;
     align-items: center;
+    user-select: none;
 }
 
 .infoCartaExpansion {
@@ -377,7 +258,8 @@
 }
 
 .infoCartaNumero {
-	margin-top: -15px;
+	margin-top: -7px;
+	margin-left: -20px;
 	display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -391,9 +273,8 @@
     border-radius: 10px;
     transition: border-color 0.5s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: -8px;
+    margin-top: 2px;
 }
-
 
 .contenedorBotoneraCarta {
 	background-color: white;
@@ -412,50 +293,6 @@
 	justify-content: center;
 }
 
-.botonesCartaAmpliadaAceptar {
-    padding: 10px 20px;
-    margin: 0px 10px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    width: 120px;
-}
-
-.botonesCartaAmpliadaAceptar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8; 
-}
-
-.botonesCartaAmpliadaSalir {
-    padding: 10px 20px;
-    margin: 0px 10px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    width: 120px;
-}
-
-.botonesCartaAmpliadaSalir:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-}
-
-.fuenteNormal {
-	font-weight: 600;
+.botonesCarta {
+    width: 110px;
 }

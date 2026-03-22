@@ -1,6 +1,6 @@
 // funciones genericas
 
-//popupErrores
+// popup de errores o confirmacion
 const popupErroresOConfirmacion = {
     mostrar: function(icono, titulo, errores) {
         Swal.fire({
@@ -9,8 +9,8 @@ const popupErroresOConfirmacion = {
             html: errores ? `<ul style="text-align: left; color: #68768A; font-family: Arial, sans-serif; font-weight: bold;"> ${errores} </ul>` : "",
             confirmButtonText: "Aceptar",
             customClass: {
-				title: 'titlePopupErrorConfirmacion',
-                confirmButton: 'botonAceptar'
+				title: 'titlePopupErrorConfirmacion label',
+                confirmButton: 'botonPopupError aceptar'
             },
             didOpen: (popup) => {
                 popup.style.borderRadius = "30px";
@@ -40,13 +40,14 @@ const QueryURL = {
 	}
 }
 
+// recuperar usuario logado
 const usuarioLogado = {
 	recuperar: function() {
 		return JSON.parse(localStorage.getItem("usuario"));	
 	}
 }
 
-
+// cargar barra superior
 const barraSuperior = {
     cargar: function() {
         // Solo cargamos si NO es la página de login
@@ -92,6 +93,7 @@ const barraSuperior = {
     }
 };
 
+// abrir aplicaciones del menú
 const cambiarAplicacion = {
 	paginaPrincipal: function() {
 		window.location.href = "/paginaPrincipal/html/paginaPrincipal.html";

@@ -156,6 +156,11 @@ $(document).ready(function() {
 		criterios.estadoId = estadoSeleccionado;
 		criterios.ordenacion = ordenSeleccionado;
 		let intercambios = await recuperarIntercambiosActivos(criterios);
+		if(intercambios.length === 0) {
+			$("#textoNoResultados").show();
+		} else {
+			$("#textoNoResultados").hide();
+		}
 		return intercambios;
 	}
 	
@@ -176,7 +181,7 @@ $(document).ready(function() {
 		$("#divEstado1").show();
 		$("#divEstado2").hide();
 		$("#divEstado3").hide();
-		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio:");
+		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio");
 		let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 		if(cartasOfrecer.length == 1) {
 			$("#textoOfrecer1").text("Carta para ofrecer");
@@ -228,7 +233,7 @@ $(document).ready(function() {
 		if(intercambio.ofertanteId == usuario.id) {
 			criteriosUsuario.id = intercambio.contraparteId;
 			let contraparte = await recuperarUsuarioIntercambio(criteriosUsuario);
-			$("#textoEstado").text(contraparte.nombre + " te han hecho la siguiente oferta:");
+			$("#textoEstado").text(contraparte.nombre + " te ha hecho la siguiente oferta");
 			$("#textoOfrecer2").text("Darás");
 			$("#textoQuerer2").text("Recibirás");
 			$("#textoEsperar").hide();
@@ -284,7 +289,7 @@ $(document).ready(function() {
 		if(intercambio.ofertanteId == usuario.id) {
 			criteriosUsuario.id = intercambio.contraparteId;
 			let contraparte = await recuperarUsuarioIntercambio(criteriosUsuario);
-			$("#textoEstado").text("Has aceptado la oferta de " + contraparte.nombre + ":");
+			$("#textoEstado").text("Has aceptado la oferta de " + contraparte.nombre);
 			$("#textoOfrecer3").text("Darás");
 			$("#textoQuerer3").text("Recibirás");
 			$("#nombreUsuario").text("Id Pokemon TCG Pocket de " + contraparte.nombre);
@@ -293,12 +298,12 @@ $(document).ready(function() {
 		} else {
 			criteriosUsuario.id = intercambio.ofertanteId;
 			let ofertante = await recuperarUsuarioIntercambio(criteriosUsuario);
-			$("#textoEstado").text(ofertante.nombre + "ha aceptado tu oferta:");
+			$("#textoEstado").text(ofertante.nombre + " ha aceptado tu oferta");
 			$("#textoQuerer3").text("Darás");
 			$("#textoOfrecer3").text("Recibirás");
 			$("#nombreUsuario").text("Id Pokémon TCG Pocket de " + ofertante.nombre);
 			$("#idJuegoIntercambio").text(ofertante.juegoId);
-			$("#botonera3").hide();
+			$("#botonera3").show();
 		}
 		
 		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");

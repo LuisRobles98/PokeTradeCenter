@@ -1,36 +1,33 @@
+/*----------------------------------------- LOGO EXPANSIONES ------------------------------------*/
 .expansionLogo {
     width: 116px;
 }
 
-/*----------------------------------------- POPUP LISTADO CARTAS BARAJA ------------------------------------*/
-
-.baraja {
+/*----------------------------------------- POPUP LISTADO CARTAS INTERCAMBIO ------------------------------------*/
+.popupIntercambio {
     display: flex;
-    position: absolute;
     top: 86px;
     left: 50px;
     height: 122px;
     width: 1800px;
-    background-color: white;
     padding: 10px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 
 .cartasBarajaOfrecer {
 	margin-left: 35px;
 	width: 500px;
+	user-select: none;
+	
 }
 
 .cartasBarajaQuerer {
 	margin-left: 35px;
 	width: 500px;
+	user-select: none;
 }
 
 .cartaBaraja {
-	margin-top: 20px;
+	margin-top: 18px;
     margin-right: 5px;
     width: 75px;
     border-radius: 8px;
@@ -46,54 +43,32 @@
 	transform: scale(1.03);
 }
 
-.boton {
+.botoneraPublicar {
+	display: block;
+}
+
+.btnPublicarIntercambio {
 	margin-top: 42px;
 	margin-left: 5px;
     width: 200px;
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.boton:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
 }
 
 .labelOfrecerCartas {
 	display: flex;
     position: absolute;
-    top: 82px;
-    left: 408px;
-    z-index: 1;
+	top: 6px;
+    left: 384px;
 }
 
 .labelQuererCartas {
 	display: flex;
     position: absolute;
-    top: 82px;
-    left: 1166px;
-    z-index: 1;
+    top: 6px;
+    left: 1141px;
 }
 
 .tipoIntercambio {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
@@ -101,23 +76,9 @@
     align-items: center;
 }
 
-.tipoIntercambio:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.tipoIntercambio.tipoSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
-.labelInfoRojo {
+.info {
 	display: block;
 	margin-top: 15px;
-	color: red;
-    font-size: 13px;
-    font-family: Arial, sans-serif;
-    font-weight: 400;
 	text-align: center;
 }
 
@@ -128,27 +89,19 @@
 }
 
 /* -----------------------------------------POPUP BUSCADOR CARTAS--------------------------------------- */
-.buscadorCartas {
+.popupBuscadorCartas {
     display: flex;
     flex-direction: column;
-    position: absolute;
     top: 245px;
     left: 50px;
     height: 606px;
     max-width: fit-content;
-    background-color: white;
     padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/*--------------------------- TODOS LOS LABELS ----------------------*/
-.label {
-    font-family: Arial, sans-serif;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #68768A;
+
+.labelBuscador {
+	margin-left: 7px;
+	margin-top: -7px;
 }
 
 /* ---------------------------EXPANSIONES BUSCADOR CARTAS------------------------------------------- */
@@ -157,8 +110,8 @@
     justify-content: flex-start;
 }
 .expansion {
-    display: flex;          /* organiza los hijos en fila */
-    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+    display: flex;
+    flex-wrap: wrap;
 	align-items: left;
     gap: 10px;
     margin: 5px;
@@ -166,45 +119,18 @@
 .expansionCarta {
     display: flex;
     padding: 1px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-
-.expansionCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.expansionCarta.expansionSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
 
 /* ----------------------------------INPUTS BUSCADOR CARTAS---------------------------------------- */
+.inputCarta {
+	display: flex;
+    flex-direction: column;
+}
+
 .inputBuscadorCartas {
 	align-items: center;
 	width: 362px;
-    padding: 10px;
     margin: 5px;
-    border-radius: 10px;
-    border: 2px solid #8EA0B8;
-    font-weight: normal;
-    font-size: 1em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputBuscadorCartas:hover {
-    border-color: #7A8BA3;
-}
-
-.inputBuscadorCartas:focus {
-	outline: none; /* eliminar lo que pone por defecto el navegador */
-    border-color: #68768A;
 }
 
 /* ---------------------------RAREZAS BUSCADOR CARTAS------------------------------------------- */
@@ -213,38 +139,20 @@
     justify-content: flex-start;
 }
 .rareza {
-    display: flex;          /* organiza los hijos en fila */
-    flex-wrap: wrap;        /* permite que los hijos pasen a la siguiente fila si no caben */
+    display: flex;
+    flex-wrap: wrap;
 	align-items: left;
     gap: 10px;
     margin: 5px;
 }
 .rarezaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     align-items: center;
     width: 75px;
     justify-content: center;
     flex-wrap: nowrap;
 
 }
-
-.rarezaCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.rarezaCarta.rarezaSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
 
 /* --------------------------- ENERGIAS BUSCADOR CARTAS --------------------------- */
 .selectEnergiasCarta {
@@ -260,29 +168,12 @@
 }
 .energiaCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 42px;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: center;
     align-items: center;
-}
-
-.energiaCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.energiaCarta.energiaSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
 }
 
 /* --------------------------- TIPOS BUSCADOR CARTAS --------------------------- */
@@ -299,13 +190,6 @@
 }
 .tipoCarta {
     display: flex;
-    padding: 5px;
-    border: 2px solid #8EA0B8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
@@ -313,36 +197,20 @@
     align-items: center;
 }
 
-.tipoCarta:hover {
-	transform: scale(1.03);
-	border: 2px solid #7A8BA3;
-}
-
-.tipoCarta.tipoSeleccionada {
-    background-color: #B0B0B0;
-    border-color: #68768A;
-}
-
 /* -------------------------------------------------------------POPUP RESULTADOS CARTAS------------------------------------------------------------ */
 
 /* --------------------------- POPUP ----------------------------------------- */
-.resultadosCartas {
+.popupResultadosCartas {
 	display: flex;
     flex-direction: column;
-    position: absolute;
     top: 245px;
     left: 600px;
     height: 606px;
     width: 1230px;
-    background-color: white;
     padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 4px 70px rgba(0, 0, 0, 0.6);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ---------------- CONTENEDOR CARTAS ------------------------- */
-
 .mostrarCartas {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -359,89 +227,34 @@
   transition: transform 0.2s;
   border-radius: 10px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  user-select: none;
 }
 .carta:hover {
 	transform: scale(1.03);
 }
 
-.fuenteNormal {
-	font-weight: 600;
-}
-
 /*---------- POPUP CONFIRMAR -----------*/
-
-.confirmar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
 .contenidoConfirmar {
     background-color: white;
     padding: 30px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 413px;
 }
 
 .botoneraConfirmar {
-	display: flex;
-	justify-content: center;
 	margin-top: 20px;
-	margin-left: -20px;
 }
 
 .textoConfirmacion {
     display: flex;
     text-align: center;
-	color: #68768A;
 }
 
-.botonPublicar {
-    padding: 10px 20px;
-    border: 2px solid #007bb5;
-    border-radius: 30px;
-    background-color: cornflowerblue;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+.btnPublicar {
+	width: 110px;
 }
 
-.botonPublicar:hover {
-	transform: scale(1.03);
-	border: 2px solid #005f87;
-	background-color: #2F65C8;
-}
-
-.botonCancelar {
-    padding: 10px 20px;
-    margin: 0px 15px;
-    border: 2px solid #B85C5C;
-    border-radius: 30px;
-    background-color: #E07A7A;
-    color: white;
-    font-weight: normal;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.5s;
-    transition: transform 0.2s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.botonCancelar:hover {
-    transform: scale(1.03);
-    border: 2px solid #9C4A4A;
-    background-color: #C75C5C;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+.btnCancelar {
+    width: 110px;
 }
