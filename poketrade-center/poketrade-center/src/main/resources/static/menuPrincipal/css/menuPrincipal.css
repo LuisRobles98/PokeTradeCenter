@@ -1,4 +1,4 @@
-/* Primera fila de apps (los 4)*/
+/*--------------MENU PRINCIPAL-------------------*/
 .iconosAplicaciones {
     display: grid;
     position: absolute;
@@ -10,39 +10,45 @@
     justify-content: center;
 }
 
-
-.iconoApp {
-    font-size: 66px;
-    color: #008CBA;
-    cursor: pointer;
-    transition: color 0.2s ease;
+.appMenu {
+	display: flex;
+	width: fit-content;
+  	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+   	box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+   	cursor: pointer;
+   	user-select: none;
+   	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.iconoApp:hover {
-	transform: scale(1.2);
-    color: #007bb5;
+.appMenu:hover {
+    transform: scale(1.03);
+    box-shadow: 0 1px 40px rgba(0, 0, 0, 0.5)
 }
 
-.iconoContenedor {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+.imagenApp {
+	width: 80px;
+   	transition: transform 0.3s ease;
 }
 
-.iconoApp {
-    font-size: 48px;
-    color: #008CBA;
-    cursor: pointer;
-    transition: transform 0.2s;
+.labelApp {
+	font-family: Arial, sans-serif;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-align: center;
+    user-select: none;
+    width: 140px;
+    height: 35px;
+    transition: color 0.3s ease;
+    transition: transform 0.3s;
 }
 
-.iconoApp:hover {
-    color: #007bb5;
-}
-
-
-/*-------------------------------------------------- MENU PRINCIPAL (IGNORAR LO DE ARRIBA DE MOMENTO, SE BORRARA MAS ADELANTE) ---------------------------------------------------------*/
 /*------------------------- CONTENIDO POPUP INCLUIR ID JUEGO --------------------------*/
 .contenidoIncluirIdJuego {
     position: relative;
@@ -62,7 +68,6 @@
     width: 28px;
 }
 
-
 /*------------------INPUT POPUP INCLUIR ID JUEGO----------------------*/
 .inputIncluirIdJuego {
 	display: flex;
@@ -75,46 +80,4 @@
 .btnIncluirIdJuego {
     margin-top: 20px;
     width: 181px;
-}
-
-/*---------------------------------*/
-.appMenu {
-	display: flex;
-	width: fit-content;
-  	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	position: relative;
-    background-color: white;
-    padding: 30px;
-    border-radius: 30px;
-   	box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
-   	cursor: pointer;
-   	user-select: none;
-   	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.imagenApp {
-	width: 80px;
-	/*transiciones*/
-   	transition: transform 0.3s ease;
-}
-
-.labelApp {
-	font-family: Arial, sans-serif;
-    padding: 10px;
-    font-weight: bold;
-    font-size: 1.25em;
-    text-align: center;
-    user-select: none;
-    width: 140px;
-    height: 35px;
-    transition: color 0.3s ease;
-    transition: transform 0.3s;
-    color: #68768A;
-}
-
-.appMenu:hover {
-    transform: scale(1.03);
-    box-shadow: 0 1px 40px rgba(0, 0, 0, 0.5)
 }
