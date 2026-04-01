@@ -16,7 +16,7 @@ FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta
 INSERT INTO carta
 (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
 SELECT 1, 4, "Venusaur ex", 4, 1, 1, 0, null
-FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM cartaa WHERE expansion_id = 1 AND carta_juego_id = 4);
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 4);
 
 INSERT INTO carta
 (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
@@ -35,7 +35,7 @@ FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta
 
 INSERT INTO carta
 (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
-SELECT 1, 8, "weedle", 1, 1, 1, 1, null
+SELECT 1, 8, "Weedle", 1, 1, 1, 1, null
 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 8);
 
 INSERT INTO carta
@@ -462,3 +462,38 @@ INSERT INTO carta
 (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
 SELECT 1, 93, "Frosmoth", 2, 3, 1, 0, null
 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 93);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 94, "Pikachu", 1, 4, 1, 1, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 94);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 95, "Raichu", 3, 4, 1, 0, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 95);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 96, "Pikachu ex", 4, 4, 1, 1, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 96);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 97, "Magnemite", 1, 4, 1, 1, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 97);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 98, "Magneton", 3, 4, 1, 0, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 98);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 99, "Voltorb", 1, 4, 1, 1, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 99);
+
+INSERT INTO carta
+(expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+SELECT 1, 100, "Electrode", 2, 4, 1, 0, null
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM carta WHERE expansion_id = 1 AND carta_juego_id = 100);
