@@ -13,6 +13,7 @@ import com.poketradecenter.Clase.CartaUsuario;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IColeccionCartasService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 import com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper;
 
 @Service
@@ -48,6 +49,7 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	
 	private CartaUsuario recuperarCartaUsuario(CartaUsuario cartaUsuario) {
 		CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
+		criterios.setUsuarioId(cartaUsuario.getUsuarioId());
 		List<Integer> expansiones = new ArrayList<>();
 		expansiones.add(cartaUsuario.getExpansionId());
 		criterios.setExpansiones(expansiones);
@@ -69,6 +71,18 @@ public class ColeccionCartasService implements IColeccionCartasService {
 			return cartaService.recuperarTotalCartasPorExpansion(expansionId);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar el total de cartas de la expansión", e);
+		}
+	}
+	
+	@Override
+	public void insertarCartasNuevoUsuario(Integer usuarioId) {
+		CartaUsuario cartaUsuario = new CartaUsuario();
+		cartaUsuario.setUsuarioId(usuarioId);
+		cartaUsuario.setObtenida(false);
+		for(Integer i = Constantes.ELEMENTO_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_1; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_1);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
 		}
 	}
 }

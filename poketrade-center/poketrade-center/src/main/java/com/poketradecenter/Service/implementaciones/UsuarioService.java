@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
+import com.poketradecenter.Service.interfaces.IColeccionCartasService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Utilities.implementaciones.Constantes;
 import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
@@ -17,11 +18,14 @@ public class UsuarioService implements IUsuarioService {
 	
 	@Autowired
 	private IUsuarioMapper usuarioMapper;
+	@Autowired
+	private IColeccionCartasService coleccionCartasService;
 	
 	@Override
 	public void crearUsuario(Usuario usuario) {
 		validarDatosUsuario(usuario, true);
 		crear(usuario);
+		insertarCartasNuevoUsuario(usuario);
 	}
 	
 	private void crear(Usuario usuario) {
@@ -121,8 +125,6 @@ public class UsuarioService implements IUsuarioService {
 		}
 	}
 	
-	
-	
 	@Override
 	public List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
 		try {
@@ -138,5 +140,9 @@ public class UsuarioService implements IUsuarioService {
 		for(Usuario usuario : usuarios) {
 			usuario.setPassword(null);
 		}
+	}
+	
+	private void insertarCartasNuevoUsuario(Usuario usuario) {
+		coleccionCartasService.insertarCartasNuevoUsuario(usuario.getId());
 	}
 }

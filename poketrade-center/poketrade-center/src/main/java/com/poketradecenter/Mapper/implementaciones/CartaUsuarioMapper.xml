@@ -72,4 +72,11 @@
 	   WHERE usuario_id = #{usuarioId} AND expansion_id = #{expansionId} AND carta_juego_id = #{cartaJuegoId}
 	</update>
 	
+	<!-- SQL para insertar cartas de usuario -->
+	<insert id="insertar" parameterType="com.poketradecenter.Clase.CartaUsuario">   
+	   INSERT INTO carta_usuario
+        (usuario_id, expansion_id, carta_juego_id, obtenida)
+        VALUES (#{usuarioId}, #{expansionId}, #{cartaJuegoId}, #{obtenida})
+	</insert>
+	
 </mapper>

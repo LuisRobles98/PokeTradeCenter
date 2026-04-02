@@ -3,7 +3,7 @@
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IUsuarioMapper">
 
     <!-- SQL para insertar un usuario cuando se registra-->
-    <insert id="crear" parameterType="com.poketradecenter.Clase.Usuario">
+    <insert id="crear" parameterType="com.poketradecenter.Clase.Usuario" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO usuario
         (nombre, email, password, icono_id, emblema_1_id, emblema_2_id, emblema_3_id)
         VALUES (#{nombre}, #{email}, #{password}, 1,0,0,0)
