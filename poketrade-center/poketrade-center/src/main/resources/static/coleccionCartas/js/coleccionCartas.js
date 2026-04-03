@@ -6,6 +6,7 @@ $(document).ready(function() {
 	let listaEnergias = [];
 	let listaTipos = [];
 	let obtenida = null;
+	let scroll = true;
 	
 	limpiarBuscador();
 	cargarCartas();
@@ -34,8 +35,18 @@ $(document).ready(function() {
 	}
 	
 	$("#inputNombreCarta").on("input", function() {
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
+	
+	function buscarCartasUsuarioPorCriteriosScroll() {
+		scroll = true;
+		buscarCartasUsuarioPorCriterios();
+	}
+	
+	function buscarCartasUsuarioPorCriteriosNoScroll() {
+		scroll = false;
+		buscarCartasUsuarioPorCriterios();
+	}
 	
 	//funcionalidad click expansiones
 	$(".expansionCarta").click(function() {
@@ -49,7 +60,7 @@ $(document).ready(function() {
         	listaExpansiones.push(id);
         	$(this).addClass("seleccionada");
     	}
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
 	
 	//funcionalidad click rarezas
@@ -64,7 +75,7 @@ $(document).ready(function() {
         	listaRarezas.push(id);
         	$(this).addClass("seleccionada");
     	}
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
 	
 	//funcionalidad click energia
@@ -79,7 +90,7 @@ $(document).ready(function() {
         	listaEnergias.push(id);
         	$(this).addClass("seleccionada");
     	}
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
 	
 	//funcionalidad click tipo
@@ -94,7 +105,7 @@ $(document).ready(function() {
         	listaTipos.push(id);
         	$(this).addClass("seleccionada");
     	}
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
 	
 	//funcionalidad click obtenidas
@@ -107,13 +118,13 @@ $(document).ready(function() {
 			obtenida = valor;
 			$(this).addClass("seleccionada");
 		}
-    	buscarCartasUsuarioPorCriterios();
+    	buscarCartasUsuarioPorCriteriosScroll();
 	});
 	
 	//cargar cartas
 	function cargarCartas() {
 		$("#resultadosCartas").show();
-		buscarCartasUsuarioPorCriterios();
+		buscarCartasUsuarioPorCriteriosScroll();
 	}
 	
 	async function buscarCartasUsuarioPorCriterios() {
@@ -150,7 +161,9 @@ $(document).ready(function() {
         	}
         	contenedor.appendChild(img);
     	});
-    	contenedor.scrollTo({ top: 0, behavior: "smooth" });
+    	if(scroll) {
+			contenedor.scrollTo({ top: 0, behavior: "smooth" });	
+		}
 	}
 	
 	function calcularContadores(cartas) {
@@ -302,7 +315,7 @@ async function abrirAmpliarCarta(carta) {
 				await actualizarObtenida(carta);
 				popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección", "");
 				$("#cartaSeleccionada").hide();
-				buscarCartasUsuarioPorCriterios();	
+				buscarCartasUsuarioPorCriteriosNoScroll();
 			} catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error.message);
 			}
@@ -318,7 +331,7 @@ async function abrirAmpliarCarta(carta) {
 				await actualizarObtenida(carta);
 				popupErroresOConfirmacion.mostrar("success","La carta ha sido eliminada de la colección", "");
 				$("#cartaSeleccionada").hide();
-				buscarCartasUsuarioPorCriterios();	
+				buscarCartasUsuarioPorCriteriosNoScroll();
 			} catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error);
 			}

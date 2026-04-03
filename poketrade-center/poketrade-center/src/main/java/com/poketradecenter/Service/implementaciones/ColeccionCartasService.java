@@ -1,11 +1,7 @@
 package com.poketradecenter.Service.implementaciones;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +20,6 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	@Autowired
 	private ICartaService cartaService;
 	
-
 	@Override
 	public List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criterios) {
 		try {
@@ -54,7 +49,7 @@ public class ColeccionCartasService implements IColeccionCartasService {
 		expansiones.add(cartaUsuario.getExpansionId());
 		criterios.setExpansiones(expansiones);
 		criterios.setCartaJuegoId(cartaUsuario.getCartaJuegoId());
-		return recuperarCartaUsuarioPorCriterios(criterios).get(0);
+		return recuperarCartaUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	private void actualizar(CartaUsuario cartaUsuario) {
@@ -81,6 +76,11 @@ public class ColeccionCartasService implements IColeccionCartasService {
 		cartaUsuario.setObtenida(false);
 		for(Integer i = Constantes.ELEMENTO_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_1; i++) {
 			cartaUsuario.setExpansionId(Constantes.EXPANSION_1);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.ELEMENTO_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_2; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_2);
 			cartaUsuario.setCartaJuegoId(i);
 			cartaUsuarioMapper.insertar(cartaUsuario);
 		}

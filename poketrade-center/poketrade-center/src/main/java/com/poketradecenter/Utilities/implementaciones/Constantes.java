@@ -18,4 +18,6 @@ public class Constantes {
 	//Constantes Módulos Colección Cartas
 	public static final Integer TOTAL_CARTAS_EXPANSION_1 = 286;
 	public static final Integer EXPANSION_1 = 1;
+	public static final Integer TOTAL_CARTAS_EXPANSION_2 = 86;
+	public static final Integer EXPANSION_2 = 2;
 }
