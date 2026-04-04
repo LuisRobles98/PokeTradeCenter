@@ -50,7 +50,7 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY bu.fecha_creacion DESC
+		        ORDER BY bu.id DESC
 		    </otherwise>
 		</choose>
 	</select>

@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 		barajaUsuario.setUsuarioId(barajaPublica.getCreadorId());
 		barajaUsuario.setBarajaPublicaId(barajaPublica.getId());
 		barajaUsuario.setBarajaId(barajaPublica.getBarajaId());
-		barajaUsuario.setFechaCreacion(Constantes.FECHA_ACTUAL);
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
 		guardarBarajaUsuario(barajaUsuario);
 	}
 	
@@ -167,13 +168,13 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	private void construirBarajaUsuario(BarajaUsuario barajaUsuario) {
 		barajaUsuario.setBarajaId(barajaUsuario.getBaraja().getId());
-		barajaUsuario.setFechaCreacion(Constantes.FECHA_ACTUAL);
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
 	}
 	
 	private void construirBarajaPublica(BarajaPublica barajaPublica) {
 		barajaPublica.setBarajaId(barajaPublica.getBaraja().getId());
 		barajaPublica.setMeGusta(Constantes.CERO_LIKES);
-		barajaPublica.setFechaCreacion(Constantes.FECHA_ACTUAL);
+		barajaPublica.setFechaCreacion(LocalDateTime.now());
 	}
 	
 	private BarajaUsuario guardarBarajaUsuario(BarajaUsuario barajaUsuario) {
@@ -196,7 +197,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	@Override
 	public void guardarBarajaPublicaComoUsuario(BarajaUsuario barajaUsuario) {
-		barajaUsuario.setFechaCreacion(Constantes.FECHA_ACTUAL);
+		barajaUsuario.setFechaCreacion(LocalDateTime.now());
 		guardarBarajaUsuario(barajaUsuario);
 	}
 }

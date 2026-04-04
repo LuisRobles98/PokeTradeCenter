@@ -1,4 +1,5 @@
 package com.poketradecenter.Service.implementaciones;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -125,8 +126,8 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 		intercambio.setCartaQuererFinal(null);
 		intercambio.setCartaOfrecerFinalNombre(null);
 		intercambio.setCartaQuererFinalNombre(null);
-		intercambio.setFechaCreacion(Constantes.FECHA_ACTUAL);
-		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
+		intercambio.setFechaCreacion(LocalDateTime.now());
+		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	
 	private void publicar(Intercambio intercambio) {

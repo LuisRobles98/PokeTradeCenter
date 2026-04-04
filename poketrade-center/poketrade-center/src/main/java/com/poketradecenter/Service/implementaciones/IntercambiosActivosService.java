@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,7 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	}
 	
 	private void completarDatosActualizarIntercambio(Intercambio intercambio) {
-		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
+		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	
 	private void actualizar(Intercambio intercambio) {

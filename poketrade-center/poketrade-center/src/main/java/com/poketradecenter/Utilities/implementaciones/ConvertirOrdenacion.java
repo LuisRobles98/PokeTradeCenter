@@ -37,9 +37,9 @@ public class ConvertirOrdenacion implements IConvertirOrdenacion {
 	public String convertirOrdenacionTablonIntercambios(String ordenacion) {
 		switch(ordenacion) {
 			case Constantes.FECHA_DESC:
-				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_DESCENDENTE;
+				return Constantes.FECHA_CAMBIO + " " + Constantes.ORDENACION_DESCENDENTE;
 			case Constantes.FECHA_ASC:
-				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_ASCENDENTE;
+				return Constantes.FECHA_CAMBIO + " " + Constantes.ORDENACION_ASCENDENTE;
 			default:
 				return null;
 		}

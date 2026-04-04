@@ -39,7 +39,7 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY bp.fecha_creacion DESC
+		        ORDER BY bp.id DESC
 		    </otherwise>
 		</choose>
 	</select>

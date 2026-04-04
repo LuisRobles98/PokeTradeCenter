@@ -1,7 +1,5 @@
 package com.poketradecenter.Utilities.implementaciones;
 
-import java.time.LocalDateTime;
-
 public class Constantes {
 	//Constantes genéricas
 	public static final Integer CERO = 0;
@@ -9,7 +7,6 @@ public class Constantes {
 	public static final Integer ELEMENTO_1 = 1;
 	public static final Integer CONTADOR_0 = 0;
 	public static final Integer CONTADOR_1 = 1;
-	public static final LocalDateTime FECHA_ACTUAL = LocalDateTime.now();
 	
 	//Constantes Módulo Barajas Públicas
 	public static final Integer SUMAR_LIKE = 1;
@@ -72,6 +69,7 @@ public class Constantes {
 	//Constantes Utilidades ConvertirOrdenacion
 	public static final String ME_GUSTA = "me_gusta";
 	public static final String FECHA_CREACION = "fecha_creacion";
+	public static final String FECHA_CAMBIO = "fecha_cambio";
 	public static final String ORDENACION_ASCENDENTE = "ASC";
 	public static final String ORDENACION_DESCENDENTE = "DESC";
 	public static final String LIKES_DESC = "likes_desc";

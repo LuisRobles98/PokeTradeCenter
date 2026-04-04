@@ -1,5 +1,6 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,7 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		intercambio.setCartaOfrecerFinalNombre(cartaParaOfrecer.getNombre());
 		intercambio.setCartaQuererFinalNombre(cartaParaQuerer.getNombre());
 		intercambio.setEstadoId(Constantes.INTERCAMBIO_PUBLICO_ESTADO_OFERTA_RECIBIDA);
-		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
+		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	
 	private void solicitar(Intercambio intercambio) {

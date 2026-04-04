@@ -42,7 +42,7 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY id DESC
 		    </otherwise>
 		</choose>
 	</select>
@@ -99,7 +99,7 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY id DESC
 		    </otherwise>
 		</choose>
 	</select>
