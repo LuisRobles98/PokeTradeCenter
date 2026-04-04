@@ -229,12 +229,12 @@ $(document).ready(function() {
 				let intercambio = construirSolicitudIntercambio();
 				await solicitarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha solicitado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
-				$("#confirmarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}
 		}
+		$("#confirmarIntercambio").hide();
 	});
 	
 	async function validarDatos() {

@@ -2,22 +2,20 @@ package com.poketradecenter.Utilities.implementaciones;
 import org.springframework.stereotype.Service;
 import com.poketradecenter.Utilities.interfaces.IConvertirOrdenacion;
 
-
-
 @Service
 public class ConvertirOrdenacion implements IConvertirOrdenacion {
 	
 	@Override
 	public String convertirOrdenacionBarajasPublicas(String ordenacion) {
 		switch(ordenacion) {
-			case "likes_desc":
-				return "me_gusta DESC";
-			case "likes_asc":
-				return "me_gusta ASC";
-			case "fecha_desc":
-				return "fecha_creacion DESC";
-			case "fecha_asc":
-				return "fecha_creacion ASC";
+			case Constantes.LIKES_DESC:
+				return Constantes.ME_GUSTA + " " + Constantes.ORDENACION_DESCENDENTE;
+			case Constantes.LIKES_ASC:
+				return Constantes.ME_GUSTA + " " + Constantes.ORDENACION_ASCENDENTE;
+			case Constantes.FECHA_DESC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_DESCENDENTE;
+			case Constantes.FECHA_ASC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_ASCENDENTE;
 			default:
 				return null;
 		}
@@ -26,10 +24,10 @@ public class ConvertirOrdenacion implements IConvertirOrdenacion {
 	@Override
 	public String convertirOrdenacionMisBarajas(String ordenacion) {
 		switch(ordenacion) {
-			case "fecha_desc":
-				return "fecha_creacion DESC";
-			case "fecha_asc":
-				return "fecha_creacion ASC";
+			case Constantes.FECHA_DESC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_DESCENDENTE;
+			case Constantes.FECHA_ASC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_ASCENDENTE;
 			default:
 				return null;
 		}
@@ -38,13 +36,12 @@ public class ConvertirOrdenacion implements IConvertirOrdenacion {
 	@Override
 	public String convertirOrdenacionTablonIntercambios(String ordenacion) {
 		switch(ordenacion) {
-		case "fecha_desc":
-			return "fecha_creacion DESC";
-		case "fecha_asc":
-			return "fecha_creacion ASC";
-		default:
-			return null;
+			case Constantes.FECHA_DESC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_DESCENDENTE;
+			case Constantes.FECHA_ASC:
+				return Constantes.FECHA_CREACION + " " + Constantes.ORDENACION_ASCENDENTE;
+			default:
+				return null;
+		}
 	}
-}
-	
 }

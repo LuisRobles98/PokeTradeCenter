@@ -381,12 +381,12 @@ $(document).ready(function() {
 			try {
 				await actualizarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha eliminado correctamente el intercambio", "");
-				$("#confirmarEliminarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}	
 		}
+		$("#confirmarEliminarIntercambio").hide();
 	});
 	
 	$("#btnEliminarRechazar").click(async function() {
@@ -398,12 +398,12 @@ $(document).ready(function() {
 			try {
 				await actualizarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha eliminado correctamente el intercambio", "");
-				$("#confirmarRechazarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}	
 		}
+		$("#confirmarRechazarIntercambio").hide();
 	});
 	
 	$("#btnOfertarRechazar").click(async function() {
@@ -415,12 +415,12 @@ $(document).ready(function() {
 			try {
 				await actualizarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha vuelto a ofertar correctamente el intercambio", "");
-				$("#confirmarRechazarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}	
 		}
+		$("#confirmarRechazarIntercambio").hide();
 	});
 	
 	$("#btnAceptarAceptar").click(async function() {
@@ -432,12 +432,12 @@ $(document).ready(function() {
 			try {
 				await actualizarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha aceptado correctamente el intercambio", "");
-				$("#confirmarAceptarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}	
 		}
+		$("#confirmarAceptarIntercambio").hide();
 	});
 	
 	$("#btnFinalizarFinalizar").click(async function() {
@@ -449,12 +449,12 @@ $(document).ready(function() {
 			try {
 				await actualizarIntercambio(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha finalizado correctamente el intercambio", "");
-				$("#confirmarFinalizarIntercambio").hide();
 				limpiarYCargarTabla();
 			}catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}	
 		}
+		$("#confirmarFinalizarIntercambio").hide();
 	});
 	
 

@@ -40,7 +40,6 @@ public class UsuarioController {
     	}
     }
     
-    
     @GetMapping("/usuario")
     public List<Usuario> recuperarUsuarioPorCriterios(@RequestParam Map<String, String> params) {
         CriteriosUsuario criterios = crearCriterios.crearCriteriosUsuarioParams(params);

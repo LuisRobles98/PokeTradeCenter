@@ -21,5 +21,4 @@ public class BarajaService implements IBarajaService {
 			throw new RuntimeException("Ha ocurrido un error al guardar la baraja", e);
 		}
 	}
-	
 }

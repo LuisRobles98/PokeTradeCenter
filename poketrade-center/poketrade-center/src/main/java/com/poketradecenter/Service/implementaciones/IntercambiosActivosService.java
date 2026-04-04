@@ -1,6 +1,5 @@
 package com.poketradecenter.Service.implementaciones;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import com.poketradecenter.Mapper.interfaces.IIntercambioMapper;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class IntercambiosActivosService implements IIntercambiosActivosService {
@@ -37,12 +37,12 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	
 	@Override
 	public Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public Carta recuperarCartaPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
@@ -53,22 +53,21 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	}
 	
 	private void validarIntercambio(Intercambio intercambio) {
-		if(intercambio.getEstadoId() == 2) {
+		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_RECIBIDA) {
 			throw new RuntimeException("Se ha insertado un estado que no corresponde");
 		}
-		if(intercambio.getEstadoId() == 1 && intercambio.getContraparteId() != null) {
+		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA && intercambio.getContraparteId() != null) {
 			throw new RuntimeException("Si se vuelve a publicar el intercambio no puede haber una persona como contraparte");
 		}
-		if(intercambio.getEstadoId() == 3 && intercambio.getContraparteId() == null) {
+		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_ACEPTADA && intercambio.getContraparteId() == null) {
 			throw new RuntimeException("Tiene que haber una persona como contraparte al aceptar el intercambio");
 		}
 	}
 	
 	private void completarDatosActualizarIntercambio(Intercambio intercambio) {
-		intercambio.setFechaCambio(LocalDateTime.now());
+		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
 	}
 	
-
 	private void actualizar(Intercambio intercambio) {
 		try {
 			intercambioMapper.actualizar(intercambio);

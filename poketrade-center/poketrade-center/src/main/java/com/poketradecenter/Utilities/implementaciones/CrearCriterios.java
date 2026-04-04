@@ -27,10 +27,10 @@ public class CrearCriterios implements ICrearCriterios {
 		CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
  	   	params.forEach((key, value) -> {
  	        switch(key) {
- 	            case "usuarioId":
+ 	            case Constantes.CRITERIOS_CARTA_USUARIO_USUARIO_ID:
  	                criterios.setUsuarioId(Integer.parseInt(value));
  	                break;
- 	            case "expansiones":
+ 	            case Constantes.CRITERIOS_CARTA_USUARIO_EXPANSIONES:
  	            	List<Integer> expansiones = Arrays.stream(value.split(","))
          				.map(String::trim)
          				.filter(s -> !s.isEmpty())
@@ -38,13 +38,13 @@ public class CrearCriterios implements ICrearCriterios {
          				.collect(Collectors.toList());
  	                criterios.setExpansiones(expansiones);
  	                break;
- 	            case "cartaJuegoId":
+ 	            case Constantes.CRITERIOS_CARTA_USUARIO_CARTA_JUEGO_ID:
  	                criterios.setCartaJuegoId(Integer.parseInt(value));
  	                break;
- 	            case "nombre":
+ 	            case Constantes.CRITERIOS_CARTA_USUARIO_NOMBRE:
  	                criterios.setNombre(value);
  	                break;
- 	            case "rarezas":
+ 	            case Constantes.CRITERIOS_CARTA_USUARIO_RAREZAS:
  	            	List<Integer> rarezas = Arrays.stream(value.split(","))
 	            			.map(String::trim)
 	                        .filter(s -> !s.isEmpty())
@@ -52,7 +52,7 @@ public class CrearCriterios implements ICrearCriterios {
 	                        .collect(Collectors.toList());
  	            	criterios.setRarezas(rarezas);
  	                break;
-    	            case "energias":
+	            case Constantes.CRITERIOS_CARTA_USUARIO_ENERGIAS:
  	            	List<Integer> energias = Arrays.stream(value.split(","))
 	            			.map(String::trim)
 	                        .filter(s -> !s.isEmpty())
@@ -60,7 +60,7 @@ public class CrearCriterios implements ICrearCriterios {
 	                        .collect(Collectors.toList());
  	            	criterios.setEnergias(energias);
  	                break;
-    	            case "tipos":
+	            case Constantes.CRITERIOS_CARTA_USUARIO_TIPOS:
  	            	List<Integer> tipos = Arrays.stream(value.split(","))
 	            			.map(String::trim)
 	                        .filter(s -> !s.isEmpty())
@@ -68,12 +68,12 @@ public class CrearCriterios implements ICrearCriterios {
 	                        .collect(Collectors.toList());
  	            	criterios.setTipos(tipos);
  	                break;
-    	            case "obtenida":
-    	            	if(value == "null") {
-    	            		criterios.setObtenida(null);
-    	            	} else {
-    	            		criterios.setObtenida(Boolean.parseBoolean(value));
-    	            	}
+	            case Constantes.CRITERIOS_CARTA_USUARIO_OBTENIDA:
+	            	if(value == "null") {
+	            		criterios.setObtenida(null);
+	            	} else {
+	            		criterios.setObtenida(Boolean.parseBoolean(value));
+	            	}
  	            default:
  	                break;
  	        }
@@ -86,31 +86,31 @@ public class CrearCriterios implements ICrearCriterios {
 	   CriteriosUsuario criterios = new CriteriosUsuario();
 	   params.forEach((key, value) -> {
 	        switch(key) {
-	            case "email":
+	            case Constantes.CRITERIOS_USUARIO_EMAIL:
 	                criterios.setEmail(value);
 	                break;
-	            case "password":
+	            case Constantes.CRITERIOS_USUARIO_PASSWORD:
 	                criterios.setPassword(value);
 	                break;
-	            case "nombre":
+	            case Constantes.CRITERIOS_USUARIO_NOMBRE:
 	                criterios.setNombre(value);
 	                break;
-	            case "juegoId":
+	            case Constantes.CRITERIOS_USUARIO_JUEGO_ID:
 	                criterios.setJuegoId(value);
 	                break;
-  	            case "iconoId":
+  	            case Constantes.CRITERIOS_USUARIO_ICONO_ID:
 	                criterios.setIconoId(Integer.parseInt(value));
 	                break;
-  	            case "emblema1Id":
+  	            case Constantes.CRITERIOS_USUARIO_EMBLEMA_1_ID:
 	                criterios.setIconoId(Integer.parseInt(value));
 	                break;
-  	            case "emblema2Id":
+  	            case Constantes.CRITERIOS_USUARIO_EMBLEMA_2_ID:
 	                criterios.setIconoId(Integer.parseInt(value));
 	                break;
-  	            case "emblema3Id":
+  	            case Constantes.CRITERIOS_USUARIO_EMBLEMA_3_ID:
 	                criterios.setIconoId(Integer.parseInt(value));
 	                break;
-	            case "id":
+	            case Constantes.CRITERIOS_USUARIO_ID:
 	                criterios.setId(Integer.parseInt(value));
 	                break;
 	            default:
@@ -125,7 +125,7 @@ public class CrearCriterios implements ICrearCriterios {
     	CriteriosCarta criterios = new CriteriosCarta();
     	params.forEach((key, value) -> {
 	        switch(key) {
-	            case "expansiones":
+	            case Constantes.CRITERIOS_CARTA_EXPANSIONES:
 	            	List<Integer> expansiones = Arrays.stream(value.split(","))
         				.map(String::trim)
         				.filter(s -> !s.isEmpty())
@@ -133,13 +133,13 @@ public class CrearCriterios implements ICrearCriterios {
         				.collect(Collectors.toList());
 	                criterios.setExpansiones(expansiones);
 	                break;
-	            case "cartaJuegoId":
+	            case Constantes.CRITERIOS_CARTA_CARTA_JUEGO_ID:
 	                criterios.setCartaJuegoId(Integer.parseInt(value));
 	                break;
-	            case "nombre":
+	            case Constantes.CRITERIOS_CARTA_NOMBRE:
 	                criterios.setNombre(value);
 	                break;
-	            case "rarezas":
+	            case Constantes.CRITERIOS_CARTA_RAREZAS:
 	            	List<Integer> rarezas = Arrays.stream(value.split(","))
             			.map(String::trim)
                         .filter(s -> !s.isEmpty())
@@ -147,7 +147,7 @@ public class CrearCriterios implements ICrearCriterios {
                         .collect(Collectors.toList());
 	            	criterios.setRarezas(rarezas);
 	                break;
-   	            case "energias":
+   	            case Constantes.CRITERIOS_CARTA_ENERGIAS:
 	            	List<Integer> energias = Arrays.stream(value.split(","))
             			.map(String::trim)
                         .filter(s -> !s.isEmpty())
@@ -155,7 +155,7 @@ public class CrearCriterios implements ICrearCriterios {
                         .collect(Collectors.toList());
 	            	criterios.setEnergias(energias);
 	                break;
-   	            case "tipos":
+   	            case Constantes.CRITERIOS_CARTA_TIPOS:
 	            	List<Integer> tipos = Arrays.stream(value.split(","))
             			.map(String::trim)
                         .filter(s -> !s.isEmpty())
@@ -175,16 +175,16 @@ public class CrearCriterios implements ICrearCriterios {
 	   CriteriosBarajaPublica criterios = new CriteriosBarajaPublica();
 	   params.forEach((key, value) -> {
 	        switch(key) {
-	        	case "usuarioId":
+	        	case Constantes.CRITERIOS_BARAJA_PUBLICA_USUARIO_ID:
 	        		criterios.setUsuarioId(Integer.parseInt(value));
 	        		break;
-	            case "cartaNombre":
+	            case Constantes.CRITERIOS_BARAJA_PUBLICA_CARTA_NOMBRE:
 	                criterios.setCartaNombre(value);
 	                break;
-	            case "ordenacion":
+	            case Constantes.CRITERIOS_BARAJA_PUBLICA_ORDENACION:
 	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionBarajasPublicas(value));
 	            	break;
-	            case "barajaPublicaId":
+	            case Constantes.CRITERIOS_BARAJA_PUBLICA_BARAJA_PUBLICA_ID:
 	            	criterios.setBarajaPublicaId(Integer.parseInt(value));
 	            	break;
 	            default:
@@ -199,16 +199,16 @@ public class CrearCriterios implements ICrearCriterios {
 	   CriteriosBarajaUsuario criterios = new CriteriosBarajaUsuario();
 	   params.forEach((key, value) -> {
 	        switch(key) {
-	            case "usuarioId":
+	            case Constantes.CRITERIOS_BARAJA_USUARIO_USUARIO_ID:
 	                criterios.setUsuarioId(Integer.parseInt(value));
 	                break;
-	            case "barajaPublicaId":
+	            case Constantes.CRITERIOS_BARAJA_USUARIO_BARAJA_PUBLICA_ID:
 	                criterios.setBarajaPublicaId(Integer.parseInt(value));
 	                break;
-	            case "cartaNombre":
+	            case Constantes.CRITERIOS_BARAJA_USUARIO_CARTA_NOMBRE:
 	                criterios.setCartaNombre(value);
 	                break;
-	            case "ordenacion":
+	            case Constantes.CRITERIOS_BARAJA_USUARIO_ORDENACION:
 	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionMisBarajas(value));
 	            	break;
 	            default:
@@ -221,31 +221,30 @@ public class CrearCriterios implements ICrearCriterios {
 	@Override
 	public CriteriosIntercambio crearCriteriosIntercambioParams(Map<String, String> params) {
 		CriteriosIntercambio criterios = new CriteriosIntercambio();
-    	   params.forEach((key, value) -> {
-    	        switch(key) {
-    	        	case "id":
-    	        		criterios.setId(Integer.parseInt(value));
-    	        		break;
-    	        	case "usuarioId":
-    	        		criterios.setUsuarioId(Integer.parseInt(value));
-    	        		break;
-    	            case "nombreOfrecer":
-    	                criterios.setCartasOfrecerNombre(value);
-    	                break;
-    	            case "nombreQuerer":
-    	            	criterios.setCartasQuererNombre(value);
-    	            	break;
-    	            case "estadoId":
-    	            	criterios.setEstadoId(Integer.parseInt(value));
-    	            	break;
-    	            case "ordenacion":
-    	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionTablonIntercambios(value));
-    	            	break;
-    	            default:
-    	                break;
-    	        }
-    	    });
-        return criterios;
+		params.forEach((key, value) -> {
+			switch(key) {
+	        	case Constantes.CRITERIOS_INTERCAMBIO_ID:
+	        		criterios.setId(Integer.parseInt(value));
+	        		break;
+	        	case Constantes.CRITERIOS_INTERCAMBIO_USUARIO_ID:
+	        		criterios.setUsuarioId(Integer.parseInt(value));
+	        		break;
+	            case Constantes.CRITERIOS_INTERCAMBIO_NOMBRE_OFRECER:
+	                criterios.setCartasOfrecerNombre(value);
+	                break;
+	            case Constantes.CRITERIOS_INTERCAMBIO_NOMBRE_QUERER:
+	            	criterios.setCartasQuererNombre(value);
+	            	break;
+	            case Constantes.CRITERIOS_INTERCAMBIO_ESTADO_ID:
+	            	criterios.setEstadoId(Integer.parseInt(value));
+	            	break;
+	            case Constantes.CRITERIOS_INTERCAMBIO_ORDENACION:
+	            	criterios.setOrdenacion(convertirOrdenacion.convertirOrdenacionTablonIntercambios(value));
+	            	break;
+	            default:
+	                break;
+	        }
+	    });
+		return criterios;
 	}
-	
 }

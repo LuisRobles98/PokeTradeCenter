@@ -1,6 +1,5 @@
 package com.poketradecenter.Service.implementaciones;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import com.poketradecenter.Mapper.interfaces.IIntercambioMapper;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ITablonIntercambiosService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class TablonIntercambiosService implements ITablonIntercambiosService {
@@ -38,12 +38,12 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 	
 	@Override
 	public Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public Carta recuperarCartaPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
@@ -68,8 +68,8 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		
 		CriteriosIntercambio criterios = new CriteriosIntercambio();
 		criterios.setId(intercambio.getId());
-		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(0);
-		if(intercambioBBDD.getEstadoId() != 1) {
+		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
+		if(intercambioBBDD.getEstadoId() != Constantes.INTERCAMBIO_PUBLICO_ESTADO_SIN_OFERTA) {
 			throw new RuntimeException("Parece que alguien se te ha adelantado y ya ha solicitado el intercambio");
 		}
 	}
@@ -78,10 +78,10 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		String[] carta = cartaIntercambio.split(",");
 		CriteriosCarta criterios = new CriteriosCarta();
 		List<Integer> expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(carta[0].trim()));
+		expansiones.add(Integer.parseInt(carta[Constantes.PRIMER_ELEMENTO].trim()));
 		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(carta[1].trim()));
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		criterios.setCartaJuegoId(Integer.parseInt(carta[Constantes.ELEMENTO_1].trim()));
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	private void completarDatosSolicitarIntercambio(Intercambio intercambio) {
@@ -89,8 +89,8 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		Carta cartaParaQuerer = recuperarCarta(intercambio.getCartaQuererFinal());
 		intercambio.setCartaOfrecerFinalNombre(cartaParaOfrecer.getNombre());
 		intercambio.setCartaQuererFinalNombre(cartaParaQuerer.getNombre());
-		intercambio.setEstadoId(2);
-		intercambio.setFechaCambio(LocalDateTime.now());
+		intercambio.setEstadoId(Constantes.INTERCAMBIO_PUBLICO_ESTADO_OFERTA_RECIBIDA);
+		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
 	}
 	
 	private void solicitar(Intercambio intercambio) {

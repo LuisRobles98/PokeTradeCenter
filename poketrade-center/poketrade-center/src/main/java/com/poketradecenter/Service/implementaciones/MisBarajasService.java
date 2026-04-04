@@ -14,10 +14,10 @@ import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
 import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
-import com.poketradecenter.Service.interfaces.IBarajasPublicasService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class MisBarajasService implements IMisBarajasService {
@@ -45,7 +45,7 @@ public class MisBarajasService implements IMisBarajasService {
 	
 	@Override
 	public Carta recuperarCartaMisBarajas(CriteriosCarta criterios) {	
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
@@ -62,12 +62,12 @@ public class MisBarajasService implements IMisBarajasService {
 		BarajaPublica baraja = recuperarBarajaPublica(criterios);
 		CriteriosUsuario criteriosUsuario = new CriteriosUsuario();
 		criteriosUsuario.setId(baraja.getCreadorId());
-		return usuarioService.recuperarUsuarioPorCriterios(criteriosUsuario).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criteriosUsuario).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	private BarajaPublica recuperarBarajaPublica(CriteriosBarajaPublica criterios) {
 		try {
-			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios).get(0);
+			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar la baraja pública", e);
 		}

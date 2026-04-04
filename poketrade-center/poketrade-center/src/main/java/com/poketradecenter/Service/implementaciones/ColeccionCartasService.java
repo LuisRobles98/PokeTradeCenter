@@ -3,6 +3,7 @@ package com.poketradecenter.Service.implementaciones;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CartaUsuario;
@@ -69,18 +70,69 @@ public class ColeccionCartasService implements IColeccionCartasService {
 		}
 	}
 	
+	@Async
 	@Override
 	public void insertarCartasNuevoUsuario(Integer usuarioId) {
 		CartaUsuario cartaUsuario = new CartaUsuario();
 		cartaUsuario.setUsuarioId(usuarioId);
 		cartaUsuario.setObtenida(false);
-		for(Integer i = Constantes.ELEMENTO_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_1; i++) {
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_1; i++) {
 			cartaUsuario.setExpansionId(Constantes.EXPANSION_1);
 			cartaUsuario.setCartaJuegoId(i);
 			cartaUsuarioMapper.insertar(cartaUsuario);
 		}
-		for(Integer i = Constantes.ELEMENTO_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_2; i++) {
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_2; i++) {
 			cartaUsuario.setExpansionId(Constantes.EXPANSION_2);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_3; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_3);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_4; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_4);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_5; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_5);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_6; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_6);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_7; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_7);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_8; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_8);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_9; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_9);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_10; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_10);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_11; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_11);
+			cartaUsuario.setCartaJuegoId(i);
+			cartaUsuarioMapper.insertar(cartaUsuario);
+		}
+		for(Integer i = Constantes.CONTADOR_1; i <= Constantes.TOTAL_CARTAS_EXPANSION_12; i++) {
+			cartaUsuario.setExpansionId(Constantes.EXPANSION_12);
 			cartaUsuario.setCartaJuegoId(i);
 			cartaUsuarioMapper.insertar(cartaUsuario);
 		}

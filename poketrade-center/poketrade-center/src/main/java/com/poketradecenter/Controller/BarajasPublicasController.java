@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaLike;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
@@ -81,5 +80,4 @@ public class BarajasPublicasController {
     		return ResponseEntity.badRequest().body(e.getMessage());
     	}
     }
-    
 }

@@ -1,5 +1,4 @@
 package com.poketradecenter.Service.implementaciones;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +12,7 @@ import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Mapper.interfaces.IIntercambioMapper;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICrearIntercambioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class CrearIntercambioService implements ICrearIntercambioService {
@@ -22,7 +22,6 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 	
 	@Autowired
 	private IIntercambioMapper intercambioMapper;
-	
 	
 	@Override
 	public List<Carta> recuperarCartasPorCriterios(CriteriosCarta criterios) {
@@ -52,25 +51,25 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 		
 		//validar que no hay una misma carta mas de una vez en ofrecer o en querer
 		for(Carta carta1 : cartasOfrecer) {
-			Integer contador = 0;
+			Integer contador = Constantes.CONTADOR_0;
 			for(Carta carta2 : cartasOfrecer) {
 				if(carta1.getExpansionId() == carta2.getExpansionId() && carta1.getCartaJuegoId() == carta2.getCartaJuegoId()) {
 					contador++;
 				}
 			}
-			if(contador > 1) {
+			if(contador > Constantes.MAXIMO_CARTAS_IGUALES) {
 				throw new RuntimeException("Has añadido una carta repetida en la sección de ofrecer");
 			}
 		}
 		
 		for(Carta carta1 : cartasQuerer) {
-			Integer contador = 0;
+			Integer contador = Constantes.CONTADOR_0;
 			for(Carta carta2 : cartasQuerer) {
 				if(carta1.getExpansionId() == carta2.getExpansionId() && carta1.getCartaJuegoId() == carta2.getCartaJuegoId()) {
 					contador++;
 				}
 			}
-			if(contador > 1) {
+			if(contador > Constantes.MAXIMO_CARTAS_IGUALES) {
 				throw new RuntimeException("Has añadido una carta repetida en la sección de querer");
 			}
 		}
@@ -83,7 +82,6 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 				}
 			}
 		}
-		
 		
 		//validar que hay al menos la misma rareza de ofrecer y querer
 		for(Carta carta1 : cartasOfrecer) {
@@ -122,13 +120,13 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 		String nombreCartasQuererIntercambio = cartasQuerer.stream().map(Carta::getNombre).collect(Collectors.joining(" "));
 		intercambio.setCartasQuererNombre(nombreCartasQuererIntercambio);
 		
-		intercambio.setEstadoId(1);//abierta
+		intercambio.setEstadoId(Constantes.CREAR_INTERCAMBIO_ESTADO_SIN_OFERTA);
 		intercambio.setCartaOfrecerFinal(null);
 		intercambio.setCartaQuererFinal(null);
 		intercambio.setCartaOfrecerFinalNombre(null);
 		intercambio.setCartaQuererFinalNombre(null);
-		intercambio.setFechaCreacion(LocalDateTime.now());
-		intercambio.setFechaCambio(LocalDateTime.now());
+		intercambio.setFechaCreacion(Constantes.FECHA_ACTUAL);
+		intercambio.setFechaCambio(Constantes.FECHA_ACTUAL);
 	}
 	
 	private void publicar(Intercambio intercambio) {
@@ -147,14 +145,14 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 			String[] cartaBaraja = carta.split(",");
 			CriteriosCarta criterios = new CriteriosCarta();
 			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+			expansiones.add(Integer.parseInt(cartaBaraja[Constantes.PRIMER_ELEMENTO].trim()));
 			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[Constantes.ELEMENTO_1].trim()));
 			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 			if(cartasBBDD.isEmpty()) {
 				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
 			}
-			cartasOfrecer.add(cartasBBDD.get(0));
+			cartasOfrecer.add(cartasBBDD.get(Constantes.PRIMER_ELEMENTO));
 		}
 		return cartasOfrecer;
 	}
@@ -167,14 +165,14 @@ public class CrearIntercambioService implements ICrearIntercambioService {
 			String[] cartaBaraja = carta.split(",");
 			CriteriosCarta criterios = new CriteriosCarta();
 			List<Integer> expansiones = new ArrayList<>();
-			expansiones.add(Integer.parseInt(cartaBaraja[0].trim()));
+			expansiones.add(Integer.parseInt(cartaBaraja[Constantes.PRIMER_ELEMENTO].trim()));
 			criterios.setExpansiones(expansiones);
-			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[1].trim()));
+			criterios.setCartaJuegoId(Integer.parseInt(cartaBaraja[Constantes.ELEMENTO_1].trim()));
 			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios);
 			if(cartasBBDD.isEmpty()) {
 				throw new RuntimeException("No existe ninguna carta que coincida que la marcada en el sistema");
 			}
-			cartasQuerer.add(cartasBBDD.get(0));
+			cartasQuerer.add(cartasBBDD.get(Constantes.PRIMER_ELEMENTO));
 		}
 		return cartasQuerer;
 	}

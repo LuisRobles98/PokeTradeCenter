@@ -25,7 +25,6 @@ public class ColeccionCartasController {
 	@Autowired
 	private ICrearCriterios crearCriterios;
 	
-
     @GetMapping("/coleccionCartas")
     public List<CartaUsuario> recuperarCartasUsuarioPorCriterios(@RequestParam Map<String, String> params) {
         CriteriosCartaUsuario criterios = crearCriterios.crearCriteriosCartaUsuarioParams(params);
