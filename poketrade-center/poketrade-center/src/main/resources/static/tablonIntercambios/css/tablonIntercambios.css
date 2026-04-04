@@ -432,7 +432,7 @@
 
 .mostrarCartasOfrecer {
  	position: absolute;
-    top: 100px;
+    top: 105px;
     gap: 12px;
     padding: 10px;
     user-select: none;
@@ -440,7 +440,7 @@
 
 .mostrarCartasQuerer {
  	position: absolute;
-    top: 450px;
+    top: 455px;
     gap: 12px;
     padding: 10px;
     user-select: none;
@@ -851,7 +851,7 @@
 
 .cartaOfrecerYo {
 	position: absolute;
-	top: 464px;
+	top: 478px;
 	left: 724px;
 	width: 150px;
 	border-radius: 8px;
@@ -860,7 +860,7 @@
 
 .cartaQuererYo {
 	position: absolute;
-    top: 106px;
+    top: 120px;
     left: 724px;
     width: 150px;
     border-radius: 8px;
@@ -883,7 +883,7 @@
     position: absolute;
     margin-left: 600px;
     color: #68768A;
-    margin-top: 150px;
+    margin-top: 164px;
     font-size: 55px;
     user-select: none;
 }
@@ -892,9 +892,71 @@
     position: absolute;
     margin-left: 600px;
     color: #68768A;
-    margin-top: 505px;
+    margin-top: 519px;
     font-size: 55px;
     user-select: none;
+}
+
+.expansionQuererYo {
+	position: absolute;
+    top: 54px;
+    left: 670px;
+    width: 136px;
+}
+
+.cartaJuegoIdQuererYo {
+    position: absolute;
+	top: 48px;
+    left: 830px;
+    padding: 10px;
+    width: 60px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.cartaJuegoIdQuererYo:hover {
+    border-color: #7A8BA3;
+}
+
+.cartaJuegoIdQuererYo:focus {
+	outline: none;
+    border-color: #68768A;
+}
+
+.expansionOfrecerYo {
+    position: absolute;
+    top: 406px;
+    left: 670px;
+    width: 136px;
+}
+
+.cartaJuegoIdOfrecerYo {
+    position: absolute;
+    top: 400px;
+    left: 830px;
+    padding: 10px;
+    width: 60px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.cartaJuegoIdOfrecerYo:hover {
+    border-color: #7A8BA3;
+}
+
+.cartaJuegoIdOfrecerYo:focus {
+	outline: none;
+    border-color: #68768A;
 }
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/

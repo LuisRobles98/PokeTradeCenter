@@ -227,7 +227,7 @@ async function abrirAmpliarCarta(carta) {
      $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
      
      //Actualizamos el numero de carta con respecto al total de cartas de la expansion
-     $("#infoNumero").text(carta.cartaJuegoId + "/" + await recuperarTotalCartasExpansionId(carta.expansionId));
+     $("#infoNumero").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 
     // Actualizamos la imagen del popup
     $("#cartaSeleccionadaAmpliada").attr("src", carta.src);

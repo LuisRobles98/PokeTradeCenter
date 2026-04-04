@@ -297,7 +297,7 @@ $(document).ready(function() {
 	function recargarOfrecer() {
 		let contenedor = document.getElementById("divCartaQuererYo");
 		contenedor.innerHTML = "";
-		cartaQuieroSeleccionada.forEach((carta, index) => {
+		cartaQuieroSeleccionada.forEach(async (carta, index) => {
     		let img = document.createElement("img");
     		img.classList.add("cartaQuererYo");
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
@@ -306,10 +306,15 @@ $(document).ready(function() {
 				img.dataset.expansionId = carta.expansionId;
     			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.posicion = carta.posicion;
+     			$("#expansionQuererYo").show().attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
+     			$("#cartaJuegoIdQuererYo").show();
+     			$("#cartaJuegoQuererYo").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
+    			$("#expansionQuererYo").hide();
+    			$("#cartaJuegoIdQuererYo").hide();
 			}
     		contenedor.appendChild(img);
 		});
@@ -318,7 +323,7 @@ $(document).ready(function() {
 	function recargarQuerer() {
 		let contenedor = document.getElementById("divCartaOfrecerYo");
 		contenedor.innerHTML = "";
-		cartaOfrezcoSeleccionada.forEach((carta, index) => {
+		cartaOfrezcoSeleccionada.forEach(async (carta, index) => {
     		let img = document.createElement("img");
     		img.classList.add("cartaOfrecerYo");
     		if(carta.expansionId != 0 && carta.cartaJuegoId != 0) {
@@ -327,10 +332,15 @@ $(document).ready(function() {
 				img.dataset.expansionId = carta.expansionId;
     			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.posicion = carta.posicion;
+     			$("#expansionOfrecerYo").show().attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
+     			$("#cartaJuegoIdOfrecerYo").show();
+     			$("#cartaJuegoOfrecerYo").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
     			img.dataset.cartaJuegoId = 0;
+    			$("#expansionOfrecerYo").hide();
+    			$("#cartaJuegoIdOfrecerYo").hide();
 			}
     		contenedor.appendChild(img);
 		});
@@ -354,4 +364,7 @@ $(document).ready(function() {
 		}
 	}
 	
+	async function recuperarTotalCartasExpansionId(expansionId) {
+		 return await recuperarTotalCartasExpansion(expansionId);
+	}
 });
