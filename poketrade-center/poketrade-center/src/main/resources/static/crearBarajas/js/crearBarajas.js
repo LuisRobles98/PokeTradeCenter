@@ -61,6 +61,7 @@ $(document).ready(function() {
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
 				img.dataset.basico = carta.basico;
+				img.title = "Selecciona la carta para eliminarla de la baraja";
 			} else {
 				img.src = index < 2 ? "/crearBarajas/imagenes/cartaVacia2.png"
         			: "/crearBarajas/imagenes/cartaVacia.png";
@@ -165,6 +166,7 @@ $(document).ready(function() {
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
         	img.dataset.nombre = carta.nombre;
         	img.dataset.basico = carta.basico;
+        	img.title = "Selecciona la carta para añadirla a la baraja";
         	contenedor.appendChild(img);
     	});
 		contenedor.scrollTo({ top: 0, behavior: "smooth" });

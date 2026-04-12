@@ -155,7 +155,7 @@ $(document).ready(function() {
         	img.dataset.expansionId = carta.expansionId;
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
         	img.dataset.obtenida = carta.obtenida;
-        	
+        	img.title = "Selecciona la carta para abrir el menú de opciones";
 	        if (!carta.obtenida) {
             	img.classList.add("deshabilitarParcial");
         	}
@@ -308,12 +308,12 @@ async function abrirAmpliarCarta(carta) {
 
 	async function obtenerCarta(carta) {
 		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No puedes obtener una carta que ya tienes", "");
+			popupErroresOConfirmacion.mostrar("error", "No puedes marcar como obtenida una carta que ya tienes", "");
 		} else {
 			try {
 				carta.obtenida = true;
 				await actualizarObtenida(carta);
-				popupErroresOConfirmacion.mostrar("success", "La carta ha sido añadida a la colección", "");
+				popupErroresOConfirmacion.mostrar("success", "La carta ha sido marcada como obtenida en tu colección", "");
 				$("#cartaSeleccionada").hide();
 				buscarCartasUsuarioPorCriteriosNoScroll();
 			} catch(error) {
@@ -324,12 +324,12 @@ async function abrirAmpliarCarta(carta) {
 	
 	async function quitarCarta(carta) {
 		if(!carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No puedes eliminar una carta que no tienes", "");
+			popupErroresOConfirmacion.mostrar("error", "No puedes desmarcar una carta que no tienes", "");
 		} else {
 			try {
 				carta.obtenida = false;
 				await actualizarObtenida(carta);
-				popupErroresOConfirmacion.mostrar("success","La carta ha sido eliminada de la colección", "");
+				popupErroresOConfirmacion.mostrar("success","La carta ya no está marcada como obtenida en tu colección", "");
 				$("#cartaSeleccionada").hide();
 				buscarCartasUsuarioPorCriteriosNoScroll();
 			} catch(error) {

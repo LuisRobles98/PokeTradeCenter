@@ -64,7 +64,7 @@ public class Constantes {
 	public static final Integer PRIMER_ICONO = 1;
 	public static final Integer TOTAL_ICONOS = 54;
 	public static final Integer PRIMER_EMBLEMA = 0;
-	public static final Integer TOTAL_EMBLEMAS = 28;
+	public static final Integer TOTAL_EMBLEMAS = 53;
 	
 	//Constantes Utilidades ConvertirOrdenacion
 	public static final String ME_GUSTA = "me_gusta";

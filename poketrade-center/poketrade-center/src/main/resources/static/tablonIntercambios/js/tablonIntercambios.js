@@ -182,6 +182,7 @@ $(document).ready(function() {
         		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
 	        	img.dataset.expansionId = expansionId;
         		img.dataset.cartaJuegoId = cartaJuegoId;
+        		img.title = "Selecciona la carta que quieras quedarte";
         		contenedorOfrecer.appendChild(img);
 			});
     		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
@@ -202,6 +203,7 @@ $(document).ready(function() {
         		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
 	        	img.dataset.expansionId = expansionId;
         		img.dataset.cartaJuegoId = cartaJuegoId;
+        		img.title = "Selecciona la carta que quieras ofrecer";
         		contenedorQuerer.appendChild(img);
 			});
     		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
@@ -307,6 +309,7 @@ $(document).ready(function() {
      			$("#expansionQuererYo").show().attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
      			$("#cartaJuegoIdQuererYo").show();
      			$("#cartaJuegoQuererYo").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
+     			img.title = "Selecciona la carta para quitarla";
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
@@ -333,6 +336,7 @@ $(document).ready(function() {
      			$("#expansionOfrecerYo").show().attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
      			$("#cartaJuegoIdOfrecerYo").show();
      			$("#cartaJuegoOfrecerYo").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
+     			img.title = "Selecciona la carta para quitarla";
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
