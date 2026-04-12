@@ -76,4 +76,9 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 			throw new RuntimeException("Ha ocurrido un error al actualizar el intercambio", e);
 		}
 	}
+	
+	@Override
+	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
+		return cartaService.recuperarTotalCartasPorExpansion(expansionId);
+	}
 }

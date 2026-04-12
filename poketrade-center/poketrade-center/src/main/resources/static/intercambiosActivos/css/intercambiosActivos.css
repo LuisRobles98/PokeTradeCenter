@@ -797,30 +797,30 @@
 .mostrarCartasOfrecer1 {
 	display: flex;
     justify-content: center;
-	margin-top: 55px;
+	margin-top: 50px;
 }
 
 .mostrarCartasOfrecer23 {
 	display: flex;
     justify-content: center;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 .mostrarCartasQuerer1 {
 	display: flex;
     justify-content: center;
- 	margin-top: 55px;
+ 	margin-top: 50px;
 }
 
 .mostrarCartasQuerer23 {
 	display: flex;
     justify-content: center;
- 	margin-top: 50px;
+ 	margin-top: 30px;
 }
 
 
 .cartasOfrecer1 {
-	margin-top: 20px;
+	margin-top: 5px;
 }
 
 .cartasOfrecer23 {
@@ -828,7 +828,7 @@
 }
 
 .cartasQuerer1 {
-	margin-top: 20px;
+	margin-top: 5px;
 }
 
 .cartasQuerer23 {
@@ -859,25 +859,26 @@
 }
 
 .botonera1 {
-    display: flex;
-    justify-content: center;
-    margin-top: 155px;
+    margin-top: 79px;
 }
 
 .botonera2 {
-    display: flex;
-    justify-content: center;
-    margin-top: 171px;
+    margin-top: 103px;
 }
 
 .botonera3 {
     display: flex;
     justify-content: center;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
-.iconoEstadoIntercambio {
-	margin-top: -55px;
+.iconoEstadoIntercambio2 {
+	margin-top: -75px;
+    font-size: 55px;
+}
+
+.iconoEstadoIntercambio3 {
+	margin-top: -88px;
     font-size: 55px;
 }
 
@@ -893,7 +894,7 @@
     align-items: center;
     justify-content: center;
     gap: 85px;
-    margin-top: 155px;
+    margin-top: 120px;
 }
 
 .verOferta3 {
@@ -901,23 +902,23 @@
     align-items: center;
     justify-content: center;
     gap: 85px;
-    margin-top: 129px;
+    margin-top: 70px;
 }
 
 .textoEsperar {
-	margin-top: 110px;
+	margin-top: 60px;
     display: flex;
 }
 
 .textoAgregar {
-	margin-top: 45px;
+	margin-top: 13px;
     display: flex;
     width: 740px;
     text-align: center;
 }
 
 .textoUsuario {
-	margin-top: 15px;
+	margin-top: 10px;
     display: flex;
     text-align: center;
     justify-content: space-around;
@@ -936,6 +937,7 @@
     justify-content: center;
     padding: 10px;
     width: 160px;
+    margin-top: 10px;
     margin: 15px auto;
     border-radius: 10px;
     border: 2px solid #8EA0B8;
@@ -949,13 +951,48 @@
     border-color: #7A8BA3;
 }
 
-.idJuegoIntercambio:focus {
-	outline: none;
-    border-color: #68768A;
-}
-
 .btnBotonera3 {
 	width: 192px;
+}
+
+.infoCartas {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expansionId {
+    width: 136px;
+}
+
+.cartaJuegoId {
+    padding: 10px;
+    width: 60px;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 2px solid #8EA0B8;
+    font-weight: normal;
+    font-size: 1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.cartaJuegoId:hover {
+    border-color: #7A8BA3;
+}
+
+.oculto {
+  visibility: hidden;
 }
 
 /*---------------------------- POPUPS CONFIRMACION  ----------------------------*/
@@ -981,4 +1018,3 @@
 .btnConfirmar {
 	width: 107px;
 }
-

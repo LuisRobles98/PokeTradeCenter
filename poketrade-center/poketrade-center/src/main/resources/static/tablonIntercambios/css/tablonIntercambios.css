@@ -851,7 +851,7 @@
 
 .cartaOfrecerYo {
 	position: absolute;
-	top: 478px;
+	top: 474px;
 	left: 724px;
 	width: 150px;
 	border-radius: 8px;
@@ -923,11 +923,6 @@
     border-color: #7A8BA3;
 }
 
-.cartaJuegoIdQuererYo:focus {
-	outline: none;
-    border-color: #68768A;
-}
-
 .expansionOfrecerYo {
     position: absolute;
     top: 406px;
@@ -952,11 +947,6 @@
 
 .cartaJuegoIdOfrecerYo:hover {
     border-color: #7A8BA3;
-}
-
-.cartaJuegoIdOfrecerYo:focus {
-	outline: none;
-    border-color: #68768A;
 }
 
 /*---------------------------- POPUP CONFIRMACION ELIMINAR ----------------------------*/

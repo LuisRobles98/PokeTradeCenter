@@ -261,7 +261,6 @@ $(document).ready(function() {
 		if(intercambioBBDD == null || intercambioBBDD == undefined) {
 			errores = errores += "- Parece que alguien se ha adelantado y ya ha solicitado el intercambio" + "<br>";
 		}
-		
 		return errores;
 	}
 	
@@ -272,7 +271,6 @@ $(document).ready(function() {
 		intercambio.contraparteId = usuario.id;
 		return intercambio;
 	}
-	
 	
 	//funcion seleccionar carta quiero
 	$("#mostrarCartasOfrecer").on("click", ".carta", function() {

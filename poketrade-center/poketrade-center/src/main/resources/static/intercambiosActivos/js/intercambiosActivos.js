@@ -177,6 +177,7 @@ $(document).ready(function() {
 	}
 	
 	async function mostrarIntercambioEstado1(intercambio) {
+		let masDeUnaCarta = false;
 		$("#popupMostrarIntercambio").show();
 		$("#divEstado1").show();
 		$("#divEstado2").hide();
@@ -184,9 +185,19 @@ $(document).ready(function() {
 		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio");
 		let cartasOfrecer = intercambio.cartasOfrecer.split(";");
 		if(cartasOfrecer.length == 1) {
+			masDeUnaCarta = false;
 			$("#textoOfrecer1").text("Carta para ofrecer");
+			let carta = cartasOfrecer[0];
+			let [expansionId, cartaJuegoId] = carta.split(",");
+			$("#expansionContainerOfrecer1").removeClass("oculto");
+			$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerOfrecer1").removeClass("oculto");
+ 			$("#cartaJuegoOfrecer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		} else {
+			masDeUnaCarta = true;
 			$("#textoOfrecer1").text("Cartas para ofrecer");	
+			$("#expansionContainerOfrecer1").addClass("oculto");
+			$("#cartaJuegoContainerOfrecer1").addClass("oculto");
 		}
 		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer1");
 		contenedorOfrecer.innerHTML = "";
@@ -198,15 +209,37 @@ $(document).ready(function() {
     		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
+    		if(masDeUnaCarta) {
+				img.addEventListener("mouseenter", async function() {
+					$("#expansionContainerOfrecer1").removeClass("oculto");
+					$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+					$("#cartaJuegoContainerOfrecer1").removeClass("oculto");
+ 					$("#cartaJuegoOfrecer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+				});
+				 img.addEventListener("mouseleave", function() { 
+		 			$("#expansionContainerOfrecer1").addClass("oculto");
+					$("#cartaJuegoContainerOfrecer1").addClass("oculto");
+				 });
+			}
     		contenedorOfrecer.appendChild(img);
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
-		
+			
 		let cartasQuerer = intercambio.cartasQuerer.split(";")
 		if(cartasQuerer.length == 1) {
+			masDeUnaCarta = false;
 			$("#textoQuerer1").text("Carta para recibir");
+			let carta = cartasQuerer[0];
+			let [expansionId, cartaJuegoId] = carta.split(",");
+			$("#expansionContainerQuerer1").removeClass("oculto");
+			$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerQuerer1").removeClass("oculto");
+ 			$("#cartaJuegoQuerer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		} else {
+			masDeUnaCarta = true;
 			$("#textoQuerer1").text("Cartas para recibir");
+			$("#expansionContainerQuerer1").addClass("oculto");
+			$("#cartaJuegoContainerQuerer1").addClass("oculto");
 		}
 		let contenedorQuerer = document.getElementById("mostrarCartasQuerer1");
 		contenedorQuerer.innerHTML = "";
@@ -218,6 +251,18 @@ $(document).ready(function() {
     		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
+    		if(masDeUnaCarta) {
+				img.addEventListener("mouseenter", async function() {
+					$("#expansionContainerQuerer1").removeClass("oculto");
+					$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+					$("#cartaJuegoContainerQuerer1").removeClass("oculto");
+ 					$("#cartaJuegoQuerer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+				});
+				 img.addEventListener("mouseleave", function() { 
+		 			$("#expansionContainerQuerer1").addClass("oculto");
+					$("#cartaJuegoContainerQuerer1").addClass("oculto");
+				 });
+			}
     		contenedorQuerer.appendChild(img);
 		});
 		contenedorQuerer.scrollTo({ top: 0, behavior: "smooth" });
@@ -251,8 +296,8 @@ $(document).ready(function() {
 		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
 		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer2");
 		contenedorOfrecer.innerHTML = "";
-		contenedorOfrecer.className = "mostrarCartasOfrecer2 abanicoMostrarOfrecer-" + cartasOfrecer.length;
-		cartasOfrecer.forEach(carta => {
+		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-" + cartasOfrecer.length;
+		cartasOfrecer.forEach(async carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
     		let [expansionId, cartaJuegoId] = carta.split(",");
@@ -260,14 +305,19 @@ $(document).ready(function() {
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
     		contenedorOfrecer.appendChild(img);
+    		
+			$("#expansionContainerOfrecer2").removeClass("oculto");
+			$("#expansionIdOfrecer2").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerOfrecer2").removeClass("oculto");
+ 			$("#cartaJuegoOfrecer2").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 		
 		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
 		let contenedorQuerer = document.getElementById("mostrarCartasQuerer2");
 		contenedorQuerer.innerHTML = "";
-		contenedorQuerer.className = "mostrarCartasQuerer2 abanicoMostrarQuerer-" + cartasQuerer.length;
-		cartasQuerer.forEach(carta => {
+		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-" + cartasQuerer.length;
+		cartasQuerer.forEach(async carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
     		let [expansionId, cartaJuegoId] = carta.split(",");
@@ -275,6 +325,11 @@ $(document).ready(function() {
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
     		contenedorQuerer.appendChild(img);
+    		
+			$("#expansionContainerQuerer2").removeClass("oculto");
+			$("#expansionIdQuerer2").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerQuerer2").removeClass("oculto");
+ 			$("#cartaJuegoQuerer2").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
@@ -309,8 +364,8 @@ $(document).ready(function() {
 		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
 		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer3");
 		contenedorOfrecer.innerHTML = "";
-		contenedorOfrecer.className = "mostrarCartasOfrecer3 abanicoMostrarOfrecer-" + cartasOfrecer.length;
-		cartasOfrecer.forEach(carta => {
+		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-" + cartasOfrecer.length;
+		cartasOfrecer.forEach(async carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
     		let [expansionId, cartaJuegoId] = carta.split(",");
@@ -318,14 +373,19 @@ $(document).ready(function() {
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
     		contenedorOfrecer.appendChild(img);
+    		
+			$("#expansionContainerOfrecer3").removeClass("oculto");
+			$("#expansionIdOfrecer3").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerOfrecer3").removeClass("oculto");
+ 			$("#cartaJuegoOfrecer3").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 		
 		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
 		let contenedorQuerer = document.getElementById("mostrarCartasQuerer3");
 		contenedorQuerer.innerHTML = "";
-		contenedorQuerer.className = "mostrarCartasQuerer3 abanicoMostrarQuerer-" + cartasQuerer.length;
-		cartasQuerer.forEach(carta => {
+		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-" + cartasQuerer.length;
+		cartasQuerer.forEach(async carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
     		let [expansionId, cartaJuegoId] = carta.split(",");
@@ -333,11 +393,14 @@ $(document).ready(function() {
         	img.dataset.expansionId = expansionId;
     		img.dataset.cartaJuegoId = cartaJuegoId;
     		contenedorQuerer.appendChild(img);
+    		
+			$("#expansionContainerQuerer3").removeClass("oculto");
+			$("#expansionIdQuerer3").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#cartaJuegoContainerQuerer3").removeClass("oculto");
+ 			$("#cartaJuegoQuerer3").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
-	
-	
 	
 	$("#btnEliminarIntercambio").click(function() {
 		$("#confirmarEliminarIntercambio").show();
@@ -468,19 +531,15 @@ $(document).ready(function() {
 		
 	async function validarDatos(intercambio) {
 		let errores = "";
-		
 		if(intercambio.estadoId == 2) {
 			errores = errores += "- Se ha insertado un estado que no corresponde" + "<br>";
 		}
-		
 		if(intercambio.estadoId == 1 && intercambio.contraparteId != null) {
 			errores = errores += "- Si se vuelve a publicar el intercambio no puede haber una persona como contraparte" + "<br>";
 		}
-
 		if(intercambio.estadoId == 3 && intercambio.contraparteId == null) {
 			errores = errores += "- Tiene que haber una persona como contraparte al aceptar el intercambio" + "<br>";
 		}
-		
 		return errores;
 	}
 		
@@ -492,4 +551,7 @@ $(document).ready(function() {
 		}
 	}
 	
+	async function recuperarTotalCartasExpansionId(expansionId) {
+		return await recuperarTotalCartasExpansion(expansionId);
+	}
 });
