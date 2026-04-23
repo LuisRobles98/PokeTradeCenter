@@ -86,23 +86,20 @@ $(document).ready(function() {
 	
 	async function formarPortadas(barajasPublicasRecuperadas) {
 		let portadas = [];
-		
 		for (const barajaPublica of barajasPublicasRecuperadas) {
 			let portada = {};
 			let baraja = barajaPublica.baraja;
-			let primeraCarta = baraja.cartas.split(";")[0];
-			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
-			let carta = await recuperarCarta(expansionId,cartaJuegoId);
+			let primeraCarta = baraja.cartas[0];
+			let carta = await recuperarCarta(primeraCarta.expansionId, primeraCarta.cartaJuegoId);
 			
 			portada.barajaPublicaId = barajaPublica.id;
-			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
+			portada.imgPortada = `/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`;
 			let cartaEnergia = carta.energiaId ?? "null";
 			portada.imgFondo = `/imagenes/fondos/fondo${cartaEnergia}.png`;
 			portada.nombre = baraja.nombre;
 			portada.meGusta = barajaPublica.meGusta;
 			portadas.push(portada);
 		};
-	
 		portadasMostrar = portadas;
 	}
 	
@@ -114,7 +111,6 @@ $(document).ready(function() {
 		criterios.cartaJuegoId = cartaJuegoId;
 		return await recuperarCartaPrincipal(criterios);
 	}
-	
 	
 	async function recuperarBarajasPorCriterios() {
 		let criterios = {};
@@ -134,12 +130,10 @@ $(document).ready(function() {
 			$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
 			let contenedor = document.getElementById("mostrarCartas");
 			contenedor.innerHTML = "";
-			let cartas = baraja.cartas.split(";");
-			cartas.forEach(carta => {
+			baraja.cartas.forEach(carta => {
 				let img = document.createElement("img");
         		img.classList.add("carta");
-        		let [expansionId, cartaJuegoId] = carta.split(",");
-        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+        		img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
         		contenedor.appendChild(img);
 			});
     		contenedor.scrollTo({ top: 0, behavior: "smooth" });

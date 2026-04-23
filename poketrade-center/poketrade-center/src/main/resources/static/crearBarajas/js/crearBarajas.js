@@ -345,7 +345,7 @@ $(document).ready(function() {
 		let barajaUsuario = {};
 		barajaUsuario.usuarioId = usuario.id;
 		let baraja = {};
-		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		baraja.cartas = cartasBaraja;
 		barajaUsuario.baraja = baraja;
 		return barajaUsuario;
 	}
@@ -354,7 +354,7 @@ $(document).ready(function() {
 		let barajaPublica = {};
 		barajaPublica.creadorId = usuario.id;
 		let baraja = {};
-		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		baraja.cartas = cartasBaraja;
 		barajaPublica.baraja = baraja;
 		return barajaPublica;
 	}

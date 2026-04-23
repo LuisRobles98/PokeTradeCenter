@@ -1,10 +1,11 @@
 package com.poketradecenter.Clase;
 
+import java.util.List;
+
 public class Baraja {
 	private Integer id;
 	private String nombre;
-	private String cartas;
-	private String cartasNombre;
+	private List<Carta> cartas;
 	
 	public Integer getId() {return id;}
 	public void setId(Integer id) {this.id = id;}
@@ -12,9 +13,6 @@ public class Baraja {
 	public String getNombre() {return nombre;}
 	public void setNombre(String nombre) {this.nombre = nombre;}
 	
-	public String getCartas() {return cartas;}
-	public void setCartas(String cartas) {this.cartas = cartas;}
-	
-	public String getCartasNombre() {return cartasNombre;}
-	public void setCartasNombre(String cartasNombre) {this.cartasNombre = cartasNombre;}
+	public List<Carta> getCartas() {return cartas;}
+	public void setCartas(List<Carta> cartas) {this.cartas = cartas;}
 }
