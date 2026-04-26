@@ -5,7 +5,7 @@ import java.util.List;
 public class Baraja {
 	private Integer id;
 	private String nombre;
-	private List<Carta> cartas;
+	private List<CartaBaraja> cartas;
 	
 	public Integer getId() {return id;}
 	public void setId(Integer id) {this.id = id;}
@@ -13,6 +13,6 @@ public class Baraja {
 	public String getNombre() {return nombre;}
 	public void setNombre(String nombre) {this.nombre = nombre;}
 	
-	public List<Carta> getCartas() {return cartas;}
-	public void setCartas(List<Carta> cartas) {this.cartas = cartas;}
+	public List<CartaBaraja> getCartas() {return cartas;}
+	public void setCartas(List<CartaBaraja> cartas) {this.cartas = cartas;}
 }

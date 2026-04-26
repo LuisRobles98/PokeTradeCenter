@@ -54,18 +54,24 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	}
 	
 	private void validarIntercambio(Intercambio intercambio) {
-		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_RECIBIDA) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_RECIBIDA)) {
 			throw new RuntimeException("Se ha insertado un estado que no corresponde");
 		}
-		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA && intercambio.getContraparteId() != null) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA) && intercambio.getContraparteId() != null) {
 			throw new RuntimeException("Si se vuelve a publicar el intercambio no puede haber una persona como contraparte");
 		}
-		if(intercambio.getEstadoId() == Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_ACEPTADA && intercambio.getContraparteId() == null) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_ACEPTADA) && intercambio.getContraparteId() == null) {
 			throw new RuntimeException("Tiene que haber una persona como contraparte al aceptar el intercambio");
 		}
 	}
 	
 	private void completarDatosActualizarIntercambio(Intercambio intercambio) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA)) {
+			intercambio.setCartaOfrecerFinalExpansionId(null);
+			intercambio.setCartaOfrecerFinalCartaJuegoId(null);
+			intercambio.setCartaQuererFinalExpansionId(null);
+			intercambio.setCartaQuererFinalCartaJuegoId(null);
+		}
 		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	

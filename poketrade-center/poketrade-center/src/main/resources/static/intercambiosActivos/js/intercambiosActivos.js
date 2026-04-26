@@ -18,11 +18,11 @@ $(document).ready(function() {
 	}
 	
 	async function initTabla() {
-		let intercambiosRecuperadas = await recuperarIntercambiosActivosPorCriterios();
-		await formarPortadas(intercambiosRecuperadas);
+		let intercambiosRecuperados = await recuperarIntercambiosActivosPorCriterios();
+		await formarPortadas(intercambiosRecuperados);
 		
 		const tablaIntercambios = new Tabulator("#tablaIntercambios", {
-			data: intercambiosRecuperadas,
+			data: intercambiosRecuperados,
 			layout: "fitDataStretch",
 			rowHeight: 140,
 			height:"715px",
@@ -111,30 +111,26 @@ $(document).ready(function() {
 		});
 	}
 	
-	async function formarPortadas(intercambiosRecuperadas) {
+	async function formarPortadas(intercambiosRecuperados) {
 		let portadas = [];
 		
-		for (const intercambio of intercambiosRecuperadas) {
+		for (const intercambio of intercambiosRecuperados) {
 			let portada = {};
 			portada.imgPortadaOfrecer = [];
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+			let cartasOfrecer = intercambio.cartasOfrecer;
 			portada.imgPortadaQuerer = [];
-			let cartasQuerer = intercambio.cartasQuerer.split(";");
-
+			let cartasQuerer = intercambio.cartasQuerer;
 			portada.intercambioId = intercambio.id;
-			
+
 			for(const carta of cartasOfrecer) {
-				let [expansionId, cartaJuegoId] = carta.split(",");
-				portada.imgPortadaOfrecer.push(`/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`);
+				portada.imgPortadaOfrecer.push(`/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`);
 			}
 			
 			for(const carta of cartasQuerer) {
-				let [expansionId, cartaJuegoId] = carta.split(",");
-				portada.imgPortadaQuerer.push(`/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`);
+				portada.imgPortadaQuerer.push(`/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`);
 			}
 			portadas.push(portada);
 		};
-	
 		portadasMostrar = portadas;
 	}
 	
@@ -183,16 +179,15 @@ $(document).ready(function() {
 		$("#divEstado2").hide();
 		$("#divEstado3").hide();
 		$("#textoEstado").text("Hasta el momento, nadie te ha hecho una oferta por este intercambio");
-		let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+		let cartasOfrecer = intercambio.cartasOfrecer;
 		if(cartasOfrecer.length == 1) {
 			masDeUnaCarta = false;
 			$("#textoOfrecer1").text("Carta para ofrecer");
 			let carta = cartasOfrecer[0];
-			let [expansionId, cartaJuegoId] = carta.split(",");
 			$("#expansionContainerOfrecer1").removeClass("oculto");
-			$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
 			$("#cartaJuegoContainerOfrecer1").removeClass("oculto");
- 			$("#cartaJuegoOfrecer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+ 			$("#cartaJuegoOfrecer1").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 		} else {
 			masDeUnaCarta = true;
 			$("#textoOfrecer1").text("Cartas para ofrecer");	
@@ -205,16 +200,15 @@ $(document).ready(function() {
 		cartasOfrecer.forEach(carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
+        	img.dataset.expansionId = carta.expansionId;
+    		img.dataset.cartaJuegoId = carta.cartaJuegoId;
     		if(masDeUnaCarta) {
 				img.addEventListener("mouseenter", async function() {
 					$("#expansionContainerOfrecer1").removeClass("oculto");
-					$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+					$("#expansionIdOfrecer1").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
 					$("#cartaJuegoContainerOfrecer1").removeClass("oculto");
- 					$("#cartaJuegoOfrecer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+ 					$("#cartaJuegoOfrecer1").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 				});
 				 img.addEventListener("mouseleave", function() { 
 		 			$("#expansionContainerOfrecer1").addClass("oculto");
@@ -225,16 +219,15 @@ $(document).ready(function() {
 		});
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 			
-		let cartasQuerer = intercambio.cartasQuerer.split(";")
+		let cartasQuerer = intercambio.cartasQuerer;
 		if(cartasQuerer.length == 1) {
 			masDeUnaCarta = false;
 			$("#textoQuerer1").text("Carta para recibir");
 			let carta = cartasQuerer[0];
-			let [expansionId, cartaJuegoId] = carta.split(",");
 			$("#expansionContainerQuerer1").removeClass("oculto");
-			$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+			$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
 			$("#cartaJuegoContainerQuerer1").removeClass("oculto");
- 			$("#cartaJuegoQuerer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+ 			$("#cartaJuegoQuerer1").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 		} else {
 			masDeUnaCarta = true;
 			$("#textoQuerer1").text("Cartas para recibir");
@@ -247,16 +240,15 @@ $(document).ready(function() {
 		cartasQuerer.forEach(carta => {
 			let img = document.createElement("img");
     		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
+    		img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
+        	img.dataset.expansionId = carta.expansionId;
+    		img.dataset.cartaJuegoId = carta.cartaJuegoId;
     		if(masDeUnaCarta) {
 				img.addEventListener("mouseenter", async function() {
 					$("#expansionContainerQuerer1").removeClass("oculto");
-					$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
+					$("#expansionIdQuerer1").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
 					$("#cartaJuegoContainerQuerer1").removeClass("oculto");
- 					$("#cartaJuegoQuerer1").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
+ 					$("#cartaJuegoQuerer1").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
 				});
 				 img.addEventListener("mouseleave", function() { 
 		 			$("#expansionContainerQuerer1").addClass("oculto");
@@ -293,44 +285,42 @@ $(document).ready(function() {
 			$("#botonera2").hide();
 		}
 		
-		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
+		let cartaOfrecerFinalExpansionId = intercambio.cartaOfrecerFinalExpansionId;
+		let cartaOfrecerFinalCartaJuegoId = intercambio.cartaOfrecerFinalCartaJuegoId;
 		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer2");
 		contenedorOfrecer.innerHTML = "";
-		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-" + cartasOfrecer.length;
-		cartasOfrecer.forEach(async carta => {
-			let img = document.createElement("img");
-    		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
-    		contenedorOfrecer.appendChild(img);
+		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-1";
+		
+		let imgOfrecer = document.createElement("img");
+		imgOfrecer.classList.add("carta");
+		imgOfrecer.src = "/imagenes/cartas/" + cartaOfrecerFinalExpansionId + "/" + cartaOfrecerFinalCartaJuegoId + ".png";
+    	imgOfrecer.dataset.expansionId = cartaOfrecerFinalExpansionId;
+		imgOfrecer.dataset.cartaJuegoId = cartaOfrecerFinalCartaJuegoId;
+		contenedorOfrecer.appendChild(imgOfrecer);
     		
-			$("#expansionContainerOfrecer2").removeClass("oculto");
-			$("#expansionIdOfrecer2").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
-			$("#cartaJuegoContainerOfrecer2").removeClass("oculto");
- 			$("#cartaJuegoOfrecer2").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
-		});
+		$("#expansionContainerOfrecer2").removeClass("oculto");
+		$("#expansionIdOfrecer2").attr("src", "/imagenes/expansiones/" + cartaOfrecerFinalExpansionId + ".png");
+		$("#cartaJuegoContainerOfrecer2").removeClass("oculto");
+		$("#cartaJuegoOfrecer2").text(String(cartaOfrecerFinalCartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(cartaOfrecerFinalExpansionId)).padStart(3, '0'));
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 		
-		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
+		let cartaQuererFinalExpansionId = intercambio.cartaQuererFinalExpansionId;
+		let cartaQuererFinalCartaJuegoId = intercambio.cartaQuererFinalCartaJuegoId;
 		let contenedorQuerer = document.getElementById("mostrarCartasQuerer2");
 		contenedorQuerer.innerHTML = "";
-		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-" + cartasQuerer.length;
-		cartasQuerer.forEach(async carta => {
-			let img = document.createElement("img");
-    		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
-    		contenedorQuerer.appendChild(img);
+		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-1";
+		
+		let imgQuerer = document.createElement("img");
+		imgQuerer.classList.add("carta");
+		imgQuerer.src = "/imagenes/cartas/" + cartaQuererFinalExpansionId + "/" + cartaQuererFinalCartaJuegoId + ".png";
+    	imgQuerer.dataset.expansionId = cartaQuererFinalExpansionId;
+		imgQuerer.dataset.cartaJuegoId = cartaQuererFinalCartaJuegoId;
+		contenedorQuerer.appendChild(imgQuerer);
     		
-			$("#expansionContainerQuerer2").removeClass("oculto");
-			$("#expansionIdQuerer2").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
-			$("#cartaJuegoContainerQuerer2").removeClass("oculto");
- 			$("#cartaJuegoQuerer2").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
-		});
+		$("#expansionContainerQuerer2").removeClass("oculto");
+		$("#expansionIdQuerer2").attr("src", "/imagenes/expansiones/" + cartaQuererFinalExpansionId + ".png");
+		$("#cartaJuegoContainerQuerer2").removeClass("oculto");
+		$("#cartaJuegoQuerer2").text(String(cartaQuererFinalCartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(cartaQuererFinalExpansionId)).padStart(3, '0'));
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
@@ -361,44 +351,42 @@ $(document).ready(function() {
 			$("#botonera3").show();
 		}
 		
-		let cartasOfrecer = intercambio.cartaOfrecerFinal.split(";");
+		let cartaOfrecerFinalExpansionId = intercambio.cartaOfrecerFinalExpansionId;
+		let cartaOfrecerFinalCartaJuegoId = intercambio.cartaOfrecerFinalCartaJuegoId;
 		let contenedorOfrecer = document.getElementById("mostrarCartasOfrecer3");
 		contenedorOfrecer.innerHTML = "";
-		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-" + cartasOfrecer.length;
-		cartasOfrecer.forEach(async carta => {
-			let img = document.createElement("img");
-    		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
-    		contenedorOfrecer.appendChild(img);
-    		
-			$("#expansionContainerOfrecer3").removeClass("oculto");
-			$("#expansionIdOfrecer3").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
-			$("#cartaJuegoContainerOfrecer3").removeClass("oculto");
- 			$("#cartaJuegoOfrecer3").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
-		});
+		contenedorOfrecer.className = "mostrarCartasOfrecer23 abanicoMostrarOfrecer-1";
+		
+		let imgOfrecer = document.createElement("img");
+		imgOfrecer.classList.add("carta");
+		imgOfrecer.src = "/imagenes/cartas/" + cartaOfrecerFinalExpansionId + "/" + cartaOfrecerFinalCartaJuegoId + ".png";
+    	imgOfrecer.dataset.expansionId = cartaOfrecerFinalExpansionId;
+		imgOfrecer.dataset.cartaJuegoId = cartaOfrecerFinalCartaJuegoId;
+		contenedorOfrecer.appendChild(imgOfrecer);
+		
+		$("#expansionContainerOfrecer3").removeClass("oculto");
+		$("#expansionIdOfrecer3").attr("src", "/imagenes/expansiones/" + cartaOfrecerFinalExpansionId + ".png");
+		$("#cartaJuegoContainerOfrecer3").removeClass("oculto");
+		$("#cartaJuegoOfrecer3").text(String(cartaOfrecerFinalCartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(cartaOfrecerFinalExpansionId)).padStart(3, '0'));
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 		
-		let cartasQuerer = intercambio.cartaQuererFinal.split(";")
+		let cartaQuererFinalExpansionId = intercambio.cartaQuererFinalExpansionId;
+		let cartaQuererFinalCartaJuegoId = intercambio.cartaQuererFinalCartaJuegoId;
 		let contenedorQuerer = document.getElementById("mostrarCartasQuerer3");
 		contenedorQuerer.innerHTML = "";
-		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-" + cartasQuerer.length;
-		cartasQuerer.forEach(async carta => {
-			let img = document.createElement("img");
-    		img.classList.add("carta");
-    		let [expansionId, cartaJuegoId] = carta.split(",");
-    		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-        	img.dataset.expansionId = expansionId;
-    		img.dataset.cartaJuegoId = cartaJuegoId;
-    		contenedorQuerer.appendChild(img);
-    		
-			$("#expansionContainerQuerer3").removeClass("oculto");
-			$("#expansionIdQuerer3").attr("src", "/imagenes/expansiones/" + expansionId + ".png");
-			$("#cartaJuegoContainerQuerer3").removeClass("oculto");
- 			$("#cartaJuegoQuerer3").text(String(cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(expansionId)).padStart(3, '0'));
-		});
+		contenedorQuerer.className = "mostrarCartasQuerer23 abanicoMostrarQuerer-1";
+		
+		let imgQuerer = document.createElement("img");
+		imgQuerer.classList.add("carta");
+		imgQuerer.src = "/imagenes/cartas/" + cartaQuererFinalExpansionId + "/" + cartaQuererFinalCartaJuegoId + ".png";
+    	imgQuerer.dataset.expansionId = cartaQuererFinalExpansionId;
+		imgQuerer.dataset.cartaJuegoId = cartaQuererFinalCartaJuegoId;
+		contenedorQuerer.appendChild(imgQuerer);
+		
+		$("#expansionContainerQuerer3").removeClass("oculto");
+		$("#expansionIdQuerer3").attr("src", "/imagenes/expansiones/" + cartaQuererFinalExpansionId + ".png");
+		$("#cartaJuegoContainerQuerer3").removeClass("oculto");
+		$("#cartaJuegoQuerer3").text(String(cartaQuererFinalCartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(cartaQuererFinalExpansionId)).padStart(3, '0'));
 		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
 	}
 	
@@ -436,7 +424,7 @@ $(document).ready(function() {
 	
 	
 	$("#btnEliminarEliminar").click(async function() {
-		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, null);
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, null);
 		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
@@ -453,7 +441,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnEliminarRechazar").click(async function() {
-		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, intercambioSeleccionadoCompleto.contraparteId);
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, intercambioSeleccionadoCompleto.contraparteId);
 		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
@@ -470,7 +458,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnOfertarRechazar").click(async function() {
-		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 1, null);
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 1, null);
 		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
@@ -487,7 +475,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnAceptarAceptar").click(async function() {
-		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 3, intercambioSeleccionadoCompleto.contraparteId);
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 3, intercambioSeleccionadoCompleto.contraparteId);
 		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
@@ -504,7 +492,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnFinalizarFinalizar").click(async function() {
-		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto.id, 4, intercambioSeleccionadoCompleto.contraparteId);
+		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, intercambioSeleccionadoCompleto.contraparteId);
 		let errores = await validarDatos(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
@@ -521,9 +509,7 @@ $(document).ready(function() {
 	});
 	
 
-	function construirActualizarIntercambio(id, estado, contraparteId) {
-		let intercambio = {};
-		intercambio.id = id;
+	function construirActualizarIntercambio(intercambio, estado, contraparteId) {
 		intercambio.estadoId = estado;
 		intercambio.contraparteId = contraparteId;
 		return intercambio;

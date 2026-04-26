@@ -41,8 +41,10 @@
 	        <if test="cartaNombre != null">
 	            AND EXISTS (
 	            	SELECT 1
-	                FROM carta_baraja cb2 JOIN carta c ON c.expansion_id = cb2.expansion_id AND c.carta_juego_id = cb2.carta_juego_id
-	                WHERE cb2.baraja_id = b.id AND c.nombre LIKE CONCAT('%', #{cartaNombre}, '%'))
+	                FROM carta_baraja cb2 
+	                JOIN carta c ON c.expansion_id = cb2.expansion_id AND c.carta_juego_id = cb2.carta_juego_id
+	                WHERE cb2.baraja_id = b.id AND c.nombre LIKE CONCAT('%', #{cartaNombre}, '%')
+                )
 	        </if>
 	        <if test="usuarioId != null">
 	            AND bu.usuario_id = #{usuarioId}

@@ -1,13 +1,13 @@
 package com.poketradecenter.Clase;
 
-public class CartaBaraja {
-	private Integer barajaId;
+public class CartaIntercambio {
+	private Integer intercambioId;
 	private Integer expansionId;
 	private Integer cartaJuegoId;
 	private Integer orden;
 	
-	public void setBarajaId(Integer barajaId) {this.barajaId = barajaId;}
-	public Integer getBarajaId() {return barajaId;}
+	public void setIntercambioId(Integer intercambioId) {this.intercambioId = intercambioId;}
+	public Integer getIntercambioId() {return intercambioId;}
 	
 	public void setExpansionId(Integer expansionId) {this.expansionId = expansionId;}
 	public Integer getExpansionId() {return expansionId;}

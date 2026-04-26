@@ -24,7 +24,7 @@ $(document).ready(function() {
 		listaExpansiones = [];
 		$(".expansionCarta").removeClass("seleccionada");
 		listaRarezas = [];
-		$(".rarezaCarta").removeClass("rarezaSeleccionada");
+		$(".rarezaCarta").removeClass("seleccionada");
 		listaEnergias = [];
 		$(".energiaCarta").removeClass("seleccionada");
 		listaTipos = [];
@@ -454,14 +454,8 @@ $(document).ready(function() {
 	function construirIntercambio() {
 		let intercambio = {};
 		intercambio.ofertanteId = usuario.id;
-		intercambio.cartasOfrecer = cartasBarajaOfrecer
-			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
-			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
-			.join(";")
-		intercambio.cartasQuerer = cartasBarajaQuerer
-			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
-			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
-			.join(";")
+		intercambio.cartasOfrecer = cartasBarajaOfrecer.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0);
+		intercambio.cartasQuerer = cartasBarajaQuerer.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0);
 		return intercambio;
 	}
 });

@@ -119,20 +119,18 @@ $(document).ready(function() {
 		for (const intercambio of intercambiosRecuperadas) {
 			let portada = {};
 			portada.imgPortadaOfrecer = [];
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+			let cartasOfrecer = intercambio.cartasOfrecer;
 			portada.imgPortadaQuerer = [];
-			let cartasQuerer = intercambio.cartasQuerer.split(";");
+			let cartasQuerer = intercambio.cartasQuerer;
 
 			portada.intercambioId = intercambio.id;
 			
 			for(const carta of cartasOfrecer) {
-				let [expansionId, cartaJuegoId] = carta.split(",");
-				portada.imgPortadaOfrecer.push(`/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`);
+				portada.imgPortadaOfrecer.push(`/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`);
 			}
 			
 			for(const carta of cartasQuerer) {
-				let [expansionId, cartaJuegoId] = carta.split(",");
-				portada.imgPortadaQuerer.push(`/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`);
+				portada.imgPortadaQuerer.push(`/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`);
 			}
 			portadas.push(portada);
 		};
@@ -166,7 +164,7 @@ $(document).ready(function() {
 			let criteriosCreador = {};
 			criteriosCreador.id = intercambio.ofertanteId;
 			let creador = await recuperarCreadorIntercambio(criteriosCreador);
-			let cartasOfrecer = intercambio.cartasOfrecer.split(";");
+			let cartasOfrecer = intercambio.cartasOfrecer;
 			if(cartasOfrecer.length == 1) {
 				$("#textoOfrecer").text(creador.nombre + " ofrece la siguiente carta:").removeClass("textoOfrecer").addClass("textoOfrecerUna");
 			} else {
@@ -178,16 +176,15 @@ $(document).ready(function() {
 			cartasOfrecer.forEach(carta => {
 				let img = document.createElement("img");
         		img.classList.add("carta");
-        		let [expansionId, cartaJuegoId] = carta.split(",");
-        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-	        	img.dataset.expansionId = expansionId;
-        		img.dataset.cartaJuegoId = cartaJuegoId;
+        		img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
+	        	img.dataset.expansionId = carta.expansionId;
+        		img.dataset.cartaJuegoId = carta.cartaJuegoId;
         		img.title = "Selecciona la carta que quieras quedarte";
         		contenedorOfrecer.appendChild(img);
 			});
     		contenedorOfrecer.scrollTo({ top: 0, behavior: "smooth" });
     		
-    		let cartasQuerer = intercambio.cartasQuerer.split(";")
+    		let cartasQuerer = intercambio.cartasQuerer;
     		if(cartasQuerer.length == 1) {
 				$("#textoQuerer").text("A cambio de la siguiente carta:").removeClass("textoQuerer").addClass("textoQuererUna");
 			} else {
@@ -199,10 +196,9 @@ $(document).ready(function() {
 			cartasQuerer.forEach(carta => {
 				let img = document.createElement("img");
         		img.classList.add("carta");
-        		let [expansionId, cartaJuegoId] = carta.split(",");
-        		img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
-	        	img.dataset.expansionId = expansionId;
-        		img.dataset.cartaJuegoId = cartaJuegoId;
+        		img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
+	        	img.dataset.expansionId = carta.expansionId;
+        		img.dataset.cartaJuegoId = carta.cartaJuegoId;
         		img.title = "Selecciona la carta que quieras ofrecer";
         		contenedorQuerer.appendChild(img);
 			});
@@ -268,8 +264,10 @@ $(document).ready(function() {
 	
 	function construirSolicitudIntercambio() {
 		let intercambio = intercambioSeleccionadoCompleto;
-		intercambio.cartaQuererFinal = cartaOfrezcoSeleccionada[0].expansionId + "," + cartaOfrezcoSeleccionada[0].cartaJuegoId;
-		intercambio.cartaOfrecerFinal = cartaQuieroSeleccionada[0].expansionId + "," + cartaQuieroSeleccionada[0].cartaJuegoId;
+		intercambio.cartaQuererFinalExpansionId = cartaOfrezcoSeleccionada[0].expansionId;
+		intercambio.cartaQuererFinalCartaJuegoId = cartaOfrezcoSeleccionada[0].cartaJuegoId;
+		intercambio.cartaOfrecerFinalExpansionId = cartaQuieroSeleccionada[0].expansionId;
+		intercambio.cartaOfrecerFinalCartaJuegoId = cartaQuieroSeleccionada[0].cartaJuegoId;
 		intercambio.contraparteId = usuario.id;
 		return intercambio;
 	}

@@ -14,7 +14,6 @@ import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
 import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
-import com.poketradecenter.Service.interfaces.ICartaBarajaService;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;

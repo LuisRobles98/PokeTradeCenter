@@ -10,6 +10,7 @@ import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaPublica;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
+import com.poketradecenter.Clase.CartaBaraja;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Mapper.interfaces.IBarajaPublicaMapper;
 import com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper;
@@ -41,9 +42,9 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	@Override
 	public void guardarBaraja(BarajaUsuario barajaUsuario) {
-		establecerCartas(barajaUsuario.getBaraja());
-		validarCartas(barajaUsuario.getBaraja().getCartas());
-		construirBaraja(barajaUsuario.getBaraja());
+		List<Carta> cartas = establecerCartas(barajaUsuario.getBaraja());
+		validarCartas(cartas);
+		construirBaraja(barajaUsuario.getBaraja(), cartas);
 		guardarBaraja(barajaUsuario.getBaraja());
 		construirBarajaUsuario(barajaUsuario);
 		guardarBarajaUsuario(barajaUsuario);
@@ -51,9 +52,9 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	@Override
 	public void publicarBaraja(BarajaPublica barajaPublica) {
-		establecerCartas(barajaPublica.getBaraja());
-		validarCartas(barajaPublica.getBaraja().getCartas());
-		construirBaraja(barajaPublica.getBaraja());
+		List<Carta> cartas = establecerCartas(barajaPublica.getBaraja());
+		validarCartas(cartas);
+		construirBaraja(barajaPublica.getBaraja(), cartas);
 		guardarBaraja(barajaPublica.getBaraja());
 		construirBarajaPublica(barajaPublica);
 		guardarBarajaPublica(barajaPublica);
@@ -61,9 +62,9 @@ public class CrearBarajasService implements ICrearBarajasService {
 	
 	@Override
 	public void guardarPublicarBaraja(BarajaPublica barajaPublica) {
-		establecerCartas(barajaPublica.getBaraja());
-		validarCartas(barajaPublica.getBaraja().getCartas());
-		construirBaraja(barajaPublica.getBaraja());
+		List<Carta> cartas = establecerCartas(barajaPublica.getBaraja());
+		validarCartas(cartas);
+		construirBaraja(barajaPublica.getBaraja(), cartas);
 		guardarBaraja(barajaPublica.getBaraja());
 		construirBarajaPublica(barajaPublica);
 		guardarBarajaPublica(barajaPublica);
@@ -80,7 +81,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 		//validar tamaño baraja
 		Integer contadorCartas = Constantes.CONTADOR_0;
 		for(Carta carta : cartasBarajaGuardarPublicar) {
-			if(carta.getExpansionId() != Constantes.CERO && carta.getCartaJuegoId() != Constantes.CERO) {
+			if(!carta.getExpansionId().equals(Constantes.CERO) && !carta.getCartaJuegoId().equals(Constantes.CERO)) {
 				contadorCartas++;
 			}
 		}
@@ -90,11 +91,11 @@ public class CrearBarajasService implements ICrearBarajasService {
 		
 		//validar cartas repetidas mas de dos cartas
 		for(Carta carta1 : cartasBarajaGuardarPublicar) {
-			if(carta1.getExpansionId() != Constantes.CERO && carta1.getCartaJuegoId() != Constantes.CERO) {
+			if(!carta1.getExpansionId().equals(Constantes.CERO) && !carta1.getCartaJuegoId().equals(Constantes.CERO)) {
 				Integer contadorRepetidas = Constantes.CONTADOR_0;
 				for(Carta carta2 : cartasBarajaGuardarPublicar) {
-					if(carta2.getExpansionId() != Constantes.CERO && carta2.getCartaJuegoId() != Constantes.CERO) {
-						if(carta1.getExpansionId() == carta2.getExpansionId() && carta1.getCartaJuegoId() == carta2.getCartaJuegoId()) {
+					if(!carta2.getExpansionId().equals(Constantes.CERO) && !carta2.getCartaJuegoId().equals(Constantes.CERO)) {
+						if(carta1.getExpansionId().equals(carta2.getExpansionId()) && carta1.getCartaJuegoId().equals(carta2.getCartaJuegoId())) {
 							contadorRepetidas++;
 						}
 					}
@@ -108,7 +109,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 		//validar que haya alguna carta básica
 		boolean basica = false;
 		for(Carta carta : cartasBarajaGuardarPublicar) {
-			if(carta.getExpansionId() != Constantes.CERO && carta.getCartaJuegoId() != Constantes.CERO) {
+			if(!carta.getExpansionId().equals(Constantes.CERO) && !carta.getCartaJuegoId().equals(Constantes.CERO)) {
 				if(carta.getBasico()) {
 					basica = true;
 				}
@@ -119,12 +120,12 @@ public class CrearBarajasService implements ICrearBarajasService {
 		}
 	}
 	
-	private void construirBaraja(Baraja baraja) {
-		Carta primeraCarta = baraja.getCartas().get(Constantes.PRIMER_ELEMENTO);
-		Carta segundaCarta = baraja.getCartas().get(Constantes.ELEMENTO_1);
+	private void construirBaraja(Baraja baraja, List<Carta> cartas) {
+		Carta primeraCarta = cartas.get(Constantes.PRIMER_ELEMENTO);
+		Carta segundaCarta = cartas.get(Constantes.ELEMENTO_1);
 		
 		String nombreBaraja = "Baraja ";
-		if(primeraCarta.getExpansionId() == segundaCarta.getExpansionId() && primeraCarta.getCartaJuegoId() == segundaCarta.getCartaJuegoId()) {
+		if(primeraCarta.getExpansionId().equals(segundaCarta.getExpansionId()) && primeraCarta.getCartaJuegoId().equals(segundaCarta.getCartaJuegoId())) {
 			nombreBaraja += primeraCarta.getNombre();
 		} else {
 			nombreBaraja += primeraCarta.getNombre();
@@ -176,17 +177,17 @@ public class CrearBarajasService implements ICrearBarajasService {
 		guardarBarajaUsuario(barajaUsuario);
 	}
 	
-	private void establecerCartas(Baraja baraja) {
+	private List<Carta> establecerCartas(Baraja baraja) {
 		List<Carta> listaCartasBBDD = new ArrayList<>();
-		for(Carta carta : baraja.getCartas()) {
+		for(CartaBaraja carta : baraja.getCartas()) {
 			CriteriosCarta criterios = construirCriterios(carta);
 			List<Carta> cartasBBDD = cartaService.recuperarCartasCrearBarajasPorCriterios(criterios);
 			listaCartasBBDD.add(cartasBBDD.get(Constantes.PRIMER_ELEMENTO));
 		}
-		baraja.setCartas(listaCartasBBDD);
+		return listaCartasBBDD;
 	}
 	
-	private CriteriosCarta construirCriterios(Carta carta) {
+	private CriteriosCarta construirCriterios(CartaBaraja carta) {
 		CriteriosCarta criterios = new CriteriosCarta();
 		List<Integer> expansiones = new ArrayList<>();
 		expansiones.add(carta.getExpansionId());
