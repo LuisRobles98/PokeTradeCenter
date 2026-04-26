@@ -26,7 +26,12 @@ CREATE TABLE IF NOT EXISTS carta (
 );
 
 CREATE TABLE IF NOT EXISTS carta_usuario (
-
+	usuario_id INT NOT NULL,
+    expansion_id INT NOT NULL,
+    carta_juego_id INT NOT NULL,
+    obtenida TINYINT NOT NULL,
+    
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
 CREATE TABLE IF NOT EXISTS intercambio (
