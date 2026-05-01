@@ -7,4 +7,5 @@ public interface IUsuarioService {
 	void crearUsuario(Usuario usuario);
 	List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criteriosUsuario);
 	void actualizarUsuario(Usuario usuario);
+	void eliminarUsuario(Usuario usuario);
 }

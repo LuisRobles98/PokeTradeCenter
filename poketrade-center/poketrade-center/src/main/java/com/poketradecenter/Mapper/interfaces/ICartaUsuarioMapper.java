@@ -11,4 +11,5 @@ public interface ICartaUsuarioMapper {
 	List<CartaUsuario> recuperarPorCriterios(CriteriosCartaUsuario criterios);
 	void actualizar(CartaUsuario cartaUsuario);
 	void insertar(CartaUsuario cartaUsuario);
+	void eliminar(Integer usuarioId);
 }

@@ -133,15 +133,6 @@ $(document).ready(function() {
 
 	$("#cambioPassword").click(function() {
 		$("#password").show();
-		let contenedor = document.getElementById("mostrarIconos");
-		contenedor.innerHTML = "";
-		for(let i = 1; i <= 54; i++) {
-        	let img = document.createElement("img");
-        	img.classList.add("iconoSeleccionado"); // clase para aplicar CSS
-        	img.src = "/imagenes/iconos/" + i + ".png";
-        	img.dataset.id = i;
-        	contenedor.appendChild(img);
-		}
 	});
 	
 	$("#btnCancelarPassword").click(function() {
@@ -165,7 +156,6 @@ $(document).ready(function() {
 	
 	function validarModificarPassword() {
 		let errores = "";
-		
 		if($("#inputPasswordUsuario").val().trim() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordUsuario").val().length < 8) {
@@ -189,4 +179,30 @@ $(document).ready(function() {
 	$("#btnCancelarEmblema").click(function() {
 		$("#emblemas").hide();
 	});
+	
+	$("#eliminarCuenta").click(function() {
+		$("#eliminar").show();
+	});
+	
+	$("#btnCancelarEliminarCuenta").click(function() {
+		$("#eliminar").hide();
+	});
+	
+	$("#btnEliminarCuenta").click(function() {
+		try {
+			eliminarCuenta();
+			cerrarSesion();
+		} catch(error) {
+			popupErroresOConfirmacion.mostrar("error","Ha ocurrido el siguiente error en el sistema:",error.message);
+		}
+	});
+	
+	async function eliminarCuenta() {
+		await eliminarUsuario(usuario);
+	}
+	
+	function cerrarSesion() {
+		$("#btnCerrarSesion").click();
+	}
+
 });

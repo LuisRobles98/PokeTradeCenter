@@ -1,15 +1,12 @@
 package com.poketradecenter.Utilities.implementaciones;
 
 public class Constantes {
-	//Constantes genéricas
+	//Constantes genéricas	
 	public static final Integer CERO = 0;
 	public static final Integer PRIMER_ELEMENTO = 0;
 	public static final Integer ELEMENTO_1 = 1;
 	public static final Integer CONTADOR_0 = 0;
 	public static final Integer CONTADOR_1 = 1;
-	
-	//Constantes Módulo Barajas Públicas
-	public static final Integer SUMAR_LIKE = 1;
 		
 	//Constantes Módulos Colección Cartas
 	public static final Integer TOTAL_CARTAS_EXPANSION_1 = 286;
@@ -50,6 +47,7 @@ public class Constantes {
 	public static final Integer INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA = 1;
 	public static final Integer INTERCAMBIO_ACTIVO_ESTADO_OFERTA_RECIBIDA = 2;
 	public static final Integer INTERCAMBIO_ACTIVO_ESTADO_OFERTA_ACEPTADA = 3;
+	public static final Integer INTERCAMBIO_ACTIVO_ESTADO_FINALIZADO = 4;
 	
 	//Constantes Módulo Tablon Intercambios
 	public static final Integer INTERCAMBIO_PUBLICO_ESTADO_SIN_OFERTA = 1;
@@ -65,9 +63,12 @@ public class Constantes {
 	public static final Integer TOTAL_ICONOS = 54;
 	public static final Integer PRIMER_EMBLEMA = 0;
 	public static final Integer TOTAL_EMBLEMAS = 53;
+	public static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	public static final String DOMINIO_DELETE = "@deleteUser.com";
+	public static final Integer LONGITUD_ELIMINAR_PASSWORD = 40;
 	
 	//Constantes Utilidades ConvertirOrdenacion
-	public static final String ME_GUSTA = "me_gusta";
+	public static final String ME_GUSTA = "meGusta";
 	public static final String FECHA_CREACION = "fecha_creacion";
 	public static final String FECHA_CAMBIO = "fecha_cambio";
 	public static final String ORDENACION_ASCENDENTE = "ASC";

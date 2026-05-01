@@ -77,4 +77,11 @@
         VALUES (#{usuarioId}, #{expansionId}, #{cartaJuegoId}, #{obtenida})
 	</insert>
 	
+	<!-- SQL para eliminar cartas de usuario -->
+	<insert id="eliminar" parameterType="Integer"> 
+		DELETE
+		FROM carta_usuario
+		WHERE usuario_id = #{usuarioId}
+	</insert>
+	
 </mapper>

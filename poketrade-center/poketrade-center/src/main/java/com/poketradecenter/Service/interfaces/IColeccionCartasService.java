@@ -7,5 +7,4 @@ public interface IColeccionCartasService {
 	List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criteriosCartaUsuario);
 	void actualizarCarta(CartaUsuario cartaUsuario);
 	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
-	void insertarCartasNuevoUsuario(Integer usuarioId);
 }

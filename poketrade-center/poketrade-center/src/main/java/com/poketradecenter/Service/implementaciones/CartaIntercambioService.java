@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CartaIntercambio;
 import com.poketradecenter.Clase.Intercambio;
 import com.poketradecenter.Mapper.interfaces.ICartaIntercambioMapper;

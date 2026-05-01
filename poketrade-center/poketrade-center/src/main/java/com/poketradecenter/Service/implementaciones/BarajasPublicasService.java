@@ -41,7 +41,8 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	@Override
 	public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajaPublica criterios) {
 		try {
-			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			List<BarajaPublica> barajas = barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			return barajas;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar las barajas públicas", e);
 		}
@@ -68,24 +69,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	
 	@Override
 	public void darLikeABaraja(BarajaLike barajaLike) {
-		darLike(barajaLike);
 		guardarBarajaLike(barajaLike);
-	}
-	
-	private void darLike(BarajaLike barajaLike) {
-		CriteriosBarajaPublica criteriosBusqueda = new CriteriosBarajaPublica();
-		criteriosBusqueda.setBarajaPublicaId(barajaLike.getBarajaPublicaId());
-		BarajaPublica baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(Constantes.PRIMER_ELEMENTO);
-		baraja.setMeGusta(baraja.getMeGusta() + Constantes.SUMAR_LIKE);
-		actualizarBaraja(baraja);
-	}
-	
-	private void actualizarBaraja(BarajaPublica baraja) {
-		try {
-			barajaPublicaMapper.actualizar(baraja);
-		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al actualizar la baraja", e);
-		}
 	}
 	
 	private void guardarBarajaLike(BarajaLike baraja) {

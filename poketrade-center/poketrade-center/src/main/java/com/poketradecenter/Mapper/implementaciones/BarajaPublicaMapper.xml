@@ -28,8 +28,8 @@
  
 	 <!-- SQL para recuperar las barajas públicas por criterios-->
 	 <select id="recuperarBarajasPublicasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaPublica" resultMap="BarajaPublicaConBarajaMap">
-   	    SELECT bp.id AS bp_id, bp.creador_id AS creadorId, bp.baraja_id AS barajaId, bp.me_gusta AS meGusta, bp.fecha_creacion AS fechaCreacion, 
-   	    b.id AS b_id, b.nombre AS b_nombre, cb.baraja_id, cb.expansion_id, cb.carta_juego_id, cb.orden
+   	    SELECT bp.id AS bp_id, bp.creador_id AS creadorId, bp.baraja_id AS barajaId, (SELECT COUNT(*)FROM baraja_like bl WHERE bl.baraja_publica_id = bp.id) AS meGusta, 
+   	    bp.fecha_creacion AS fechaCreacion, b.id AS b_id, b.nombre AS b_nombre, cb.baraja_id, cb.expansion_id, cb.carta_juego_id, cb.orden
 	    FROM baraja_publica bp
 	    JOIN baraja b ON b.id = bp.baraja_id
 	    LEFT JOIN carta_baraja cb ON cb.baraja_id = b.id
@@ -57,15 +57,8 @@
 	<!-- SQL para publicar una baraja creada-->
     <insert id="guardar" parameterType="com.poketradecenter.Clase.BarajaPublica" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO baraja_publica
-        (creador_id, baraja_id, me_gusta, fecha_creacion)
-        VALUES (#{creadorId}, #{barajaId}, #{meGusta},#{fechaCreacion})
+        (creador_id, baraja_id, fecha_creacion)
+        VALUES (#{creadorId}, #{barajaId}, #{fechaCreacion})
     </insert>
-	
-	<update id="actualizar" parameterType="com.poketradecenter.Clase.BarajaPublica">
-	    UPDATE baraja_publica
-	    SET
-	    me_gusta = #{meGusta}
-	    WHERE id = #{id}
-	</update>
 	
 </mapper>

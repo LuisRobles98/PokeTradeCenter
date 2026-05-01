@@ -1,12 +1,15 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.security.SecureRandom;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
-import com.poketradecenter.Service.interfaces.IColeccionCartasService;
+import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
+import com.poketradecenter.Service.interfaces.IMisBarajasService;
+import com.poketradecenter.Service.interfaces.IUsuarioGestionService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Utilities.implementaciones.Constantes;
 import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
@@ -17,7 +20,7 @@ public class UsuarioService implements IUsuarioService {
 	@Autowired
 	private IUsuarioMapper usuarioMapper;
 	@Autowired
-	private IColeccionCartasService coleccionCartasService;
+	private IUsuarioGestionService usuarioGestionService;
 	
 	@Override
 	public void crearUsuario(Usuario usuario) {
@@ -141,6 +144,39 @@ public class UsuarioService implements IUsuarioService {
 	}
 	
 	private void insertarCartasNuevoUsuario(Usuario usuario) {
-		coleccionCartasService.insertarCartasNuevoUsuario(usuario.getId());
+		usuarioGestionService.insertarCartasNuevoUsuario(usuario.getId());
+	}
+	
+	@Override
+	public void eliminarUsuario(Usuario usuario) {
+		Integer usuarioId = usuario.getId();
+		usuarioGestionService.eliminarCartasUsuario(usuarioId);
+		usuarioGestionService.eliminarBarajasUsuario(usuarioId);
+		usuarioGestionService.eliminarIntercambios(usuarioId);
+		eliminar(usuario);
+	}
+	
+	private void eliminar(Usuario usuario) {
+		usuario.setPassword(generarPasswordEliminarUsuario());
+		usuario.setEmail(generarEmailEliminarUsuario());
+		actualizarDatosUsuario(usuario);
+	}
+	
+	private String generarPasswordEliminarUsuario() {
+		return generarEliminarUsuario();
+	}
+	
+	private String generarEmailEliminarUsuario() {
+		return generarEliminarUsuario().concat(Constantes.DOMINIO_DELETE);
+	}
+	
+	private String generarEliminarUsuario() {
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder();
+		Integer longitud = Constantes.LONGITUD_ELIMINAR_PASSWORD - Constantes.DOMINIO_DELETE.length();
+		for(int i = 0; i < longitud; i++) {
+			sb.append(Constantes.CHARS.charAt(random.nextInt(Constantes.CHARS.length())));
+		}
+		return sb.toString();
 	}
 }

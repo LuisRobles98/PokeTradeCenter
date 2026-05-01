@@ -10,5 +10,4 @@ import com.poketradecenter.Clase.CriteriosBarajaPublica;
 public interface IBarajaPublicaMapper {
 	List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajaPublica criterios);
 	void guardar(BarajaPublica barajaPublica);
-	void actualizar(BarajaPublica baraja);
 }
