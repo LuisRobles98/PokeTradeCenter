@@ -23,3 +23,18 @@ async function recuperarUsuario(usuario) {
     })
     .then(response => response.json());
 };
+
+async function eliminarUsuario(usuario) {
+	let parameters = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuario),
+    };
+    let response = await fetch('http://localhost:8080/usuario', parameters);
+    if (!response.ok) {
+        let msg = await response.text();
+        throw new Error(msg || 'Error desconocido del servidor');
+    }
+};

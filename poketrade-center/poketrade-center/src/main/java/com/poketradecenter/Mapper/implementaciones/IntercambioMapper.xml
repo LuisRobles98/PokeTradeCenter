@@ -2,95 +2,143 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IIntercambioMapper">
 
-    <!-- SQL para publicar un intercambio nuevo-->
-    <insert id="publicarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio">
-        INSERT INTO intercambio
-        (ofertante_id, contraparte_id, cartas_ofrecer, cartas_querer, cartas_ofrecer_nombre, cartas_querer_nombre, estado_id, 
-        carta_ofrecer_final, carta_querer_final, carta_ofrecer_final_nombre, carta_querer_final_nombre, fecha_creacion, fecha_cambio)
-        VALUES (#{ofertanteId}, #{contraparteId}, #{cartasOfrecer}, #{cartasQuerer}, #{cartasOfrecerNombre}, #{cartasQuererNombre}, #{estadoId}, 
-        #{cartaOfrecerFinal}, #{cartaQuererFinal}, #{cartaOfrecerFinalNombre}, #{cartaQuererFinalNombre}, #{fechaCreacion}, #{fechaCambio})
-    </insert>
-    
+	<resultMap id="IntercambioBarajaMap" type="com.poketradecenter.Clase.Intercambio">
+		<!-- Campos de Intercambio -->
+	    <id property="id" column="id"/>
+	    <result property="ofertanteId" column="ofertanteId"/>
+	    <result property="contraparteId" column="contraparteId"/>
+	    <result property="estadoId" column="estadoId"/>
+	    <result property="fechaCreacion" column="fechaCreacion"/>
+	    <result property="fechaCambio" column="fechaCambio"/>
+	    
+	    <!-- Cartas ofrecer -->
+        <collection property="cartasOfrecer"
+                ofType="com.poketradecenter.Clase.CartaIntercambio"
+                select="getCartasOfrecer"
+                column="id"/>
+        
+  		<!-- Cartas querer -->
+    	<collection property="cartasQuerer"
+                ofType="com.poketradecenter.Clase.CartaIntercambio"
+                select="getCartasQuerer"
+                column="id"/>
+	</resultMap>
+
     <!-- SQL para recuperar los intercambios públicos por criterios-->
-	 <select id="recuperarIntercambiosPublicosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" 
-	 		resultType="com.poketradecenter.Clase.Intercambio">
-	    SELECT id, ofertante_id AS ofertanteId, contraparte_id AS contraparteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
-	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre,
-	    estado_id AS estadoId, carta_ofrecer_final AS cartaOfrecerFinal, carta_querer_final AS cartaOfrecerFinal,
-	    carta_ofrecer_final_nombre AS cartaOfrecerFinalNombre, carta_querer_final_nombre AS cartaQuererFinalNombre, 
-	    fecha_creacion AS fechaCreacion
-	    FROM intercambio
+	 <select id="recuperarIntercambiosPublicosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" resultMap="IntercambioBarajaMap">
+		SELECT i.id, i.ofertante_id AS ofertanteId, i.contraparte_id AS contraparteId, i.estado_id AS estadoId, 
+		i.carta_ofrecer_final_expansion_id AS cartaOfrecerFinalExpansionId, i.carta_ofrecer_final_carta_juego_id AS cartaOfrecerFinalCartaJuegoId,
+		i.carta_querer_final_expansion_id AS cartaQuererFinalExpansionId, i.carta_querer_final_carta_juego_id AS cartaQuererFinalCartaJuegoId,
+		i.fecha_creacion AS fechaCreacion, i.fecha_cambio AS fechaCambio
+	    FROM intercambio i
 	    <where>
 	    	<if test="id != null">
-	            AND id = #{id}
+	            AND i.id = #{id}
 	        </if>
-	    
  	   	    <if test="usuarioId != null">
-	            AND ofertante_id != #{usuarioId}
+	            AND i.ofertante_id != #{usuarioId}
 	        </if>
-	    	
    	        <if test="cartasOfrecerNombre != null">
-	            AND cartas_ofrecer_nombre LIKE CONCAT('%', #{cartasOfrecerNombre}, '%')
+ 	       		AND EXISTS (
+                	SELECT 1
+                	FROM carta_intercambio_ofrecer cio
+                	JOIN carta c ON c.expansion_id = cio.expansion_id AND c.carta_juego_id = cio.carta_juego_id
+                	WHERE cio.intercambio_id = i.id AND c.nombre LIKE CONCAT('%', #{cartasOfrecerNombre}, '%')
+            	)
 	        </if>
         	<if test="cartasQuererNombre != null">
-	            AND cartas_querer_nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
+            	AND EXISTS (
+                	SELECT 1
+                	FROM carta_intercambio_querer ciq 
+                	JOIN carta c ON c.expansion_id = ciq.expansion_id AND c.carta_juego_id = ciq.carta_juego_id
+                	WHERE ciq.intercambio_id = i.id AND c.nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
+               	)
 	        </if>
-	        AND estado_id = 1
+	        AND i.estado_id = 1
 	    </where>
 		<choose>
 		    <when test="ordenacion != null">
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY i.id DESC
 		    </otherwise>
 		</choose>
 	</select>
+	
+	<select id="getCartasOfrecer" parameterType="int" resultType="com.poketradecenter.Clase.CartaIntercambio">
+	    SELECT intercambio_id AS intercambioId, expansion_id AS expansionId, carta_juego_id AS cartaJuegoId, orden
+	    FROM carta_intercambio_ofrecer
+	    WHERE intercambio_id = #{value}
+	    ORDER BY orden ASC
+	</select>
+	
+	<select id="getCartasQuerer" parameterType="int" resultType="com.poketradecenter.Clase.CartaIntercambio">
+		SELECT intercambio_id AS intercambioId, expansion_id AS expansionId, carta_juego_id AS cartaJuegoId, orden
+	   	FROM carta_intercambio_querer
+	   	WHERE intercambio_id = #{value}
+	   	ORDER BY orden
+	</select>
+	
+    <!-- SQL para publicar un intercambio nuevo-->
+    <insert id="publicarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO intercambio
+        (ofertante_id, contraparte_id, estado_id, fecha_creacion, fecha_cambio)
+        VALUES (#{ofertanteId}, #{contraparteId}, #{estadoId}, #{fechaCreacion}, #{fechaCambio})
+    </insert>
 	
 	<update id="solicitarIntercambio" parameterType="com.poketradecenter.Clase.Intercambio">
 	   UPDATE intercambio
 	   <set>
 	   	   contraparte_id = #{contraparteId},
-	   	   carta_ofrecer_final = #{cartaOfrecerFinal},
-	       carta_ofrecer_final_nombre = #{cartaOfrecerFinalNombre},
-	       carta_querer_final = #{cartaQuererFinal},
-	       carta_querer_final_nombre = #{cartaQuererFinalNombre},
-	       estado_id = #{estadoId},
+	   	   estado_id = #{estadoId},
+	   	   carta_ofrecer_final_expansion_id = #{cartaOfrecerFinalExpansionId},
+	   	   carta_ofrecer_final_carta_juego_id = #{cartaOfrecerFinalCartaJuegoId},
+	   	   carta_querer_final_expansion_id = #{cartaQuererFinalExpansionId},
+	   	   carta_querer_final_carta_juego_id = #{cartaQuererFinalCartaJuegoId},
 	       fecha_cambio = #{fechaCambio}
 	   </set>
 	   WHERE id = #{id}
 	</update>
 	
 	<!-- SQL para recuperar los intercambios activos por criterios-->
-	 <select id="recuperarIntercambiosActivosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" 
-	 		resultType="com.poketradecenter.Clase.Intercambio">
-	    SELECT id, ofertante_id AS ofertanteId, contraparte_id AS contraparteId, cartas_ofrecer AS cartasOfrecer, cartas_querer AS cartasQuerer,
-	    cartas_ofrecer_nombre AS cartasOfrecerNombre, cartas_querer_nombre AS cartasQuererNombre, 
-   	    estado_id AS estadoId, carta_ofrecer_final AS cartaOfrecerFinal, carta_querer_final AS cartaQuererFinal,
-	    carta_ofrecer_final_nombre AS cartaOfrecerFinalNombre, carta_querer_final_nombre AS cartaQuererFinalNombre, 
-	    fecha_creacion AS fechaCreacion
-	    FROM intercambio
+	 <select id="recuperarIntercambiosActivosPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosIntercambio" resultMap="IntercambioBarajaMap">
+		SELECT i.id, i.ofertante_id AS ofertanteId, i.contraparte_id AS contraparteId, i.estado_id AS estadoId, 
+		i.carta_ofrecer_final_expansion_id AS cartaOfrecerFinalExpansionId, i.carta_ofrecer_final_carta_juego_id AS cartaOfrecerFinalCartaJuegoId,
+		i.carta_querer_final_expansion_id AS cartaQuererFinalExpansionId, i.carta_querer_final_carta_juego_id AS cartaQuererFinalCartaJuegoId,
+		i.fecha_creacion AS fechaCreacion, i.fecha_cambio AS fechaCambio
+	    FROM intercambio i
 	    <where>
 	    	<if test="id != null">
-	            AND id = #{id}
+	            AND i.id = #{id}
 	        </if>
 	    
  	   	    <if test="usuarioId != null">
-	            AND (ofertante_id = #{usuarioId} OR contraparte_id = #{usuarioId})
+	            AND (i.ofertante_id = #{usuarioId} OR i.contraparte_id = #{usuarioId})
 	        </if>
 	    	
    	        <if test="cartasOfrecerNombre != null">
-	            AND cartas_ofrecer_nombre LIKE CONCAT('%', #{cartasOfrecerNombre}, '%')
+	            AND EXISTS (
+                	SELECT 1
+                	FROM carta_intercambio_ofrecer cio
+                	JOIN carta c ON c.expansion_id = cio.expansion_id AND c.carta_juego_id = cio.carta_juego_id
+                	WHERE cio.intercambio_id = i.id AND c.nombre LIKE CONCAT('%', #{cartasOfrecerNombre}, '%')
+            	)
 	        </if>
         	<if test="cartasQuererNombre != null">
-	            AND cartas_querer_nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
+	            AND EXISTS (
+                	SELECT 1
+                	FROM carta_intercambio_querer ciq 
+                	JOIN carta c ON c.expansion_id = ciq.expansion_id AND c.carta_juego_id = ciq.carta_juego_id
+                	WHERE ciq.intercambio_id = i.id AND c.nombre LIKE CONCAT('%', #{cartasQuererNombre}, '%')
+               	)
 	        </if>
              <choose>
 			    <when test="estadoId != null">
-			        AND estado_id = #{estadoId}
+			        AND i.estado_id = #{estadoId}
 			    </when>
 			    <otherwise>
-			        AND estado_id != 4
+			        AND i.estado_id != 4
 			    </otherwise>
 			</choose>
 	    </where>
@@ -99,7 +147,7 @@
 		        ORDER BY ${ordenacion}
 		    </when>
 		    <otherwise>
-		        ORDER BY fecha_creacion DESC
+		        ORDER BY i.id DESC
 		    </otherwise>
 		</choose>
 	</select>
@@ -107,17 +155,13 @@
 	<update id="actualizar" parameterType="com.poketradecenter.Clase.Intercambio">
 	   UPDATE intercambio
 	   <set>
-	       <if test="contraparteId != null">
-	           contraparte_id = #{contraparteId},
-	       </if>
-	
-	       <if test="estadoId != null">
-	           estado_id = #{estadoId},
-	       </if>
-	
-	       <if test="fechaCambio != null">
-	           fecha_cambio = #{fechaCambio},
-	       </if>
+	       	contraparte_id = #{contraparteId},
+			estado_id = #{estadoId},
+			carta_ofrecer_final_expansion_id = #{cartaOfrecerFinalExpansionId},
+	   	   	carta_ofrecer_final_carta_juego_id = #{cartaOfrecerFinalCartaJuegoId},
+	   	   	carta_querer_final_expansion_id = #{cartaQuererFinalExpansionId},
+	   	   	carta_querer_final_carta_juego_id = #{cartaQuererFinalCartaJuegoId},
+			fecha_cambio = #{fechaCambio},
 	   </set>
 	   WHERE id = #{id}
 	</update>

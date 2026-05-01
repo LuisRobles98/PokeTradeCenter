@@ -61,6 +61,7 @@ $(document).ready(function() {
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
 				img.dataset.basico = carta.basico;
+				img.title = "Selecciona la carta para eliminarla de la baraja";
 			} else {
 				img.src = index < 2 ? "/crearBarajas/imagenes/cartaVacia2.png"
         			: "/crearBarajas/imagenes/cartaVacia.png";
@@ -165,6 +166,7 @@ $(document).ready(function() {
         	img.dataset.cartaJuegoId = carta.cartaJuegoId;
         	img.dataset.nombre = carta.nombre;
         	img.dataset.basico = carta.basico;
+        	img.title = "Selecciona la carta para añadirla a la baraja";
         	contenedor.appendChild(img);
     	});
 		contenedor.scrollTo({ top: 0, behavior: "smooth" });
@@ -343,7 +345,7 @@ $(document).ready(function() {
 		let barajaUsuario = {};
 		barajaUsuario.usuarioId = usuario.id;
 		let baraja = {};
-		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		baraja.cartas = cartasBaraja;
 		barajaUsuario.baraja = baraja;
 		return barajaUsuario;
 	}
@@ -352,7 +354,7 @@ $(document).ready(function() {
 		let barajaPublica = {};
 		barajaPublica.creadorId = usuario.id;
 		let baraja = {};
-		baraja.cartas = cartasBaraja.map(carta => carta.expansionId + "," + carta.cartaJuegoId).join(";");
+		baraja.cartas = cartasBaraja;
 		barajaPublica.baraja = baraja;
 		return barajaPublica;
 	}

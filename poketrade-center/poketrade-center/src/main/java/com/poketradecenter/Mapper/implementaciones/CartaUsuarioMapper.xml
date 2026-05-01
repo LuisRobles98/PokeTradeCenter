@@ -1,8 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper">
 
-
-
     <!-- SQL para recuperar cartas de usuario por criterios-->
  <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosCartaUsuario"  
         resultType="com.poketradecenter.Clase.CartaUsuario">
@@ -71,5 +69,19 @@
 	   </set>
 	   WHERE usuario_id = #{usuarioId} AND expansion_id = #{expansionId} AND carta_juego_id = #{cartaJuegoId}
 	</update>
+	
+	<!-- SQL para insertar cartas de usuario -->
+	<insert id="insertar" parameterType="com.poketradecenter.Clase.CartaUsuario">   
+	   INSERT INTO carta_usuario
+        (usuario_id, expansion_id, carta_juego_id, obtenida)
+        VALUES (#{usuarioId}, #{expansionId}, #{cartaJuegoId}, #{obtenida})
+	</insert>
+	
+	<!-- SQL para eliminar cartas de usuario -->
+	<insert id="eliminar" parameterType="Integer"> 
+		DELETE
+		FROM carta_usuario
+		WHERE usuario_id = #{usuarioId}
+	</insert>
 	
 </mapper>

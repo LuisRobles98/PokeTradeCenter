@@ -20,6 +20,7 @@ import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ICrearBarajasService;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class BarajasPublicasService implements IBarajasPublicasService {
@@ -40,7 +41,8 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	@Override
 	public List<BarajaPublica> recuperarBarajasPublicasPorCriterios(CriteriosBarajaPublica criterios) {
 		try {
-			return barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			List<BarajaPublica> barajas = barajaPublicaMapper.recuperarBarajasPublicasPorCriterios(criterios);
+			return barajas;
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al recuperar las barajas públicas", e);
 		}
@@ -48,18 +50,18 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	
 	@Override
 	public Carta recuperarCartaBarajasPublicas(CriteriosCarta criterios) {	
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public Usuario recuperarCreadorBarajasPublicas(CriteriosUsuario criterios) {	
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public boolean comprobarLikeABaraja(CriteriosBarajaPublica criterios) {
 		try {
-			return barajaLikeMapper.recuperarBarajaLikePorCriterios(criterios).size() > 0;
+			return !barajaLikeMapper.recuperarBarajaLikePorCriterios(criterios).isEmpty();
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al comprobar si ya se había dado like a esa baraja", e);
 		}
@@ -67,24 +69,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	
 	@Override
 	public void darLikeABaraja(BarajaLike barajaLike) {
-		darLike(barajaLike);
 		guardarBarajaLike(barajaLike);
-	}
-	
-	private void darLike(BarajaLike barajaLike) {
-		CriteriosBarajaPublica criteriosBusqueda = new CriteriosBarajaPublica();
-		criteriosBusqueda.setBarajaPublicaId(barajaLike.getBarajaPublicaId());
-		BarajaPublica baraja = recuperarBarajasPublicasPorCriterios(criteriosBusqueda).get(0);
-		baraja.setMeGusta(baraja.getMeGusta() + 1);
-		actualizarBaraja(baraja);
-	}
-	
-	private void actualizarBaraja(BarajaPublica baraja) {
-		try {
-			barajaPublicaMapper.actualizar(baraja);
-		} catch(RuntimeException e) {
-			throw new RuntimeException("Ha ocurrido un error al actualizar la baraja", e);
-		}
 	}
 	
 	private void guardarBarajaLike(BarajaLike baraja) {
@@ -97,7 +82,7 @@ public class BarajasPublicasService implements IBarajasPublicasService {
 	
 	@Override
 	public boolean comprobarBarajaPublicaGuardada(CriteriosBarajaUsuario criterios) {
-		return misBarajasService.recuperarMisBarajasPorCriterios(criterios).size() > 0;
+		return !misBarajasService.recuperarMisBarajasPorCriterios(criterios).isEmpty();
 	}
 	
 	@Override

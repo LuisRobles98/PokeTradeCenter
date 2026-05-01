@@ -54,12 +54,26 @@
 }
 
 .cambioPassword {
-	margin-top: 15px;
+    position: absolute;
+    top: 345px;
 	text-decoration:underline;
 	color: #68768A;
 }
 
 .cambioPassword:hover {
+  	cursor: pointer;
+  	text-decoration:underline;
+}
+
+.eliminarCuenta {
+    position: absolute;
+    top: 345px;
+   	left: 360px;
+	text-decoration:underline;
+	color: #68768A;
+}
+
+.eliminarCuenta:hover {
   	cursor: pointer;
   	text-decoration:underline;
 }
@@ -119,6 +133,7 @@
     width: 80px;
     margin-left: 25px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 /*--------------------BOTON---------------------------*/
@@ -237,5 +252,30 @@ btnCancelar {
 }
 
 .botonesCambioPassword {
+	width: 115px;
+}
+
+/*-----------POPUP ELIMINAR CUENTA--------------*/
+.contenidoEliminarCuenta {
+    background-color: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 274px;
+}
+
+.lblEliminarCuenta {
+	display: block;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    margin-left: 36px;
+}
+
+.botoneraEliminarCuenta {
+	display: flex;
+	justify-content: center;
+}
+
+.botonesEliminarCuenta {
 	width: 115px;
 }

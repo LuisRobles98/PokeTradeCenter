@@ -34,9 +34,10 @@
 					<input id="inputNombreUsuario" class="inputUsuario input">
 					<span class="labelDatoUsuario label">Id Pokémon TCG Pocket</span>
 					<input id="inputJuegoIdUsuario" class="inputUsuario input">
-					<span class="labelDatoUsuario label">Correo electronico</span>
+					<span class="labelDatoUsuario label">Correo electrónico</span>
 					<input id="inputCorreoUsuario" class="inputUsuario input" disabled>
 					<span id="cambioPassword" class="labelDatoUsuario cambioPassword">Cambiar Contraseña</span>
+					<span id="eliminarCuenta" class="labelDatoUsuario eliminarCuenta">Eliminar Cuenta</span>
 				</div>
 			</div>
 			<div id="personalizacionUsuario" class="personalizacionUsuario">
@@ -82,6 +83,16 @@
 			<div id="botonera" class="botoneraCambioPassword">
 				<button id="btnCancelarPassword" class="botonesCambioPassword cancelar">Cancelar</button>
 				<button id="btnModificarPassword" class="botonesCambioPassword aceptar">Modificar</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="eliminar" class="popupConfirmar" style="display: none;">
+		<div id="contenidoEliminarCuenta" class="contenidoEliminarCuenta">
+			<label for="lblEliminarCuenta" class="lblEliminarCuenta labelRojo">Esta acción no se puede deshacer</label>
+			<div id="botonera" class="botoneraEliminarCuenta">
+				<button id="btnCancelarEliminarCuenta" class="botonesEliminar cancelar">Cancelar</button>
+				<button id="btnEliminarCuenta" class="botonesEliminarCuenta aceptar">Eliminar</button>
 			</div>
 		</div>
 	</div>

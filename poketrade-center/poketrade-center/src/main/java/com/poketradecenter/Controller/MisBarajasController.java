@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.poketradecenter.Clase.Baraja;
 import com.poketradecenter.Clase.BarajaUsuario;
 import com.poketradecenter.Clase.Carta;
 import com.poketradecenter.Clase.CriteriosBarajaPublica;
 import com.poketradecenter.Clase.CriteriosCarta;
 import com.poketradecenter.Clase.CriteriosBarajaUsuario;
-import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
 import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Utilities.interfaces.ICrearCriterios;

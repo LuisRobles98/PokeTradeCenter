@@ -15,6 +15,7 @@ import com.poketradecenter.Mapper.interfaces.IIntercambioMapper;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class IntercambiosActivosService implements IIntercambiosActivosService {
@@ -37,12 +38,12 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	
 	@Override
 	public Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public Carta recuperarCartaPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
@@ -53,27 +54,37 @@ public class IntercambiosActivosService implements IIntercambiosActivosService {
 	}
 	
 	private void validarIntercambio(Intercambio intercambio) {
-		if(intercambio.getEstadoId() == 2) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_RECIBIDA)) {
 			throw new RuntimeException("Se ha insertado un estado que no corresponde");
 		}
-		if(intercambio.getEstadoId() == 1 && intercambio.getContraparteId() != null) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA) && intercambio.getContraparteId() != null) {
 			throw new RuntimeException("Si se vuelve a publicar el intercambio no puede haber una persona como contraparte");
 		}
-		if(intercambio.getEstadoId() == 3 && intercambio.getContraparteId() == null) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_OFERTA_ACEPTADA) && intercambio.getContraparteId() == null) {
 			throw new RuntimeException("Tiene que haber una persona como contraparte al aceptar el intercambio");
 		}
 	}
 	
 	private void completarDatosActualizarIntercambio(Intercambio intercambio) {
+		if(intercambio.getEstadoId().equals(Constantes.INTERCAMBIO_ACTIVO_ESTADO_SIN_OFERTA)) {
+			intercambio.setCartaOfrecerFinalExpansionId(null);
+			intercambio.setCartaOfrecerFinalCartaJuegoId(null);
+			intercambio.setCartaQuererFinalExpansionId(null);
+			intercambio.setCartaQuererFinalCartaJuegoId(null);
+		}
 		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	
-
 	private void actualizar(Intercambio intercambio) {
 		try {
 			intercambioMapper.actualizar(intercambio);
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al actualizar el intercambio", e);
 		}
+	}
+	
+	@Override
+	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
+		return cartaService.recuperarTotalCartasPorExpansion(expansionId);
 	}
 }

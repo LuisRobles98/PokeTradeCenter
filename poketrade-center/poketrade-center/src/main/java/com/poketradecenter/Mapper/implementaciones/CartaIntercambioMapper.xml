@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.ICartaIntercambioMapper">
+
+    <!-- SQL para guardar una carta a ofrecer en el intercambio -->
+    <insert id="guardarOfrecer" parameterType="com.poketradecenter.Clase.CartaIntercambio">
+        INSERT INTO carta_intercambio_ofrecer
+        (intercambio_id, expansion_id, carta_juego_id, orden)
+        VALUES (#{intercambioId}, #{expansionId}, #{cartaJuegoId}, #{orden})
+    </insert>
+    
+    <!-- SQL para guardar una carta a querer en el intercambio -->
+    <insert id="guardarQuerer" parameterType="com.poketradecenter.Clase.CartaIntercambio">
+        INSERT INTO carta_intercambio_querer
+        (intercambio_id, expansion_id, carta_juego_id, orden)
+        VALUES (#{intercambioId}, #{expansionId}, #{cartaJuegoId}, #{orden})
+    </insert>
+ 	
+</mapper>

@@ -12,4 +12,5 @@ public interface IIntercambiosActivosService {
 	Carta recuperarCartaPorCriterios(CriteriosCarta criterios);
 	Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios);
 	void actualizarIntercambio(Intercambio intercambio);
+	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
 }

@@ -7,10 +7,10 @@ $(document).ready(function() {
 		$("#inputNombreUsuario").val(usuario.nombre);
 		$("#inputJuegoIdUsuario").val(usuario.juegoId);
 		$("#inputCorreoUsuario").val(usuario.email);
-		$("#iconoUsuario").attr("src", "/imagenes/iconos/" + usuario.iconoId + ".png");
-		$("#emblema1Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema1Id + ".png");
-        $("#emblema2Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema2Id + ".png");
-        $("#emblema3Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png");
+		$("#iconoUsuario").attr("src", "/imagenes/iconos/" + usuario.iconoId + ".png").attr("title", "Selecciona para cambiar el icono");
+		$("#emblema1Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema1Id + ".png").attr("title", "Selecciona para cambiar el primer emblema");
+        $("#emblema2Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema2Id + ".png").attr("title", "Selecciona para cambiar el segundo emblema");
+        $("#emblema3Usuario").attr("src", "/imagenes/emblemas/" + usuario.emblema3Id + ".png").attr("title", "Selecciona para cambiar el tercer emblema");
 	}
 	
 	$("#iconoUsuario").click(function() {
@@ -50,7 +50,7 @@ $(document).ready(function() {
 		$("#emblemas").show();
 		let contenedor = document.getElementById("mostrarEmblemas");
 		contenedor.innerHTML = "";
-		for(let i = 0; i <= 28; i++) {
+		for(let i = 0; i <= 53; i++) {
         	let img = document.createElement("img");
         	img.classList.add("emblemaSeleccionado", "icono"); // clase para aplicar CSS
         	img.src = "/imagenes/emblemas/" + i + ".png";
@@ -133,15 +133,6 @@ $(document).ready(function() {
 
 	$("#cambioPassword").click(function() {
 		$("#password").show();
-		let contenedor = document.getElementById("mostrarIconos");
-		contenedor.innerHTML = "";
-		for(let i = 1; i <= 54; i++) {
-        	let img = document.createElement("img");
-        	img.classList.add("iconoSeleccionado"); // clase para aplicar CSS
-        	img.src = "/imagenes/iconos/" + i + ".png";
-        	img.dataset.id = i;
-        	contenedor.appendChild(img);
-		}
 	});
 	
 	$("#btnCancelarPassword").click(function() {
@@ -165,7 +156,6 @@ $(document).ready(function() {
 	
 	function validarModificarPassword() {
 		let errores = "";
-		
 		if($("#inputPasswordUsuario").val().trim() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordUsuario").val().length < 8) {
@@ -179,7 +169,6 @@ $(document).ready(function() {
 		if($("#inputPasswordUsuario").val() != $("#inputPasswordUsuarioConfirmacion").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
 		}
-		
 		return errores;
 	}
 	
@@ -190,5 +179,30 @@ $(document).ready(function() {
 	$("#btnCancelarEmblema").click(function() {
 		$("#emblemas").hide();
 	});
+	
+	$("#eliminarCuenta").click(function() {
+		$("#eliminar").show();
+	});
+	
+	$("#btnCancelarEliminarCuenta").click(function() {
+		$("#eliminar").hide();
+	});
+	
+	$("#btnEliminarCuenta").click(function() {
+		try {
+			eliminarCuenta();
+			cerrarSesion();
+		} catch(error) {
+			popupErroresOConfirmacion.mostrar("error","Ha ocurrido el siguiente error en el sistema:",error.message);
+		}
+	});
+	
+	async function eliminarCuenta() {
+		await eliminarUsuario(usuario);
+	}
+	
+	function cerrarSesion() {
+		$("#btnCerrarSesion").click();
+	}
 
 });

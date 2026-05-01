@@ -24,7 +24,7 @@ $(document).ready(function() {
 		listaExpansiones = [];
 		$(".expansionCarta").removeClass("seleccionada");
 		listaRarezas = [];
-		$(".rarezaCarta").removeClass("rarezaSeleccionada");
+		$(".rarezaCarta").removeClass("seleccionada");
 		listaEnergias = [];
 		$(".energiaCarta").removeClass("seleccionada");
 		listaTipos = [];
@@ -72,6 +72,7 @@ $(document).ready(function() {
     			img.dataset.cartaJuegoId = carta.cartaJuegoId;
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
+				img.title = "Selecciona la carta para eliminarla de la lista";
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
@@ -95,6 +96,7 @@ $(document).ready(function() {
 				img.dataset.nombre = carta.nombre;
 				img.dataset.posicion = carta.posicion;
 				img.dataset.basico = carta.basico;
+				img.title = "Selecciona la carta para eliminarla de la lista";
 			} else {
 				img.src = "/crearIntercambio/imagenes/cartaVacia.png";
 				img.dataset.expansionId = 0;
@@ -205,6 +207,7 @@ $(document).ready(function() {
         	img.dataset.rarezaId = carta.rarezaId;
         	img.dataset.nombre = carta.nombre;
         	img.dataset.basico = carta.basico;
+        	img.title = "Selecciona la carta para añadirla a la lista";
         	contenedor.appendChild(img);
     	});
 		contenedor.scrollTo({ top: 0, behavior: "smooth" });
@@ -320,7 +323,7 @@ $(document).ready(function() {
 				await publicar(intercambio);
 				popupErroresOConfirmacion.mostrar("success", "Se ha publicado correctamente el intercambio. Podrás verla en la aplicación de 'Intercambios Activos'", "");
 				limpiar();
-			}catch(error) {
+			} catch(error) {
 				popupErroresOConfirmacion.mostrar("error", "Se han producido el siguiente error en el sistema:",error.message);
 			}
 		}
@@ -391,7 +394,6 @@ $(document).ready(function() {
 				}
 			}
 		});
-		
 		cartaRepetidaQuerer.forEach(nombreCarta => {
 			errores += "- Has puesto que quieres la carta de " + nombreCarta + " mas de una vez" + "<br>";
 		});
@@ -408,7 +410,6 @@ $(document).ready(function() {
 						}
 					}
 				});
-
 			}
 		});
 		
@@ -447,21 +448,14 @@ $(document).ready(function() {
 				}
 			}
 		});
-
 		return errores;
 	}
 	
 	function construirIntercambio() {
 		let intercambio = {};
 		intercambio.ofertanteId = usuario.id;
-		intercambio.cartasOfrecer = cartasBarajaOfrecer
-			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
-			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
-			.join(";")
-		intercambio.cartasQuerer = cartasBarajaQuerer
-			.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0)
-			.map(carta => carta.expansionId + "," + carta.cartaJuegoId)
-			.join(";")
+		intercambio.cartasOfrecer = cartasBarajaOfrecer.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0);
+		intercambio.cartasQuerer = cartasBarajaQuerer.filter(carta => carta.expansionId != 0 && carta.cartaJuegoId != 0);
 		return intercambio;
 	}
 });

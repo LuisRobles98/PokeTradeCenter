@@ -16,6 +16,7 @@ import com.poketradecenter.Mapper.interfaces.IIntercambioMapper;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.ITablonIntercambiosService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 
 @Service
 public class TablonIntercambiosService implements ITablonIntercambiosService {
@@ -38,12 +39,12 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 	
 	@Override
 	public Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
-		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(0);
+		return usuarioService.recuperarUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
 	public Carta recuperarCartaPorCriterios(CriteriosCarta criterios) {
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		return cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	@Override
@@ -54,42 +55,39 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 	}
 	
 	private void validarDatosIntercambio(Intercambio intercambio) {
-		if(intercambio.getCartaOfrecerFinal() == null) {
-			throw new RuntimeException("No has seleccionado ninguna carta para quedarte");
+		if(intercambio.getCartaOfrecerFinalExpansionId() == null || intercambio.getCartaOfrecerFinalCartaJuegoId() == null) {
+			throw new RuntimeException("No se ha seleccionado ninguna carta para querer");
 		}
-		if(intercambio.getCartaQuererFinal() == null) {
-			throw new RuntimeException("No has seleccionado ninguna carta para ofrecer");
+		
+		if(intercambio.getCartaQuererFinalExpansionId() == null || intercambio.getCartaQuererFinalCartaJuegoId() == null) {
+			throw new RuntimeException("No se ha seleccionado ninguna carta para ofrecer");
 		}
-		Carta cartaParaOfrecer = recuperarCarta(intercambio.getCartaOfrecerFinal());
-		Carta cartaParaQuerer = recuperarCarta(intercambio.getCartaQuererFinal());
-		if(cartaParaOfrecer.getRarezaId() != cartaParaQuerer.getRarezaId()) {
+		
+		Carta cartaParaOfrecer = recuperarCarta(intercambio.getCartaOfrecerFinalExpansionId(), intercambio.getCartaOfrecerFinalCartaJuegoId());
+		Carta cartaParaQuerer = recuperarCarta(intercambio.getCartaQuererFinalExpansionId(), intercambio.getCartaQuererFinalCartaJuegoId());
+		if(!cartaParaOfrecer.getRarezaId().equals(cartaParaQuerer.getRarezaId())) {
 			throw new RuntimeException("Las rarezas de las cartas seleccionadas no coinciden");
 		}
 		
 		CriteriosIntercambio criterios = new CriteriosIntercambio();
 		criterios.setId(intercambio.getId());
-		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(0);
-		if(intercambioBBDD.getEstadoId() != 1) {
+		Intercambio intercambioBBDD = recuperarIntercambiosPublicosPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
+		if(!intercambioBBDD.getEstadoId().equals(Constantes.INTERCAMBIO_PUBLICO_ESTADO_SIN_OFERTA)) {
 			throw new RuntimeException("Parece que alguien se te ha adelantado y ya ha solicitado el intercambio");
 		}
 	}
 	
-	private Carta recuperarCarta(String cartaIntercambio) {
-		String[] carta = cartaIntercambio.split(",");
+	private Carta recuperarCarta(Integer expansionId, Integer cartaJuegoId) {
 		CriteriosCarta criterios = new CriteriosCarta();
 		List<Integer> expansiones = new ArrayList<>();
-		expansiones.add(Integer.parseInt(carta[0].trim()));
+		expansiones.add(expansionId);
 		criterios.setExpansiones(expansiones);
-		criterios.setCartaJuegoId(Integer.parseInt(carta[1].trim()));
-		return cartaService.recuperarCartasCrearBarajasPorCriterios(criterios).get(0);
+		criterios.setCartaJuegoId(cartaJuegoId);
+		return cartaService.recuperarCartasCrearIntercambioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	private void completarDatosSolicitarIntercambio(Intercambio intercambio) {
-		Carta cartaParaOfrecer = recuperarCarta(intercambio.getCartaOfrecerFinal());
-		Carta cartaParaQuerer = recuperarCarta(intercambio.getCartaQuererFinal());
-		intercambio.setCartaOfrecerFinalNombre(cartaParaOfrecer.getNombre());
-		intercambio.setCartaQuererFinalNombre(cartaParaQuerer.getNombre());
-		intercambio.setEstadoId(2);
+		intercambio.setEstadoId(Constantes.INTERCAMBIO_PUBLICO_ESTADO_OFERTA_RECIBIDA);
 		intercambio.setFechaCambio(LocalDateTime.now());
 	}
 	
@@ -99,5 +97,10 @@ public class TablonIntercambiosService implements ITablonIntercambiosService {
 		} catch(RuntimeException e) {
 			throw new RuntimeException("Ha ocurrido un error al actualizar un intercambios público del tablón", e);
 		}
+	}
+	
+	@Override
+	public Integer recuperarTotalCartasPorExpansion(Integer expansionId) {
+		return cartaService.recuperarTotalCartasPorExpansion(expansionId);
 	}
 }

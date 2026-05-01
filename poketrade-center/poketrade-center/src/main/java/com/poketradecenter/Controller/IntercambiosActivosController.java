@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,5 +55,10 @@ public class IntercambiosActivosController {
 	   	}catch(RuntimeException e) {
 	   		return ResponseEntity.badRequest().body(e.getMessage());
 	   	}
+    }
+    
+    @GetMapping("/intercambiosActivos/{expansionId}")
+    public Integer recuperarTotalCartasPorExpansion(@PathVariable Integer expansionId) {
+    	return intercambiosActivosService.recuperarTotalCartasPorExpansion(expansionId);
     }
 }

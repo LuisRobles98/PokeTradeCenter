@@ -21,11 +21,10 @@ $(document).ready(function() {
 		for (const barajaUsuario of barajasRecuperadas) {
 			let portada = {};
 			let baraja = barajaUsuario.baraja;
-			let primeraCarta = baraja.cartas.split(";")[0];
-			let [expansionId, cartaJuegoId] = primeraCarta.split(",");
-			let carta = await recuperarCarta(expansionId,cartaJuegoId);
+			let primeraCarta = baraja.cartas[0];
+			let carta = await recuperarCarta(primeraCarta.expansionId, primeraCarta.cartaJuegoId);
 			portada.barajaUsuarioId = barajaUsuario.id;
-			portada.imgPortada = `/imagenes/cartas/${expansionId}/${cartaJuegoId}.png`;
+			portada.imgPortada = `/imagenes/cartas/${carta.expansionId}/${carta.cartaJuegoId}.png`;
 			let cartaEnergia = carta.energiaId ?? "null";
 			portada.imgFondo = `/imagenes/fondos/fondo${cartaEnergia}.png`;
 			portada.nombre = baraja.nombre;
@@ -120,12 +119,11 @@ $(document).ready(function() {
 			}
 			let contenedor = document.getElementById("mostrarCartas");
 			contenedor.innerHTML = "";
-			let cartas = baraja.cartas.split(";");
+			let cartas = baraja.cartas;
 			cartas.forEach(carta => {
 				let img = document.createElement("img");
 	        	img.classList.add("carta");
-	        	let [expansionId, cartaJuegoId] = carta.split(",");
-	        	img.src = "/imagenes/cartas/" + expansionId + "/" + cartaJuegoId + ".png";
+	        	img.src = "/imagenes/cartas/" + carta.expansionId + "/" + carta.cartaJuegoId + ".png";
 	        	contenedor.appendChild(img);
 			});
 	    	contenedor.scrollTo({ top: 0, behavior: "smooth" });	

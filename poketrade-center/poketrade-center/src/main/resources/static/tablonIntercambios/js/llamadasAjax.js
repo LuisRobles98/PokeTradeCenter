@@ -45,3 +45,13 @@ async function solicitarIntercambio(intercambio) {
         throw new Error(msg || 'Error desconocido del servidor');
     }
 };
+
+async function recuperarTotalCartasExpansion(expansionId) {
+    return fetch(`http://localhost:8080/intercambiosPublicos/${expansionId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json());
+};

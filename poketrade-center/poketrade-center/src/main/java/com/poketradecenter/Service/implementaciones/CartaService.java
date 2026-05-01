@@ -42,5 +42,4 @@ public class CartaService implements ICartaService {
 			throw new RuntimeException("Ha ocurrido un error al recuperar cartas durante la creacion de un intercambio", e);
 		}
 	}
-	
 }

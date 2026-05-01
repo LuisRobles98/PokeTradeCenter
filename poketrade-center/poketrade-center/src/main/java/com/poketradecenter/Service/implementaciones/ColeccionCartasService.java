@@ -1,11 +1,7 @@
 package com.poketradecenter.Service.implementaciones;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +9,7 @@ import com.poketradecenter.Clase.CartaUsuario;
 import com.poketradecenter.Clase.CriteriosCartaUsuario;
 import com.poketradecenter.Service.interfaces.ICartaService;
 import com.poketradecenter.Service.interfaces.IColeccionCartasService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 import com.poketradecenter.Mapper.interfaces.ICartaUsuarioMapper;
 
 @Service
@@ -23,7 +20,6 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	@Autowired
 	private ICartaService cartaService;
 	
-
 	@Override
 	public List<CartaUsuario> recuperarCartaUsuarioPorCriterios(CriteriosCartaUsuario criterios) {
 		try {
@@ -48,11 +44,12 @@ public class ColeccionCartasService implements IColeccionCartasService {
 	
 	private CartaUsuario recuperarCartaUsuario(CartaUsuario cartaUsuario) {
 		CriteriosCartaUsuario criterios = new CriteriosCartaUsuario();
+		criterios.setUsuarioId(cartaUsuario.getUsuarioId());
 		List<Integer> expansiones = new ArrayList<>();
 		expansiones.add(cartaUsuario.getExpansionId());
 		criterios.setExpansiones(expansiones);
 		criterios.setCartaJuegoId(cartaUsuario.getCartaJuegoId());
-		return recuperarCartaUsuarioPorCriterios(criterios).get(0);
+		return recuperarCartaUsuarioPorCriterios(criterios).get(Constantes.PRIMER_ELEMENTO);
 	}
 	
 	private void actualizar(CartaUsuario cartaUsuario) {

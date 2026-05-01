@@ -5,8 +5,8 @@
     <!-- SQL para guardar una baraja y devolverla-->
     <insert id="guardar" parameterType="com.poketradecenter.Clase.Baraja" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO baraja
-        (nombre, cartas, cartas_nombre)
-        VALUES (#{nombre}, #{cartas}, #{cartasNombre})
+        (nombre)
+        VALUES (#{nombre})
     </insert>
  	
 </mapper>

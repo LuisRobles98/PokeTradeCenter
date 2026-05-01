@@ -2,23 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.poketradecenter.Mapper.interfaces.IBarajaUsuarioMapper">
 
-
 	<resultMap id="BarajaUsuarioConBarajaMap" type="com.poketradecenter.Clase.BarajaUsuario">
-	    <!-- Campos de BarajaPublica -->
+		<!-- Campos de BarajaUsuario -->
 	    <id property="id" column="bu_id"/>
 	    <result property="usuarioId" column="usuarioId"/>
-   	    <result property="barajaPublicaId" column="barajaPublicaId"/>
-	    <result property="barajaId" column="barajaId"/>
+	    <result property="barajaPublicaId" column="barajaPublicaId"/>
 	    <result property="fechaCreacion" column="fechaCreacion"/>
 	    
 	    <!-- Asociación con Baraja -->
 	    <association property="baraja" javaType="com.poketradecenter.Clase.Baraja">
 	        <id property="id" column="b_id"/>
 	        <result property="nombre" column="b_nombre"/>
-	        <result property="cartas" column="b_cartas"/>
+	        
+	        <!-- Asociación con CartaBaraja -->
+	        <collection property="cartas" ofType="com.poketradecenter.Clase.CartaBaraja">
+	         	<result property="barajaId" column="baraja_id"/>
+	            <result property="expansionId" column="expansion_id"/>
+	            <result property="cartaJuegoId" column="carta_juego_id"/>
+	            <result property="orden" column="orden"/>
+	        </collection>
 	    </association>
 	</resultMap>
-
 
     <!-- SQL para guardar una baraja creada-->
     <insert id="guardar" parameterType="com.poketradecenter.Clase.BarajaUsuario" useGeneratedKeys="true" keyProperty="id">
@@ -27,32 +31,36 @@
         VALUES (#{usuarioId}, #{barajaPublicaId}, #{barajaId},#{fechaCreacion})
     </insert>
         
-	 <!-- SQL para recuperar mis barajas por criterios-->
-	 <select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaUsuario"  
-	        resultMap="BarajaUsuarioConBarajaMap">
-	    SELECT bu.id AS bu_id, bu.usuario_id AS usuarioId, bu.baraja_publica_id AS barajaPublicaId, bu.fecha_creacion AS fechaCreacion,
-	    b.id AS b_id, b.nombre AS b_nombre, b.cartas AS b_cartas
+	<select id="recuperarMisBarajasPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosBarajaUsuario" resultMap="BarajaUsuarioConBarajaMap">
+	    SELECT bu.id AS bu_id, bu.usuario_id AS usuarioId, bu.baraja_publica_id AS barajaPublicaId, bu.fecha_creacion AS fechaCreacion, b.id AS b_id,
+		b.nombre AS b_nombre, cb.baraja_id, cb.expansion_id, cb.carta_juego_id, cb.orden
 	    FROM baraja_usuario bu
 	    JOIN baraja b ON b.id = bu.baraja_id
+	    LEFT JOIN carta_baraja cb ON cb.baraja_id = b.id
 	    <where>
-   	        <if test="cartaNombre != null">
-	            AND b.cartas_nombre LIKE CONCAT('%', #{cartaNombre}, '%')
+	        <if test="cartaNombre != null">
+	            AND EXISTS (
+	            	SELECT 1
+	                FROM carta_baraja cb2 
+	                JOIN carta c ON c.expansion_id = cb2.expansion_id AND c.carta_juego_id = cb2.carta_juego_id
+	                WHERE cb2.baraja_id = b.id AND c.nombre LIKE CONCAT('%', #{cartaNombre}, '%')
+                )
 	        </if>
 	        <if test="usuarioId != null">
 	            AND bu.usuario_id = #{usuarioId}
 	        </if>
-     	    <if test="barajaPublicaId != null">
+	        <if test="barajaPublicaId != null">
 	            AND bu.baraja_publica_id = #{barajaPublicaId}
 	        </if>
 	    </where>
-		<choose>
-		    <when test="ordenacion != null">
-		        ORDER BY ${ordenacion}
-		    </when>
-		    <otherwise>
-		        ORDER BY bu.fecha_creacion DESC
-		    </otherwise>
-		</choose>
+	    <choose>
+	        <when test="ordenacion != null">
+	            ORDER BY ${ordenacion}, cb.orden ASC
+	        </when>
+	        <otherwise>
+	            ORDER BY bu.fecha_creacion DESC, cb.orden ASC
+	        </otherwise>
+	    </choose>
 	</select>
 	
 	 <delete id="eliminarMiBaraja" parameterType="com.poketradecenter.Clase.Baraja">

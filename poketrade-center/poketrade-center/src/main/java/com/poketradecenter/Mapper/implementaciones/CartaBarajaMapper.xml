@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poketradecenter.Mapper.interfaces.ICartaBarajaMapper">
+
+    <!-- SQL para guardar una carta en baraja -->
+    <insert id="guardar" parameterType="com.poketradecenter.Clase.CartaBaraja">
+        INSERT INTO carta_baraja
+        (baraja_id, expansion_id, carta_juego_id, orden)
+        VALUES (#{barajaId}, #{expansionId}, #{cartaJuegoId}, #{orden})
+    </insert>
+ 	
+</mapper>

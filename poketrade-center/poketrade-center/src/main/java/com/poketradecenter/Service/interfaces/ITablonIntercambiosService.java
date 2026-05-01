@@ -12,4 +12,5 @@ public interface ITablonIntercambiosService {
 	Carta recuperarCartaPorCriterios(CriteriosCarta criterios);
 	void solicitarIntercambio(Intercambio intercambio);
 	Usuario recuperarUsuarioPorCriterios(CriteriosUsuario criterios);
+	Integer recuperarTotalCartasPorExpansion(Integer expansionId);
 }

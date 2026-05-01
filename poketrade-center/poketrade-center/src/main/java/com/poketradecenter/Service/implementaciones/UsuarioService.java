@@ -1,14 +1,17 @@
 package com.poketradecenter.Service.implementaciones;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
+import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
+import com.poketradecenter.Service.interfaces.IMisBarajasService;
+import com.poketradecenter.Service.interfaces.IUsuarioGestionService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
+import com.poketradecenter.Utilities.implementaciones.Constantes;
 import com.poketradecenter.Mapper.interfaces.IUsuarioMapper;
 
 @Service
@@ -16,11 +19,14 @@ public class UsuarioService implements IUsuarioService {
 	
 	@Autowired
 	private IUsuarioMapper usuarioMapper;
+	@Autowired
+	private IUsuarioGestionService usuarioGestionService;
 	
 	@Override
 	public void crearUsuario(Usuario usuario) {
 		validarDatosUsuario(usuario, true);
 		crear(usuario);
+		insertarCartasNuevoUsuario(usuario);
 	}
 	
 	private void crear(Usuario usuario) {
@@ -41,7 +47,7 @@ public class UsuarioService implements IUsuarioService {
 		//nombre de usuario(ambas)
 		if(usuario.getNombre() == null || usuario.getNombre().isBlank()) {
 			throw new RuntimeException("El nombre de usuario no puede estar vacío");
-		} else if(usuario.getNombre().length() > 45){
+		} else if(usuario.getNombre().length() > Constantes.LIMITE_NOMBRE){
 			throw new RuntimeException("El nombre de usuario no puede tener más de 45 caracteres");
 		}
 		
@@ -58,16 +64,16 @@ public class UsuarioService implements IUsuarioService {
 		} else {
 			//contraseña(actualizar)
 			if(!usuario.getPassword().isBlank()) {
-				if(usuario.getPassword().length() < 8) {
+				if(usuario.getPassword().length() < Constantes.LIMITE_INFERIOR_PASSWORD) {
 					throw new RuntimeException("La contraseña debe tener 8 caracteres como mínimo");
-				} else if(usuario.getPassword().length() > 45) {
+				} else if(usuario.getPassword().length() > Constantes.LIMITE_SUPERIOR_PASSWORD) {
 					throw new RuntimeException("La contraseña no puede tener más de 45 caracteres");
 				}
 			}
 			//id tcg(actualizar)
 			if(usuario.getJuegoId() == null || usuario.getJuegoId().isBlank()) {
 				throw new RuntimeException("El id de TCG Pocket no puede estar vacío");
-			} else if(usuario.getJuegoId().length() > 45){
+			} else if(usuario.getJuegoId().length() > Constantes.LIMITE_JUEGO_ID){
 				throw new RuntimeException("El id de TCG Pocket no puede tener más de 45 caracteres");
 			}
 			
@@ -79,28 +85,28 @@ public class UsuarioService implements IUsuarioService {
 			//icono(actualizar)
 			if(usuario.getIconoId() == null) {
 				throw new RuntimeException("No hay nigún icono definido");
-			} else if(usuario.getIconoId() < 1 || usuario.getIconoId() > 54) {
+			} else if(usuario.getIconoId() < Constantes.PRIMER_ICONO || usuario.getIconoId() > Constantes.TOTAL_ICONOS) {
 				throw new RuntimeException("El icono no corresponde con ninguno del sistema");
 			}
 			
 			//emblema1(actualizar)
 			if(usuario.getEmblema1Id() == null) {
 				throw new RuntimeException("No hay ningún emblema definido en la primera posición");
-			} else if(usuario.getEmblema1Id() < 0 || usuario.getEmblema1Id() > 28) {
+			} else if(usuario.getEmblema1Id() < Constantes.PRIMER_EMBLEMA || usuario.getEmblema1Id() > Constantes.TOTAL_EMBLEMAS) {
 				throw new RuntimeException("El primer emblema no corresponde con ninguno del sistema");
 			}
 			
 			//emblema2(actualizar)
 			if(usuario.getEmblema2Id() == null) {
 				throw new RuntimeException("No hay ningún emblema definido en la segunda posición");
-			} else if(usuario.getEmblema2Id() < 0 || usuario.getEmblema2Id() > 28) {
+			} else if(usuario.getEmblema2Id() < Constantes.PRIMER_EMBLEMA || usuario.getEmblema2Id() > Constantes.TOTAL_EMBLEMAS) {
 				throw new RuntimeException("El segundo emblema no corresponde con ninguno del sistema");
 			}
 			
 			//emblema3(actualizar)
 			if(usuario.getEmblema3Id() == null) {
 				throw new RuntimeException("No hay ningún emblema definido en la tercera posición");
-			} else if(usuario.getEmblema3Id() < 0 || usuario.getEmblema3Id() > 28) {
+			} else if(usuario.getEmblema3Id() < Constantes.PRIMER_EMBLEMA || usuario.getEmblema3Id() > Constantes.TOTAL_EMBLEMAS) {
 				throw new RuntimeException("El tercer emblema no corresponde con ninguno del sistema");
 			}
 		}
@@ -120,8 +126,6 @@ public class UsuarioService implements IUsuarioService {
 		}
 	}
 	
-	
-	
 	@Override
 	public List<Usuario> recuperarUsuarioPorCriterios(CriteriosUsuario criterios) {
 		try {
@@ -137,5 +141,42 @@ public class UsuarioService implements IUsuarioService {
 		for(Usuario usuario : usuarios) {
 			usuario.setPassword(null);
 		}
+	}
+	
+	private void insertarCartasNuevoUsuario(Usuario usuario) {
+		usuarioGestionService.insertarCartasNuevoUsuario(usuario.getId());
+	}
+	
+	@Override
+	public void eliminarUsuario(Usuario usuario) {
+		Integer usuarioId = usuario.getId();
+		usuarioGestionService.eliminarCartasUsuario(usuarioId);
+		usuarioGestionService.eliminarBarajasUsuario(usuarioId);
+		usuarioGestionService.eliminarIntercambios(usuarioId);
+		eliminar(usuario);
+	}
+	
+	private void eliminar(Usuario usuario) {
+		usuario.setPassword(generarPasswordEliminarUsuario());
+		usuario.setEmail(generarEmailEliminarUsuario());
+		actualizarDatosUsuario(usuario);
+	}
+	
+	private String generarPasswordEliminarUsuario() {
+		return generarEliminarUsuario();
+	}
+	
+	private String generarEmailEliminarUsuario() {
+		return generarEliminarUsuario().concat(Constantes.DOMINIO_DELETE);
+	}
+	
+	private String generarEliminarUsuario() {
+		SecureRandom random = new SecureRandom();
+		StringBuilder sb = new StringBuilder();
+		Integer longitud = Constantes.LONGITUD_ELIMINAR_PASSWORD - Constantes.DOMINIO_DELETE.length();
+		for(int i = 0; i < longitud; i++) {
+			sb.append(Constantes.CHARS.charAt(random.nextInt(Constantes.CHARS.length())));
+		}
+		return sb.toString();
 	}
 }
