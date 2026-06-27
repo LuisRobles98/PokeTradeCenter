@@ -17,7 +17,7 @@
 	    </where>
 	</select>
 	
- 	 <!-- SQL para insertar la combinacion usuario baraja al dar like-->
+ 	 <!-- SQL para insertar la combinación usuario baraja al dar like-->
 	 <insert id="crear" parameterType="com.poketradecenter.Clase.BarajaLike">
 	    INSERT INTO baraja_like
 	    (usuario_id, baraja_publica_id)

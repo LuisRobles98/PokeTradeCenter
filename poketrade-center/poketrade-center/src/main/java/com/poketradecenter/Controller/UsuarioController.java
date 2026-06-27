@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
-import com.poketradecenter.Service.interfaces.IUsuarioGestionService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Utilities.interfaces.ICrearCriterios;
 

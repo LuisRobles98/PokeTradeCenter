@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.poketradecenter.Clase.CriteriosUsuario;
 import com.poketradecenter.Clase.Usuario;
-import com.poketradecenter.Service.interfaces.IIntercambiosActivosService;
-import com.poketradecenter.Service.interfaces.IMisBarajasService;
 import com.poketradecenter.Service.interfaces.IUsuarioGestionService;
 import com.poketradecenter.Service.interfaces.IUsuarioService;
 import com.poketradecenter.Utilities.implementaciones.Constantes;
