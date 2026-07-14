@@ -314,7 +314,7 @@ $(document).ready(function() {
 	});
 	 
     async function publicarIntercambio() {
-		let errores = validarDatos();
+		let errores = validarDatosCartasPublicarIntercambio();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -329,7 +329,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	function validarDatos() {
+	function validarDatosCartasPublicarIntercambio() {
 		let errores = "";
 		//validar que hay al menos una carta que ofrezcas
 		let contadorCartas = 0;

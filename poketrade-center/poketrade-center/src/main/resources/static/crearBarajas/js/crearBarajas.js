@@ -242,7 +242,7 @@ $(document).ready(function() {
     });
     
     async function guardarBaraja() {
-		let errores = validarDatos();
+		let errores = validarDatosCartasCrearBaraja();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -258,7 +258,7 @@ $(document).ready(function() {
 	}
 	
     async function publicarBaraja() {
-		let errores = validarDatos();
+		let errores = validarDatosCartasCrearBaraja();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -274,7 +274,7 @@ $(document).ready(function() {
 	}
 	
     async function guardarYPublicarBaraja() {
-		let errores = validarDatos();
+		let errores = validarDatosCartasCrearBaraja();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -289,7 +289,7 @@ $(document).ready(function() {
 		}
 	}
 	
-	function validarDatos() {
+	function validarDatosCartasCrearBaraja() {
 		let errores = "";
 		//validar que hay 20 cartas
 		let contadorCartas = 0;
@@ -301,7 +301,6 @@ $(document).ready(function() {
 		if(contadorCartas != 20) {
 			errores += "- La baraja debe tener 20 cartas" + "<br>";
 		}
-		
 		//validar que no hay una misma carta mas de dos veces
 		let masDeDosCartas = new Set();
 		cartasBaraja.forEach(carta1 => {
@@ -320,11 +319,9 @@ $(document).ready(function() {
 				}
 			}
 		});
-		
 		masDeDosCartas.forEach(nombreCarta => {
 			errores += "- La carta " + nombreCarta + " no puede estar más de dos veces" + "<br>";
 		});
-		
 		//validar que hay al menos una carta básica
 		let hayCartaBasica = false;
 		cartasBaraja.forEach(carta => {
@@ -334,7 +331,6 @@ $(document).ready(function() {
 				}
 			}
 		});
-		
 		if(!hayCartaBasica) {
 			errores += "- La baraja debe tener al menos una carta básica" + "<br>";
 		}

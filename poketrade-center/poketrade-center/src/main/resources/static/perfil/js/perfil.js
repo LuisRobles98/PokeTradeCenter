@@ -78,7 +78,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnModificarDatosUsuario").click(async function() {
-		let errores = validarDatos();
+		let errores = validarDatosModificacion();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -96,13 +96,15 @@ $(document).ready(function() {
 		}
     });
     
-    function validarDatos() {
+    function validarDatosModificacion() {
 		let errores = "";
+		//nombre de usuario introducido y no supera el límite máximo
 		if($("#inputNombreUsuario").val().trim() == "") {
 			errores += "- Debes introducir un nombre de usuario" + "<br>";
 		} else if($("#inputNombreUsuario").val().length > 45) {
 			errores += "- El nombre de usuario no puede tener más de 45 caracteres" + "<br>";
 		}
+		//id de juego válido y no supera límite máximo
 		if($("#inputJuegoIdUsuario").val().trim() == "") {
 			errores += "- Debes introducir un id de Pokemon TCG Pocket" + "<br>";
 		} else if($("#inputJuegoIdUsuario").val().length > 45) {
@@ -156,6 +158,7 @@ $(document).ready(function() {
 	
 	function validarModificarPassword() {
 		let errores = "";
+		//contraseña introducida y entre los límites de caracteres permitido
 		if($("#inputPasswordUsuario").val().trim() == "") {
 			errores += "- Debes introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordUsuario").val().length < 8) {
@@ -163,9 +166,11 @@ $(document).ready(function() {
 		} else if($("#inputPasswordUsuario").val().length > 45) {
 			errores += "- La contraseña no puede tener más de 45 caracteres" + "<br>";
 		}
+		//contraseña de verificación introducida
 		if($("#inputPasswordUsuarioConfirmacion").val().trim() == "") {
 			errores += "- Debe volver a introducir la contraseña para verificarla" + "<br>";
 		}
+		//ambas contraseñas iguales
 		if($("#inputPasswordUsuario").val() != $("#inputPasswordUsuarioConfirmacion").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
 		}

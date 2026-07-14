@@ -219,7 +219,7 @@ $(document).ready(function() {
 	});
 	
 	$("#btnSolicitar").click(async function() {
-		let errores = await validarDatos();
+		let errores = await validarDatosSolicitarIntercambio();
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -235,7 +235,7 @@ $(document).ready(function() {
 		$("#confirmarIntercambio").hide();
 	});
 	
-	async function validarDatos() {
+	async function validarDatosSolicitarIntercambio() {
 		let errores = "";
 		if(cartaQuieroSeleccionada[0].expansionId == 0 && cartaQuieroSeleccionada[0].cartaJuegoId == 0) {
 			errores = errores += "- No has seleccionado ninguna carta para quedarte" + "<br>";

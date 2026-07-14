@@ -59,9 +59,9 @@ INSERT INTO carta VALUES (1,55,'Blastoise',3,3,1,0,NULL);
 INSERT INTO carta VALUES (1,56,'Blastoise ex',4,3,1,0,NULL);
 INSERT INTO carta VALUES (1,57,'Psyduck',1,3,1,1,NULL);
 INSERT INTO carta VALUES (1,58,'Golduck',2,3,1,0,NULL);
-INSERT INTO carta VALUES (1,59,'Poliwag',1,2,1,1,NULL);
-INSERT INTO carta VALUES (1,60,'Poliwhirl',2,2,1,0,NULL);
-INSERT INTO carta VALUES (1,61,'Poliwrath',3,2,1,0,NULL);
+INSERT INTO carta VALUES (1,59,'Poliwag',1,3,1,1,NULL);
+INSERT INTO carta VALUES (1,60,'Poliwhirl',2,3,1,0,NULL);
+INSERT INTO carta VALUES (1,61,'Poliwrath',3,3,1,0,NULL);
 INSERT INTO carta VALUES (1,62,'Tentacool',1,3,1,1,NULL);
 INSERT INTO carta VALUES (1,63,'Tentacruel',2,3,1,0,NULL);
 INSERT INTO carta VALUES (1,64,'Seel',1,3,1,1,NULL);
@@ -375,3 +375,15 @@ INSERT INTO carta VALUES (2,83,'Mew ex',6,5,1,1,NULL);
 INSERT INTO carta VALUES (2,84,'Aerodactyl ex',6,6,1,0,NULL);
 INSERT INTO carta VALUES (2,85,'Celebi ex',7,1,1,1,NULL);
 INSERT INTO carta VALUES (2,86,'Mew ex',10,5,1,1,NULL);
+
+#Expansión Promo A (expansion_id, carta_juego_id, nombre, rareza_id, energia_id, tipo_id, basico, carta_promo_usable_barajas)
+INSERT INTO carta VALUES (12,1,"Poción",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,2,"Velocidad X",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,3,"Periscopio",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,4,"Pokédex",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,5,"Poké Ball",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,6,"Tarjeta Roja",11,NULL,2,0,true);
+INSERT INTO carta VALUES (12,7,"Investigación de Profesores (Profesor Oak)",11,NULL,3,0,true);
+INSERT INTO carta VALUES (12,8,"Pokédex",11,NULL,2,0,false);
+
+INSERT INTO carta VALUES (12,14,"Lapras ex",11,3,1,1,true);
