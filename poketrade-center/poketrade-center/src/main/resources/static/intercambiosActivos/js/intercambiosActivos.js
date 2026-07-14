@@ -425,7 +425,7 @@ $(document).ready(function() {
 	
 	$("#btnEliminarEliminar").click(async function() {
 		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, null);
-		let errores = await validarDatos(intercambio);
+		let errores = await validarDatosActualizarIntercambio(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -442,7 +442,7 @@ $(document).ready(function() {
 	
 	$("#btnEliminarRechazar").click(async function() {
 		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, intercambioSeleccionadoCompleto.contraparteId);
-		let errores = await validarDatos(intercambio);
+		let errores = await validarDatosActualizarIntercambio(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -459,7 +459,7 @@ $(document).ready(function() {
 	
 	$("#btnOfertarRechazar").click(async function() {
 		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 1, null);
-		let errores = await validarDatos(intercambio);
+		let errores = await validarDatosActualizarIntercambio(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -476,7 +476,7 @@ $(document).ready(function() {
 	
 	$("#btnAceptarAceptar").click(async function() {
 		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 3, intercambioSeleccionadoCompleto.contraparteId);
-		let errores = await validarDatos(intercambio);
+		let errores = await validarDatosActualizarIntercambio(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -493,7 +493,7 @@ $(document).ready(function() {
 	
 	$("#btnFinalizarFinalizar").click(async function() {
 		let intercambio = construirActualizarIntercambio(intercambioSeleccionadoCompleto, 4, intercambioSeleccionadoCompleto.contraparteId);
-		let errores = await validarDatos(intercambio);
+		let errores = await validarDatosActualizarIntercambio(intercambio);
 		if(errores != ""){
 			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
@@ -515,7 +515,7 @@ $(document).ready(function() {
 		return intercambio;
 	}
 		
-	async function validarDatos(intercambio) {
+	async function validarDatosActualizarIntercambio(intercambio) {
 		let errores = "";
 		if(intercambio.estadoId == 2) {
 			errores = errores += "- Se ha insertado un estado que no corresponde" + "<br>";

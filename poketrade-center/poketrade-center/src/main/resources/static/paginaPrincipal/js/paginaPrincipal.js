@@ -51,29 +51,32 @@ $(document).ready(function() {
 	
 	async function validarRegistro() {
 		let errores = "";
+		//campo usuario rellenado
 		if($("#inputUsuarioRegistro").val().trim() == "") {
 			errores += "- Debe introducir un nombre" + "<br>";
 		}
+		//campo email rellando
 		if($("#inputCorreoRegistro").val().trim() == "") {
 			errores += "- Debe introducir un email" + "<br>";
 		} else if($("#inputCorreoRegistro").val().indexOf('@') === -1 || $("#inputCorreoRegistro").val().indexOf('.') === -1) {
 			errores += "- Debe introducir un email valido" + "<br>";
 		}
-		
 		//comprobar que el correo no exista en bbdd
  		let correoExiste = await comprobarCorreoExiste();
 	    if (correoExiste) {
 	        errores += "- El correo ya existe en el sistema" + "<br>";
 	    }
-		
+		//campo contraseña rellenado
 		if($("#inputPasswordRegistro").val().trim() == "") {
 			errores += "- Debe introducir una contraseña valida" + "<br>";
 		} else if($("#inputPasswordRegistro").val().length < 8) {
 			errores += "- La contraseña tiene que tener 8 caracteres como mínimo" + "<br>";
 		}
+		//campo validación contraseña rellenado
 		if($("#inputPassword2Registro").val().trim() == "") {
 			errores += "- Debe volver a introducir la contraseña para verificarla" + "<br>";
 		}
+		//campo contraseña y campo repetir contraseña coinciden
 		if($("#inputPasswordRegistro").val() != $("#inputPassword2Registro").val()) {
 			errores += "- Las contraseñas no coinciden" + "<br>";
 		}
@@ -103,15 +106,17 @@ $(document).ready(function() {
 	
 	async function validarAcceso() {
 		let errores = "";
+		//email introducido y formato válido
 		if($("#inputCorreoInicioSesion").val().trim() == "") {
 			errores += "- Debes introducir un email" + "<br>";
 		} else if($("#inputCorreoInicioSesion").val().indexOf('@') === -1 || $("#inputCorreoInicioSesion").val().indexOf('.') === -1) {
 			errores += "- Debes introducir un email valido" + "<br>";
 		}
+		//contraseña introducida
 		if($("#inputPasswordInicioSesion").val() == "") {
 			errores += "- Debes introducir una contraseña" + "<br>";
 		}
-		
+		//comprobar que el usuario existe en el sistema
 		if(errores == "") {
 			let usuarioExiste = await comprobarUsuarioExiste();
 			if(!usuarioExiste) {

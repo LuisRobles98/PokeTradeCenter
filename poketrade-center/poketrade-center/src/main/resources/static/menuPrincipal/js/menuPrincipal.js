@@ -33,6 +33,7 @@ $(document).ready(async function() {
     
     function validarIdJuego() {
 		let errores = "";
+		//id de juego introducido
 		if($("#inputIdJuego").val() == "") {
 			errores += "- Debes introducir un id de juego" + "<br>";
 		}

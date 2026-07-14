@@ -213,102 +213,103 @@ $(document).ready(function() {
 	});
 	
 
-async function abrirAmpliarCarta(carta) {
-    // Guardamos los campos importantes
-    $("#cartaSeleccionada").data("expansion", carta.expansionId);
-    $("#cartaSeleccionada").data("cartaJuegoId", carta.cartaJuegoId);
-    $("#cartaSeleccionada").data("obtenida", carta.obtenida);
-    
-
-    // Mostramos el popup
-    $("#cartaSeleccionada").show();
-    
-    // Actualizamos la expansion de la carta
-     $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
-     
-     //Actualizamos el numero de carta con respecto al total de cartas de la expansion
-     $("#infoNumero").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
-
-    // Actualizamos la imagen del popup
-    $("#cartaSeleccionadaAmpliada").attr("src", carta.src);
-
-    // Deshabilitamos la carta si no la tenemos
-    if (!carta.obtenida) {
-        $("#cartaSeleccionadaAmpliada").addClass("deshabilitarParcial");
-    } else {
-        $("#cartaSeleccionadaAmpliada").removeClass("deshabilitarParcial");
-    }
-
-    // ----------------- ROTACIÓN 3D SEGUIMIENTO CLICK -----------------
-    let girando = false;
-    let rotX = 0;
-    let rotY = 0;
-    let lastX = 0;
-    let lastY = 0;
-
-    $("#cartaSeleccionadaAmpliada").off(".rotar"); // limpiar eventos previos
-
-    $("#cartaSeleccionadaAmpliada").on("mousedown.rotar", function(e) {
-        e.preventDefault();
-        girando = true;
-        lastX = e.clientX;
-        lastY = e.clientY;
-    });
-
-    $(document).on("mouseup.rotar", function() {
-        if (!girando) return;
-        girando = false;
-
-        // Volver al centro suavemente al soltar
-        rotX = 0;
-        rotY = 0;
-        $("#cartaSeleccionadaAmpliada").css("transform", `rotateX(0deg) rotateY(0deg)`);
-    });
-
-    $(document).on("mousemove.rotar", function(e) {
-        if (!girando) return;
-
-        // Rotación intuitiva
-        rotY += (e.clientX - lastX) / 5; // derecha → derecha, izquierda → izquierda
-        rotX -= (e.clientY - lastY) / 5; // abajo → abajo, arriba → arriba
-
-        // Limitar giro máximo
-        rotY = Math.max(Math.min(rotY, 45), -45);
-        rotX = Math.max(Math.min(rotX, 45), -45);
-
-        $("#cartaSeleccionadaAmpliada").css("transform", `rotateX(${rotX}deg) rotateY(${rotY}deg)`);
-
-        lastX = e.clientX;
-        lastY = e.clientY;
-    });
-
-    // ----------------- BOTÓN SALIR -----------------
-    $("#btnSalir").off("click").on("click", () => {
-        $("#cartaSeleccionada").hide();
-        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
-        $("#cartaSeleccionadaAmpliada").off(".rotar"); // quitar eventos de rotación
-    });
-
-    // ----------------- BOTÓN OBTENER -----------------
-    $("#btnObtener").off("click").on("click", () => {
-		
-		obtenerCarta(carta);		
-        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
-        $("#cartaSeleccionadaAmpliada").off(".rotar");
-    });
-
-    // ----------------- BOTÓN QUITAR -----------------
-    $("#btnQuitar").off("click").on("click", () => {
-		
-		quitarCarta(carta);
-        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
-        $("#cartaSeleccionadaAmpliada").off(".rotar");
-    });
-}
+	async function abrirAmpliarCarta(carta) {
+	    // Guardamos los campos importantes
+	    $("#cartaSeleccionada").data("expansion", carta.expansionId);
+	    $("#cartaSeleccionada").data("cartaJuegoId", carta.cartaJuegoId);
+	    $("#cartaSeleccionada").data("obtenida", carta.obtenida);
+	    
+	
+	    // Mostramos el popup
+	    $("#cartaSeleccionada").show();
+	    
+	    // Actualizamos la expansion de la carta
+	     $("#infoExpansion").attr("src", "/imagenes/expansiones/" + carta.expansionId + ".png");
+	     
+	     //Actualizamos el numero de carta con respecto al total de cartas de la expansion
+	     $("#infoNumero").text(String(carta.cartaJuegoId).padStart(3, '0') + "/" + String(await recuperarTotalCartasExpansionId(carta.expansionId)).padStart(3, '0'));
+	
+	    // Actualizamos la imagen del popup
+	    $("#cartaSeleccionadaAmpliada").attr("src", carta.src);
+	
+	    // Deshabilitamos la carta si no la tenemos
+	    if (!carta.obtenida) {
+	        $("#cartaSeleccionadaAmpliada").addClass("deshabilitarParcial");
+	    } else {
+	        $("#cartaSeleccionadaAmpliada").removeClass("deshabilitarParcial");
+	    }
+	
+	    // ----------------- ROTACIÓN 3D SEGUIMIENTO CLICK -----------------
+	    let girando = false;
+	    let rotX = 0;
+	    let rotY = 0;
+	    let lastX = 0;
+	    let lastY = 0;
+	
+	    $("#cartaSeleccionadaAmpliada").off(".rotar"); // limpiar eventos previos
+	
+	    $("#cartaSeleccionadaAmpliada").on("mousedown.rotar", function(e) {
+	        e.preventDefault();
+	        girando = true;
+	        lastX = e.clientX;
+	        lastY = e.clientY;
+	    });
+	
+	    $(document).on("mouseup.rotar", function() {
+	        if (!girando) return;
+	        girando = false;
+	
+	        // Volver al centro suavemente al soltar
+	        rotX = 0;
+	        rotY = 0;
+	        $("#cartaSeleccionadaAmpliada").css("transform", `rotateX(0deg) rotateY(0deg)`);
+	    });
+	
+	    $(document).on("mousemove.rotar", function(e) {
+	        if (!girando) return;
+	
+	        // Rotación intuitiva
+	        rotY += (e.clientX - lastX) / 5; // derecha → derecha, izquierda → izquierda
+	        rotX -= (e.clientY - lastY) / 5; // abajo → abajo, arriba → arriba
+	
+	        // Limitar giro máximo
+	        rotY = Math.max(Math.min(rotY, 45), -45);
+	        rotX = Math.max(Math.min(rotX, 45), -45);
+	
+	        $("#cartaSeleccionadaAmpliada").css("transform", `rotateX(${rotX}deg) rotateY(${rotY}deg)`);
+	
+	        lastX = e.clientX;
+	        lastY = e.clientY;
+	    });
+	
+	    // ----------------- BOTÓN SALIR -----------------
+	    $("#btnSalir").off("click").on("click", () => {
+	        $("#cartaSeleccionada").hide();
+	        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
+	        $("#cartaSeleccionadaAmpliada").off(".rotar"); // quitar eventos de rotación
+	    });
+	
+	    // ----------------- BOTÓN OBTENER -----------------
+	    $("#btnObtener").off("click").on("click", () => {
+			
+			obtenerCarta(carta);		
+	        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
+	        $("#cartaSeleccionadaAmpliada").off(".rotar");
+	    });
+	
+	    // ----------------- BOTÓN QUITAR -----------------
+	    $("#btnQuitar").off("click").on("click", () => {
+			
+			quitarCarta(carta);
+	        $("#cartaSeleccionadaAmpliada").css("transform", "rotateX(0deg) rotateY(0deg)");
+	        $("#cartaSeleccionadaAmpliada").off(".rotar");
+	    });
+	}
 
 	async function obtenerCarta(carta) {
-		if(carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No puedes marcar como obtenida una carta que ya tienes", "");
+		let errores = validarModificacionObtencionCarta(carta.obtenida, true);
+		if(errores != "") {
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
 				carta.obtenida = true;
@@ -323,8 +324,9 @@ async function abrirAmpliarCarta(carta) {
 	}
 	
 	async function quitarCarta(carta) {
-		if(!carta.obtenida) {
-			popupErroresOConfirmacion.mostrar("error", "No puedes desmarcar una carta que no tienes", "");
+		let errores = validarModificacionObtencionCarta(carta.obtenida, false);
+		if(errores != "") {
+			popupErroresOConfirmacion.mostrar("error", "Se han producido los siguientes errores:",errores);
 		} else {
 			try {
 				carta.obtenida = false;
@@ -336,6 +338,14 @@ async function abrirAmpliarCarta(carta) {
 				popupErroresOConfirmacion.mostrar("error", "Ha ocurrido el siguiente error en el sistema:", error);
 			}
 		}
+	}
+	
+	function validarModificacionObtencionCarta(estado, estadoNoValido) {
+		let errores = "";
+		if(estado == estadoNoValido) {
+			errores += "- No puedes realizar dicha acción sobre esta carta" + "<br>";
+		}
+		return errores;
 	}
 	
 	async function actualizarObtenida(carta) {

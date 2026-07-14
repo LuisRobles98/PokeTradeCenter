@@ -88,7 +88,6 @@ public class CrearBarajasService implements ICrearBarajasService {
 		if(contadorCartas != Constantes.MAXIMO_CARTAS_BARAJA) {
 			throw new RuntimeException("La baraja no tiene 20 cartas");
 		}
-		
 		//validar cartas repetidas mas de dos cartas
 		for(Carta carta1 : cartasBarajaGuardarPublicar) {
 			if(!carta1.getExpansionId().equals(Constantes.CERO) && !carta1.getCartaJuegoId().equals(Constantes.CERO)) {
@@ -105,7 +104,6 @@ public class CrearBarajasService implements ICrearBarajasService {
 				}
 			}
 		}
-		
 		//validar que haya alguna carta básica
 		boolean basica = false;
 		for(Carta carta : cartasBarajaGuardarPublicar) {
