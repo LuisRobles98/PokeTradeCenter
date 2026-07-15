@@ -44,7 +44,7 @@
     <!-- SQL para recuperar usuarios por criterios-->
     <select id="recuperarPorCriterios" parameterType="com.poketradecenter.Clase.CriteriosUsuario"  resultType="com.poketradecenter.Clase.Usuario">
     	SELECT id, nombre, email, password, juego_id AS juegoId, icono_id AS iconoId, emblema_1_id AS emblema1Id, emblema_2_id AS emblema2Id, emblema_3_id AS emblema3Id
-    	FROM Usuario
+    	FROM usuario
     	<where>
 	        <if test="id != null">
 	            AND id = #{id}
