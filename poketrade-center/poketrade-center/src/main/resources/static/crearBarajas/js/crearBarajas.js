@@ -309,7 +309,7 @@ $(document).ready(function() {
 				let nombreCarta = carta1.nombre;
 				cartasBaraja.forEach(carta2 => {
 					if(carta2.expansionId != 0 && carta2.cartaJuegoId != 0) {
-						if(carta1.expansionId == carta2.expansionId && carta1.cartaJuegoId == carta2.cartaJuegoId) {
+						if(carta1.nombre == carta2.nombre) {
 							contadorCartas++;
 						}
 					}

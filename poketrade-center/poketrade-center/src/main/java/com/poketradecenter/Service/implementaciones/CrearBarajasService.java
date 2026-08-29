@@ -94,7 +94,7 @@ public class CrearBarajasService implements ICrearBarajasService {
 				Integer contadorRepetidas = Constantes.CONTADOR_0;
 				for(Carta carta2 : cartasBarajaGuardarPublicar) {
 					if(!carta2.getExpansionId().equals(Constantes.CERO) && !carta2.getCartaJuegoId().equals(Constantes.CERO)) {
-						if(carta1.getExpansionId().equals(carta2.getExpansionId()) && carta1.getCartaJuegoId().equals(carta2.getCartaJuegoId())) {
+						if(carta1.getNombre().equals(carta2.getNombre())) {
 							contadorRepetidas++;
 						}
 					}
