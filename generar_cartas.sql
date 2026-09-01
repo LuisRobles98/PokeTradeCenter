@@ -467,7 +467,7 @@ INSERT INTO carta VALUES (8,86,"Noa",6,NULL,3,0,NULL);
 INSERT INTO carta VALUES (8,87,"Flareon ex",6,2,1,0,NULL);
 INSERT INTO carta VALUES (8,88,"Primarina ex",6,3,1,0,NULL);
 INSERT INTO carta VALUES (8,89,"Sylveon ex",6,5,1,0,NULL);
-INSERT INTO carta VALUES (8,90,"Dragonite ex",6,10,1,0,NULL);
+INSERT INTO carta VALUES (8,90,"Dragonite ex",6,9,1,0,NULL);
 INSERT INTO carta VALUES (8,91,"Snorlax ex",6,10,1,0,NULL);
 INSERT INTO carta VALUES (8,92,"Eevee ex",7,10,1,1,NULL);
 INSERT INTO carta VALUES (8,93,"Pinsir",8,1,1,1,NULL);
