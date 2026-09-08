@@ -113,7 +113,7 @@ $(document).ready(function() {
 				$("#textoCreador").text(baraja.nombre + " creada por " + usuario.nombre);
 			} else {
 				let criterios = {};
-				criterios.id = barajaUsuario.barajaPublicaId;
+				criterios.barajaPublicaId = barajaUsuario.barajaPublicaId;
 				let creador = await recuperarCreador(criterios);
 				$("#textoCreador").text(baraja.nombre + " creada por " + creador.nombre);
 			}
